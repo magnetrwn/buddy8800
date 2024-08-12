@@ -8,5 +8,5 @@ cd build
 cmake ..
 make
 mv compile_commands.json .. || true
-ctest || true
+ctest --output-on-failure || true
 cd ..
