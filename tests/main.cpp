@@ -1,8 +1,2 @@
 #define CATCH_CONFIG_MAIN
-#include <catch2/catch_test_macros.hpp>
-
-#include "cpu.hpp"
-
-TEST_CASE("Test Description", "[tag]") {
-    REQUIRE(baz::foo(1) == -1);
-}
+#include "test_cpu.hpp"

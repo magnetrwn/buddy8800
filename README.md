@@ -12,6 +12,6 @@
 
 + Make sure you have installed CMake on your system.
 + Clone the repository and navigate to the root directory.
-+ **Optional for Catch2**: Initialize the submodules with `git submodule update --init --recursive`.
++ Either install Catch2 globally or run `git submodule update --init --recursive` to add it as a git submodule.
 + Run `./build.sh` from the root directory.
 + The final executable will be placed in the `bin/` directory.
