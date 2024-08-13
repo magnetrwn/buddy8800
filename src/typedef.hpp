@@ -1,7 +1,6 @@
 #ifndef TYPEDEF_HPP_
 #define TYPEDEF_HPP_
 
-#include <array>
 #include <cstdint>
 #include <cstddef>
 
