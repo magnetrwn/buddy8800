@@ -3,7 +3,7 @@
 #include "typedef.hpp"
 #include "cpu.hpp"
 
-TEST_CASE("cpu_state") {
+TEST_CASE("CPU state registers.", "[cpu_state]") {
     cpu_state state;
 
     SECTION("Testing get and set working in-between 8 and 16 bit requests.") {
@@ -14,12 +14,12 @@ TEST_CASE("cpu_state") {
         REQUIRE(state.get_register8<F>() == 0x34);
 
         // Get a 16 bit register set by two 8 bit setters
-        REQUIRE(state.get_register16<AF>() == 0x3412);
+        REQUIRE(state.get_register16<AF>() == 0x1234);
 
         // Get two 8 bit registers set by a 16 bit setter
         state.set_register16<AF>(0xABCD);
-        REQUIRE(state.get_register8<A>() == 0xCD);
-        REQUIRE(state.get_register8<F>() == 0xAB);
+        REQUIRE(state.get_register8<A>() == 0xAB);
+        REQUIRE(state.get_register8<F>() == 0xCD);
 
         // Get and set on 16 bit registers
         state.set_register16<AF>(0x05AF);
@@ -44,12 +44,12 @@ TEST_CASE("cpu_state") {
         state.set_register8<HIGH_PC>(0xBC);
 
         // Check that the low half of all register pairs is still the same
-        REQUIRE(state.get_register16<AF>() == 0x0012);
-        REQUIRE(state.get_register16<BC>() == 0x5534);
-        REQUIRE(state.get_register16<DE>() == 0xAA56);
-        REQUIRE(state.get_register16<HL>() == 0xFF78);
-        REQUIRE(state.get_register16<SP>() == 0x009A);
-        REQUIRE(state.get_register16<PC>() == 0x55BC);
+        REQUIRE(state.get_register16<AF>() == 0x1200);
+        REQUIRE(state.get_register16<BC>() == 0x3455);
+        REQUIRE(state.get_register16<DE>() == 0x56AA);
+        REQUIRE(state.get_register16<HL>() == 0x78FF);
+        REQUIRE(state.get_register16<SP>() == 0x9A00);
+        REQUIRE(state.get_register16<PC>() == 0xBC55);
 
         // Set the low half of all register pairs to a known value using 8 bit setters
         state.set_register8<F>(0xFE);
@@ -60,11 +60,11 @@ TEST_CASE("cpu_state") {
         state.set_register8<LOW_PC>(0x54);
 
         // Check that the high half of all register pairs is still the same
-        REQUIRE(state.get_register16<AF>() == 0xFE12);
-        REQUIRE(state.get_register16<BC>() == 0xDC34);
-        REQUIRE(state.get_register16<DE>() == 0xBA56);
-        REQUIRE(state.get_register16<HL>() == 0x9878);
-        REQUIRE(state.get_register16<SP>() == 0x769A);
-        REQUIRE(state.get_register16<PC>() == 0x54BC);
+        REQUIRE(state.get_register16<AF>() == 0x12FE);
+        REQUIRE(state.get_register16<BC>() == 0x34DC);
+        REQUIRE(state.get_register16<DE>() == 0x56BA);
+        REQUIRE(state.get_register16<HL>() == 0x7898);
+        REQUIRE(state.get_register16<SP>() == 0x9A76);
+        REQUIRE(state.get_register16<PC>() == 0xBC54);
     }
 }

@@ -20,9 +20,9 @@ struct cpu_state {
     template <cpu_registers8 reg>
     constexpr u8 get_register8() const {
         if constexpr (reg & 1)
-            return registers[reg >> 1] >> 8;
-        else
             return registers[reg >> 1] & 0xFF;
+        else
+            return registers[reg >> 1] >> 8;
     }
 
     template <cpu_registers16 pair>
@@ -33,11 +33,11 @@ struct cpu_state {
     template <cpu_registers8 reg>
     constexpr void set_register8(u8 value) {
         if constexpr (reg & 1) {
-            registers[reg >> 1] &= 0x00FF;
-            registers[reg >> 1] |= (value << 8);
-        } else {
             registers[reg >> 1] &= 0xFF00;
             registers[reg >> 1] |= value;
+        } else {
+            registers[reg >> 1] &= 0x00FF;
+            registers[reg >> 1] |= (value << 8);
         }
     }
 
