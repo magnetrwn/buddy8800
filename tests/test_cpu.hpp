@@ -1,10 +1,20 @@
 #include <catch2/catch_test_macros.hpp>
 
-#include "typedef.hpp"
-#include "cpu.hpp"
+#include "cpu_state.hpp"
 
 TEST_CASE("CPU state registers.", "[cpu_state]") {
     cpu_state state;
+
+    SECTION("Check state is generally zeroed, but not on bit 1 of F, on construction.") {
+        using enum cpu_registers16;
+
+        REQUIRE(state.get_register16<AF>() == 0x0002);
+        REQUIRE(state.get_register16<BC>() == 0x0000);
+        REQUIRE(state.get_register16<DE>() == 0x0000);
+        REQUIRE(state.get_register16<HL>() == 0x0000);
+        REQUIRE(state.get_register16<SP>() == 0x0000);
+        REQUIRE(state.get_register16<PC>() == 0x0000);
+    }
 
     SECTION("Testing get and set working in-between 8 and 16 bit requests.") {
         using enum cpu_registers8;
