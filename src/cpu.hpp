@@ -76,12 +76,22 @@ public:
     template <cpu_registers16 pair>
     inline void INX() { state.inc_register16<pair>(); }
 
+    /*template <cpu_registers8 reg>
+    inline void INR() { 
+        state.inc_register8<reg>();
+        u8 r = state.get_register8<reg>();
+
+    }*/
+
+    inline void INR_M() { ++memory[state.get_register16<cpu_registers16::HL>()]; }
+
     /// \}
 
     void step() { execute(fetch()); }
 
     cpu() : state(), memory({}) {
-        memory = {0, 1, 0x05, 0xAF, 0b00010001, 0x10, 0x20, 0b00010010, 0};
+        for (int i = 0; i < 0x10000; i++)
+            memory[i] = (i / 3) % 256;
     }
 };
 

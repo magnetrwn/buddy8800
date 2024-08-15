@@ -2,7 +2,7 @@
 
 int main() {
     cpu processor;
-    for (int i = 0; i < 30; i++) // TODO: testing with a bunch of steps
+    for (int i = 0; i < 75; i++) // TODO: testing with a bunch of steps
         processor.step();
     return 0;
 }

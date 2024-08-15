@@ -110,6 +110,25 @@ struct cpu_state {
         return set_register8<cpu_registers8::F>(get_register8<cpu_registers8::F>() & ~static_cast<u8>(flag));
     }
 
+    /// @brief Set or unset a flag based on a boolean condition.
+    template <cpu_flags flag>
+    constexpr void set_if_flag(bool cond) {
+        if (cond)
+            set_flag<flag>();
+        else
+            unset_flag<flag>();
+    }
+
+    /// @brief Set or unset all flags based on the older value of an 8 bit register, and current state.
+    template <cpu_registers8 reg>
+    constexpr void set_all_flags(u8 was) {
+        u8 is = get_register8<reg>();
+        set_if_flag<cpu_flags::Z>(!is);
+        set_if_flag<cpu_flags::S>(is & 0x80);
+        set_if_flag<cpu_flags::P>(__builtin_parity(is));
+        set_if_flag<cpu_flags::AC>(!(was & 0xF0) and (is & 0x08));
+    }
+
     /// \}
 
     cpu_state() : registers({}) { set_register16<cpu_registers16::AF>(0x02); }
