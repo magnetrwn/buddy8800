@@ -67,13 +67,25 @@ struct cpu_state {
     }
 
     /// \}
-    /// @name Incrementing getters.
+    /// @name Incrementing getters and other shortcuts.
     /// \{
 
     /// @brief Get the value of a 16 bit register (including any pair of 8 bit registers) and then increment it.
     template <cpu_registers16 pair>
     constexpr u16 get_then_inc_register16() {
         return registers[static_cast<usize>(pair)]++;
+    }
+
+    /// @brief Increment an 8 bit register.
+    template <cpu_registers8 reg>
+    constexpr void inc_register8() {
+        set_register8<reg>(get_register8<reg>() + 1);
+    }
+
+    /// @brief Increment a 16 bit register.
+    template <cpu_registers16 pair>
+    constexpr void inc_register16() {
+        ++registers[static_cast<usize>(pair)];
     }
 
     /// \}
