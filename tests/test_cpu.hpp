@@ -121,4 +121,27 @@ TEST_CASE("CPU state registers.", "[cpu_state]") {
         // Check that all flags are set via get_register8
         REQUIRE(state.get_register8<cpu_registers8::F>() == 0xFF);
     }
+
+    SECTION("Testing incrementing getters.") {
+        using enum cpu_registers16;
+
+        // Set the PC register pair to a known value, and zero all others
+        state.set_register16<PC>(0xFFFF);
+        state.set_register16<AF>(0x0000);
+        state.set_register16<BC>(0x0000);
+        state.set_register16<DE>(0x0000);
+        state.set_register16<HL>(0x0000);
+        state.set_register16<SP>(0x0000);
+
+        // Check that the register pair is the same when getting
+        REQUIRE(state.get_then_inc_register16<PC>() == 0xFFFF);
+
+        // Check that the register pair is incremented and hasn't leaked an overflow bit
+        REQUIRE(state.get_register16<AF>() == 0x0000);
+        REQUIRE(state.get_register16<BC>() == 0x0000);
+        REQUIRE(state.get_register16<DE>() == 0x0000);
+        REQUIRE(state.get_register16<HL>() == 0x0000);
+        REQUIRE(state.get_register16<SP>() == 0x0000);
+        REQUIRE(state.get_register16<PC>() == 0x0000);
+    }
 }
