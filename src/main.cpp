@@ -1,8 +1,25 @@
 #include "cpu.hpp"
 
+#include <vector>
+#include <fstream>
+
 int main() {
     cpu processor;
-    for (int i = 0; i < 75; i++) // TODO: testing with a bunch of steps
+
+    std::ifstream file("tests/res/cpudiag.bin", std::ios::binary);
+    if (!file) {
+        return 1;
+    }
+
+    std::vector<u8> cpudiag{
+        (std::istreambuf_iterator<char>(file)),
+        std::istreambuf_iterator<char>()
+    };
+
+    processor.load(cpudiag.begin(), cpudiag.end());
+
+    for (usize i = 0; i < 100; ++i)
         processor.step();
+
     return 0;
 }

@@ -3,6 +3,7 @@
 
 #include <array>
 #include <cstdio>
+#include <stdexcept>
 
 #include "cpu_state.hpp"
 #include "typedef.hpp"
@@ -11,7 +12,7 @@
 class cpu {
 private:
     cpu_state state;
-    std::array<u8, 0x10000> memory; // TODO: just temporary
+    std::array<u8, 0x10000> memory;
 
     inline u16 pc() const { return state.get_register16(cpu_registers16::PC); }
     inline u8 fetch() { return memory[state.get_then_inc_register16(cpu_registers16::PC)]; }
@@ -74,15 +75,35 @@ public:
         ++memory[state.get_register16(cpu_registers16::HL)];
         state.set_all_flags(value, value + 1);
     }
+    inline void DCR(cpu_registers8 reg) {
+        u8 value = state.get_register8(reg);
+        state.set_register8(reg, value - 1);
+        state.set_all_flags(reg, value);
+    }
+    inline void DCR_M() {
+        u8 value = memory[state.get_register16(cpu_registers16::HL)];
+        --memory[state.get_register16(cpu_registers16::HL)];
+        state.set_all_flags(value, value - 1);
+    }
 
     /// \}
 
     void step() { execute(fetch()); }
 
-    cpu() : state(), memory({}) {
-        for (int i = 0; i < 0x10000; i++)
-            memory[i] = (i / 3) % 256;
+    template <typename FwdIt>
+    void load(FwdIt begin, FwdIt end, usize offset = 0) {
+        usize dist = std::distance(begin, end);
+
+        if (dist > memory.size() - offset)
+            throw std::out_of_range("Not enough space in emulated memory.");
+
+        std::copy(begin, end, memory.begin() + offset);
     }
+
+    void load_state(const cpu_state& new_state) { state = new_state; }
+    cpu_state save_state() const { return state; }
+
+    cpu() : state(), memory({}) {}
 };
 
 #endif

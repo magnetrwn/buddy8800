@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 project(buddy8800)
 
+set(CMAKE_BUILD_TYPE Debug)
 option(ENABLE_TESTING "Enable testing" ON)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -10,7 +11,9 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 set(CMAKE_STATIC_LIBRARY_PREFIX "")
-add_compile_options(-Wall -Wextra)
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic")
+set(CMAKE_CXX_FLAGS_DEBUG "-g -O0 -no-pie")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2 -Werror")
 
 add_subdirectory(src)
 

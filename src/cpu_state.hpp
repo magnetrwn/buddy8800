@@ -2,7 +2,6 @@
 #define CPU_STATE_HPP_
 
 #include <array>
-#include <stdexcept>
 
 #include "typedef.hpp"
 

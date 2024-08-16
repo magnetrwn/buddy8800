@@ -1,6 +1,10 @@
 #include <catch2/catch_test_macros.hpp>
 
+#include <vector>
+#include <fstream>
+
 #include "cpu_state.hpp"
+#include "cpu.hpp"
 
 TEST_CASE("CPU state registers.", "[cpu_state]") {
     cpu_state state;
@@ -122,7 +126,7 @@ TEST_CASE("CPU state registers.", "[cpu_state]") {
         REQUIRE(state.get_register8(cpu_registers8::F) == 0xFF);
     }
 
-    SECTION("Testing incrementing getters.") {
+    SECTION("Testing incrementing.") {
         using enum cpu_registers8;
         using enum cpu_registers16;
 
@@ -155,5 +159,46 @@ TEST_CASE("CPU state registers.", "[cpu_state]") {
         REQUIRE(state.get_register16(HL) == 0x0000);
         REQUIRE(state.get_register16(SP) == 0x0000);
         REQUIRE(state.get_register16(PC) == 0x0000);
+
+        // Increment all 8 bit registers
+        state.inc_register8(A);
+        state.inc_register8(F);
+        state.inc_register8(B);
+        state.inc_register8(C);
+        state.inc_register8(D);
+        state.inc_register8(E);
+        state.inc_register8(H);
+        state.inc_register8(L);
+        state.inc_register8(HIGH_SP);
+        state.inc_register8(LOW_SP);
+        state.inc_register8(HIGH_PC);
+        state.inc_register8(LOW_PC);
+
+        // Check that all registers are incremented
+        REQUIRE(state.get_register16(AF) == 0x0101);
+        REQUIRE(state.get_register16(BC) == 0x0101);
+        REQUIRE(state.get_register16(DE) == 0x0101);
+        REQUIRE(state.get_register16(HL) == 0x0101);
+        REQUIRE(state.get_register16(SP) == 0x0101);
+        REQUIRE(state.get_register16(PC) == 0x0101);
     }
 }
+
+/*TEST_CASE("Testing the CPU itself.", "[cpu]") {
+    cpu processor;
+
+    SECTION("Running cpudiag.bin.") {
+        // Open the cpudiag.bin file
+        std::ifstream file("tests/res/cpudiag.bin", std::ios::binary);
+        REQUIRE(file);
+
+        // Read the file into a vector
+        std::vector<u8> cpudiag{
+            (std::istreambuf_iterator<char>(file)),
+            std::istreambuf_iterator<char>()
+        };
+
+        // Load the file into the memory referenced by the CPU
+        processor.load(cpudiag.begin(), cpudiag.end());
+    }
+}*/
