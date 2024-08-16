@@ -23,7 +23,7 @@ enum class cpu_flags {
 /**
  * @brief Represents the state of the CPU.
  * 
- * This struct represents the CPU state and provides useful compile-time methods to work with it.
+ * This struct represents the CPU state and provides useful methods to work with it.
  * On construction all register space is initialized to zero (except bit 1 of the F register, which
  * is supposed to always be one).
  */
@@ -34,24 +34,21 @@ struct cpu_state {
     /// \{
 
     /// @brief Get the value of an 8 bit register (including halves of SP and PC).
-    template <cpu_registers8 reg>
-    constexpr u8 get_register8() const {
-        if constexpr (static_cast<usize>(reg) & 1)
+    constexpr u8 get_register8(cpu_registers8 reg) const {
+        if (static_cast<usize>(reg) & 1)
             return registers[static_cast<usize>(reg) >> 1] & 0xFF;
         else
             return registers[static_cast<usize>(reg) >> 1] >> 8;
     }
 
     /// @brief Get the value of a 16 bit register (including any pair of 8 bit registers).
-    template <cpu_registers16 pair>
-    constexpr u16 get_register16() const {
+    constexpr u16 get_register16(cpu_registers16 pair) const {
         return registers[static_cast<usize>(pair)];
     }
 
     /// @brief Set the value of an 8 bit register (including halves of SP and PC).
-    template <cpu_registers8 reg>
-    constexpr void set_register8(u8 value) {
-        if constexpr (static_cast<usize>(reg) & 1) {
+    constexpr void set_register8(cpu_registers8 reg, u8 value) {
+        if (static_cast<usize>(reg) & 1) {
             registers[static_cast<usize>(reg) >> 1] &= 0xFF00;
             registers[static_cast<usize>(reg) >> 1] |= value;
         } else {
@@ -61,8 +58,7 @@ struct cpu_state {
     }
 
     /// @brief Set the value of a 16 bit register (including any pair of 8 bit registers).
-    template <cpu_registers16 pair>
-    constexpr void set_register16(u16 value) {
+    constexpr void set_register16(cpu_registers16 pair, u16 value) {
         registers[static_cast<usize>(pair)] = value;
     }
 
@@ -71,20 +67,17 @@ struct cpu_state {
     /// \{
 
     /// @brief Get the value of a 16 bit register (including any pair of 8 bit registers) and then increment it.
-    template <cpu_registers16 pair>
-    constexpr u16 get_then_inc_register16() {
+    constexpr u16 get_then_inc_register16(cpu_registers16 pair) {
         return registers[static_cast<usize>(pair)]++;
     }
 
     /// @brief Increment an 8 bit register.
-    template <cpu_registers8 reg>
-    constexpr void inc_register8() {
-        set_register8<reg>(get_register8<reg>() + 1);
+    constexpr void inc_register8(cpu_registers8 reg) {
+        set_register8(reg, get_register8(reg) + 1);
     }
 
     /// @brief Increment a 16 bit register.
-    template <cpu_registers16 pair>
-    constexpr void inc_register16() {
+    constexpr void inc_register16(cpu_registers16 pair) {
         ++registers[static_cast<usize>(pair)];
     }
 
@@ -93,33 +86,29 @@ struct cpu_state {
     /// \{
 
     /// @brief Get the value of a flag.
-    template <cpu_flags flag>
-    constexpr bool get_flag() const {
-        return (get_register8<cpu_registers8::F>() & static_cast<u8>(flag)) != 0x00;
+    constexpr bool get_flag(cpu_flags flag) const {
+        return (get_register8(cpu_registers8::F) & static_cast<u8>(flag)) != 0x00;
     }
 
     /// @brief Set a flag.
-    template <cpu_flags flag>
-    constexpr void set_flag() {
-        return set_register8<cpu_registers8::F>(get_register8<cpu_registers8::F>() | static_cast<u8>(flag));
+    constexpr void set_flag(cpu_flags flag) {
+        return set_register8(cpu_registers8::F, get_register8(cpu_registers8::F) | static_cast<u8>(flag));
     }
 
     /// @brief Unset a flag.
-    template <cpu_flags flag>
-    constexpr void unset_flag() {
-        return set_register8<cpu_registers8::F>(get_register8<cpu_registers8::F>() & ~static_cast<u8>(flag));
+    constexpr void unset_flag(cpu_flags flag) {
+        return set_register8(cpu_registers8::F, get_register8(cpu_registers8::F) & ~static_cast<u8>(flag));
     }
 
     /// @brief Set or unset a flag based on a boolean condition.
-    template <cpu_flags flag>
-    constexpr void set_if_flag(bool cond) {
+    constexpr void set_if_flag(cpu_flags flag, bool cond) {
         if (cond)
-            set_flag<flag>();
+            set_flag(flag);
         else
-            unset_flag<flag>();
+            unset_flag(flag);
     }
 
-    /// @brief Set or unset all flags based on the older value of an 8 bit register, and current state.
+    /*/// @brief Set or unset all flags based on the older value of an 8 bit register, and current state.
     template <cpu_registers8 reg>
     constexpr void set_all_flags(u8 was) {
         u8 is = get_register8<reg>();
@@ -127,11 +116,11 @@ struct cpu_state {
         set_if_flag<cpu_flags::S>(is & 0x80);
         set_if_flag<cpu_flags::P>(__builtin_parity(is));
         set_if_flag<cpu_flags::AC>(!(was & 0xF0) and (is & 0x08));
-    }
+    }*/
 
     /// \}
 
-    cpu_state() : registers({}) { set_register16<cpu_registers16::AF>(0x02); }
+    cpu_state() : registers({}) { set_register16(cpu_registers16::AF, 0x02); }
 };
 
 #endif

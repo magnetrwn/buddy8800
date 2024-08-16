@@ -13,37 +13,36 @@ private:
     cpu_state state;
     std::array<u8, 0x10000> memory; // TODO: just temporary
 
-    constexpr u16 pc() const { return state.get_register16<cpu_registers16::PC>(); }
-    constexpr u8 fetch() { return memory[state.get_then_inc_register16<cpu_registers16::PC>()]; }
+    inline u16 pc() const { return state.get_register16(cpu_registers16::PC); }
+    inline u8 fetch() { return memory[state.get_then_inc_register16(cpu_registers16::PC)]; }
 
-    template <u8 opc, usize ops>
-    constexpr void _trace() {
+    template <usize ops>
+    void _trace(u8 opc) {
         if constexpr (ops == 1)
-            printf("%04hX    %02hhX      \t %s\n", pc() - 1, opc, util::get_opcode_str<opc>());
+            printf("%04hX    %02hhX      \t %s\n", pc() - 1, opc, util::get_opcode_str(opc));
         else if constexpr (ops == 2)
-            printf("%04hX    %02hhX %02hhX   \t %s\n", pc() - 1, opc, memory[pc()], util::get_opcode_str<opc>());
+            printf("%04hX    %02hhX %02hhX   \t %s\n", pc() - 1, opc, memory[pc()], util::get_opcode_str(opc));
         else if constexpr (ops == 3)
-            printf("%04hX    %02hhX %02hhX %02hhX\t %s\n", pc() - 1, opc, memory[pc()], memory[pc() + 1], util::get_opcode_str<opc>());
+            printf("%04hX    %02hhX %02hhX %02hhX\t %s\n", pc() - 1, opc, memory[pc()], memory[pc() + 1], util::get_opcode_str(opc));
         else
             static_assert(false, "Invalid number of operands.");
     }
 
-    constexpr void _trace_state() {
+    void _trace_state() {
         printf("\x1B[44;01mA: %02hhX BC: %04hX DE: %04hX HL: %04hX \x1B[0m\n",
-            state.get_register8<cpu_registers8::A>(),
-            state.get_register16<cpu_registers16::BC>(),
-            state.get_register16<cpu_registers16::DE>(),
-            state.get_register16<cpu_registers16::HL>());
+            state.get_register8(cpu_registers8::A),
+            state.get_register16(cpu_registers16::BC),
+            state.get_register16(cpu_registers16::DE),
+            state.get_register16(cpu_registers16::HL));
         printf("\x1B[44;01mF: %c %c %c %c %c                     \x1B[0m\n",
-            state.get_flag<cpu_flags::S>() ? 'S' : '/',
-            state.get_flag<cpu_flags::Z>() ? 'Z' : '/',
-            state.get_flag<cpu_flags::AC>() ? 'A' : '/',
-            state.get_flag<cpu_flags::P>() ? 'P' : '/',
-            state.get_flag<cpu_flags::C>() ? 'C' : '/');
+            state.get_flag(cpu_flags::S) ? 'S' : '/',
+            state.get_flag(cpu_flags::Z) ? 'Z' : '/',
+            state.get_flag(cpu_flags::AC) ? 'A' : '/',
+            state.get_flag(cpu_flags::P) ? 'P' : '/',
+            state.get_flag(cpu_flags::C) ? 'C' : '/');
     }
 
-    template <cpu_registers16 reg>
-    constexpr void _trace_reg16_deref() {
+    void _trace_reg16_deref(cpu_registers16 reg) {
         printf("\x1B[42;01m(%s: %04hX): %02hhX                   \x1B[0m\n",
             (reg == cpu_registers16::AF) ? "AF" : 
                 (reg == cpu_registers16::BC) ? "BC" : 
@@ -51,11 +50,11 @@ private:
                 (reg == cpu_registers16::HL) ? "HL" : 
                 (reg == cpu_registers16::SP) ? "SP" : 
                 "PC",
-            state.get_register16<reg>(),
-            memory[state.get_register16<reg>()]);
+            state.get_register16(reg),
+            memory[state.get_register16(reg)]);
     }
 
-    constexpr void _trace_error(u8 opc) {
+    void _trace_error(u8 opc) {
         printf("%04hX    %02hhX      \t \x1B[31;01mUNKNOWN\x1B[0m\n", pc() - 1, opc);
     }
 
@@ -66,24 +65,18 @@ public:
     /// \{
 
     inline void NOP() {}
-
-    template <cpu_registers16 pair>
-    inline void LXI() { u16 lo = fetch(); u16 hi = fetch(); state.set_register16<pair>((hi << 8) | lo); }
-
-    template <cpu_registers16 pair>
-    inline void STAX() { memory[state.get_register16<pair>()] = state.get_register8<cpu_registers8::A>(); }
-
-    template <cpu_registers16 pair>
-    inline void INX() { state.inc_register16<pair>(); }
+    inline void LXI(cpu_registers16 pair) { u16 lo = fetch(); u16 hi = fetch(); state.set_register16(pair, (hi << 8) | lo); }
+    inline void STAX(cpu_registers16 pair) { memory[state.get_register16(pair)] = state.get_register8(cpu_registers8::A); }
+    inline void INX(cpu_registers16 pair) { state.inc_register16(pair); }
 
     /*template <cpu_registers8 reg>
     inline void INR() { 
-        state.inc_register8<reg>();
-        u8 r = state.get_register8<reg>();
+        state.inc_register8(reg);
+        u8 r = state.get_register8(reg);
 
     }*/
 
-    inline void INR_M() { ++memory[state.get_register16<cpu_registers16::HL>()]; }
+    //inline void INR_M() { ++memory[state.get_register16(cpu_registers16::HL)]; }
 
     /// \}
 
