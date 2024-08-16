@@ -44,7 +44,33 @@ void cpu::execute(u8 opcode) {
         case 0b00101101:
         case 0b00111101: _trace<1>(opcode); DCR(reg_dst_sel); _trace_state(); break;
         case 0b00110101: _trace<1>(opcode); DCR_M(); _trace_state(); _trace_reg16_deref(cpu_registers16::HL); break;
+
+        //     ..DDD...
+        case 0b00000110:
+        case 0b00001110:
+        case 0b00010110:
+        case 0b00011110:
+        case 0b00100110:
+        case 0b00101110:
+        case 0b00111110: _trace<2>(opcode); MVI(reg_dst_sel); _trace_state(); break;
+        case 0b00110110: _trace<2>(opcode); MVI_M(); _trace_state(); _trace_reg16_deref(cpu_registers16::HL); break;
         
-        default: _trace_error(opcode); break;
+        //     ..RP....
+        case 0b00001001:
+        case 0b00011001:
+        case 0b00101001:
+        case 0b00111001: _trace<1>(opcode); DAD(reg_pair_sel); _trace_state(); break;
+
+        //     ..RP....
+        case 0b00001010:
+        case 0b00011010: _trace<1>(opcode); LDAX(reg_pair_sel); _trace_reg16_deref(reg_pair_sel); _trace_state(); break;
+
+        //     ..RP....
+        case 0b00001011:
+        case 0b00011011:
+        case 0b00101011:
+        case 0b00111011: _trace<1>(opcode); DCX(reg_pair_sel); _trace_state(); break;
+
+        default:         _trace_error(opcode); break;
     }
 }

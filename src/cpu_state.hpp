@@ -114,7 +114,7 @@ struct cpu_state {
     }
 
     /// @brief Set or unset all flags based on a provided old and new memory value.
-    constexpr void set_all_flags(u8 is, u8 was) {
+    constexpr void set_Z_S_P_AC_flags(u8 is, u8 was) {
         set_if_flag(cpu_flags::Z, !is);
         set_if_flag(cpu_flags::S, is & 0x80);
         set_if_flag(cpu_flags::P, __builtin_parity(is));
@@ -122,8 +122,8 @@ struct cpu_state {
     }
 
     /// @brief Set or unset all flags based on the older value of an 8 bit register, and current state.
-    constexpr void set_all_flags(cpu_registers8 reg, u8 was) {
-        set_all_flags(get_register8(reg), was);
+    constexpr void set_Z_S_P_AC_flags(cpu_registers8 reg, u8 was) {
+        set_Z_S_P_AC_flags(get_register8(reg), was);
     }
 
     /// \}
