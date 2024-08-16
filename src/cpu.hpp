@@ -3,6 +3,7 @@
 
 #include <array>
 #include <cstdio>
+#include <vector>
 #include <stdexcept>
 
 #include "cpu_state.hpp"
@@ -13,6 +14,7 @@ class cpu {
 private:
     cpu_state state;
     std::array<u8, 0x10000> memory;
+    bool halted;
 
     inline u16 pc() const { return state.get_register16(cpu_registers16::PC); }
     inline u8 fetch() { return memory[state.get_then_inc_register16(cpu_registers16::PC)]; }
@@ -179,24 +181,23 @@ public:
 
     inline void CMC() { state.set_if_flag(cpu_flags::C, !state.get_flag(cpu_flags::C)); }
 
+    inline void MOV(cpu_registers8 dst, cpu_registers8 src) { state.set_register8(dst, state.get_register8(src)); }
+
+    inline void MOV_FROM_M(cpu_registers8 dst) { state.set_register8(dst, memory[state.get_register16(cpu_registers16::HL)]); }
+
+    inline void MOV_TO_M(cpu_registers8 src) { memory[state.get_register16(cpu_registers16::HL)] = state.get_register8(src); }
+
+    inline void HLT() { halted = true; }
+
     /// \}
 
-    void step() { execute(fetch()); }
+    void step();
 
-    template <typename FwdIt>
-    void load(FwdIt begin, FwdIt end, usize offset = 0) {
-        usize dist = std::distance(begin, end);
+    void load(std::vector<u8>::iterator begin, std::vector<u8>::iterator end, usize offset = 0);
+    void load_state(const cpu_state& new_state);
+    cpu_state save_state() const;
 
-        if (dist > memory.size() - offset)
-            throw std::out_of_range("Not enough space in emulated memory.");
-
-        std::copy(begin, end, memory.begin() + offset);
-    }
-
-    void load_state(const cpu_state& new_state) { state = new_state; }
-    cpu_state save_state() const { return state; }
-
-    cpu() : state(), memory({}) {}
+    cpu() : state(), memory({}), halted(false) {}
 };
 
 #endif
