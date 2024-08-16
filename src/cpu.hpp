@@ -68,15 +68,12 @@ public:
     inline void LXI(cpu_registers16 pair) { u16 lo = fetch(); u16 hi = fetch(); state.set_register16(pair, (hi << 8) | lo); }
     inline void STAX(cpu_registers16 pair) { memory[state.get_register16(pair)] = state.get_register8(cpu_registers8::A); }
     inline void INX(cpu_registers16 pair) { state.inc_register16(pair); }
-
-    /*template <cpu_registers8 reg>
-    inline void INR() { 
-        state.inc_register8(reg);
-        u8 r = state.get_register8(reg);
-
-    }*/
-
-    //inline void INR_M() { ++memory[state.get_register16(cpu_registers16::HL)]; }
+    inline void INR(cpu_registers8 reg) { state.set_all_flags(reg, state.get_then_inc_register8(reg)); }
+    inline void INR_M() { 
+        u8 value = memory[state.get_register16(cpu_registers16::HL)];
+        ++memory[state.get_register16(cpu_registers16::HL)];
+        state.set_all_flags(value, value + 1);
+    }
 
     /// \}
 

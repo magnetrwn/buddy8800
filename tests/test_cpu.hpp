@@ -123,7 +123,19 @@ TEST_CASE("CPU state registers.", "[cpu_state]") {
     }
 
     SECTION("Testing incrementing getters.") {
+        using enum cpu_registers8;
         using enum cpu_registers16;
+
+        // Set the C register to a known value, and zero B
+        state.set_register8(C, 0xFF);
+        state.set_register8(B, 0x00);
+
+        // Check that the register is the same when getting
+        REQUIRE(state.get_then_inc_register8(C) == 0xFF);
+
+        // Check that the register is incremented and hasn't leaked an overflow bit
+        REQUIRE(state.get_register8(B) == 0x00);
+        REQUIRE(state.get_register8(C) == 0x00);
 
         // Set the PC register pair to a known value, and zero all others
         state.set_register16(PC, 0xFFFF);

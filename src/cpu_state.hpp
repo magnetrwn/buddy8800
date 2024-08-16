@@ -2,17 +2,24 @@
 #define CPU_STATE_HPP_
 
 #include <array>
+#include <stdexcept>
 
 #include "typedef.hpp"
 
 /// @brief Enumerates the 8 bit registers of the CPU (matches cpu_registers16).
 enum class cpu_registers8 {
-    A, F, B, C, D, E, H, L, HIGH_SP, LOW_SP, HIGH_PC, LOW_PC
+    A, F, B, C, D, E, H, L, HIGH_SP, LOW_SP, HIGH_PC, LOW_PC, _M
+};
+
+/// @brief Provides correct registers coming from opcode register selection.
+static constexpr cpu_registers8 cpu_reg8_decode[8] {
+    cpu_registers8::B, cpu_registers8::C, cpu_registers8::D, cpu_registers8::E,
+    cpu_registers8::H, cpu_registers8::L, cpu_registers8::_M, cpu_registers8::A
 };
 
 /// @brief Enumerates the 16 bit registers of the CPU (matches cpu_registers8).
 enum class cpu_registers16 {
-    AF, BC, DE, HL, SP, PC
+    AF, PSW = AF, BC, DE, HL, SP, PC
 };
 
 /// @brief Enumerates the flags of the CPU at their bit position.
@@ -35,10 +42,7 @@ struct cpu_state {
 
     /// @brief Get the value of an 8 bit register (including halves of SP and PC).
     constexpr u8 get_register8(cpu_registers8 reg) const {
-        if (static_cast<usize>(reg) & 1)
-            return registers[static_cast<usize>(reg) >> 1] & 0xFF;
-        else
-            return registers[static_cast<usize>(reg) >> 1] >> 8;
+        return (registers[static_cast<usize>(reg) >> 1] >> (8 * !(static_cast<usize>(reg) & 1))) & 0xFF;
     }
 
     /// @brief Get the value of a 16 bit register (including any pair of 8 bit registers).
@@ -48,13 +52,8 @@ struct cpu_state {
 
     /// @brief Set the value of an 8 bit register (including halves of SP and PC).
     constexpr void set_register8(cpu_registers8 reg, u8 value) {
-        if (static_cast<usize>(reg) & 1) {
-            registers[static_cast<usize>(reg) >> 1] &= 0xFF00;
-            registers[static_cast<usize>(reg) >> 1] |= value;
-        } else {
-            registers[static_cast<usize>(reg) >> 1] &= 0x00FF;
-            registers[static_cast<usize>(reg) >> 1] |= (value << 8);
-        }
+        registers[static_cast<usize>(reg) >> 1] &= (0xFF00 >> (8 * !(static_cast<usize>(reg) & 1)));
+        registers[static_cast<usize>(reg) >> 1] |= (value << (8 * !(static_cast<usize>(reg) & 1)));
     }
 
     /// @brief Set the value of a 16 bit register (including any pair of 8 bit registers).
@@ -65,6 +64,13 @@ struct cpu_state {
     /// \}
     /// @name Incrementing getters and other shortcuts.
     /// \{
+
+    /// @brief Get the value of an 8 bit register (including halves of SP and PC) and then increment it.
+    constexpr u8 get_then_inc_register8(cpu_registers8 reg) {
+        u8 value = get_register8(reg);
+        set_register8(reg, value + 1);
+        return value;
+    }
 
     /// @brief Get the value of a 16 bit register (including any pair of 8 bit registers) and then increment it.
     constexpr u16 get_then_inc_register16(cpu_registers16 pair) {
@@ -87,7 +93,7 @@ struct cpu_state {
 
     /// @brief Get the value of a flag.
     constexpr bool get_flag(cpu_flags flag) const {
-        return (get_register8(cpu_registers8::F) & static_cast<u8>(flag)) != 0x00;
+        return (get_register8(cpu_registers8::F) & static_cast<u8>(flag));
     }
 
     /// @brief Set a flag.
@@ -108,15 +114,18 @@ struct cpu_state {
             unset_flag(flag);
     }
 
-    /*/// @brief Set or unset all flags based on the older value of an 8 bit register, and current state.
-    template <cpu_registers8 reg>
-    constexpr void set_all_flags(u8 was) {
-        u8 is = get_register8<reg>();
-        set_if_flag<cpu_flags::Z>(!is);
-        set_if_flag<cpu_flags::S>(is & 0x80);
-        set_if_flag<cpu_flags::P>(__builtin_parity(is));
-        set_if_flag<cpu_flags::AC>(!(was & 0xF0) and (is & 0x08));
-    }*/
+    /// @brief Set or unset all flags based on a provided old and new memory value.
+    constexpr void set_all_flags(u8 is, u8 was) {
+        set_if_flag(cpu_flags::Z, !is);
+        set_if_flag(cpu_flags::S, is & 0x80);
+        set_if_flag(cpu_flags::P, __builtin_parity(is));
+        set_if_flag(cpu_flags::AC, (was & 0x0F) == 0x0F and (is & 0x0F) == 0x00);
+    }
+
+    /// @brief Set or unset all flags based on the older value of an 8 bit register, and current state.
+    constexpr void set_all_flags(cpu_registers8 reg, u8 was) {
+        set_all_flags(get_register8(reg), was);
+    }
 
     /// \}
 
