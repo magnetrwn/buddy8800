@@ -23,7 +23,7 @@ enum class cpu_registers16 {
 
 /// @brief Enumerates the flags of the CPU at their bit position.
 enum class cpu_flags {
-    C = 0x01, P = 0x04, AC = 0x10, Z = 0x40, S = 0x80
+    C = 0x01, CY = C, P = 0x04, AC = 0x10, Z = 0x40, S = 0x80
 };
 
 /**
@@ -106,6 +106,7 @@ struct cpu_state {
     }
 
     /// @brief Set or unset a flag based on a boolean condition.
+    /// @todo This could be optimized to not use a branch. Look into shifting or xoring.
     constexpr void set_if_flag(cpu_flags flag, bool cond) {
         if (cond)
             set_flag(flag);

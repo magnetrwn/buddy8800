@@ -57,6 +57,13 @@ private:
             memory[state.get_register16(reg)]);
     }
 
+    void _trace_mem16_deref() {
+        printf("\x1B[43;01m(%02hhX%02hhX): %02hhX                   \x1B[0m\n",
+            memory[pc()],
+            memory[pc() + 1],
+            memory[(memory[pc() + 1] << 8) | memory[pc()]]);
+    }
+
     void _trace_error(u8 opc) {
         printf("%04hX    %02hhX      \t \x1B[31;01mUNKNOWN\x1B[0m\n", pc() - 1, opc);
     }
@@ -68,27 +75,37 @@ public:
     /// \{
 
     inline void NOP() {}
+
     inline void LXI(cpu_registers16 pair) { u16 lo = fetch(); u16 hi = fetch(); state.set_register16(pair, (hi << 8) | lo); }
+
     inline void STAX(cpu_registers16 pair) { memory[state.get_register16(pair)] = state.get_register8(cpu_registers8::A); }
+
     inline void INX(cpu_registers16 pair) { state.inc_register16(pair); }
+
     inline void INR(cpu_registers8 reg) { state.set_Z_S_P_AC_flags(reg, state.get_then_inc_register8(reg)); }
+
     inline void INR_M() { 
         u8 value = memory[state.get_register16(cpu_registers16::HL)];
         ++memory[state.get_register16(cpu_registers16::HL)];
         state.set_Z_S_P_AC_flags(value, value + 1);
     }
+
     inline void DCR(cpu_registers8 reg) {
         u8 value = state.get_register8(reg);
         state.set_register8(reg, value - 1);
         state.set_Z_S_P_AC_flags(reg, value);
     }
+
     inline void DCR_M() {
         u8 value = memory[state.get_register16(cpu_registers16::HL)];
         --memory[state.get_register16(cpu_registers16::HL)];
         state.set_Z_S_P_AC_flags(value, value - 1);
     }
+
     inline void MVI(cpu_registers8 reg) { state.set_register8(reg, fetch()); }
+
     inline void MVI_M() { memory[state.get_register16(cpu_registers16::HL)] = fetch(); }
+
     inline void DAD(cpu_registers16 pair) {
         u32 hl = state.get_register16(cpu_registers16::HL);
         u32 pval = state.get_register16(pair);
@@ -96,8 +113,71 @@ public:
         state.set_if_flag(cpu_flags::C, result & 0xFFFF0000);
         state.set_register16(cpu_registers16::HL, result);
     }
+
     inline void LDAX(cpu_registers16 pair) { state.set_register8(cpu_registers8::A, memory[state.get_register16(pair)]); }
+
     inline void DCX(cpu_registers16 pair) { state.set_register16(pair, state.get_register16(pair) - 1); }
+
+    inline void RLC() {
+        u8 a = state.get_register8(cpu_registers8::A);
+        state.set_register8(cpu_registers8::A, (a << 1) | (a >> 7));
+        state.set_if_flag(cpu_flags::C, a & 0x80);
+    }
+
+    inline void RRC() {
+        u8 a = state.get_register8(cpu_registers8::A);
+        state.set_register8(cpu_registers8::A, (a >> 1) | (a << 7));
+        state.set_if_flag(cpu_flags::C, a & 0x01);
+    }
+
+    inline void RAL() {
+        u8 a = state.get_register8(cpu_registers8::A);
+        state.set_register8(cpu_registers8::A, (a << 1) | state.get_flag(cpu_flags::C));
+        state.set_if_flag(cpu_flags::C, a & 0x80);
+    }
+
+    inline void RAR() {
+        u8 a = state.get_register8(cpu_registers8::A);
+        state.set_register8(cpu_registers8::A, (a >> 1) | (state.get_flag(cpu_flags::C) << 7));
+        state.set_if_flag(cpu_flags::C, a & 0x01);
+    }
+
+    inline void SHLD() {
+        u16 lo = fetch();
+        u16 hi = fetch();
+        u16 addr = (hi << 8) | lo;
+        memory[addr] = state.get_register8(cpu_registers8::L);
+        memory[addr + 1] = state.get_register8(cpu_registers8::H);
+    }
+
+    inline void DAA() {
+        u8 a = state.get_register8(cpu_registers8::A);
+        bool is_lo = ((a & 0x0F) > 0x09 or state.get_flag(cpu_flags::AC));
+        a += 0x06 * is_lo;
+        state.set_if_flag(cpu_flags::AC, is_lo);
+        bool is_hi = ((a & 0xF0) > 0x90 or state.get_flag(cpu_flags::C));
+        a += 0x60 * is_hi;
+        state.set_if_flag(cpu_flags::C, is_hi);
+        state.set_register8(cpu_registers8::A, a);
+    }
+
+    inline void LHLD() {
+        u16 lo = fetch();
+        u16 hi = fetch();
+        u16 addr = (hi << 8) | lo;
+        state.set_register8(cpu_registers8::L, memory[addr]);
+        state.set_register8(cpu_registers8::H, memory[addr + 1]);
+    }
+
+    inline void CMA() { state.set_register8(cpu_registers8::A, ~state.get_register8(cpu_registers8::A)); }
+
+    inline void STA() { u16 lo = fetch(); u16 hi = fetch(); memory[(hi << 8) | lo] = state.get_register8(cpu_registers8::A); }
+
+    inline void STC() { state.set_flag(cpu_flags::C); }
+
+    inline void LDA() { u16 lo = fetch(); u16 hi = fetch(); state.set_register8(cpu_registers8::A, memory[(hi << 8) | lo]); }
+
+    inline void CMC() { state.set_if_flag(cpu_flags::C, !state.get_flag(cpu_flags::C)); }
 
     /// \}
 

@@ -15,9 +15,7 @@ void cpu::execute(u8 opcode) {
 
         //     ..RP....
         case 0b00000010:
-        case 0b00010010:
-        case 0b00100010:
-        case 0b00110010: _trace<1>(opcode); STAX(reg_pair_sel); _trace_reg16_deref(reg_pair_sel); break;
+        case 0b00010010: _trace<1>(opcode); STAX(reg_pair_sel); _trace_reg16_deref(reg_pair_sel); break;
 
         //     ..RP....
         case 0b00000011:
@@ -63,13 +61,37 @@ void cpu::execute(u8 opcode) {
 
         //     ..RP....
         case 0b00001010:
-        case 0b00011010: _trace<1>(opcode); LDAX(reg_pair_sel); _trace_reg16_deref(reg_pair_sel); _trace_state(); break;
+        case 0b00011010: _trace<1>(opcode); LDAX(reg_pair_sel); _trace_state(); _trace_reg16_deref(reg_pair_sel); break;
 
         //     ..RP....
         case 0b00001011:
         case 0b00011011:
         case 0b00101011:
         case 0b00111011: _trace<1>(opcode); DCX(reg_pair_sel); _trace_state(); break;
+
+        case 0b00000111: _trace<1>(opcode); RLC(); _trace_state(); break;
+
+        case 0b00001111: _trace<1>(opcode); RRC(); _trace_state(); break;
+
+        case 0b00010111: _trace<1>(opcode); RAL(); _trace_state(); break;
+
+        case 0b00011111: _trace<1>(opcode); RAR(); _trace_state(); break;
+
+        case 0b00100010: _trace<3>(opcode); SHLD(); _trace_state(); _trace_mem16_deref(); break;
+
+        case 0b00100111: _trace<1>(opcode); DAA(); _trace_state(); break;
+
+        case 0b00101010: _trace<3>(opcode); LHLD(); _trace_state(); _trace_mem16_deref(); break;
+
+        case 0b00101111: _trace<1>(opcode); CMA(); _trace_state(); break;
+
+        case 0b00110010: _trace<3>(opcode); STA(); _trace_state(); _trace_mem16_deref(); break;
+
+        case 0b00110111: _trace<1>(opcode); STC(); _trace_state(); break;
+
+        case 0b00111010: _trace<3>(opcode); LDA(); _trace_state(); _trace_mem16_deref(); break;
+
+        case 0b00111111: _trace<1>(opcode); CMC(); _trace_state(); break;
 
         default:         _trace_error(opcode); break;
     }
