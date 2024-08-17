@@ -57,12 +57,13 @@ void cpu::_trace_stackptr16_deref() {
     printf("\x1B[42;01m(%04hX): %02hhX (%04hX): %02hhX            \x1B[0m\n",
         state.get_register16(cpu_registers16::SP),
         memory[state.get_register16(cpu_registers16::SP)],
-        state.get_register16(cpu_registers16::SP) + 1,
-        memory[state.get_register16(cpu_registers16::SP) + 1]);
+        state.get_register16(cpu_registers16::SP) - 1,
+        memory[state.get_register16(cpu_registers16::SP) - 1]);
 }
 
 void cpu::_trace_error(u8 opc) {
     printf("%04hX    %02hhX      \t \x1B[31;01mUNKNOWN\x1B[0m\n", pc() - 1, opc);
+    throw std::runtime_error("Unknown opcode hit.");
 }
 
 void cpu::execute(u8 opcode) {
@@ -368,7 +369,7 @@ void cpu::execute(u8 opcode) {
         case 0b11000101:
         case 0b11010101:
         case 0b11100101:
-        case 0b11110101: _trace<3>(opcode); PUSH(pair_sel); _trace_state();
+        case 0b11110101: _trace<1>(opcode); PUSH(pair_sel); _trace_state();
         break;
 
         //     ..ALU...
@@ -380,6 +381,47 @@ void cpu::execute(u8 opcode) {
         case 0b11101110:
         case 0b11110110:
         case 0b11111110: _trace<2>(opcode); ALU_OPERATIONS_A_IMM((opcode >> 3) & 0b111); _trace_state();
+        break;
+
+        //     ..NNN...
+        case 0b11000111:
+        case 0b11001111:
+        case 0b11010111:
+        case 0b11011111:
+        case 0b11100111:
+        case 0b11101111:
+        case 0b11110111:
+        case 0b11111111: _trace<1>(opcode); RST((opcode >> 3) & 0b111); _trace_state();
+        break;
+
+        case 0b11001001: _trace<1>(opcode); RETURN(); _trace_state();
+        break;
+
+        case 0b11001101: _trace<3>(opcode); CALL(); _trace_state();
+        break;
+
+        case 0b11010011: _trace<2>(opcode); OUT();
+        break;
+
+        case 0b11011011: _trace<2>(opcode); IN();
+        break;
+
+        case 0b11100011: _trace<1>(opcode); XTHL(); _trace_state(); _trace_stackptr16_deref();
+        break;
+
+        case 0b11101001: _trace<1>(opcode); PCHL(); _trace_state();
+        break;
+
+        case 0b11101011: _trace<1>(opcode); XCHG(); _trace_state();
+        break;
+
+        case 0b11110011: _trace<1>(opcode); DI();
+        break;
+
+        case 0b11111001: _trace<1>(opcode); SPHL(); _trace_state();
+        break;
+
+        case 0b11111011: _trace<1>(opcode); EI();
         break;
 
         default:         _trace_error(opcode); 

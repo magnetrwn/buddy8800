@@ -17,7 +17,7 @@ int main() {
 
     processor.load(cpudiag.begin(), cpudiag.end(), 0x100);
 
-    for (usize i = 0; i < 150; ++i)
+    for (usize i = 0; i < 30; ++i)
         processor.step();
 
     return 0;
