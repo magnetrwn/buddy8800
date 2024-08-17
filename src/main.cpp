@@ -3,6 +3,8 @@
 #include <vector>
 #include <fstream>
 
+#include <unistd.h>
+
 int main() {
     cpu processor(0x100);
 

@@ -3,20 +3,36 @@
 //#define OPRANGE(opstart, opend, opshft, opvlen)
 
 void cpu::_trace_state() {
-        printf("\x1B[44;01mA: %02hhX BC: %04hX DE: %04hX HL: %04hX \x1B[0m\n",
-            state.get_register8(cpu_registers8::A),
-            state.get_register16(cpu_registers16::BC),
-            state.get_register16(cpu_registers16::DE),
-            state.get_register16(cpu_registers16::HL));
-        printf("\x1B[44;01m SP: %04hX PC: %04hX F: %c %c %c %c %c  \x1B[0m\n",
-            state.get_register16(cpu_registers16::SP),
-            state.get_register16(cpu_registers16::PC),
-            state.get_flag(cpu_flags::S) ? 'S' : '/',
-            state.get_flag(cpu_flags::Z) ? 'Z' : '/',
-            state.get_flag(cpu_flags::AC) ? 'A' : '/',
-            state.get_flag(cpu_flags::P) ? 'P' : '/',
-            state.get_flag(cpu_flags::C) ? 'C' : '/');
-    }
+    constexpr static const char* CHG = "\x1B[43;01m";
+    static cpu_state last_state = state;
+
+    printf("\x1B[44;01mA: %s%02hhX\x1B[44;01m BC: %s%04hX\x1B[44;01m DE: %s%04hX\x1B[44;01m HL: %s%04hX\x1B[44;01m \x1B[0m\n"
+           "\x1B[44;01m SP: %s%04hX\x1B[44;01m PC: %s%04hX\x1B[44;01m F: %s%c\x1B[44;01m %s%c\x1B[44;01m %s%c\x1B[44;01m %s%c\x1B[44;01m %s%c\x1B[44;01m  \x1B[0m\n",
+        last_state.get_register8(cpu_registers8::A) == state.get_register8(cpu_registers8::A) ? "" : CHG,
+        state.get_register8(cpu_registers8::A),
+        last_state.get_register16(cpu_registers16::BC) == state.get_register16(cpu_registers16::BC) ? "" : CHG,
+        state.get_register16(cpu_registers16::BC),
+        last_state.get_register16(cpu_registers16::DE) == state.get_register16(cpu_registers16::DE) ? "" : CHG,
+        state.get_register16(cpu_registers16::DE),
+        last_state.get_register16(cpu_registers16::HL) == state.get_register16(cpu_registers16::HL) ? "" : CHG,
+        state.get_register16(cpu_registers16::HL),
+        last_state.get_register16(cpu_registers16::SP) == state.get_register16(cpu_registers16::SP) ? "" : CHG,
+        state.get_register16(cpu_registers16::SP),
+        last_state.get_register16(cpu_registers16::PC) == state.get_register16(cpu_registers16::PC) ? "" : CHG,
+        state.get_register16(cpu_registers16::PC),
+        last_state.get_flag(cpu_flags::S) == state.get_flag(cpu_flags::S) ? "" : CHG,
+        state.get_flag(cpu_flags::S) ? 'S' : '/',
+        last_state.get_flag(cpu_flags::Z) == state.get_flag(cpu_flags::Z) ? "" : CHG,
+        state.get_flag(cpu_flags::Z) ? 'Z' : '/',
+        last_state.get_flag(cpu_flags::AC) == state.get_flag(cpu_flags::AC) ? "" : CHG,
+        state.get_flag(cpu_flags::AC) ? 'A' : '/',
+        last_state.get_flag(cpu_flags::P) == state.get_flag(cpu_flags::P) ? "" : CHG,
+        state.get_flag(cpu_flags::P) ? 'P' : '/',
+        last_state.get_flag(cpu_flags::C) == state.get_flag(cpu_flags::C) ? "" : CHG,
+        state.get_flag(cpu_flags::C) ? 'C' : '/');
+
+    last_state = state;
+}
 
 void cpu::_trace_reg16_deref(cpu_registers16 reg) {
     printf("\x1B[42;01m(%s: %04hX): %02hhX                   \x1B[0m\n",
@@ -30,11 +46,19 @@ void cpu::_trace_reg16_deref(cpu_registers16 reg) {
         memory[state.get_register16(reg)]);
 }
 
-void cpu::_trace_mem16_deref() {
-    printf("\x1B[43;01m(%02hhX%02hhX): %02hhX                   \x1B[0m\n",
-        memory[pc()],
+/*void cpu::_trace_memref16_deref() {
+    printf("\x1B[41;01m(%02hhX%02hhX): %02hhX                       \x1B[0m\n",
         memory[pc() + 1],
+        memory[pc()],
         memory[(memory[pc() + 1] << 8) | memory[pc()]]);
+}*/
+
+void cpu::_trace_stackptr16_deref() {
+    printf("\x1B[42;01m(%04hX): %02hhX (%04hX): %02hhX            \x1B[0m\n",
+        state.get_register16(cpu_registers16::SP),
+        memory[state.get_register16(cpu_registers16::SP)],
+        state.get_register16(cpu_registers16::SP) + 1,
+        memory[state.get_register16(cpu_registers16::SP) + 1]);
 }
 
 void cpu::_trace_error(u8 opc) {
@@ -136,25 +160,25 @@ void cpu::execute(u8 opcode) {
         case 0b00011111: _trace<1>(opcode); RAR(); _trace_state(); 
         break;
 
-        case 0b00100010: _trace<3>(opcode); SHLD(); _trace_state(); _trace_mem16_deref(); 
+        case 0b00100010: _trace<3>(opcode); SHLD(); _trace_state(); //_trace_mem16_deref(); 
         break;
 
         case 0b00100111: _trace<1>(opcode); DAA(); _trace_state(); 
         break;
 
-        case 0b00101010: _trace<3>(opcode); LHLD(); _trace_state(); _trace_mem16_deref(); 
+        case 0b00101010: _trace<3>(opcode); LHLD(); _trace_state(); //_trace_mem16_deref(); 
         break;
 
         case 0b00101111: _trace<1>(opcode); CMA(); _trace_state(); 
         break;
 
-        case 0b00110010: _trace<3>(opcode); STA(); _trace_state(); _trace_mem16_deref(); 
+        case 0b00110010: _trace<3>(opcode); STA(); _trace_state(); //_trace_mem16_deref(); 
         break;
 
         case 0b00110111: _trace<1>(opcode); STC(); _trace_state(); 
         break;
 
-        case 0b00111010: _trace<3>(opcode); LDA(); _trace_state(); _trace_mem16_deref(); 
+        case 0b00111010: _trace<3>(opcode); LDA(); _trace_state(); //_trace_mem16_deref(); 
         break;
 
         case 0b00111111: _trace<1>(opcode); CMC(); _trace_state(); 
@@ -294,10 +318,10 @@ void cpu::execute(u8 opcode) {
         case 0b10110100:
         case 0b10110101:
         case 0b10110111:
-        case 0b10110110: _trace<1>(opcode); ALU_OPERATIONS_A(src_sel, opcode & 0b111);
+        case 0b10110110: _trace<1>(opcode); ALU_OPERATIONS_A(src_sel, opcode & 0b111); _trace_state();
         break;
 
-        //     ..CCC....
+        //     ..CCC...
         case 0b11000000:
         case 0b11001000:
         case 0b11010000:
@@ -305,7 +329,58 @@ void cpu::execute(u8 opcode) {
         case 0b11100000:
         case 0b11101000:
         case 0b11110000:
-        case 0b11111000: _trace<1>(opcode); RETURN_ON((opcode & 0b00111000) >> 3); _trace_state();
+        case 0b11111000: _trace<1>(opcode); RETURN_ON((opcode >> 3) & 0b111); _trace_state();
+        break;
+
+        //     ..RP....
+        case 0b11000001:
+        case 0b11010001:
+        case 0b11100001:
+        case 0b11110001: _trace<1>(opcode); POP(pair_sel); _trace_state();
+        break;
+
+        //     ..CCC...
+        case 0b11000010:
+        case 0b11001010:
+        case 0b11010010:
+        case 0b11011010:
+        case 0b11100010:
+        case 0b11101010:
+        case 0b11110010:
+        case 0b11111010: _trace<3>(opcode); JUMP_ON((opcode >> 3) & 0b111); _trace_state();
+        break;
+
+        case 0b11000011: _trace<3>(opcode); JMP(); _trace_state();
+        break;
+
+        //     ..CCC...
+        case 0b11000100:
+        case 0b11001100:
+        case 0b11010100:
+        case 0b11011100:
+        case 0b11100100:
+        case 0b11101100:
+        case 0b11110100:
+        case 0b11111100: _trace<3>(opcode); CALL_ON((opcode & 0b00111000) >> 3); _trace_state();
+        break;
+
+        //     ..RP....
+        case 0b11000101:
+        case 0b11010101:
+        case 0b11100101:
+        case 0b11110101: _trace<3>(opcode); PUSH(pair_sel); _trace_state();
+        break;
+
+        //     ..ALU...
+        case 0b11000110:
+        case 0b11001110:
+        case 0b11010110:
+        case 0b11011110:
+        case 0b11100110:
+        case 0b11101110:
+        case 0b11110110:
+        case 0b11111110: _trace<2>(opcode); ALU_OPERATIONS_A_IMM((opcode >> 3) & 0b111); _trace_state();
+        break;
 
         default:         _trace_error(opcode); 
         break;

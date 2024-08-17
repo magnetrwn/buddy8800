@@ -33,7 +33,8 @@ private:
 
     void _trace_state();
     void _trace_reg16_deref(cpu_registers16 reg);
-    void _trace_mem16_deref();
+    //void _trace_mem16_deref();
+    void _trace_stackptr16_deref();
     void _trace_error(u8 opc);
 
     void execute(u8 opcode);
@@ -44,6 +45,8 @@ public:
     /// @name Opcode implementations.
     /// @todo Turn the _M functions into actually using conditional checking for the register being == _M
     /// @todo Make all this set(get()) into a single change()
+    /// @todo Make a convenient function for getting (SP) and (SP+1), or just 2x8 bytes
+    /// @todo Double-check everything is little-endian
     /// \{
 
     inline void NOP() {}
@@ -194,11 +197,88 @@ public:
         state.set_Z_S_P_AC_flags(result, a);
     }
 
-    inline void RETURN_ON(u8 cc) {
-        if (!resolve_flag_cond(cc)) return;
-        state.set_register16(cpu_registers16::PC, memory[state.get_register16(cpu_registers16::SP)]);
+    inline void RETURN_ON(u8 cc) { if (resolve_flag_cond(cc)) RETURN(); }
+
+    inline void POP(cpu_registers16 pair) {
+        _trace_stackptr16_deref();
+        u16 lo = memory[state.get_register16(cpu_registers16::SP)];
+        u16 hi = memory[state.get_register16(cpu_registers16::SP) + 1];
+        state.set_register16(pair, (hi << 8) | lo);
         state.set_register16(cpu_registers16::SP, state.get_register16(cpu_registers16::SP) + 2);
     }
+
+    inline void JUMP_ON(u8 cc) { if (resolve_flag_cond(cc)) JMP(); }
+
+    inline void JMP() { u16 lo = fetch(); u16 hi = fetch(); state.set_register16(cpu_registers16::PC, (hi << 8) | lo); }
+
+    inline void CALL_ON(u8 cc) { if (resolve_flag_cond(cc)) CALL(); }
+
+    inline void PUSH(cpu_registers16 pair) {
+        state.set_register16(cpu_registers16::SP, state.get_register16(cpu_registers16::SP) - 2);
+        memory[state.get_register16(cpu_registers16::SP)] = state.get_register16(pair) & 0xFF;
+        memory[state.get_register16(cpu_registers16::SP) + 1] = state.get_register16(pair) >> 8;
+        _trace_stackptr16_deref();
+    }
+
+    inline void ALU_OPERATIONS_A_IMM(u8 alu) {
+        u16 a = state.get_register8(cpu_registers8::A);
+        u16 with = fetch();
+        u16 result;
+
+        switch (alu) {
+            case 0b000: result = a + with; break;
+            case 0b001: result = a + with + state.get_flag(cpu_flags::C); break;
+            case 0b010: result = a - with; break;
+            case 0b011: result = a - with - state.get_flag(cpu_flags::C); break;
+            case 0b100: result = a & with; break;
+            case 0b101: result = a ^ with; break;
+            case 0b110: result = a | with; break;
+            case 0b111: 
+                result = a - with;
+                state.set_if_flag(cpu_flags::C, result & 0xFF00);
+                state.set_Z_S_P_AC_flags(result, a);
+                return;
+        }
+
+        state.set_register8(cpu_registers8::A, result);
+        state.set_if_flag(cpu_flags::C, result & 0xFF00);
+        state.set_Z_S_P_AC_flags(result, a);
+    }
+
+    inline void RST(u8 n) {
+        PUSH(cpu_registers16::PC);
+        state.set_register16(cpu_registers16::PC, n * 8);
+    }
+
+    inline void RETURN() { POP(cpu_registers16::PC); }
+
+    inline void CALL() {
+        PUSH(cpu_registers16::PC);
+        u16 lo = fetch();
+        u16 hi = fetch();
+        state.set_register16(cpu_registers16::PC, (hi << 8) | lo);
+    }
+
+    inline void OUT() { throw std::runtime_error("OUT not implemented."); }
+
+    inline void IN() { throw std::runtime_error("IN not implemented."); }
+
+    inline void XTHL() {
+        u16 stackmem_lo = memory[state.get_register16(cpu_registers16::SP)];
+        u16 stackmem_hi = memory[state.get_register16(cpu_registers16::SP) + 1];
+        u16 hl = state.get_register16(cpu_registers16::HL);
+        state.set_register16(cpu_registers16::HL, stackmem_hi << 8 | stackmem_lo);
+        memory[state.get_register16(cpu_registers16::SP)] = hl & 0xFF;
+        memory[state.get_register16(cpu_registers16::SP) + 1] = hl >> 8;
+    }
+
+    inline void PCHL() { state.set_register16(cpu_registers16::PC, state.get_register16(cpu_registers16::HL)); }
+
+    inline void DI() { throw std::runtime_error("DI not implemented."); }
+
+    inline void SPHL() { state.set_register16(cpu_registers16::SP, state.get_register16(cpu_registers16::HL)); }
+
+    inline void EI() { throw std::runtime_error("EI not implemented."); }
 
     /// \}
 
