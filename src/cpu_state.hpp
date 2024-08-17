@@ -10,6 +10,11 @@ enum class cpu_registers8 {
     A, F, B, C, D, E, H, L, HIGH_SP, LOW_SP, HIGH_PC, LOW_PC, _M
 };
 
+/// @brief Check if a register is actually a memory reference.
+static constexpr bool is_memref(cpu_registers8 reg) {
+    return reg == cpu_registers8::_M;
+}
+
 /// @brief Provides correct registers coming from opcode register selection.
 static constexpr cpu_registers8 cpu_reg8_decode[8] {
     cpu_registers8::B, cpu_registers8::C, cpu_registers8::D, cpu_registers8::E,
@@ -35,7 +40,7 @@ enum class cpu_flags {
  */
 struct cpu_state {
     std::array<u16, 6> registers;
-
+    
     /// @name Register state get/setters.
     /// \{
 
@@ -106,7 +111,6 @@ struct cpu_state {
     }
 
     /// @brief Set or unset a flag based on a boolean condition.
-    /// @todo This could be optimized to not use a branch. Look into shifting or xoring.
     constexpr void set_if_flag(cpu_flags flag, bool cond) {
         if (cond)
             set_flag(flag);
@@ -120,11 +124,6 @@ struct cpu_state {
         set_if_flag(cpu_flags::S, is & 0x80);
         set_if_flag(cpu_flags::P, __builtin_parity(is));
         set_if_flag(cpu_flags::AC, (was & 0x0F) == 0x0F and (is & 0x0F) == 0x00);
-    }
-
-    /// @brief Set or unset all flags based on the older value of an 8 bit register, and current state.
-    constexpr void set_Z_S_P_AC_flags(cpu_registers8 reg, u8 was) {
-        set_Z_S_P_AC_flags(get_register8(reg), was);
     }
 
     /// \}
