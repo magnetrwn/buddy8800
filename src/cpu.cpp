@@ -64,8 +64,8 @@ void cpu::_trace_stackptr16_deref() {
     printf("\x1B[42;01m(%04hX): %02hhX (%04hX): %02hhX            \x1B[0m\n",
         state.get_register16(cpu_registers16::SP),
         memory[state.get_register16(cpu_registers16::SP)],
-        state.get_register16(cpu_registers16::SP) - 1,
-        memory[state.get_register16(cpu_registers16::SP) - 1]);
+        state.get_register16(cpu_registers16::SP) + 1,
+        memory[state.get_register16(cpu_registers16::SP) + 1]);
     #endif
 }
 

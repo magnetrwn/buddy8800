@@ -205,9 +205,10 @@ public:
     inline void RETURN_ON(u8 cc) { if (resolve_flag_cond(cc)) RETURN(); }
 
     inline void POP(cpu_registers16 pair) {
+        if (pair == cpu_registers16::SP) pair = cpu_registers16::AF;
         _trace_stackptr16_deref();
         u16 lo = memory[state.get_register16(cpu_registers16::SP)];
-        u16 hi = memory[state.get_register16(cpu_registers16::SP) - 1];
+        u16 hi = memory[state.get_register16(cpu_registers16::SP) + 1];
         state.set_register16(pair, (hi << 8) | lo);
         state.set_register16(cpu_registers16::SP, state.get_register16(cpu_registers16::SP) + 2);
     }
@@ -219,9 +220,10 @@ public:
     inline void CALL_ON(u8 cc) { if (resolve_flag_cond(cc)) return CALL(); fetch(); fetch(); }
 
     inline void PUSH(cpu_registers16 pair) {
+        if (pair == cpu_registers16::SP) pair = cpu_registers16::AF;
         state.set_register16(cpu_registers16::SP, state.get_register16(cpu_registers16::SP) - 2);
         memory[state.get_register16(cpu_registers16::SP)] = state.get_register16(pair) & 0xFF;
-        memory[state.get_register16(cpu_registers16::SP) - 1] = state.get_register16(pair) >> 8;
+        memory[state.get_register16(cpu_registers16::SP) + 1] = state.get_register16(pair) >> 8;
         _trace_stackptr16_deref();
     }
 
@@ -270,11 +272,11 @@ public:
 
     inline void XTHL() {
         u16 stackmem_lo = memory[state.get_register16(cpu_registers16::SP)];
-        u16 stackmem_hi = memory[state.get_register16(cpu_registers16::SP) - 1];
+        u16 stackmem_hi = memory[state.get_register16(cpu_registers16::SP) + 1];
         u16 hl = state.get_register16(cpu_registers16::HL);
         state.set_register16(cpu_registers16::HL, stackmem_hi << 8 | stackmem_lo);
         memory[state.get_register16(cpu_registers16::SP)] = hl & 0xFF;
-        memory[state.get_register16(cpu_registers16::SP) - 1] = hl >> 8;
+        memory[state.get_register16(cpu_registers16::SP) + 1] = hl >> 8;
     }
 
     inline void PCHL() { state.set_register16(cpu_registers16::PC, state.get_register16(cpu_registers16::HL)); }
