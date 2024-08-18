@@ -8,7 +8,10 @@
 
 #include "cpu_state.hpp"
 #include "typedef.hpp"
+
+#ifdef ENABLE_TRACE
 #include "util.hpp"
+#endif
 
 class cpu {
 private:
@@ -20,7 +23,8 @@ private:
     inline u8 fetch() { return memory[state.get_then_inc_register16(cpu_registers16::PC)]; }
 
     template <usize ops>
-    void _trace(u8 opc) {
+    void _trace([[maybe_unused]] u8 opc) {
+        #ifdef ENABLE_TRACE
         if constexpr (ops == 1)
             printf("%04hX    %02hhX      \t %s\n", pc() - 1, opc, util::get_opcode_str(opc));
         else if constexpr (ops == 2)
@@ -29,6 +33,7 @@ private:
             printf("%04hX    %02hhX %02hhX %02hhX\t %s\n", pc() - 1, opc, memory[pc()], memory[pc() + 1], util::get_opcode_str(opc));
         else
             static_assert(false, "Invalid number of operands.");
+        #endif
     }
 
     void _trace_state();
@@ -36,10 +41,10 @@ private:
     //void _trace_mem16_deref();
     void _trace_stackptr16_deref();
     void _trace_error(u8 opc);
-
+    
     void execute(u8 opcode);
-
     bool resolve_flag_cond(u8 cc);
+    void handle_bdos();
 
 public:
     /// @name Opcode implementations.
@@ -294,7 +299,7 @@ public:
     void load_state(const cpu_state& new_state);
     cpu_state save_state() const;
 
-    cpu(u16 start_at = 0x0) : state(), memory({}), halted(false) { state.set_register16(cpu_registers16::PC, start_at); }
+    cpu() : state(), memory({}), halted(false) {}
 };
 
 #endif

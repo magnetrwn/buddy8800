@@ -3,10 +3,8 @@
 #include <vector>
 #include <fstream>
 
-#include <unistd.h>
-
 int main() {
-    cpu processor(0x100);
+    cpu processor;
 
     std::ifstream file("tests/res/cpudiag.bin", std::ios::binary);
     if (!file) {
@@ -17,7 +15,7 @@ int main() {
 
     processor.load(cpudiag.begin(), cpudiag.end(), 0x100);
 
-    for (usize i = 0; i < 30; ++i)
+    for (usize i = 0; i < 200; ++i)
         processor.step();
 
     return 0;

@@ -3,6 +3,7 @@
 //#define OPRANGE(opstart, opend, opshft, opvlen)
 
 void cpu::_trace_state() {
+    #ifdef ENABLE_TRACE
     constexpr static const char* CHG = "\x1B[43;01m";
     static cpu_state last_state = state;
 
@@ -32,9 +33,11 @@ void cpu::_trace_state() {
         state.get_flag(cpu_flags::C) ? 'C' : '/');
 
     last_state = state;
+    #endif
 }
 
-void cpu::_trace_reg16_deref(cpu_registers16 reg) {
+void cpu::_trace_reg16_deref([[maybe_unused]] cpu_registers16 reg) {
+    #ifdef ENABLE_TRACE
     printf("\x1B[42;01m(%s: %04hX): %02hhX                   \x1B[0m\n",
         (reg == cpu_registers16::AF) ? "AF" : 
             (reg == cpu_registers16::BC) ? "BC" : 
@@ -44,26 +47,98 @@ void cpu::_trace_reg16_deref(cpu_registers16 reg) {
             "PC",
         state.get_register16(reg),
         memory[state.get_register16(reg)]);
+    #endif
 }
 
 /*void cpu::_trace_memref16_deref() {
+    #ifdef ENABLE_TRACE
     printf("\x1B[41;01m(%02hhX%02hhX): %02hhX                       \x1B[0m\n",
         memory[pc() + 1],
         memory[pc()],
         memory[(memory[pc() + 1] << 8) | memory[pc()]]);
+    #endif
 }*/
 
 void cpu::_trace_stackptr16_deref() {
+    #ifdef ENABLE_TRACE
     printf("\x1B[42;01m(%04hX): %02hhX (%04hX): %02hhX            \x1B[0m\n",
         state.get_register16(cpu_registers16::SP),
         memory[state.get_register16(cpu_registers16::SP)],
         state.get_register16(cpu_registers16::SP) - 1,
         memory[state.get_register16(cpu_registers16::SP) - 1]);
+    #endif
 }
 
-void cpu::_trace_error(u8 opc) {
+void cpu::_trace_error([[maybe_unused]] u8 opc) {
+    #ifdef ENABLE_TRACE
     printf("%04hX    %02hhX      \t \x1B[31;01mUNKNOWN\x1B[0m\n", pc() - 1, opc);
     throw std::runtime_error("Unknown opcode hit.");
+    #endif
+}
+
+bool cpu::resolve_flag_cond(u8 cc) {
+    switch (cc) {
+        case 0b000: return !state.get_flag(cpu_flags::Z);
+        case 0b001: return state.get_flag(cpu_flags::Z); 
+        case 0b010: return !state.get_flag(cpu_flags::C);
+        case 0b011: return state.get_flag(cpu_flags::C); 
+        case 0b100: return !state.get_flag(cpu_flags::P);
+        case 0b101: return state.get_flag(cpu_flags::P); 
+        case 0b110: return !state.get_flag(cpu_flags::S);
+        case 0b111: return state.get_flag(cpu_flags::S);
+        default: return false;
+    }
+}
+
+void cpu::handle_bdos() {
+    if (state.get_register16(cpu_registers16::PC) == 0x0005) {
+        u8 c = state.get_register8(cpu_registers8::C);
+
+        #ifdef ENABLE_TRACE
+        puts("\x1B[47;01mBDOS 0x0005: Wants to print:     \x1B[0m");
+        #endif
+
+        if (c == 0x02)
+            putchar(state.get_register8(cpu_registers8::E));
+        
+        else if (c == 0x09)
+            for (u16 de = state.get_register16(cpu_registers16::DE); memory[de] != '$'; ++de)
+                putchar(memory[de]);
+
+        fetch();
+
+        #ifdef ENABLE_TRACE
+        puts("");
+        _trace<1>(0b11001001); 
+        #endif
+        
+        RETURN();
+    }
+}
+
+void cpu::step() { 
+    if (halted) return;
+    handle_bdos();
+    execute(fetch()); 
+}
+
+void cpu::load(std::vector<u8>::iterator begin, std::vector<u8>::iterator end, usize offset) {
+    memory = { 0xC3, static_cast<u8>(offset & 0xFF), static_cast<u8>(offset >> 8) };
+
+    usize dist = std::distance(begin, end);
+
+    if (dist > memory.size() - offset)
+        throw std::out_of_range("Not enough space in emulated memory.");
+
+    std::copy(begin, end, memory.begin() + offset);
+}
+
+void cpu::load_state(const cpu_state& new_state) {
+    state = new_state;
+}
+
+cpu_state cpu::save_state() const {
+    return state;
 }
 
 void cpu::execute(u8 opcode) {
@@ -427,41 +502,4 @@ void cpu::execute(u8 opcode) {
         default:         _trace_error(opcode); 
         break;
     }
-}
-
-bool cpu::resolve_flag_cond(u8 cc) {
-    switch (cc) {
-        case 0b000: return !state.get_flag(cpu_flags::Z);
-        case 0b001: return state.get_flag(cpu_flags::Z); 
-        case 0b010: return !state.get_flag(cpu_flags::C);
-        case 0b011: return state.get_flag(cpu_flags::C); 
-        case 0b100: return !state.get_flag(cpu_flags::P);
-        case 0b101: return state.get_flag(cpu_flags::P); 
-        case 0b110: return !state.get_flag(cpu_flags::S);
-        case 0b111: return state.get_flag(cpu_flags::S);
-        default: return false;
-    }
-}
-
-void cpu::step() { 
-    if (halted) 
-        return; 
-    execute(fetch()); 
-}
-
-void cpu::load(std::vector<u8>::iterator begin, std::vector<u8>::iterator end, usize offset) {
-    usize dist = std::distance(begin, end);
-
-    if (dist > memory.size() - offset)
-        throw std::out_of_range("Not enough space in emulated memory.");
-
-    std::copy(begin, end, memory.begin() + offset);
-}
-
-void cpu::load_state(const cpu_state& new_state) {
-    state = new_state;
-}
-
-cpu_state cpu::save_state() const {
-    return state;
 }
