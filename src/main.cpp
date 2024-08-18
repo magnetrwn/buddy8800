@@ -7,15 +7,14 @@ int main() {
     cpu processor;
 
     std::ifstream file("tests/res/cpudiag.bin", std::ios::binary);
-    if (!file) {
+    if (!file)
         return 1;
-    }
 
     std::vector<u8> cpudiag { std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>() };
 
     processor.load(cpudiag.begin(), cpudiag.end(), 0x100);
 
-    for (usize i = 0; i < 200; ++i)
+    while (!processor.is_halted())
         processor.step();
 
     return 0;

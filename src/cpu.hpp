@@ -9,7 +9,7 @@
 #include "cpu_state.hpp"
 #include "typedef.hpp"
 
-#ifdef ENABLE_TRACE
+#if defined ENABLE_TRACE or defined ENABLE_TRACE_ESSENTIAL
 #include "util.hpp"
 #endif
 
@@ -24,7 +24,7 @@ private:
 
     template <usize ops>
     void _trace([[maybe_unused]] u8 opc) {
-        #ifdef ENABLE_TRACE
+        #if defined ENABLE_TRACE or defined ENABLE_TRACE_ESSENTIAL
         if constexpr (ops == 1)
             printf("%04hX    %02hhX      \t %s\n", pc() - 1, opc, util::get_opcode_str(opc));
         else if constexpr (ops == 2)
@@ -41,7 +41,7 @@ private:
     //void _trace_mem16_deref();
     void _trace_stackptr16_deref();
     void _trace_error(u8 opc);
-    
+
     void execute(u8 opcode);
     bool resolve_flag_cond(u8 cc);
     void handle_bdos();
@@ -298,6 +298,7 @@ public:
     void load(std::vector<u8>::iterator begin, std::vector<u8>::iterator end, usize offset = 0);
     void load_state(const cpu_state& new_state);
     cpu_state save_state() const;
+    bool is_halted() const;
 
     cpu() : state(), memory({}), halted(false) {}
 };

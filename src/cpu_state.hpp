@@ -122,8 +122,8 @@ struct cpu_state {
     constexpr void set_Z_S_P_AC_flags(u8 is, u8 was) {
         set_if_flag(cpu_flags::Z, !is);
         set_if_flag(cpu_flags::S, is & 0x80);
-        set_if_flag(cpu_flags::P, __builtin_parity(is));
-        set_if_flag(cpu_flags::AC, (was & 0x0F) == 0x0F and (is & 0x0F) == 0x00);
+        set_if_flag(cpu_flags::P, !__builtin_parity(is));
+        set_if_flag(cpu_flags::AC, (was & 0b00001000) and (is & 0b00010000));
     }
 
     /// \}

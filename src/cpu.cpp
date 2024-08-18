@@ -91,7 +91,27 @@ bool cpu::resolve_flag_cond(u8 cc) {
 }
 
 void cpu::handle_bdos() {
-    if (state.get_register16(cpu_registers16::PC) == 0x0005) {
+    static bool just_booted = true;
+
+    if (pc() == 0x0000) {
+        if (just_booted) {
+
+            #ifdef ENABLE_TRACE
+            puts("\x1B[47;01mBDOS 0x0000: Reset vector!       \x1B[0m");
+            #endif
+
+            just_booted = false;
+            return;
+        }
+
+        #ifdef ENABLE_TRACE
+        puts("\x1B[47;01mBDOS 0x0000: That's all folks!   \x1B[0m");
+        #endif
+
+        memory[0] = 0b01110110;
+    }
+
+    if (pc() == 0x0005) {
         u8 c = state.get_register8(cpu_registers8::C);
 
         #ifdef ENABLE_TRACE
@@ -99,16 +119,19 @@ void cpu::handle_bdos() {
         #endif
 
         if (c == 0x02)
-            putchar(state.get_register8(cpu_registers8::E));
-        
+            printf("\x1B[33;01m%c\x1B[0m", state.get_register8(cpu_registers8::E));
+
         else if (c == 0x09)
             for (u16 de = state.get_register16(cpu_registers16::DE); memory[de] != '$'; ++de)
-                putchar(memory[de]);
+                printf("\x1B[33;01m%c\x1B[0m", memory[de]);
+
+        else
+            throw std::runtime_error("Unknown BDOS call.");
 
         fetch();
 
         #ifdef ENABLE_TRACE
-        puts("");
+        putchar('\n');
         _trace<1>(0b11001001); 
         #endif
         
@@ -116,21 +139,23 @@ void cpu::handle_bdos() {
     }
 }
 
-void cpu::step() { 
+void cpu::step() {
     if (halted) return;
     handle_bdos();
     execute(fetch()); 
 }
 
 void cpu::load(std::vector<u8>::iterator begin, std::vector<u8>::iterator end, usize offset) {
-    memory = { 0xC3, static_cast<u8>(offset & 0xFF), static_cast<u8>(offset >> 8) };
-
     usize dist = std::distance(begin, end);
 
     if (dist > memory.size() - offset)
         throw std::out_of_range("Not enough space in emulated memory.");
 
     std::copy(begin, end, memory.begin() + offset);
+
+    memory[0] = 0xC3;
+    memory[1] = static_cast<u8>(offset & 0xFF);
+    memory[2] = static_cast<u8>(offset >> 8);
 }
 
 void cpu::load_state(const cpu_state& new_state) {
@@ -141,9 +166,13 @@ cpu_state cpu::save_state() const {
     return state;
 }
 
+bool cpu::is_halted() const {
+    return halted;
+}
+
 void cpu::execute(u8 opcode) {
     cpu_registers16 pair_sel = static_cast<cpu_registers16>((((opcode & 0b00110000) >> 4) & 0b11) + 1);
-    cpu_registers8 dst_sel = cpu_reg8_decode[((opcode & 0b00111000) >> 3) & 0b111];
+    cpu_registers8 dst_sel = cpu_reg8_decode[(opcode >> 3) & 0b111];
     cpu_registers8 src_sel = cpu_reg8_decode[opcode & 0b111];
 
     switch (opcode) {
@@ -394,7 +423,7 @@ void cpu::execute(u8 opcode) {
         case 0b10110100:
         case 0b10110101:
         case 0b10110111:
-        case 0b10110110: _trace<1>(opcode); ALU_OPERATIONS_A(src_sel, opcode & 0b111); _trace_state();
+        case 0b10110110: _trace<1>(opcode); ALU_OPERATIONS_A(src_sel, (opcode >> 3) & 0b111); _trace_state();
         break;
 
         //     ..CCC...
