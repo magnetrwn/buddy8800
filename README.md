@@ -36,8 +36,8 @@ Here are some of the resources I used to figure out various aspects of this proj
 + [Why did CP/M require RAM in the bottom part of the address space](https://retrocomputing.stackexchange.com/questions/6442/why-did-cp-m-require-ram-in-the-bottom-part-of-the-address-space) as well as [Test emulated 8080 CPU without an OS](https://retrocomputing.stackexchange.com/questions/9361/test-emulated-8080-cpu-without-an-os), some good information on CP/M memory maps and execution.
 + [skx/cpm-dist](https://github.com/skx/cpm-dist), some very cool software for CP/M.
 
-# Screenshots
+### Screenshots
 
-### First Contact!
+**First Contact!**
 
 ![The first time the 8080 diagnostics ran to the end!](cpu-is-operational.png)
