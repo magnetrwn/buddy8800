@@ -145,15 +145,19 @@ void cpu::reset_printer() {
     printer.reset();
 }
 
+void cpu::set_handle_bdos(bool should) {
+    do_handle_bdos = should;
+}
+
 void cpu::step() {
     if (halted)
         return;
-    
-    handle_bdos();
+    if (do_handle_bdos)
+        handle_bdos();
     execute(fetch()); 
 }
 
-void cpu::load(std::vector<u8>::iterator begin, std::vector<u8>::iterator end, usize offset) {
+void cpu::load(std::vector<u8>::iterator begin, std::vector<u8>::iterator end, usize offset, bool auto_reset_vector) {
     usize dist = std::distance(begin, end);
 
     if (dist > memory.size() - offset)
@@ -161,9 +165,14 @@ void cpu::load(std::vector<u8>::iterator begin, std::vector<u8>::iterator end, u
 
     std::copy(begin, end, memory.begin() + offset);
 
-    memory[0] = 0xC3;
-    memory[1] = static_cast<u8>(offset & 0xFF);
-    memory[2] = static_cast<u8>(offset >> 8);
+    if (auto_reset_vector) {
+        if (offset <= 2)
+            throw std::out_of_range("First program bytes will be overwritten by reset vector.");
+
+        memory[0] = 0xC3;
+        memory[1] = static_cast<u8>(offset & 0xFF);
+        memory[2] = static_cast<u8>(offset >> 8);
+    }
 }
 
 void cpu::load_state(const cpu_state& new_state) {

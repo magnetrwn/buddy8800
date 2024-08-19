@@ -20,27 +20,14 @@
  * fetches to opcode operands. The API also provides public access to execute(), should the user want to manually
  * ask for instructions.
  *
- * Example usage:
- * @code
-    std::ifstream file("tests/res/cpudiag.bin", std::ios::binary);
-    if (!file)
-        return 1;
-
-    std::vector<u8> cpudiag { std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>() };
-
-    processor.load(cpudiag.begin(), cpudiag.end(), 0x100);
-
-    while (!processor.is_halted())
-        processor.step();
-
-    return 0;
- * @endcode
+ * For a use case example you can look at `ŧests/test_cpu.hpp`.
  */
 class cpu {
 private:
     cpu_state state;
     std::array<u8, 0x10000> memory;
     bool halted;
+    bool do_handle_bdos;
     
     util::print_helper printer;
 
@@ -322,15 +309,17 @@ public:
     void step();
     void execute(u8 opcode);
 
-    void load(std::vector<u8>::iterator begin, std::vector<u8>::iterator end, usize offset = 0);
+    void load(std::vector<u8>::iterator begin, std::vector<u8>::iterator end, usize offset = 0, bool auto_reset_vector = false);
     void load_state(const cpu_state& new_state);
     cpu_state save_state() const;
     bool is_halted() const;
 
+    void set_handle_bdos(bool should);
+
     void set_printer_to_file(const char* filename);
     void reset_printer();
 
-    cpu() : state(), memory({}), halted(false), printer(std::cout) {}
+    cpu() : state(), memory({}), halted(false), do_handle_bdos(false), printer(std::cout) {}
 };
 
 #endif

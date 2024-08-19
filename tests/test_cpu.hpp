@@ -21,7 +21,8 @@ TEST_CASE("CPU running CPUDIAG.BIN", "[cpu]") {
         REQUIRE(passed_run.is_open());
         std::vector<u8> passed_runv { std::istreambuf_iterator<char>(passed_run), std::istreambuf_iterator<char>() };
 
-        emu.load(programv.begin(), programv.end(), 0x100);
+        emu.load(programv.begin(), programv.end(), 0x100, true);
+        emu.set_handle_bdos(true);
         emu.set_printer_to_file(OUTPUT);
         while (!emu.is_halted())
             emu.step();
