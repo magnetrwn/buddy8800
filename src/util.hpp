@@ -25,36 +25,42 @@ public:
      * The temporary redirected destination is set(), then reset() to go back to the default destination.
      */
     class print_helper {
-    public:
+    private:
         std::ostream& by_default;
         std::ofstream file_redirect;
 
+    public:
+        /// @brief Set a redirection to file.
         void set(const char* filename) {
             file_redirect = std::ofstream(filename, std::ios::binary);
             if (!file_redirect.is_open())
                 throw std::invalid_argument("Could not open file for printer.");
         }
 
+        /// @brief Reset and fallback to default destination.
         void reset() {
-            if (!file_redirect.is_open())
-                throw std::invalid_argument("Nothing to reset printer to.");
-            file_redirect.close();
+            if (file_redirect.is_open())
+                file_redirect.close();
         }
 
+        /// @brief Print data to the set destination.
         template <typename T>
-        void print(T data) {
+        void print(const T& data) {
             if (file_redirect.is_open())
                 file_redirect << data;
             else
                 by_default << data;
         }
 
+        /// @brief Operator overload matching common usage of << operator.
         template <typename T>
-        void operator<<(T data) {
+        print_helper& operator<<(const T& data) {
             print(data);
+            return *this;
         }
 
         print_helper(std::ostream& by_default) : by_default(by_default) {}
+        ~print_helper() { if (file_redirect.is_open()) file_redirect.close(); }
     };
 
     /// @brief Get the parity of an integer type value.
