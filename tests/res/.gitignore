@@ -1,2 +1,3 @@
-CPUTEST.COM
-TEST.COM
+*
+!cpudiag.*
+!passed.txt

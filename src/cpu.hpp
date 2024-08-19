@@ -4,6 +4,11 @@
 #include <array>
 #include <cstdio>
 #include <vector>
+
+#include <iostream>
+#include <fstream>
+#include <ostream>
+
 #include <stdexcept>
 
 #include "cpu_state.hpp"
@@ -18,6 +23,9 @@ private:
     cpu_state state;
     std::array<u8, 0x10000> memory;
     bool halted;
+    
+    std::ostream& printer;
+    std::ofstream printer_file;
 
     inline u16 pc() const { return state.get_register16(cpu_registers16::PC); }
     inline u8 fetch() { return memory[state.get_then_inc_register16(cpu_registers16::PC)]; }
@@ -46,7 +54,6 @@ private:
     bool resolve_flag_cond(u8 cc);
     void handle_bdos();
 
-public:
     /// @name Opcode implementations.
     /// @todo Turn the _M functions into actually using conditional checking for the register being == _M
     /// @todo Make all this set(get()) into a single change()
@@ -295,14 +302,16 @@ public:
 
     /// \}
 
+public:
     void step();
 
     void load(std::vector<u8>::iterator begin, std::vector<u8>::iterator end, usize offset = 0);
     void load_state(const cpu_state& new_state);
     cpu_state save_state() const;
     bool is_halted() const;
+    void set_printer_to_file(const char* filename);
 
-    cpu() : state(), memory({}), halted(false) {}
+    cpu() : state(), memory({}), halted(false), printer(std::cout) {}
 };
 
 #endif

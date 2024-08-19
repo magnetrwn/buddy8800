@@ -1,10 +1,10 @@
-#include "cpu.hpp"
+/*#include "cpu.hpp"
 
 #include <vector>
 #include <fstream>
-
+*/
 int main() {
-    cpu processor;
+/*  cpu processor;
 
     std::ifstream file("tests/res/cpudiag.bin", std::ios::binary);
     if (!file)
@@ -16,6 +16,6 @@ int main() {
 
     while (!processor.is_halted())
         processor.step();
-
+*/
     return 0;
 }

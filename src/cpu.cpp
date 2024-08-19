@@ -1,7 +1,5 @@
 #include "cpu.hpp"
 
-//#define OPRANGE(opstart, opend, opshft, opvlen)
-
 void cpu::_trace_state() {
     #ifdef ENABLE_TRACE
     constexpr static const char* CHG = "\x1B[43;01m";
@@ -119,14 +117,11 @@ void cpu::handle_bdos() {
         #endif
 
         if (c == 0x02)
-            printf("\x1B[33;01m%c\x1B[0m", state.get_register8(cpu_registers8::E));
+            printer << state.get_register8(cpu_registers8::E);
 
         else if (c == 0x09)
             for (u16 de = state.get_register16(cpu_registers16::DE); memory[de] != '$'; ++de)
-                printf("\x1B[33;01m%c\x1B[0m", memory[de]);
-
-        else
-            throw std::runtime_error("Unknown BDOS call.");
+                printer << memory[de];
 
         fetch();
 
@@ -137,6 +132,14 @@ void cpu::handle_bdos() {
         
         RETURN();
     }
+}
+
+void cpu::set_printer_to_file(const char* filename) {
+    printer_file.open(filename);
+    if (printer_file)
+        printer.rdbuf(printer_file.rdbuf());
+    else
+        throw std::invalid_argument("Could not open file for printer.");
 }
 
 void cpu::step() {
