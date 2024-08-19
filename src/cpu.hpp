@@ -4,19 +4,12 @@
 #include <array>
 #include <cstdio>
 #include <vector>
-
 #include <iostream>
-#include <fstream>
-#include <ostream>
-
 #include <stdexcept>
 
 #include "cpu_state.hpp"
 #include "typedef.hpp"
-
-#if defined ENABLE_TRACE or defined ENABLE_TRACE_ESSENTIAL
 #include "util.hpp"
-#endif
 
 class cpu {
 private:
@@ -24,8 +17,7 @@ private:
     std::array<u8, 0x10000> memory;
     bool halted;
     
-    std::ostream& printer;
-    std::ofstream printer_file;
+    util::print_helper printer;
 
     inline u16 pc() const { return state.get_register16(cpu_registers16::PC); }
     inline u8 fetch() { return memory[state.get_then_inc_register16(cpu_registers16::PC)]; }
@@ -309,7 +301,9 @@ public:
     void load_state(const cpu_state& new_state);
     cpu_state save_state() const;
     bool is_halted() const;
+
     void set_printer_to_file(const char* filename);
+    void reset_printer();
 
     cpu() : state(), memory({}), halted(false), printer(std::cout) {}
 };

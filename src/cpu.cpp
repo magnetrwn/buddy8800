@@ -135,15 +135,16 @@ void cpu::handle_bdos() {
 }
 
 void cpu::set_printer_to_file(const char* filename) {
-    printer_file.open(filename);
-    if (printer_file)
-        printer.rdbuf(printer_file.rdbuf());
-    else
-        throw std::invalid_argument("Could not open file for printer.");
+    printer.set(filename);
+}
+
+void cpu::reset_printer() {
+    printer.reset();
 }
 
 void cpu::step() {
-    if (halted) return;
+    if (halted)
+        return;
     handle_bdos();
     execute(fetch()); 
 }

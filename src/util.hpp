@@ -1,6 +1,9 @@
 #ifndef UTIL_HPP_
 #define UTIL_HPP_
 
+#include <iostream>
+#include <fstream>
+
 #include "typedef.hpp"
 
 /**
@@ -11,6 +14,49 @@
  */
 class util {
 public:
+
+    /**
+     * @brief Helper class for managing print redirection.
+     *
+     * This class provides an object that handles printing going through it into a set destination.
+     * It can be useful in context of tests, where some specific output might be useful to be redirected
+     * to a text file rather than stdout.
+     *
+     * The temporary redirected destination is set(), then reset() to go back to the default destination.
+     */
+    class print_helper {
+    public:
+        std::ostream& by_default;
+        std::ofstream file_redirect;
+
+        void set(const char* filename) {
+            file_redirect = std::ofstream(filename, std::ios::binary);
+            if (!file_redirect.is_open())
+                throw std::invalid_argument("Could not open file for printer.");
+        }
+
+        void reset() {
+            if (!file_redirect.is_open())
+                throw std::invalid_argument("Nothing to reset printer to.");
+            file_redirect.close();
+        }
+
+        template <typename T>
+        void print(T data) {
+            if (file_redirect.is_open())
+                file_redirect << data;
+            else
+                by_default << data;
+        }
+
+        template <typename T>
+        void operator<<(T data) {
+            print(data);
+        }
+
+        print_helper(std::ostream& by_default) : by_default(by_default) {}
+    };
+
     /// @brief Get the parity of an integer type value.
     /// @note This is an alternative if __builtin_parity is not available.
     template <typename T>

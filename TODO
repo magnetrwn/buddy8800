@@ -1,0 +1,3 @@
+- Consistent use of either printf() or streams? If you look at _trace code versus BDOS call code, you will see that traces are fixed to stdout since they have ANSI escapes etc, while BDOS calls use util::print_helper which can redirect to file, which tests look at. Make sure this approach isn't smelly.
+- Shortening instruction methods repetition, like with the stack pointer?
+- Better trace handling?
