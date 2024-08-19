@@ -11,6 +11,31 @@
 #include "typedef.hpp"
 #include "util.hpp"
 
+/**
+ * @brief Represents the CPU of the emulator.
+ *
+ * This is the 8080 CPU emulator and interpreter. It abstracts the CPU functionality into straightforward methods
+ * and presents a way to step and interact with state. Being an interpreter, each opcode starting from the program
+ * counter address in memory is fetched and executed according to what it represents and including further
+ * fetches to opcode operands. The API also provides public access to execute(), should the user want to manually
+ * ask for instructions.
+ *
+ * Example usage:
+ * @code
+    std::ifstream file("tests/res/cpudiag.bin", std::ios::binary);
+    if (!file)
+        return 1;
+
+    std::vector<u8> cpudiag { std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>() };
+
+    processor.load(cpudiag.begin(), cpudiag.end(), 0x100);
+
+    while (!processor.is_halted())
+        processor.step();
+
+    return 0;
+ * @endcode
+ */
 class cpu {
 private:
     cpu_state state;
@@ -42,7 +67,6 @@ private:
     void _trace_stackptr16_deref();
     void _trace_error(u8 opc);
 
-    void execute(u8 opcode);
     bool resolve_flag_cond(u8 cc);
     void handle_bdos();
 
@@ -296,6 +320,7 @@ private:
 
 public:
     void step();
+    void execute(u8 opcode);
 
     void load(std::vector<u8>::iterator begin, std::vector<u8>::iterator end, usize offset = 0);
     void load_state(const cpu_state& new_state);
