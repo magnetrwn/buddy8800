@@ -123,6 +123,9 @@ void cpu::handle_bdos() {
             for (u16 de = state.get_register16(cpu_registers16::DE); memory[de] != '$'; ++de)
                 printer << memory[de];
 
+        else
+            throw std::runtime_error("Unknown BDOS 0x0005 call parameters.");
+
         fetch();
 
         #ifdef ENABLE_TRACE
@@ -145,6 +148,7 @@ void cpu::reset_printer() {
 void cpu::step() {
     if (halted)
         return;
+    
     handle_bdos();
     execute(fetch()); 
 }

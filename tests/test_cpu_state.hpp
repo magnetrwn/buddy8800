@@ -2,7 +2,7 @@
 
 #include "cpu_state.hpp"
 
-TEST_CASE("CPU state registers.", "[cpu_state]") {
+TEST_CASE("CPU state checks", "[cpu_state]") {
     cpu_state state;
 
     SECTION("Check state is generally zeroed, but not on bit 1 of F, on construction.") {
@@ -177,5 +177,55 @@ TEST_CASE("CPU state registers.", "[cpu_state]") {
         REQUIRE(state.get_register16(HL) == 0x0101);
         REQUIRE(state.get_register16(SP) == 0x0101);
         REQUIRE(state.get_register16(PC) == 0x0101);
+    }
+
+    SECTION("Testing flag setting based on condition.") {
+        using enum cpu_flags;
+
+        // Set all flags to 0 via set_register8
+        state.set_register8(cpu_registers8::F, 0x02);
+        REQUIRE(state.get_register8(cpu_registers8::F) == 0b00000010);
+
+        // Check flags one by one, on toggle on
+        state.set_if_flag(C, true);
+        REQUIRE(state.get_register8(cpu_registers8::F) == 0b00000011);
+        state.set_if_flag(P, true);
+        REQUIRE(state.get_register8(cpu_registers8::F) == 0b00000111);
+        state.set_if_flag(AC, true);
+        REQUIRE(state.get_register8(cpu_registers8::F) == 0b00010111);
+        state.set_if_flag(Z, true);
+        REQUIRE(state.get_register8(cpu_registers8::F) == 0b01010111);
+        state.set_if_flag(S, true);
+        REQUIRE(state.get_register8(cpu_registers8::F) == 0b11010111);
+
+        // Check flags one by one, on toggle off
+        state.set_if_flag(C, false);
+        REQUIRE(state.get_register8(cpu_registers8::F) == 0b11010110);
+        state.set_if_flag(P, false);
+        REQUIRE(state.get_register8(cpu_registers8::F) == 0b11010010);
+        state.set_if_flag(AC, false);
+        REQUIRE(state.get_register8(cpu_registers8::F) == 0b11000010);
+        state.set_if_flag(Z, false);
+        REQUIRE(state.get_register8(cpu_registers8::F) == 0b10000010);
+        state.set_if_flag(S, false);
+        REQUIRE(state.get_register8(cpu_registers8::F) == 0b00000010);
+    }
+
+    SECTION("Checking flag setting based on old and new memory values.") {
+        using enum cpu_flags;
+
+        // Set all flags to 0 via set_register8
+        state.set_register8(cpu_registers8::F, 0x02);
+        REQUIRE(state.get_register8(cpu_registers8::F) == 0b00000010);
+
+        // Check flags on each flag case
+        state.set_Z_S_P_AC_flags(0x00, 0xFF);
+        REQUIRE(state.get_flag(Z));
+        state.set_Z_S_P_AC_flags(0x10, 0x08);
+        REQUIRE(state.get_flag(AC));
+        state.set_Z_S_P_AC_flags(0x80, 0x7F);
+        REQUIRE(state.get_flag(S));
+        state.set_Z_S_P_AC_flags(0x55, 0x01);
+        REQUIRE(state.get_flag(P));
     }
 }

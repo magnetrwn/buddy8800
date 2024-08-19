@@ -5,7 +5,7 @@
 
 #include "cpu.hpp"
 
-TEST_CASE("Testing the CPU itself.", "[cpu]") {
+TEST_CASE("CPU running CPUDIAG.BIN", "[cpu]") {
     constexpr static const char* CPUDIAG = "cpudiag.bin";
     constexpr static const char* PASSED = "passed.txt";
     constexpr static const char* OUTPUT = "out.txt";
