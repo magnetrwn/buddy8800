@@ -1,3 +1,9 @@
 *
 !cpudiag.*
-!passed.txt
+!ok_cpudiag.txt
+!8080pre.com
+!ok_8080pre.txt
+!test.com
+!ok_test.txt
+!diag2.com
+!ok_diag2.txt

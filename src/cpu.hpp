@@ -26,8 +26,10 @@ class cpu {
 private:
     cpu_state state;
     std::array<u8, 0x10000> memory;
+    bool just_booted; // turn this into "wait"
     bool halted;
     bool do_handle_bdos;
+    bool interrupts_enabled;
     
     util::print_helper printer;
 
@@ -74,28 +76,35 @@ private:
 
     inline void INR(cpu_registers8 reg) {
         if (is_memref(reg)) return _INR_M();
+        state.inc_register8(reg);
         u8 value = state.get_register8(reg);
-        state.set_register8(reg, value + 1);
-        state.set_Z_S_P_AC_flags(value + 1, value);
+        state.set_if_flag(cpu_flags::AC, (value & 0x0F) == 0x00);
+        //state.set_if_flag(cpu_flags::C, value == 0x00);
+        state.set_Z_S_P_flags(value);
     }
 
     inline void _INR_M() { 
-        u8 value = memory[state.get_register16(cpu_registers16::HL)];
-        ++memory[state.get_register16(cpu_registers16::HL)];
-        state.set_Z_S_P_AC_flags(value + 1, value);
+        u8 value = ++memory[state.get_register16(cpu_registers16::HL)];
+        state.set_if_flag(cpu_flags::AC, (value & 0x0F) == 0x00);
+        //state.set_if_flag(cpu_flags::C, value == 0x00);
+        state.set_Z_S_P_flags(value);
     }
 
     inline void DCR(cpu_registers8 reg) {
         if (is_memref(reg)) return _DCR_M();
         u8 value = state.get_register8(reg);
         state.set_register8(reg, value - 1);
-        state.set_Z_S_P_AC_flags(value - 1, value);
+        --value;
+        state.set_if_flag(cpu_flags::AC, (value & 0x0F) == 0x0F);
+        //state.set_if_flag(cpu_flags::C, value == 0xFF);
+        state.set_Z_S_P_flags(value);
     }
 
     inline void _DCR_M() {
-        u8 value = memory[state.get_register16(cpu_registers16::HL)];
-        --memory[state.get_register16(cpu_registers16::HL)];
-        state.set_Z_S_P_AC_flags(value - 1, value);
+        u8 value = --memory[state.get_register16(cpu_registers16::HL)];
+        state.set_if_flag(cpu_flags::AC, (value & 0x0F) == 0x0F);
+        //state.set_if_flag(cpu_flags::C, value == 0xFF);
+        state.set_Z_S_P_flags(value);
     }
 
     inline void MVI(cpu_registers8 reg) { if (is_memref(reg)) return _MVI_M(); state.set_register8(reg, fetch()); }
@@ -155,6 +164,7 @@ private:
         a += 0x60 * is_hi;
         state.set_if_flag(cpu_flags::C, is_hi);
         state.set_register8(cpu_registers8::A, a);
+        state.set_Z_S_P_flags(a);
     }
 
     inline void LHLD() {
@@ -191,25 +201,33 @@ private:
         u16 a = state.get_register8(cpu_registers8::A);
         u16 with = ((is_memref(src)) ? memory[state.get_register16(cpu_registers16::HL)] : state.get_register8(src));
         u16 result;
+        bool is_compare = false;
+        bool is_borrow = false;
 
         switch (alu) {
             case 0b000: result = a + with; break;
             case 0b001: result = a + with + state.get_flag(cpu_flags::C); break;
-            case 0b010: result = a - with; break;
-            case 0b011: result = a - with - state.get_flag(cpu_flags::C); break;
+            case 0b010: result = a - with; is_borrow = true; break;
+            case 0b011: result = a - with - state.get_flag(cpu_flags::C); is_borrow = true; break;
             case 0b100: result = a & with; break;
             case 0b101: result = a ^ with; break;
             case 0b110: result = a | with; break;
             case 0b111: 
+                is_borrow = true;
+                is_compare = true;
                 result = a - with;
-                state.set_if_flag(cpu_flags::C, result & 0xFF00);
-                state.set_Z_S_P_AC_flags(result, a);
-                return;
         }
 
-        state.set_register8(cpu_registers8::A, result);
-        state.set_if_flag(cpu_flags::C, result & 0xFF00);
-        state.set_Z_S_P_AC_flags(result, a);
+        if (!is_compare)
+            state.set_register8(cpu_registers8::A, result);
+        
+        if (is_borrow)
+            state.set_if_flag(cpu_flags::AC, (a & 0x0F) >= (with & 0x0F));
+        else
+            state.set_if_flag(cpu_flags::AC, (a & 0x0F) + (with & 0x0F) > 0x0F);
+
+        state.set_if_flag(cpu_flags::C, result & 0x0100);
+        state.set_Z_S_P_flags(result);
     }
 
     inline void RETURN_ON(u8 cc) { if (resolve_flag_cond(cc)) RETURN(); }
@@ -241,25 +259,33 @@ private:
         u16 a = state.get_register8(cpu_registers8::A);
         u16 with = fetch();
         u16 result;
+        bool is_compare = false;
+        bool is_borrow = false;
 
         switch (alu) {
             case 0b000: result = a + with; break;
             case 0b001: result = a + with + state.get_flag(cpu_flags::C); break;
-            case 0b010: result = a - with; break;
-            case 0b011: result = a - with - state.get_flag(cpu_flags::C); break;
+            case 0b010: result = a - with; is_borrow = true; break;
+            case 0b011: result = a - with - state.get_flag(cpu_flags::C); is_borrow = true; break;
             case 0b100: result = a & with; break;
             case 0b101: result = a ^ with; break;
             case 0b110: result = a | with; break;
             case 0b111: 
+                is_borrow = true;
+                is_compare = true;
                 result = a - with;
-                state.set_if_flag(cpu_flags::C, result & 0xFF00);
-                state.set_Z_S_P_AC_flags(result, a);
-                return;
         }
 
-        state.set_register8(cpu_registers8::A, result);
-        state.set_if_flag(cpu_flags::C, result & 0xFF00);
-        state.set_Z_S_P_AC_flags(result, a);
+        if (!is_compare)
+            state.set_register8(cpu_registers8::A, result);
+        
+        if (is_borrow)
+            state.set_if_flag(cpu_flags::AC, (a & 0x0F) >= (with & 0x0F));
+        else
+            state.set_if_flag(cpu_flags::AC, (a & 0x0F) + (with & 0x0F) > 0x0F);
+
+        state.set_if_flag(cpu_flags::C, result & 0x0100);
+        state.set_Z_S_P_flags(result);
     }
 
     inline void RST(u8 n) {
@@ -297,11 +323,11 @@ private:
         state.set_register16(cpu_registers16::HL, de);
     }
 
-    inline void DI() { throw std::runtime_error("DI not implemented."); }
+    inline void DI() { interrupts_enabled = false; }
 
     inline void SPHL() { state.set_register16(cpu_registers16::SP, state.get_register16(cpu_registers16::HL)); }
 
-    inline void EI() { throw std::runtime_error("EI not implemented."); }
+    inline void EI() { interrupts_enabled = true; }
 
     /// \}
 
@@ -319,7 +345,10 @@ public:
     void set_printer_to_file(const char* filename);
     void reset_printer();
 
-    cpu() : state(), memory({}), halted(false), do_handle_bdos(false), printer(std::cout) {}
+    void clear();
+
+    cpu() : state(), memory({}), just_booted(true), halted(false), do_handle_bdos(false), 
+            interrupts_enabled(true), printer(std::cout) {}
 };
 
 #endif

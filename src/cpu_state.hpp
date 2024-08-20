@@ -66,7 +66,7 @@ struct cpu_state {
     }
 
     /// \}
-    /// @name Incrementing getters and other shortcuts.
+    /// @name Shortcut methods.
     /// \{
 
     /// @brief Get the value of an 8 bit register (including halves of SP and PC) and then increment it.
@@ -118,12 +118,11 @@ struct cpu_state {
             unset_flag(flag);
     }
 
-    /// @brief Set or unset all flags based on a provided old and new memory value.
-    constexpr void set_Z_S_P_AC_flags(u8 is, u8 was) {
+    /// @brief Set or unset all non-carry flags based on a provided value.
+    constexpr void set_Z_S_P_flags(u8 is) {
         set_if_flag(cpu_flags::Z, !is);
         set_if_flag(cpu_flags::S, is & 0x80);
         set_if_flag(cpu_flags::P, !__builtin_parity(is));
-        set_if_flag(cpu_flags::AC, (was & 0b00001000) and (is & 0b00010000));
     }
 
     /// \}

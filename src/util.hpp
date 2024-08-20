@@ -32,23 +32,27 @@ public:
     public:
         /// @brief Set a redirection to file.
         void set(const char* filename) {
-            file_redirect = std::ofstream(filename, std::ios::binary);
+            file_redirect = std::ofstream(filename, std::ios::binary | std::ios::trunc);
             if (!file_redirect.is_open())
                 throw std::invalid_argument("Could not open file for printer.");
         }
 
         /// @brief Reset and fallback to default destination.
         void reset() {
-            if (file_redirect.is_open())
+            if (file_redirect.is_open()) {
+                file_redirect.flush();
                 file_redirect.close();
+            }
         }
 
         /// @brief Print data to the set destination.
         template <typename T>
         void print(const T& data) {
-            if (file_redirect.is_open())
+            if (file_redirect.is_open()) {
                 file_redirect << data;
-            else
+                if (file_redirect.fail())
+                    throw std::runtime_error("Failed to write to file.");
+            } else
                 by_default << data;
         }
 
@@ -60,7 +64,7 @@ public:
         }
 
         print_helper(std::ostream& by_default) : by_default(by_default) {}
-        ~print_helper() { if (file_redirect.is_open()) file_redirect.close(); }
+        ~print_helper() { if (file_redirect.is_open()) reset(); }
     };
 
     /// @brief Get the parity of an integer type value.

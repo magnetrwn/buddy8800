@@ -211,21 +211,16 @@ TEST_CASE("CPU state checks", "[cpu_state]") {
         REQUIRE(state.get_register8(cpu_registers8::F) == 0b00000010);
     }
 
-    SECTION("Checking flag setting based on old and new memory values.") {
+    SECTION("Checking flag setting toggled on set_Z_S_P_flags.") {
         using enum cpu_flags;
 
-        // Set all flags to 0 via set_register8
-        state.set_register8(cpu_registers8::F, 0x02);
-        REQUIRE(state.get_register8(cpu_registers8::F) == 0b00000010);
-
-        // Check flags on each flag case
-        state.set_Z_S_P_AC_flags(0x00, 0xFF);
-        REQUIRE(state.get_flag(Z));
-        state.set_Z_S_P_AC_flags(0x10, 0x08);
-        REQUIRE(state.get_flag(AC));
-        state.set_Z_S_P_AC_flags(0x80, 0x7F);
-        REQUIRE(state.get_flag(S));
-        state.set_Z_S_P_AC_flags(0x55, 0x01);
-        REQUIRE(state.get_flag(P));
+        state.set_Z_S_P_flags(0x00);
+        REQUIRE((state.get_flag(P) and state.get_flag(Z) and !state.get_flag(S)));
+        state.set_Z_S_P_flags(0x80);
+        REQUIRE((!state.get_flag(P) and !state.get_flag(Z) and state.get_flag(S)));
+        state.set_Z_S_P_flags(0x55);
+        REQUIRE((state.get_flag(P) and !state.get_flag(Z) and !state.get_flag(S)));
+        state.set_Z_S_P_flags(0xAA);
+        REQUIRE((state.get_flag(P) and !state.get_flag(Z) and state.get_flag(S)));
     }
 }

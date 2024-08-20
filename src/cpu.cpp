@@ -89,8 +89,6 @@ bool cpu::resolve_flag_cond(u8 cc) {
 }
 
 void cpu::handle_bdos() {
-    static bool just_booted = true;
-
     if (pc() == 0x0000) {
         if (just_booted) {
 
@@ -185,6 +183,13 @@ cpu_state cpu::save_state() const {
 
 bool cpu::is_halted() const {
     return halted;
+}
+
+void cpu::clear() {
+    state = cpu_state();
+    just_booted = true;
+    memory.fill(0);
+    halted = false;
 }
 
 void cpu::execute(u8 opcode) {
