@@ -78,32 +78,27 @@ private:
         if (is_memref(reg)) return _INR_M();
         state.inc_register8(reg);
         u8 value = state.get_register8(reg);
-        state.set_if_flag(cpu_flags::AC, (value & 0x0F) == 0x00);
-        //state.set_if_flag(cpu_flags::C, value == 0x00);
+        state.set_if_flag(cpu_flags::AC, (value ^ (value - 1)) & 0x10);
         state.set_Z_S_P_flags(value);
     }
 
     inline void _INR_M() { 
         u8 value = ++memory[state.get_register16(cpu_registers16::HL)];
-        state.set_if_flag(cpu_flags::AC, (value & 0x0F) == 0x00);
-        //state.set_if_flag(cpu_flags::C, value == 0x00);
+        state.set_if_flag(cpu_flags::AC, (value ^ (value - 1)) & 0x10);
         state.set_Z_S_P_flags(value);
     }
 
     inline void DCR(cpu_registers8 reg) {
         if (is_memref(reg)) return _DCR_M();
         u8 value = state.get_register8(reg);
-        state.set_register8(reg, value - 1);
-        --value;
-        state.set_if_flag(cpu_flags::AC, (value & 0x0F) == 0x0F);
-        //state.set_if_flag(cpu_flags::C, value == 0xFF);
+        state.set_register8(reg, --value);
+        state.set_if_flag(cpu_flags::AC, ~(value ^ (value + 1)) & 0x10);
         state.set_Z_S_P_flags(value);
     }
 
     inline void _DCR_M() {
         u8 value = --memory[state.get_register16(cpu_registers16::HL)];
-        state.set_if_flag(cpu_flags::AC, (value & 0x0F) == 0x0F);
-        //state.set_if_flag(cpu_flags::C, value == 0xFF);
+        state.set_if_flag(cpu_flags::AC, ~(value ^ (value + 1)) & 0x10);
         state.set_Z_S_P_flags(value);
     }
 
@@ -156,13 +151,11 @@ private:
     }
 
     inline void DAA() {
-        u8 a = state.get_register8(cpu_registers8::A);
-        bool is_lo = ((a & 0x0F) > 0x09 or state.get_flag(cpu_flags::AC));
-        a += 0x06 * is_lo;
-        state.set_if_flag(cpu_flags::AC, is_lo);
-        bool is_hi = ((a & 0xF0) > 0x90 or state.get_flag(cpu_flags::C));
-        a += 0x60 * is_hi;
-        state.set_if_flag(cpu_flags::C, is_hi);
+        u16 a = state.get_register8(cpu_registers8::A);
+        a += 0x06 * ((a & 0x0F) > 0x09 or state.get_flag(cpu_flags::AC));
+        a += 0x60 * ((a & 0xF0) > 0x90 or state.get_flag(cpu_flags::C));
+        state.set_if_flag(cpu_flags::AC, (a ^ state.get_register8(cpu_registers8::A)) & 0x10);
+        state.set_if_flag(cpu_flags::C, a & 0x100);
         state.set_register8(cpu_registers8::A, a);
         state.set_Z_S_P_flags(a);
     }
