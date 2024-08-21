@@ -190,6 +190,8 @@ private:
                 is_borrow = true;
                 is_compare = true;
                 result = a - with;
+                break;
+            default: throw std::runtime_error("Invalid ALU operation.");
         }
 
         if (!is_compare)
