@@ -66,7 +66,7 @@ struct cpu_state {
     }
 
     /// \}
-    /// @name Shortcut methods.
+    /// @name Increment methods.
     /// \{
 
     /// @brief Get the value of an 8 bit register (including halves of SP and PC) and then increment it.
@@ -124,6 +124,42 @@ struct cpu_state {
         set_if_flag(cpu_flags::S, is & 0x80);
         set_if_flag(cpu_flags::P, !__builtin_parity(is));
     }
+
+    /// \}
+    /// @name Shortcut methods.
+    /// \{
+
+    constexpr u16 AF() const { return get_register16(cpu_registers16::AF); }
+    constexpr u16 BC() const { return get_register16(cpu_registers16::BC); }
+    constexpr u16 DE() const { return get_register16(cpu_registers16::DE); }
+    constexpr u16 HL() const { return get_register16(cpu_registers16::HL); }
+    constexpr u16 SP() const { return get_register16(cpu_registers16::SP); }
+    constexpr u16 PC() const { return get_register16(cpu_registers16::PC); }
+
+    constexpr u8 A() const { return get_register8(cpu_registers8::A); }
+    constexpr u8 F() const { return get_register8(cpu_registers8::F); }
+    constexpr u8 B() const { return get_register8(cpu_registers8::B); }
+    constexpr u8 C() const { return get_register8(cpu_registers8::C); }
+    constexpr u8 D() const { return get_register8(cpu_registers8::D); }
+    constexpr u8 E() const { return get_register8(cpu_registers8::E); }
+    constexpr u8 H() const { return get_register8(cpu_registers8::H); }
+    constexpr u8 L() const { return get_register8(cpu_registers8::L); }
+
+    constexpr void AF(u16 value) { set_register16(cpu_registers16::AF, value); }
+    constexpr void BC(u16 value) { set_register16(cpu_registers16::BC, value); }
+    constexpr void DE(u16 value) { set_register16(cpu_registers16::DE, value); }
+    constexpr void HL(u16 value) { set_register16(cpu_registers16::HL, value); }
+    constexpr void SP(u16 value) { set_register16(cpu_registers16::SP, value); }
+    constexpr void PC(u16 value) { set_register16(cpu_registers16::PC, value); }
+
+    constexpr void A(u8 value) { set_register8(cpu_registers8::A, value); }
+    constexpr void F(u8 value) { set_register8(cpu_registers8::F, value); }
+    constexpr void B(u8 value) { set_register8(cpu_registers8::B, value); }
+    constexpr void C(u8 value) { set_register8(cpu_registers8::C, value); }
+    constexpr void D(u8 value) { set_register8(cpu_registers8::D, value); }
+    constexpr void E(u8 value) { set_register8(cpu_registers8::E, value); }
+    constexpr void H(u8 value) { set_register8(cpu_registers8::H, value); }
+    constexpr void L(u8 value) { set_register8(cpu_registers8::L, value); }
 
     /// \}
 

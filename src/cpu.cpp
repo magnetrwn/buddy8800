@@ -108,17 +108,17 @@ void cpu::handle_bdos() {
     }
 
     if (pc() == 0x0005) {
-        u8 c = state.get_register8(cpu_registers8::C);
+        u8 c = state.C();
 
         #ifdef ENABLE_TRACE
         puts("\x1B[47;01mBDOS 0x0005: Wants to print:     \x1B[0m");
         #endif
 
         if (c == 0x02)
-            printer << state.get_register8(cpu_registers8::E);
+            printer << state.E();
 
         else if (c == 0x09)
-            for (u16 de = state.get_register16(cpu_registers16::DE); memory[de] != '$'; ++de)
+            for (u16 de = state.DE(); memory[de] != '$'; ++de)
                 printer << memory[de];
 
         else
