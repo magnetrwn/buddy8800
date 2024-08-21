@@ -145,6 +145,12 @@ struct cpu_state {
     constexpr u8 H() const { return get_register8(cpu_registers8::H); }
     constexpr u8 L() const { return get_register8(cpu_registers8::L); }
 
+    constexpr bool flgC() const { return get_flag(cpu_flags::C); }
+    constexpr bool flgP() const { return get_flag(cpu_flags::P); }
+    constexpr bool flgAC() const { return get_flag(cpu_flags::AC); }
+    constexpr bool flgZ() const { return get_flag(cpu_flags::Z); }
+    constexpr bool flgS() const { return get_flag(cpu_flags::S); }
+
     constexpr void AF(u16 value) { set_register16(cpu_registers16::AF, value); }
     constexpr void BC(u16 value) { set_register16(cpu_registers16::BC, value); }
     constexpr void DE(u16 value) { set_register16(cpu_registers16::DE, value); }
@@ -160,6 +166,12 @@ struct cpu_state {
     constexpr void E(u8 value) { set_register8(cpu_registers8::E, value); }
     constexpr void H(u8 value) { set_register8(cpu_registers8::H, value); }
     constexpr void L(u8 value) { set_register8(cpu_registers8::L, value); }
+
+    constexpr void flgC(bool value) { set_if_flag(cpu_flags::C, value); }
+    constexpr void flgP(bool value) { set_if_flag(cpu_flags::P, value); }
+    constexpr void flgAC(bool value) { set_if_flag(cpu_flags::AC, value); }
+    constexpr void flgZ(bool value) { set_if_flag(cpu_flags::Z, value); }
+    constexpr void flgS(bool value) { set_if_flag(cpu_flags::S, value); }
 
     /// \}
 

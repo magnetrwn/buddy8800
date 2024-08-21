@@ -445,7 +445,7 @@ void cpu::execute(u8 opcode) {
         case 0b10110100:
         case 0b10110101:
         case 0b10110111:
-        case 0b10110110: _trace<1>(opcode); ALU_OPERATIONS_A(src_sel, (opcode >> 3) & 0b111); _trace_state();
+        case 0b10110110: _trace<1>(opcode); ALU(src_sel, (opcode >> 3) & 0b111); _trace_state();
         break;
 
         //     ..CCC...
@@ -506,7 +506,7 @@ void cpu::execute(u8 opcode) {
         case 0b11100110:
         case 0b11101110:
         case 0b11110110:
-        case 0b11111110: _trace<2>(opcode); ALU_OPERATIONS_A_IMM((opcode >> 3) & 0b111); _trace_state();
+        case 0b11111110: _trace<2>(opcode); ALU_IMM((opcode >> 3) & 0b111); _trace_state();
         break;
 
         //     ..NNN...

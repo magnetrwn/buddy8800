@@ -1,11 +1,18 @@
 #include "cpu.hpp"
 
-int main() {
+int main(int argc, char** argv) {
+    if (argc != 2) {
+        std::cerr << "Usage: " << argv[0] << " <filename>" << std::endl;
+        return 1;
+    }
+
     cpu processor;
 
-    std::ifstream file("tests/res/diag2.com", std::ios::binary);
-    if (!file)
+    std::ifstream file(argv[1], std::ios::binary);
+    if (!file) {
+        std::cerr << "No such file!" << std::endl;
         return 1;
+    }
 
     std::vector<u8> cpudiag { std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>() };
 

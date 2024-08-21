@@ -33,8 +33,9 @@ private:
     
     util::print_helper printer;
 
-    inline u16 pc() const { return state.get_register16(cpu_registers16::PC); }
+    inline u16 pc() const { return state.PC(); }
     inline u8 fetch() { return memory[state.get_then_inc_register16(cpu_registers16::PC)]; }
+    inline u16 fetch2() { u16 lo = fetch(); u16 hi = fetch(); return (hi << 8) | lo; }
 
     template <usize ops>
     void _trace([[maybe_unused]] u8 opc) {
@@ -68,7 +69,7 @@ private:
 
     inline void NOP() {}
 
-    inline void LXI(cpu_registers16 pair) { u16 lo = fetch(); u16 hi = fetch(); state.set_register16(pair, (hi << 8) | lo); }
+    inline void LXI(cpu_registers16 pair) { state.set_register16(pair, fetch2()); }
 
     inline void STAX(cpu_registers16 pair) { memory[state.get_register16(pair)] = state.A(); }
 
@@ -78,13 +79,13 @@ private:
         if (is_memref(reg)) return _INR_M();
         state.inc_register8(reg);
         u8 value = state.get_register8(reg);
-        state.set_if_flag(cpu_flags::AC, (value ^ (value - 1)) & 0x10);
+        state.flgAC((value ^ (value - 1)) & 0x10);
         state.set_Z_S_P_flags(value);
     }
 
     inline void _INR_M() { 
         u8 value = ++memory[state.HL()];
-        state.set_if_flag(cpu_flags::AC, (value ^ (value - 1)) & 0x10);
+        state.flgAC((value ^ (value - 1)) & 0x10);
         state.set_Z_S_P_flags(value);
     }
 
@@ -92,13 +93,13 @@ private:
         if (is_memref(reg)) return _DCR_M();
         u8 value = state.get_register8(reg);
         state.set_register8(reg, --value);
-        state.set_if_flag(cpu_flags::AC, ~(value ^ (value + 1)) & 0x10);
+        state.flgAC(~(value ^ (value + 1)) & 0x10);
         state.set_Z_S_P_flags(value);
     }
 
     inline void _DCR_M() {
         u8 value = --memory[state.HL()];
-        state.set_if_flag(cpu_flags::AC, ~(value ^ (value + 1)) & 0x10);
+        state.flgAC(~(value ^ (value + 1)) & 0x10);
         state.set_Z_S_P_flags(value);
     }
 
@@ -110,7 +111,7 @@ private:
         u32 hl = state.HL();
         u32 pval = state.get_register16(pair);
         u32 result = hl + pval;
-        state.set_if_flag(cpu_flags::C, result & 0xFFFF0000);
+        state.flgC(result & 0xFFFF0000);
         state.HL(result);
     }
 
@@ -118,65 +119,45 @@ private:
 
     inline void DCX(cpu_registers16 pair) { state.set_register16(pair, state.get_register16(pair) - 1); }
 
-    inline void RLC() {
-        u8 a = state.A();
-        state.A((a << 1) | (a >> 7));
-        state.set_if_flag(cpu_flags::C, a & 0x80);
-    }
+    inline void RLC() { u8 a = state.A(); state.A((a << 1) | (a >> 7)); state.flgC(a & 0x80); }
 
-    inline void RRC() {
-        u8 a = state.A();
-        state.A((a >> 1) | (a << 7));
-        state.set_if_flag(cpu_flags::C, a & 0x01);
-    }
+    inline void RRC() { u8 a = state.A(); state.A((a >> 1) | (a << 7)); state.flgC(a & 0x01); }
 
     inline void RAL() {
         u8 a = state.A();
-        state.A((a << 1) | state.get_flag(cpu_flags::C));
-        state.set_if_flag(cpu_flags::C, a & 0x80);
+        state.A((a << 1) | state.flgC());
+        state.flgC(a & 0x80);
     }
 
     inline void RAR() {
         u8 a = state.A();
-        state.A((a >> 1) | (state.get_flag(cpu_flags::C) << 7));
-        state.set_if_flag(cpu_flags::C, a & 0x01);
+        state.A((a >> 1) | (state.flgC() << 7));
+        state.flgC(a & 0x01);
     }
 
-    inline void SHLD() {
-        u16 lo = fetch();
-        u16 hi = fetch();
-        u16 addr = (hi << 8) | lo;
-        memory[addr] = state.L();
-        memory[addr + 1] = state.H();
-    }
+    inline void SHLD() { u16 adr = fetch2(); memory[adr] = state.L(); memory[adr + 1] = state.H(); }
 
     inline void DAA() {
         u16 a = state.A();
-        a += 0x06 * ((a & 0x0F) > 0x09 or state.get_flag(cpu_flags::AC));
-        a += 0x60 * ((a & 0xF0) > 0x90 or state.get_flag(cpu_flags::C));
-        state.set_if_flag(cpu_flags::AC, (a ^ state.A()) & 0x10);
-        state.set_if_flag(cpu_flags::C, a & 0x100);
+        a += 0x06 * ((a & 0x0F) > 0x09 or state.flgAC());
+        a += 0x60 * ((a & 0xF0) > 0x90 or state.flgC());
+        state.flgAC((a ^ state.A()) & 0x10);
+        state.flgC(a & 0x100);
         state.A(a);
         state.set_Z_S_P_flags(a);
     }
 
-    inline void LHLD() {
-        u16 lo = fetch();
-        u16 hi = fetch();
-        u16 addr = (hi << 8) | lo;
-        state.L(memory[addr]);
-        state.H(memory[addr + 1]);
-    }
+    inline void LHLD() { u16 adr = fetch2(); state.L(memory[adr]); state.H(memory[adr + 1]); }
 
     inline void CMA() { state.A(~state.A()); }
 
-    inline void STA() { u16 lo = fetch(); u16 hi = fetch(); memory[(hi << 8) | lo] = state.A(); }
+    inline void STA() { memory[fetch2()] = state.A(); }
 
-    inline void STC() { state.set_flag(cpu_flags::C); }
+    inline void STC() { state.flgC(true); }
 
-    inline void LDA() { u16 lo = fetch(); u16 hi = fetch(); state.A(memory[(hi << 8) | lo]); }
+    inline void LDA() { state.A(memory[fetch2()]); }
 
-    inline void CMC() { state.set_if_flag(cpu_flags::C, !state.get_flag(cpu_flags::C)); }
+    inline void CMC() { state.flgC(!state.flgC()); }
 
     inline void MOV(cpu_registers8 dst, cpu_registers8 src) { 
         if (is_memref(src)) return _MOV_FROM_M(dst); 
@@ -190,18 +171,18 @@ private:
 
     inline void HLT() { halted = true; }
 
-    inline void ALU_OPERATIONS_A(cpu_registers8 src, u8 alu) {
+    inline void _ALU(cpu_registers8 src, u8 alu, bool is_immediate) {
         u16 a = state.A();
-        u16 with = ((is_memref(src)) ? memory[state.HL()] : state.get_register8(src));
+        u16 with = (is_immediate) ? fetch() : ((is_memref(src)) ? memory[state.HL()] : state.get_register8(src));
         u16 result;
         bool is_compare = false;
         bool is_borrow = false;
 
         switch (alu) {
             case 0b000: result = a + with; break;
-            case 0b001: result = a + with + state.get_flag(cpu_flags::C); break;
+            case 0b001: result = a + with + state.flgC(); break;
             case 0b010: result = a - with; is_borrow = true; break;
-            case 0b011: result = a - with - state.get_flag(cpu_flags::C); is_borrow = true; break;
+            case 0b011: result = a - with - state.flgC(); is_borrow = true; break;
             case 0b100: result = a & with; break;
             case 0b101: result = a ^ with; break;
             case 0b110: result = a | with; break;
@@ -215,13 +196,17 @@ private:
             state.A(result);
         
         if (is_borrow)
-            state.set_if_flag(cpu_flags::AC, (a & 0x0F) >= (with & 0x0F));
+            state.flgAC((a & 0x0F) >= (with & 0x0F));
         else
-            state.set_if_flag(cpu_flags::AC, (a & 0x0F) + (with & 0x0F) > 0x0F);
+            state.flgAC((a & 0x0F) + (with & 0x0F) > 0x0F);
 
-        state.set_if_flag(cpu_flags::C, result & 0x0100);
+        state.flgC(result & 0x0100);
         state.set_Z_S_P_flags(result);
     }
+
+    inline void ALU(cpu_registers8 src, u8 alu) { _ALU(src, alu, false); }
+
+    inline void ALU_IMM(u8 alu) { _ALU(cpu_registers8::A /*unused*/, alu, true); }
 
     inline void RETURN_ON(u8 cc) { if (resolve_flag_cond(cc)) RETURN(); }
 
@@ -234,11 +219,11 @@ private:
         state.SP(state.SP() + 2);
     }
 
-    inline void JUMP_ON(u8 cc) { if (resolve_flag_cond(cc)) return JMP(); fetch(); fetch(); }
+    inline void JUMP_ON(u8 cc) { if (resolve_flag_cond(cc)) return JMP(); fetch2(); }
 
-    inline void JMP() { u16 lo = fetch(); u16 hi = fetch(); state.PC((hi << 8) | lo); }
+    inline void JMP() { state.PC(fetch2()); }
 
-    inline void CALL_ON(u8 cc) { if (resolve_flag_cond(cc)) return CALL(); fetch(); fetch(); }
+    inline void CALL_ON(u8 cc) { if (resolve_flag_cond(cc)) return CALL(); fetch2(); }
 
     inline void PUSH(cpu_registers16 pair) {
         if (pair == cpu_registers16::SP) pair = cpu_registers16::AF;
@@ -248,44 +233,11 @@ private:
         //_trace_stackptr16_deref();
     }
 
-    inline void ALU_OPERATIONS_A_IMM(u8 alu) {
-        u16 a = state.A();
-        u16 with = fetch();
-        u16 result;
-        bool is_compare = false;
-        bool is_borrow = false;
-
-        switch (alu) {
-            case 0b000: result = a + with; break;
-            case 0b001: result = a + with + state.get_flag(cpu_flags::C); break;
-            case 0b010: result = a - with; is_borrow = true; break;
-            case 0b011: result = a - with - state.get_flag(cpu_flags::C); is_borrow = true; break;
-            case 0b100: result = a & with; break;
-            case 0b101: result = a ^ with; break;
-            case 0b110: result = a | with; break;
-            case 0b111: 
-                is_borrow = true;
-                is_compare = true;
-                result = a - with;
-        }
-
-        if (!is_compare)
-            state.A(result);
-        
-        if (is_borrow)
-            state.set_if_flag(cpu_flags::AC, (a & 0x0F) >= (with & 0x0F));
-        else
-            state.set_if_flag(cpu_flags::AC, (a & 0x0F) + (with & 0x0F) > 0x0F);
-
-        state.set_if_flag(cpu_flags::C, result & 0x0100);
-        state.set_Z_S_P_flags(result);
-    }
-
     inline void RST(u8 n) { PUSH(cpu_registers16::PC); state.PC(n * 8); }
 
     inline void RETURN() { POP(cpu_registers16::PC); }
 
-    inline void CALL() { u16 lo = fetch(); u16 hi = fetch(); PUSH(cpu_registers16::PC); state.PC((hi << 8) | lo); }
+    inline void CALL() { u16 adr = fetch2(); PUSH(cpu_registers16::PC); state.PC(adr); }
 
     inline void OUT() { throw std::runtime_error("OUT not implemented."); }
 
