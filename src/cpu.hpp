@@ -175,35 +175,44 @@ private:
         u16 a = state.A();
         u16 with = (is_immediate) ? fetch() : ((is_memref(src)) ? memory[state.HL()] : state.get_register8(src));
         u16 result;
-        bool is_compare = false;
-        bool is_borrow = false;
-
+        
         switch (alu) {
-            case 0b000: result = a + with; break;
-            case 0b001: result = a + with + state.flgC(); break;
-            case 0b010: result = a - with; is_borrow = true; break;
-            case 0b011: result = a - with - state.flgC(); is_borrow = true; break;
-            case 0b100: result = a & with; break;
-            case 0b101: result = a ^ with; break;
-            case 0b110: result = a | with; break;
+            case 0b000: 
+            case 0b001:
+                result = a + with + ((alu == 0b001) ? state.flgC() : 0);
+                state.flgAC(((a & 0x0F) + (with & 0x0F) + ((alu == 0b001) ? state.flgC() : 0)) > 0x0F);
+                break;
+            case 0b010: 
+            case 0b011:
+                result = a - with - ((alu == 0b011) ? state.flgC() : 0);
+                state.flgAC((a & 0x0F) >= (with & 0x0F));
+                break;
+            case 0b100:
+                result = a & with;
+                // ANA (not ANI!) sets AC if bit 3 of (a | with) is 1
+                if (is_immediate)
+                    state.flgAC(false);
+                else
+                    state.flgAC((a | with) & 0x08);
+                break;
+            case 0b101:
+            case 0b110:
+                result = (alu == 0b101) ? (a ^ with) : (a | with);
+                state.flgAC(false);
+                break;
             case 0b111: 
-                is_borrow = true;
-                is_compare = true;
                 result = a - with;
+                state.flgAC((a & 0x0F) < (with & 0x0F));
+                state.flgC(result & 0x100);
+                state.set_Z_S_P_flags(result);
                 break;
             default: throw std::runtime_error("Invalid ALU operation.");
         }
 
-        if (!is_compare)
-            state.A(result);
-        
-        if (is_borrow)
-            state.flgAC((a & 0x0F) >= (with & 0x0F));
-        else
-            state.flgAC((a & 0x0F) + (with & 0x0F) > 0x0F);
-
-        state.flgC(result & 0x0100);
+        state.flgC(result & 0x100);
         state.set_Z_S_P_flags(result);
+        if (alu != 0b111)
+            state.A(result);
     }
 
     inline void ALU(cpu_registers8 src, u8 alu) { _ALU(src, alu, false); }
