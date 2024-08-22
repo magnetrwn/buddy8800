@@ -21,22 +21,22 @@ TEST_CASE("CPU state checks", "[cpu_state]") {
         using enum cpu_registers16;
 
         // Get and set on 8 bit registers
-        state.set_register8(A, 0x12);
-        state.set_register8(F, 0x34);
-        REQUIRE(state.get_register8(A) == 0x12);
-        REQUIRE(state.get_register8(F) == 0x34);
+        state.set_register8(B, 0x12);
+        state.set_register8(C, 0x34);
+        REQUIRE(state.get_register8(B) == 0x12);
+        REQUIRE(state.get_register8(C) == 0x34);
 
         // Get a 16 bit register set by two 8 bit setters
-        REQUIRE(state.get_register16(AF) == 0x1234);
+        REQUIRE(state.get_register16(BC) == 0x1234);
 
         // Get two 8 bit registers set by a 16 bit setter
-        state.set_register16(AF, 0xABCD);
-        REQUIRE(state.get_register8(A) == 0xAB);
-        REQUIRE(state.get_register8(F) == 0xCD);
+        state.set_register16(BC, 0xABCD);
+        REQUIRE(state.get_register8(B) == 0xAB);
+        REQUIRE(state.get_register8(C) == 0xCD);
 
         // Get and set on 16 bit registers
-        state.set_register16(AF, 0x05AF);
-        REQUIRE(state.get_register16(AF) == 0x05AF);
+        state.set_register16(BC, 0x05AF);
+        REQUIRE(state.get_register16(BC) == 0x05AF);
     }
 
     SECTION("Testing get and set not modifying unrelated register space.") {
@@ -60,7 +60,7 @@ TEST_CASE("CPU state checks", "[cpu_state]") {
         state.set_register8(HIGH_PC, 0xBC);
 
         // Check that the low half of all register pairs is still the same
-        REQUIRE(state.get_register16(AF) == 0x1200);
+        REQUIRE(state.get_register16(AF) == 0x1202); // F will have 0x02 set!
         REQUIRE(state.get_register16(BC) == 0x3455);
         REQUIRE(state.get_register16(DE) == 0x56AA);
         REQUIRE(state.get_register16(HL) == 0x78FF);
@@ -76,7 +76,7 @@ TEST_CASE("CPU state checks", "[cpu_state]") {
         state.set_register8(LOW_PC, 0x54);
 
         // Check that the high half of all register pairs is still the same
-        REQUIRE(state.get_register16(AF) == 0x12FE);
+        REQUIRE(state.get_register16(AF) == 0x12D6); // F will have bits 3 and 5 unset!
         REQUIRE(state.get_register16(BC) == 0x34DC);
         REQUIRE(state.get_register16(DE) == 0x56BA);
         REQUIRE(state.get_register16(HL) == 0x7898);
@@ -97,6 +97,9 @@ TEST_CASE("CPU state checks", "[cpu_state]") {
         REQUIRE(state.get_flag(Z));
         REQUIRE(state.get_flag(S));
 
+        // Check that the unchanging bits are correct
+        REQUIRE(state.get_register8(cpu_registers8::F) == 0b11010111);
+
         // Unset all flags via unset_flag
         state.unset_flag(C);
         state.unset_flag(P);
@@ -111,6 +114,9 @@ TEST_CASE("CPU state checks", "[cpu_state]") {
         REQUIRE(!state.get_flag(Z));
         REQUIRE(!state.get_flag(S));
 
+        // Check that the unchanging bits are correct
+        REQUIRE(state.get_register8(cpu_registers8::F) == 0b00000010);
+
         // Set all flags to 1 via set_flag
         state.set_flag(C);
         state.set_flag(P);
@@ -119,7 +125,7 @@ TEST_CASE("CPU state checks", "[cpu_state]") {
         state.set_flag(S);
 
         // Check that all flags are set via get_register8
-        REQUIRE(state.get_register8(cpu_registers8::F) == 0xFF);
+        REQUIRE(state.get_register8(cpu_registers8::F) == 0xD7);
     }
 
     SECTION("Testing incrementing.") {
@@ -149,7 +155,7 @@ TEST_CASE("CPU state checks", "[cpu_state]") {
         REQUIRE(state.get_then_inc_register16(PC) == 0xFFFF);
 
         // Check that the register pair is incremented and hasn't leaked an overflow bit
-        REQUIRE(state.get_register16(AF) == 0x0000);
+        REQUIRE(state.get_register16(AF) == 0x0002); // Account for F having bit 1 set
         REQUIRE(state.get_register16(BC) == 0x0000);
         REQUIRE(state.get_register16(DE) == 0x0000);
         REQUIRE(state.get_register16(HL) == 0x0000);
@@ -171,7 +177,7 @@ TEST_CASE("CPU state checks", "[cpu_state]") {
         state.inc_register8(LOW_PC);
 
         // Check that all registers are incremented
-        REQUIRE(state.get_register16(AF) == 0x0101);
+        REQUIRE(state.get_register16(AF) == 0x0103); // Account for F having bit 1 set
         REQUIRE(state.get_register16(BC) == 0x0101);
         REQUIRE(state.get_register16(DE) == 0x0101);
         REQUIRE(state.get_register16(HL) == 0x0101);

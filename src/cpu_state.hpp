@@ -58,11 +58,21 @@ struct cpu_state {
     constexpr void set_register8(cpu_registers8 reg, u8 value) {
         registers[static_cast<usize>(reg) >> 1] &= (0xFF00 >> (8 * !(static_cast<usize>(reg) & 1)));
         registers[static_cast<usize>(reg) >> 1] |= (value << (8 * !(static_cast<usize>(reg) & 1)));
+
+        if (reg == cpu_registers8::F) {
+            registers[0] &= 0xFFD7;
+            registers[0] |= 0x0002;
+        }
     }
 
     /// @brief Set the value of a 16 bit register (including any pair of 8 bit registers).
     constexpr void set_register16(cpu_registers16 pair, u16 value) {
         registers[static_cast<usize>(pair)] = value;
+
+        if (pair == cpu_registers16::AF) {
+            registers[0] &= 0xFFD7;
+            registers[0] |= 0x0002;
+        }
     }
 
     /// \}

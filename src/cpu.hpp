@@ -189,11 +189,7 @@ private:
                 break;
             case 0b100:
                 result = a & with;
-                // ANA (not ANI!) sets AC if bit 3 of (a | with) is 1
-                if (is_immediate)
-                    state.flgAC(false);
-                else
-                    state.flgAC((a | with) & 0x08);
+                state.flgAC((a | with) & 0x08);
                 break;
             case 0b101:
             case 0b110:
@@ -202,7 +198,7 @@ private:
                 break;
             case 0b111: 
                 result = a - with;
-                state.flgAC((a & 0x0F) < (with & 0x0F));
+                state.flgAC((a & 0x0F) >= (with & 0x0F));
                 state.flgC(result & 0x100);
                 state.set_Z_S_P_flags(result);
                 break;
