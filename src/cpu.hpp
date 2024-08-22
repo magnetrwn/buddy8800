@@ -33,7 +33,6 @@ private:
     
     util::print_helper printer;
 
-    inline u16 pc() const { return state.PC(); }
     inline u8 fetch() { return memory[state.get_then_inc_register16(cpu_registers16::PC)]; }
     inline u16 fetch2() { u16 lo = fetch(); u16 hi = fetch(); return (hi << 8) | lo; }
 
@@ -41,11 +40,11 @@ private:
     void _trace([[maybe_unused]] u8 opc) {
         #if defined ENABLE_TRACE or defined ENABLE_TRACE_ESSENTIAL
         if constexpr (ops == 1)
-            printf("%04hX    %02hhX      \t %s\n", pc() - 1, opc, util::get_opcode_str(opc));
+            printf("%04hX    %02hhX      \t %s\n", state.PC() - 1, opc, util::get_opcode_str(opc));
         else if constexpr (ops == 2)
-            printf("%04hX    %02hhX %02hhX   \t %s\n", pc() - 1, opc, memory[pc()], util::get_opcode_str(opc));
+            printf("%04hX    %02hhX %02hhX   \t %s\n", state.PC() - 1, opc, memory[state.PC()], util::get_opcode_str(opc));
         else if constexpr (ops == 3)
-            printf("%04hX    %02hhX %02hhX %02hhX\t %s\n", pc() - 1, opc, memory[pc()], memory[pc() + 1], util::get_opcode_str(opc));
+            printf("%04hX    %02hhX %02hhX %02hhX\t %s\n", state.PC() - 1, opc, memory[state.PC()], memory[state.PC() + 1], util::get_opcode_str(opc));
         else
             static_assert(false, "Invalid number of operands.");
         #endif

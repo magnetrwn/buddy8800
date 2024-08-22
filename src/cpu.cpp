@@ -51,9 +51,9 @@ void cpu::_trace_reg16_deref([[maybe_unused]] cpu_registers16 reg) {
 /*void cpu::_trace_memref16_deref() {
     #ifdef ENABLE_TRACE
     printf("\x1B[41;01m(%02hhX%02hhX): %02hhX                       \x1B[0m\n",
-        memory[pc() + 1],
-        memory[pc()],
-        memory[(memory[pc() + 1] << 8) | memory[pc()]]);
+        memory[state.PC() + 1],
+        memory[state.PC()],
+        memory[(memory[state.PC() + 1] << 8) | memory[state.PC()]]);
     #endif
 }*/
 
@@ -69,7 +69,7 @@ void cpu::_trace_stackptr16_deref() {
 
 void cpu::_trace_error([[maybe_unused]] u8 opc) {
     #ifdef ENABLE_TRACE
-    printf("%04hX    %02hhX      \t \x1B[31;01mUNKNOWN\x1B[0m\n", pc() - 1, opc);
+    printf("%04hX    %02hhX      \t \x1B[31;01mUNKNOWN\x1B[0m\n", state.PC() - 1, opc);
     throw std::runtime_error("Unknown opcode hit.");
     #endif
 }
@@ -89,7 +89,7 @@ bool cpu::resolve_flag_cond(u8 cc) {
 }
 
 void cpu::handle_bdos() {
-    if (pc() == 0x0000) {
+    if (state.PC() == 0x0000) {
         if (just_booted) {
 
             #ifdef ENABLE_TRACE
@@ -107,7 +107,7 @@ void cpu::handle_bdos() {
         memory[0] = 0b01110110;
     }
 
-    if (pc() == 0x0005) {
+    if (state.PC() == 0x0005) {
         u8 c = state.C();
 
         #ifdef ENABLE_TRACE

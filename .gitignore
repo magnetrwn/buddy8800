@@ -4,3 +4,4 @@ build/
 Testing/
 compile_commands.json
 .doxygen/
+perf.data
