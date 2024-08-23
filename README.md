@@ -41,9 +41,11 @@ Here are some of the resources I used to figure out various aspects of this proj
 + [Why did CP/M require RAM in the bottom part of the address space](https://retrocomputing.stackexchange.com/questions/6442/why-did-cp-m-require-ram-in-the-bottom-part-of-the-address-space) as well as [Test emulated 8080 CPU without an OS](https://retrocomputing.stackexchange.com/questions/9361/test-emulated-8080-cpu-without-an-os), some good information on CP/M memory maps and execution.
 + [Auxiliary Carry and the Intel 8080's logical instructions](https://retrocomputing.stackexchange.com/questions/14977/auxiliary-carry-and-the-intel-8080s-logical-instructions), a very specific question that fixed diagnostics failing and is not very easy to find.
 
-**CP/M**
+**CP/M and Software**
 
 + [skx/cpm-dist](https://github.com/skx/cpm-dist), some very cool software for CP/M.
++ [jefftranter/8080](https://github.com/jefftranter/8080), more software, multiple monitor programs.
++ [beriddle/i8080](https://github.com/beriddle/i8080), some demos for the Orion-128 Russian 8080 clone machine, but includes an interesting [16 bit floating point library](https://github.com/beriddle/i8080/tree/master/FP16).
 
 And most of all, thank you to the **Emulator Development** and **Lazy Developers** Discord servers for all the help and support!
 
