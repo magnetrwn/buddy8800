@@ -14,13 +14,8 @@
 
 + Make sure you have installed CMake on your system.
 + Clone the repository and navigate to the root directory.
-+ Either install Catch2 globally or run `git submodule update --init --recursive` to add it as a git submodule.
-  + Skip this step if you don't want to run tests.
-+ Check the `CMakeLists.txt` file to select the desired build options:
-  + `CMAKE_BUILD_TYPE` can be set to `Debug` or `Release`.
-  + `ENABLE_TESTS` can be set to `ON` or `OFF` (will generate `bin/tests` for CTest).
-  + `ENABLE_TRACE` can be defined to enable CPU trace logging source.
-+ Run `./build.sh` from the root directory.
++ **Optional for testing:** Either install Catch2 globally or run `git submodule update --init --recursive` to add it as a git submodule.
++ Run `./build.sh` from the root directory (check the script, there are more options available).
 + The final executable will be placed in the `bin/` directory.
 
 ### Resources and Documentation
