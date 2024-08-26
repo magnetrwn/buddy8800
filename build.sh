@@ -14,26 +14,11 @@ set -e
 for i in "$@"
 do
   case $i in
-    -d|--debug)
-      BUILD_TYPE="Debug"
-      shift
-      ;;
-    -r|--release)
-      BUILD_TYPE="Release"
-      shift
-      ;;
-    -t|--tests)
-      ENABLE_TESTING="ON"
-      shift
-      ;;
-    --trace)
-      ENABLE_TRACE="ON"
-      shift
-      ;;
-    --trace-essential)
-      ENABLE_TRACE_ESSENTIAL="ON"
-      shift
-      ;;
+    -d|--debug)   BUILD_TYPE="Debug";;
+    -r|--release) BUILD_TYPE="Release";;
+    -T|--tests)   ENABLE_TESTING="ON";;
+       --trace)   ENABLE_TRACE="ON";;
+       --listing) ENABLE_TRACE_ESSENTIAL="ON";;
     *)
       echo "Unknown option: $i"
       exit 1
@@ -50,7 +35,7 @@ cmake .. \
   -DENABLE_TRACE=$ENABLE_TRACE \
   -DENABLE_TRACE_ESSENTIAL=$ENABLE_TRACE_ESSENTIAL
 
-make
+make -j4
 mv compile_commands.json .. || true
 
 if [ "$ENABLE_TESTING" = "ON" ]
