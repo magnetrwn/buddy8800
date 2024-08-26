@@ -14,13 +14,13 @@ set -e
 for i in "$@"
 do
   case $i in
-    -d|--debug)   BUILD_TYPE="Debug";;
-    -r|--release) BUILD_TYPE="Release";;
-    -T|--tests)   ENABLE_TESTING="ON";;
-       --trace)   ENABLE_TRACE="ON";;
-       --listing) ENABLE_TRACE_ESSENTIAL="ON";;
+    -d|--debug)           BUILD_TYPE="Debug";;
+    -r|--release)         BUILD_TYPE="Release";;
+    -T|--tests)           ENABLE_TESTING="ON";;
+       --trace)           ENABLE_TRACE="ON";;
+       --trace-essential) ENABLE_TRACE_ESSENTIAL="ON";;
     *)
-      echo "Unknown option: $i"
+      echo "$0: unknown option \"$i\""
       exit 1
       ;;
   esac

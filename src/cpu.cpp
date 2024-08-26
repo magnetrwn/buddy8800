@@ -114,6 +114,10 @@ void cpu::handle_bdos() {
         puts("\x1B[47;01mBDOS 0x0005: Wants to print:     \x1B[0m");
         #endif
 
+        #ifdef ENABLE_TRACE_ESSENTIAL
+        puts("\x1B[33;01m");
+        #endif
+
         if (c == 0x02)
             printer << state.E();
 
@@ -129,6 +133,10 @@ void cpu::handle_bdos() {
         #ifdef ENABLE_TRACE
         putchar('\n');
         _trace<1>(0b11001001); 
+        #endif
+
+        #ifdef ENABLE_TRACE_ESSENTIAL
+        puts("\x1B[0m");
         #endif
         
         RETURN();
