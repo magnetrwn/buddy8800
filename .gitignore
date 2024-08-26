@@ -5,3 +5,4 @@ Testing/
 compile_commands.json
 .doxygen/
 perf.data
+testrun.txt

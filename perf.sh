@@ -2,9 +2,10 @@
 
 set -e
 
-if ! command -v perf &> /dev/null; then
-    echo "perf could not be found."
-    exit 1
+if ! command -v perf &> /dev/null
+then
+  echo "perf could not be found."
+  exit 1
 fi
 
 perf stat -d bin/buddy8800 tests/res/diag2.com

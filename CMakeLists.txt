@@ -1,11 +1,17 @@
 cmake_minimum_required(VERSION 3.12)
 project(buddy8800)
 
-set(CMAKE_BUILD_TYPE Debug)
-option(ENABLE_TESTING "Enable testing" ON)
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Release)
+endif()
 
-#add_compile_definitions(-DENABLE_TRACE)
-#add_compile_definitions(-DENABLE_TRACE_ESSENTIAL)
+if(ENABLE_TRACE)
+    add_compile_definitions(ENABLE_TRACE)
+endif()
+
+if(ENABLE_TRACE_ESSENTIAL)
+    add_compile_definitions(ENABLE_TRACE_ESSENTIAL)
+endif()
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
