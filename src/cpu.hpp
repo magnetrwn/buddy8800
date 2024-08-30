@@ -45,8 +45,6 @@ private:
             printf("%04hX    %02hhX %02hhX   \t %s\n", state.PC() - 1, opc, memory[state.PC()], util::get_opcode_str(opc));
         else if constexpr (ops == 3)
             printf("%04hX    %02hhX %02hhX %02hhX\t %s\n", state.PC() - 1, opc, memory[state.PC()], memory[state.PC() + 1], util::get_opcode_str(opc));
-        else
-            static_assert(false, "Invalid number of operands.");
         #endif
     }
 
