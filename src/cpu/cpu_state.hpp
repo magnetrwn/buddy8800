@@ -5,6 +5,13 @@
 
 #include "typedef.hpp"
 
+#if (defined __GNUC__ or defined __clang__) and (__GNUC__ >= 3 or defined __clang__)
+#define __parity(value) __builtin_parity(value)
+#else
+#include "util.hpp"
+#define __parity(value) util::get_parity(value)
+#endif
+
 /// @brief Enumerates the 8 bit registers of the CPU (matches cpu_registers16).
 enum class cpu_registers8 {
     A, F, B, C, D, E, H, L, HIGH_SP, LOW_SP, HIGH_PC, LOW_PC, _M
@@ -132,7 +139,7 @@ struct cpu_state {
     constexpr void set_Z_S_P_flags(u8 is) {
         set_if_flag(cpu_flags::Z, !is);
         set_if_flag(cpu_flags::S, is & 0x80);
-        set_if_flag(cpu_flags::P, !__builtin_parity(is));
+        set_if_flag(cpu_flags::P, !__parity(is));
     }
 
     /// \}

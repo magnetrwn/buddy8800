@@ -58,10 +58,6 @@ private:
     void handle_bdos();
 
     /// @name Opcode implementations.
-    /// @todo Turn the _M functions into actually using conditional checking for the register being == _M
-    /// @todo Make all this set(get()) into a single change()
-    /// @todo Make a convenient function for getting (SP) and (SP+1), or just 2x8 bytes
-    /// @todo Double-check everything is little-endian
     /// \{
 
     inline void NOP() {}

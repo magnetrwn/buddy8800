@@ -20,7 +20,7 @@
 
 By default, the build script will output a release build that has no tracing and with high optimization. To customize this behavior, some flags are available:
 
-| Short Flag | Long Flag           | Action | Default |
+| Short&nbsp;Flag | Long&nbsp;Flag           | Action | Default |
 |------------|---------------------|--------|------------|
 | `-d`       | `--debug`           | Output a debug build, keeping symbol labels and disabling optimization |  |
 | `-r`       | `--release`         | Output a release build, enabling optimization | Enabled |
