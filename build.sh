@@ -6,6 +6,8 @@ BUILD_TYPE="Release"
 ENABLE_TESTING="OFF"
 ENABLE_TRACE="OFF"
 ENABLE_TRACE_ESSENTIAL="OFF"
+RUN_PERF_STAT="OFF"
+RUN_PERF_RECORD="OFF"
 
 # --- Defaults ---
 
@@ -19,6 +21,8 @@ do
     -T|--tests)           ENABLE_TESTING="ON";;
        --trace)           ENABLE_TRACE="ON";;
        --trace-essential) ENABLE_TRACE_ESSENTIAL="ON";;
+    -P|--perf-stat)       RUN_PERF_STAT="ON";;
+       --perf-record)     RUN_PERF_RECORD="ON";;
     *)
       echo "$0: unknown option \"$i\""
       exit 1
@@ -44,3 +48,20 @@ then
 fi
 
 cd ..
+
+if ! command -v perf &> /dev/null
+then
+  echo "perf could not be found."
+else
+  if [ "$RUN_PERF_STAT" = "ON" ]
+  then
+    perf stat --repeat=5 --table --detailed bin/buddy8800 tests/res/diag2.com
+  fi
+
+  if [ "$RUN_PERF_RECORD" = "ON" ]
+  then
+    perf record -F 8000 -g -- bin/buddy8800 tests/res/diag2.com
+    perf report
+    rm perf.data
+  fi
+fi
