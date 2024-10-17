@@ -265,20 +265,99 @@ private:
     /// \}
 
 public:
+    /// @name CPU API methods.
+    /// \{
+
+    /**
+     * @brief Steps the CPU by one instruction (and its operands).
+     *
+     * Calling the step method will fetch the next instruction opcode from memory and execute it. Internally, on every
+     * fetch the PC is incremented, and each instruction is also responsible for fetching its operands, so a step is
+     * effectively a full instruction step.
+     *
+     * If the CPU is set to handle BDOS calls, it will provide some pseudo BDOS functionality, currently only for printing
+     * characters and strings to wherever the printer is set to, stdout by default.
+     *
+     * @note If the CPU is halted, this method will return immediately.
+     * @par
+     * @note Internally, this method is calling `execute(fetch())`.
+     */
     void step();
+
+    /**
+     * @brief Executes a single opcode.
+     * @param opcode The opcode to execute.
+     *
+     * This method is a comprehensive jump table for all the opcodes the 8080 CPU can execute. It effectively groups the
+     * decode and execute phases of the CPU into a single method, and is used by the step method to execute instructions.
+     *
+     * @todo Currently, this method is useless for instructions with operands, since their implementation always fetches from
+     * the address bus the CPU is aware of.
+     */
     void execute(u8 opcode);
 
+    /**
+     * @brief Loads data into memory.
+     * @param begin Vector iterator to the beginning of data.
+     * @param end Vector iterator to the end of data.
+     * @param offset Offset to try to start loading at.
+     * @param auto_reset_vector Whether the zero page should point to the start of loaded data automatically.
+     *
+     * This method can be useful to load programs, libraries, or data into the emulator's memory. It will copy the data
+     * at the specified offset, check if it will fit, and if auto_reset_vector is true, it will set the zero page (the first
+     * 3 bytes of memory, specifically a jump instruction and a 2 byte argument) to point to the start of the loaded data.
+     */
     void load(std::vector<u8>::iterator begin, std::vector<u8>::iterator end, usize offset = 0, bool auto_reset_vector = false);
+
+    /**
+     * @brief Load CPU state.
+     * @param new_state The state to load.
+     *
+     * This method can set a new state to the CPU, including all registers and flags of it.
+     */
     void load_state(const cpu_state& new_state);
+
+    /**
+     * @brief Save CPU state.
+     * @return The current state of the CPU.
+     *
+     * This method will return the current state of the CPU, including all registers and flags of it.
+     */
     cpu_state save_state() const;
+
+    /**
+     * @brief Check if the CPU is halted.
+     * @return True if the CPU is halted, false otherwise.
+     */
     bool is_halted() const;
 
-    void set_handle_bdos(bool should);
-
-    void set_printer_to_file(const char* filename);
-    void reset_printer();
-
     void clear();
+
+    /// \}
+    /// @name Test related methods.
+    /// \{
+
+    /**
+     * @brief Set the CPU to resolve calls to BDOS internally.
+     * @param should Whether the CPU should handle BDOS calls.
+     *
+     * This method enables pseudo BDOS functionality by the CPU itself. This can be essential for testing the CPU,
+     * as most diagnostic programs expect the system to be able to print messages.
+     */
+    void do_pseudo_bdos(bool should);
+
+    /**
+     * @brief Redirect pseudo BDOS print routines to a file.
+     * @param filename The name of the file to print to.
+     */
+    void set_pseudo_bdos_redirect(const char* filename);
+
+    /**
+     * @brief Redirect pseudo BDOS print routines back to stdout.
+     */
+    void reset_pseudo_bdos_redirect();
+
+    /// \}
 
     cpu() : state(), memory({}), just_booted(true), halted(false), do_handle_bdos(false), 
             interrupts_enabled(true), printer(std::cout) {}

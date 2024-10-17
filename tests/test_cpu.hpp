@@ -28,11 +28,11 @@ inline void test(cpu& emu, const char* prg, const char* ok) {
     REQUIRE(!okv.empty());
 
     emu.load(programv.begin(), programv.end(), 0x100, true);
-    emu.set_handle_bdos(true);
-    emu.set_printer_to_file(OUTPUT);
+    emu.do_pseudo_bdos(true);
+    emu.set_pseudo_bdos_redirect(OUTPUT);
     while (!emu.is_halted())
         emu.step();
-    emu.reset_printer();
+    emu.reset_pseudo_bdos_redirect();
 
     std::vector<u8> outputv = read_bin(OUTPUT);
 

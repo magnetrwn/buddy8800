@@ -143,15 +143,15 @@ void cpu::handle_bdos() {
     }
 }
 
-void cpu::set_printer_to_file(const char* filename) {
+void cpu::set_pseudo_bdos_redirect(const char* filename) {
     printer.set(filename);
 }
 
-void cpu::reset_printer() {
+void cpu::reset_pseudo_bdos_redirect() {
     printer.reset();
 }
 
-void cpu::set_handle_bdos(bool should) {
+void cpu::do_pseudo_bdos(bool should) {
     do_handle_bdos = should;
 }
 

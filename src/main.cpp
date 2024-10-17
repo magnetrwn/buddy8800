@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
     std::vector<u8> cpudiag { std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>() };
 
     processor.load(cpudiag.begin(), cpudiag.end(), 0x100, true);
-    processor.set_handle_bdos(true);
+    processor.do_pseudo_bdos(true);
     while (!processor.is_halted())
         processor.step();
 

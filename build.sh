@@ -3,6 +3,7 @@
 # --- Defaults ---
 
 BUILD_TYPE="Release"
+BUILD_DOCS="ON"
 ENABLE_TESTING="OFF"
 ENABLE_TRACE="OFF"
 ENABLE_TRACE_ESSENTIAL="OFF"
@@ -48,6 +49,11 @@ then
 fi
 
 cd ..
+
+if [ "$BUILD_DOCS" = "ON" ]
+then
+  doxygen Doxyfile
+fi
 
 if ! command -v perf &> /dev/null
 then
