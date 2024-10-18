@@ -5,7 +5,7 @@
 #include <unistd.h>
 
 /**
- * @typedef Common type definitions for easier use of types.
+ * @brief Common type definitions for easier use of types.
  * @warning By including this file, you are injecting the definition namespace in the global one.
  */
 namespace type_definitions {

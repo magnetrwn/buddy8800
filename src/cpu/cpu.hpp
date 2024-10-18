@@ -302,6 +302,8 @@ public:
      * @param end Vector iterator to the end of data.
      * @param offset Offset to try to start loading at.
      * @param auto_reset_vector Whether the zero page should point to the start of loaded data automatically.
+     * @throw `std::out_of_range` if data won't fit in memory.
+     * @throw `std::out_of_range` if enabled auto reset vector will overwrite the first few bytes loaded.
      *
      * This method can be useful to load programs, libraries, or data into the emulator's memory. It will copy the data
      * at the specified offset, check if it will fit, and if auto_reset_vector is true, it will set the zero page (the first
