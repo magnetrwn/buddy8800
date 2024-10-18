@@ -2,6 +2,13 @@
 #define TYPEDEF_HPP_
 
 #include <cstdint>
+#include <unistd.h>
+
+/**
+ * @typedef Common type definitions for easier use of types.
+ * @warning By including this file, you are injecting the definition namespace in the global one.
+ */
+namespace type_definitions {
 
 typedef std::uint8_t u8;
 typedef std::uint16_t u16;
@@ -16,5 +23,12 @@ typedef std::int64_t i64;
 
 typedef float f32;
 typedef double f64;
+
+typedef int fd;
+typedef ssize_t isize;
+
+}
+
+using namespace type_definitions;
 
 #endif

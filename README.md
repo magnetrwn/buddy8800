@@ -39,6 +39,7 @@ Here are some of the resources I used to figure out various aspects of this proj
 **Overview**
 
 + [Wikipedia/Altair 8800](https://en.wikipedia.org/wiki/Altair_8800), a general overview.
++ [Making an Emulator: Space Invaders on the Intel 8080](https://www.youtube.com/watch?v=7kf70nhor24), while not directly related, this video has in-depth information on handling an Intel 8080 system's memory map and interrupts.
 
 **Intel 8080**
 
