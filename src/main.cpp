@@ -1,5 +1,5 @@
 #include "cpu.hpp"
-#include "unix_pty.hpp"
+#include "pty.hpp"
 
 int main(int argc, char** argv) {
     if (argc != 2) {
@@ -20,17 +20,11 @@ int main(int argc, char** argv) {
     processor.load(cpudiag.begin(), cpudiag.end(), 0x100, true);
     processor.do_pseudo_bdos(true);
 
-    pty altair_pty;
-    char buffer[256];
-    altair_pty.open();
-    altair_pty.set_echo_received_back(true);
-    std::cout << "Waiting for a connection on '" << altair_pty.name() << "'. Send any character to start." << std::endl;
-    altair_pty.getch();
-    altair_pty.send("Hello! Send me a string! Hello! Send me a string! Hello! Send me a string! Hello! Send me a string! Hello! Send me a string! Hello! Send me a string! Hello! Send me a string! Hello! Send me a string! Hello! Send me a string! Hello! Send me a string! Hello! Send me a string! Hello! Send me a string! Hello! Send me a string! Hello! Send me a string!\r\n");
-    altair_pty.recv(buffer, 256);
-    altair_pty.send("\r\n");
-    altair_pty.send(buffer);
-    altair_pty.send("\r\n");
+    pty term;
+    term.open();
+    term.set_echo_received_back(true);
+    std::cout << "Waiting for a connection on '" << term.name() << "'. Send any character to start." << std::endl;
+    term.getch();
 
     while (!processor.is_halted())
         processor.step();

@@ -4,7 +4,7 @@
 #include <cstring>
 #include <random>
 
-#include "unix_pty.hpp"
+#include "pty.hpp"
 
 constexpr static usize BUFFER_SIZE = 1024;
 constexpr static usize ROUNDS = 200;
@@ -26,7 +26,7 @@ inline const char* random_string(usize length) {
 }
 
 
-TEST_CASE("Unix PTY operation test", "[pty]") {
+TEST_CASE("Pseudo-terminal operation test", "[pty]") {
     pty pty_instance;
     char buffer[BUFFER_SIZE];
 
