@@ -2,7 +2,7 @@
 
 **An Intel 8080 emulated on an S-100 bus with a MITS 88 2SIO (2x Motorola 6850) serial expansion card. Designed for running BASIC and CP/M over a PTY.**
 
-<img src=media/altair-wikipedia-public-domain.webp width=360>
+![Altair 8800B](media/altair-wikipedia-public-domain-360w.webp)
 
 ### Getting Started
 
@@ -48,7 +48,7 @@ Here are some of the resources I used to figure out various aspects of this proj
 
 **Intel 8080**
 
-<img src=media/i8080-public-domain.webp width=200>
+![Intel 8080](media/i8080-public-domain-240w.webp)
 
 + [Wikipedia/Intel 8080](https://en.wikipedia.org/wiki/Intel_8080), general Intel 8080 info, with an unexpectedly good layout for opcodes.
 + [Emulator101](http://www.emulator101.com/) and [Emulator101/Opcode List](http://www.emulator101.com/reference/8080-by-opcode.html), a great resource for understanding the basics of emulation, with a comprehensive opcode list.
@@ -65,7 +65,7 @@ Here are some of the resources I used to figure out various aspects of this proj
 
 **Motorola 6850 ACIA**
 
-<img src=media/mc6850-public-domain.webp width=200>
+![Motorola 6850 ACIA](media/mc6850-public-domain-240w.webp)
 
 + [This Slide](https://ocw.ump.edu.my/pluginfile.php/423/mod_resource/content/1/Chapter%2013.pdf) provides a general overview in a neat format, but not very in-depth.
 + [Motorola 6850 ACIA Datasheet](https://www.cpcwiki.eu/imgs/3/3f/MC6850.pdf), the original datasheet for the Motorola 6850 ACIA.
