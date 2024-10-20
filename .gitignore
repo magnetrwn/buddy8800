@@ -1,0 +1,8 @@
+bin/
+build/
+.cache/
+Testing/
+compile_commands.json
+.doxygen/
+perf.data
+testrun.txt
