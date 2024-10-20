@@ -1,8 +1,8 @@
 # Buddy8800 -- An Altair 8800 S-100 Emulator
 
-**An Intel 8080 emulated on an S-100 bus with an Intel 8251 serial expansion card. Designed for running BASIC and CP/M over a PTY.**
+**An Intel 8080 emulated on an S-100 bus with a MITS 88 2SIO (2x Motorola 6850) serial expansion card. Designed for running BASIC and CP/M over a PTY.**
 
-<img src=altair-wikipedia-public-domain.webp width=480>
+<img src=media/altair-wikipedia-public-domain.webp width=480>
 
 ### Getting Started
 
@@ -43,6 +43,8 @@ Here are some of the resources I used to figure out various aspects of this proj
 
 **Intel 8080**
 
+<img src=media/i8080-public-domain.webp width=480>
+
 + [Wikipedia/Intel 8080](https://en.wikipedia.org/wiki/Intel_8080), general Intel 8080 info, with an unexpectedly good layout for opcodes.
 + [Emulator101](http://www.emulator101.com/) and [Emulator101/Opcode List](http://www.emulator101.com/reference/8080-by-opcode.html), a great resource for understanding the basics of emulation, with a comprehensive opcode list.
 + [Emulator101/cpudiag.bin](http://www.emulator101.com/files/cpudiag.bin), a diagnostic program for the Intel 8080, which was used throughout development for testing.
@@ -55,6 +57,13 @@ Here are some of the resources I used to figure out various aspects of this proj
 + [S100Computers](http://www.s100computers.com/index.html), a comprehensive collection of hardware information on S-100 systems.
 + [What additional hardware was required for BASIC on an Altair 8800](https://retrocomputing.stackexchange.com/questions/14675/what-additional-hardware-was-required-for-basic-on-an-altair-8800), a very nice explanation of how Altair 8800 systems originally shipped.
 + [Why 18 expansion slots on the Altair 8800?](https://retrocomputing.stackexchange.com/questions/24117/why-18-expansion-slots-on-the-altair-8800).
+
+**Motorola 6850 ACIA**
+
+<img src=media/mc6850-public-domain.webp width=480>
+
++ [This Slide](https://ocw.ump.edu.my/pluginfile.php/423/mod_resource/content/1/Chapter%2013.pdf) provides a general overview in a neat format, but not very in-depth.
++ [Motorola 6850 ACIA Datasheet](https://www.cpcwiki.eu/imgs/3/3f/MC6850.pdf), the original datasheet for the Motorola 6850 ACIA.
 
 **CP/M**
 
@@ -73,4 +82,4 @@ And most of all, thank you to the **Emulator Development** and **Lazy Developers
 
 **First Contact!**
 
-![The first time the 8080 diagnostics ran to the end!](cpu-is-operational.png)
+![The first time the 8080 diagnostics ran to the end!](media/cpu-is-operational.png)
