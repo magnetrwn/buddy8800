@@ -6,9 +6,14 @@
 
 ### Getting Started
 
++ **[Doxygen Documentation](https://magnetrwn.github.io/buddy8800)**
 + [Building](#building)
 + [Resources and Documentation](#resources-and-documentation)
 + [Screenshots](#screenshots)
+
+### Doxygen Documentation
+
+You can view the [Doxygen documentation](https://magnetrwn.github.io/buddy8800), which includes this README but much more descriptive content.
 
 ### Building
 
