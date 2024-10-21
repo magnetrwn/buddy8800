@@ -109,15 +109,24 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afde0990ca2d8300af613c1bf15836ac6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpty.html#afde0990ca2d8300af613c1bf15836ac6">send</a> (const char *data, usize size) const</td></tr>
 <tr class="memdesc:afde0990ca2d8300af613c1bf15836ac6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send data to the PTY interface master side.  <a href="classpty.html#afde0990ca2d8300af613c1bf15836ac6">More...</a><br /></td></tr>
 <tr class="separator:afde0990ca2d8300af613c1bf15836ac6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae60caccd262899cddaa62ebeda9ca14d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpty.html#ae60caccd262899cddaa62ebeda9ca14d">send_break</a> () const</td></tr>
+<tr class="memdesc:ae60caccd262899cddaa62ebeda9ca14d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a break signal to the PTY interface master side.  <a href="classpty.html#ae60caccd262899cddaa62ebeda9ca14d">More...</a><br /></td></tr>
+<tr class="separator:ae60caccd262899cddaa62ebeda9ca14d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af46ce3f92e8dc2077afec7a54c6b85b0"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0">getch</a> () const</td></tr>
 <tr class="memdesc:af46ce3f92e8dc2077afec7a54c6b85b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a single byte from the PTY interface master side.  <a href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0">More...</a><br /></td></tr>
 <tr class="separator:af46ce3f92e8dc2077afec7a54c6b85b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ad90a7e8c2e8a1b273b4f5859cae35c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpty.html#a9ad90a7e8c2e8a1b273b4f5859cae35c">poll</a> () const</td></tr>
+<tr class="memdesc:a9ad90a7e8c2e8a1b273b4f5859cae35c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if there is data available to be read from the PTY interface master side.  <a href="classpty.html#a9ad90a7e8c2e8a1b273b4f5859cae35c">More...</a><br /></td></tr>
+<tr class="separator:a9ad90a7e8c2e8a1b273b4f5859cae35c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22e150200a8581e9da66e309f9ee2ec6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpty.html#a22e150200a8581e9da66e309f9ee2ec6">recv</a> (char *data, usize max, char terminator='\r') const</td></tr>
 <tr class="memdesc:a22e150200a8581e9da66e309f9ee2ec6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receive data from the PTY interface master side.  <a href="classpty.html#a22e150200a8581e9da66e309f9ee2ec6">More...</a><br /></td></tr>
 <tr class="separator:a22e150200a8581e9da66e309f9ee2ec6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aacb0401e54d651c598e60e1ceb2c8d58"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpty.html#aacb0401e54d651c598e60e1ceb2c8d58">setup</a> (u32 baud_rate=DEFAULT_BAUD_RATE, u32 data_bits=DEFAULT_DATA_BITS, pty_parity parity=DEFAULT_PARITY, u32 stop_bits=DEFAULT_STOP_BITS)</td></tr>
-<tr class="memdesc:aacb0401e54d651c598e60e1ceb2c8d58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the PTY interface with custom configuration.  <a href="classpty.html#aacb0401e54d651c598e60e1ceb2c8d58">More...</a><br /></td></tr>
-<tr class="separator:aacb0401e54d651c598e60e1ceb2c8d58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acacb920c29edf75bc85388b4e347aa4e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpty.html#acacb920c29edf75bc85388b4e347aa4e">setup</a> (u32 data_bits, pty_parity parity, u32 stop_bits)</td></tr>
+<tr class="memdesc:acacb920c29edf75bc85388b4e347aa4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the PTY interface with custom configuration.  <a href="classpty.html#acacb920c29edf75bc85388b4e347aa4e">More...</a><br /></td></tr>
+<tr class="separator:acacb920c29edf75bc85388b4e347aa4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a757f8fc7156ea5215922e9646b65daaa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpty.html#a757f8fc7156ea5215922e9646b65daaa">set_baud_rate</a> (u32 baud_rate)</td></tr>
+<tr class="memdesc:a757f8fc7156ea5215922e9646b65daaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the baud rate of the PTY interface.  <a href="classpty.html#a757f8fc7156ea5215922e9646b65daaa">More...</a><br /></td></tr>
+<tr class="separator:a757f8fc7156ea5215922e9646b65daaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a361a2ef0fc27c6c1f2aac8e05aa0f89c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpty.html#a361a2ef0fc27c6c1f2aac8e05aa0f89c">set_echo_received_back</a> (bool should)</td></tr>
 <tr class="memdesc:a361a2ef0fc27c6c1f2aac8e05aa0f89c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set whether received data should be printed back to the PTY slave side.  <a href="classpty.html#a361a2ef0fc27c6c1f2aac8e05aa0f89c">More...</a><br /></td></tr>
 <tr class="separator:a361a2ef0fc27c6c1f2aac8e05aa0f89c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -201,7 +210,35 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </table>
   </dd>
 </dl>
-<p>Use this method when first starting the PTY interface. It will open the master file descriptor and setup various configuration flags (by internally calling <code><a class="el" href="classpty.html#aacb0401e54d651c598e60e1ceb2c8d58" title="Setup the PTY interface with custom configuration.">setup()</a></code>) for a bit more realism in emulating an Altair 8800 serial interface. </p>
+<p>Use this method when first starting the PTY interface. It will open the master file descriptor and setup various configuration flags for a bit more realism in emulating an Altair 8800 serial interface.</p>
+<dl class="section note"><dt>Note</dt><dd>The default setup configuration is 300 baud, 8 data bits, no parity and 1 stop bit. <code>B300-8N1</code> </dd></dl>
+
+</div>
+</div>
+<a id="a9ad90a7e8c2e8a1b273b4f5859cae35c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ad90a7e8c2e8a1b273b4f5859cae35c">&#9670;&nbsp;</a></span>poll()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool pty::poll </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if there is data available to be read from the PTY interface master side. </p>
+<dl class="section return"><dt>Returns</dt><dd>Whether there is data available to read. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">&lt;tt&gt;std::runtime_error&lt;/tt&gt;</td><td>if the PTY interface had an error.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This method polls the PTY interface master side to check if there is data available to be read. It uses the <code><a class="el" href="classpty.html#a9ad90a7e8c2e8a1b273b4f5859cae35c" title="Check if there is data available to be read from the PTY interface master side.">poll()</a></code> system call to check if there is data available to be read from the master file descriptor. This allows a blocking <code><a class="el" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0" title="Get a single byte from the PTY interface master side.">getch()</a></code> operation to be non-blocking by employing a call to this method before reading. </p>
 
 </div>
 </div>
@@ -338,6 +375,66 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
+<a id="ae60caccd262899cddaa62ebeda9ca14d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae60caccd262899cddaa62ebeda9ca14d">&#9670;&nbsp;</a></span>send_break()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pty::send_break </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Send a break signal to the PTY interface master side. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">&lt;tt&gt;std::runtime_error&lt;/tt&gt;</td><td>if the PTY interface had an error.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This method sends a break signal to the PTY interface master side. It uses the <code>tcsendbreak()</code> system call to make the pseudo-terminal interface run a break signal.</p>
+<p>Sending a break signal effectively holds the transmission line low for a considerable amount of time, with no concern for framing or data bits, which is a step further than simply sending 0x00 over and over. </p>
+
+</div>
+</div>
+<a id="a757f8fc7156ea5215922e9646b65daaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a757f8fc7156ea5215922e9646b65daaa">&#9670;&nbsp;</a></span>set_baud_rate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pty::set_baud_rate </td>
+          <td>(</td>
+          <td class="paramtype">u32&#160;</td>
+          <td class="paramname"><em>baud_rate</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the baud rate of the PTY interface. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">baud_rate</td><td>The baud rate to be set. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">&lt;tt&gt;std::runtime_error&lt;/tt&gt;</td><td>if the PTY interface could not be configured.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This method sets the baud rate of the PTY interface. It uses the <code>cfsetospeed()</code> and <code>cfsetispeed()</code> functions from <code>termios.h</code> to set the baud rate of the PTY interface. </p>
+
+</div>
+</div>
 <a id="a361a2ef0fc27c6c1f2aac8e05aa0f89c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a361a2ef0fc27c6c1f2aac8e05aa0f89c">&#9670;&nbsp;</a></span>set_echo_received_back()</h2>
 
@@ -364,8 +461,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a id="aacb0401e54d651c598e60e1ceb2c8d58"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aacb0401e54d651c598e60e1ceb2c8d58">&#9670;&nbsp;</a></span>setup()</h2>
+<a id="acacb920c29edf75bc85388b4e347aa4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acacb920c29edf75bc85388b4e347aa4e">&#9670;&nbsp;</a></span>setup()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -374,25 +471,19 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
           <td class="memname">void pty::setup </td>
           <td>(</td>
           <td class="paramtype">u32&#160;</td>
-          <td class="paramname"><em>baud_rate</em> = <code>DEFAULT_BAUD_RATE</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">u32&#160;</td>
-          <td class="paramname"><em>data_bits</em> = <code>DEFAULT_DATA_BITS</code>, </td>
+          <td class="paramname"><em>data_bits</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">pty_parity&#160;</td>
-          <td class="paramname"><em>parity</em> = <code>DEFAULT_PARITY</code>, </td>
+          <td class="paramname"><em>parity</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">u32&#160;</td>
-          <td class="paramname"><em>stop_bits</em> = <code>DEFAULT_STOP_BITS</code>&#160;</td>
+          <td class="paramname"><em>stop_bits</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -405,7 +496,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>Setup the PTY interface with custom configuration. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">baud_rate</td><td>The baud rate of the PTY interface. </td></tr>
     <tr><td class="paramname">data_bits</td><td>The amount of data bits to be used. </td></tr>
     <tr><td class="paramname">parity</td><td>The parity mode to be used. </td></tr>
     <tr><td class="paramname">stop_bits</td><td>The amount of stop bits to be used. </td></tr>
@@ -419,8 +509,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </table>
   </dd>
 </dl>
-<p>This method sets up the PTY interface with custom configuration. Internally, this makes extensive use of <code>termios.h</code> functionality and its functions to configure the PTY interface.</p>
-<dl class="section note"><dt>Note</dt><dd>The default values are: 300 baud rate, 8 data bits, no parity and 1 stop bit. <code>B300-8-N-1</code>. </dd></dl>
+<p>This method sets up the PTY interface with custom configuration. Internally, this makes extensive use of <code>termios.h</code> functionality and its functions to configure the PTY interface. </p>
 
 </div>
 </div>

@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <termios.h>
 #include <cstring>
+#include <poll.h>
 
 #include "typedef.hpp"
 
@@ -32,6 +33,8 @@ private:
     static constexpr pty_parity DEFAULT_PARITY   = pty_parity::NONE;
     static constexpr u32 DEFAULT_STOP_BITS       = 1;
 
+    static constexpr u32 DEFAULT_BREAK_DURATION  = 0; /// Will default to the termios.h default value
+
     fd master_fd;
     char slave_device_name[MAX_SLAVE_DEVICE_NAME];
 
@@ -43,8 +46,10 @@ public:
      * @throw `std::runtime_error` if the PTY interface could not be opened.
      * 
      * Use this method when first starting the PTY interface. It will open the master file descriptor
-     * and setup various configuration flags (by internally calling `setup()`) for a bit more realism
-     * in emulating an Altair 8800 serial interface.
+     * and setup various configuration flags for a bit more realism in emulating an Altair 8800 serial
+     * interface.
+     *
+     * @note The default setup configuration is 300 baud, 8 data bits, no parity and 1 stop bit. `B300-8N1`
      */
     void open();
 
@@ -84,6 +89,18 @@ public:
     void send(const char* data, usize size) const;
 
     /**
+     * @brief Send a break signal to the PTY interface master side.
+     * @throw `std::runtime_error` if the PTY interface had an error.
+     * 
+     * This method sends a break signal to the PTY interface master side. It uses the `tcsendbreak()` system
+     * call to make the pseudo-terminal interface run a break signal.
+     *
+     * Sending a break signal effectively holds the transmission line low for a considerable amount of time,
+     * with no concern for framing or data bits, which is a step further than simply sending 0x00 over and over.
+     */
+    void send_break() const;
+
+    /**
      * @brief Get a single byte from the PTY interface master side.
      * @return The byte read from the PTY interface.
      * @throw `std::runtime_error` if the PTY interface had an error.
@@ -94,6 +111,17 @@ public:
      * @warning This method will block until a byte is read.
      */
     char getch() const;
+
+    /**
+     * @brief Check if there is data available to be read from the PTY interface master side.
+     * @return Whether there is data available to read.
+     * @throw `std::runtime_error` if the PTY interface had an error.
+     *
+     * This method polls the PTY interface master side to check if there is data available to be read. It
+     * uses the `poll()` system call to check if there is data available to be read from the master file descriptor.
+     * This allows a blocking `getch()` operation to be non-blocking by employing a call to this method before reading.
+     */
+    bool poll() const;
 
     /**
      * @brief Receive data from the PTY interface master side.
@@ -115,7 +143,6 @@ public:
 
     /**
      * @brief Setup the PTY interface with custom configuration.
-     * @param baud_rate The baud rate of the PTY interface.
      * @param data_bits The amount of data bits to be used.
      * @param parity The parity mode to be used.
      * @param stop_bits The amount of stop bits to be used.
@@ -124,13 +151,18 @@ public:
      * 
      * This method sets up the PTY interface with custom configuration. Internally, this makes extensive use
      * of `termios.h` functionality and its functions to configure the PTY interface. 
-     * 
-     * @note The default values are: 300 baud rate, 8 data bits, no parity and 1 stop bit. `B300-8-N-1`.
      */
-    void setup(u32 baud_rate = DEFAULT_BAUD_RATE, 
-               u32 data_bits = DEFAULT_DATA_BITS, 
-               pty_parity parity = DEFAULT_PARITY, 
-               u32 stop_bits = DEFAULT_STOP_BITS);
+    void setup(u32 data_bits, pty_parity parity, u32 stop_bits);
+
+    /**
+     * @brief Set the baud rate of the PTY interface.
+     * @param baud_rate The baud rate to be set.
+     * @throw `std::runtime_error` if the PTY interface could not be configured.
+     * 
+     * This method sets the baud rate of the PTY interface. It uses the `cfsetospeed()` and `cfsetispeed()`
+     * functions from `termios.h` to set the baud rate of the PTY interface.
+     */
+    void set_baud_rate(u32 baud_rate);
 
     /**
      * @brief Set whether received data should be printed back to the PTY slave side.

@@ -129,12 +129,24 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> () override
 <tr class="memitem:af014521c10fc5142b20948e75481b51b inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="af014521c10fc5142b20948e75481b51b"></a>
 constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>in_range</b> (u16 adr) const</td></tr>
 <tr class="separator:af014521c10fc5142b20948e75481b51b inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9ce4692d2f026b242ce15947037015c inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="ab9ce4692d2f026b242ce15947037015c"></a>
+constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>set_bit</b> (u16 adr, u8 bitmask)</td></tr>
+<tr class="separator:ab9ce4692d2f026b242ce15947037015c inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e20e526d0fc2e36b4da4298ba42c63f inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a9e20e526d0fc2e36b4da4298ba42c63f"></a>
+constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>unset_bit</b> (u16 adr, u8 bitmask)</td></tr>
+<tr class="separator:a9e20e526d0fc2e36b4da4298ba42c63f inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f8216d1a1b20a655ad80576f5066800 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a8f8216d1a1b20a655ad80576f5066800"></a>
+constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>set_if_bit</b> (u16 adr, u8 bitmask, bool value)</td></tr>
+<tr class="separator:a8f8216d1a1b20a655ad80576f5066800 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2358edfdb5b438f36aaf59a4077e8a1f inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a2358edfdb5b438f36aaf59a4077e8a1f"></a>
 virtual u8&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> (u16 adr)=0</td></tr>
 <tr class="separator:a2358edfdb5b438f36aaf59a4077e8a1f inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40321f1991c7e0cb19d8e4daf08da58f inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a40321f1991c7e0cb19d8e4daf08da58f"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (u16 adr, u8 byte)=0</td></tr>
 <tr class="separator:a40321f1991c7e0cb19d8e4daf08da58f inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a341cef8af64e58fa9b08f2e2e61548f6 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a341cef8af64e58fa9b08f2e2e61548f6"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>refresh</b> ()=0</td></tr>
+<tr class="separator:a341cef8af64e58fa9b08f2e2e61548f6 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;usize start_adr, usize capacity, bool construct_then_write_lock&gt;<br />
