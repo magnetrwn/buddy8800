@@ -11,7 +11,8 @@ void pty::open() {
     if (ptsname_r(master_fd, slave_device_name, MAX_SLAVE_DEVICE_NAME) < 0)
         throw std::runtime_error("ptsname_r() failed");
 
-    setup();
+    set_baud_rate(DEFAULT_BAUD_RATE);
+    setup(DEFAULT_DATA_BITS, DEFAULT_PARITY, DEFAULT_STOP_BITS);
 }
 
 const char* pty::name() const {
@@ -34,12 +35,28 @@ void pty::send(const char* data, usize size) const {
     }
 }
 
+void pty::send_break() const {
+    if (tcsendbreak(master_fd, DEFAULT_BREAK_DURATION) < 0)
+        throw std::runtime_error("tcsendbreak() failed");
+}
+
 char pty::getch() const {
     char c;
     isize recv_amount = read(master_fd, &c, 1);
     if (recv_amount != 1)
         throw std::runtime_error("read() failed");
     return c;
+}
+
+bool pty::poll() const {
+    struct pollfd poll_ds;
+    poll_ds.fd = master_fd;
+    poll_ds.events = POLLIN;
+
+    if (::poll(&poll_ds, 1, 0) < 0 and errno != EINTR)
+        throw std::runtime_error("poll() failed");
+
+    return poll_ds.revents & POLLIN;
 }
 
 void pty::recv(char* data, usize max, char terminator) const {
@@ -69,13 +86,11 @@ void pty::recv(char* data, usize max, char terminator) const {
     data[total_recv] = '\0';
 }
 
-void pty::setup(u32 baud_rate, u32 data_bits, pty_parity parity, u32 stop_bits) {
+void pty::setup(u32 data_bits, pty_parity parity, u32 stop_bits) {
     struct termios tty;
     if (tcgetattr(master_fd, &tty) != 0)
         throw std::runtime_error("tcgetattr() failed");
 
-    cfsetospeed(&tty, baud_rate);
-    cfsetispeed(&tty, baud_rate);
     cfmakeraw(&tty);
 
     tty.c_cflag &= ~CSIZE;
@@ -107,6 +122,18 @@ void pty::setup(u32 baud_rate, u32 data_bits, pty_parity parity, u32 stop_bits) 
     tty.c_cflag |= (CLOCAL | CREAD);
     tty.c_cc[VMIN] = 1;
     tty.c_cc[VTIME] = 0;
+
+    if (tcsetattr(master_fd, TCSANOW, &tty) != 0)
+        throw std::runtime_error("tcsetattr() failed");
+}
+
+void pty::set_baud_rate(u32 baud_rate) {
+    struct termios tty;
+    if (tcgetattr(master_fd, &tty) != 0)
+        throw std::runtime_error("tcgetattr() failed");
+
+    cfsetospeed(&tty, baud_rate);
+    cfsetispeed(&tty, baud_rate);
 
     if (tcsetattr(master_fd, TCSANOW, &tty) != 0)
         throw std::runtime_error("tcsetattr() failed");
