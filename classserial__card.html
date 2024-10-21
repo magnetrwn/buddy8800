@@ -97,12 +97,18 @@ Inheritance diagram for serial_card&lt; start_adr, base_clock &gt;:</div>
  <div class="center">
   <img src="classserial__card.png" usemap="#serial_5Fcard_3C_20start_5Fadr_2C_20base_5Fclock_20_3E_map" alt=""/>
   <map id="serial_5Fcard_3C_20start_5Fadr_2C_20base_5Fclock_20_3E_map" name="serial_5Fcard_3C_20start_5Fadr_2C_20base_5Fclock_20_3E_map">
-<area href="classcard.html" alt="card&lt; start_adr, 4 &gt;" shape="rect" coords="0,0,223,24"/>
+<area href="classcard.html" alt="card" shape="rect" coords="0,0,223,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a145389db40a1ab9a201e261beb681c57"><td class="memItemLeft" align="right" valign="top"><a id="a145389db40a1ab9a201e261beb681c57"></a>
+constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>in_range</b> (u16 adr) const</td></tr>
+<tr class="separator:a145389db40a1ab9a201e261beb681c57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80f7a483b2e04f284a73bf70601d4360"><td class="memItemLeft" align="right" valign="top"><a id="a80f7a483b2e04f284a73bf70601d4360"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>identify</b> () const</td></tr>
+<tr class="separator:a80f7a483b2e04f284a73bf70601d4360"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3471a3d7caed345f690b1c72601800da"><td class="memItemLeft" align="right" valign="top"><a id="a3471a3d7caed345f690b1c72601800da"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>refresh</b> () override</td></tr>
 <tr class="separator:a3471a3d7caed345f690b1c72601800da"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -110,37 +116,40 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>refresh</b> () overri
 <tr class="separator:a912517ea46c7e3b702d94c8ddba2af32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfff847039d36c47cbf4a0133d9719b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#abfff847039d36c47cbf4a0133d9719b2">write</a> (u16 adr, u8 byte) override</td></tr>
 <tr class="separator:abfff847039d36c47cbf4a0133d9719b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classcard"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classcard')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classcard.html">card&lt; start_adr, 4 &gt;</a></td></tr>
-<tr class="memitem:af014521c10fc5142b20948e75481b51b inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="af014521c10fc5142b20948e75481b51b"></a>
-constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>in_range</b> (u16 adr) const</td></tr>
-<tr class="separator:af014521c10fc5142b20948e75481b51b inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9ce4692d2f026b242ce15947037015c inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="ab9ce4692d2f026b242ce15947037015c"></a>
+<tr class="memitem:af189f02c49c43bf587290ba93baa0996"><td class="memItemLeft" align="right" valign="top"><a id="af189f02c49c43bf587290ba93baa0996"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> () override</td></tr>
+<tr class="separator:af189f02c49c43bf587290ba93baa0996"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classcard"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classcard')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classcard.html">card</a></td></tr>
+<tr class="memitem:a6a2cc0e6f0ea76d9005f1c82a6de3bc1 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a6a2cc0e6f0ea76d9005f1c82a6de3bc1"></a>
 constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>set_bit</b> (u16 adr, u8 bitmask)</td></tr>
-<tr class="separator:ab9ce4692d2f026b242ce15947037015c inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e20e526d0fc2e36b4da4298ba42c63f inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a9e20e526d0fc2e36b4da4298ba42c63f"></a>
+<tr class="separator:a6a2cc0e6f0ea76d9005f1c82a6de3bc1 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3621cf94386873f9fed9de31118dc47e inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a3621cf94386873f9fed9de31118dc47e"></a>
 constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>unset_bit</b> (u16 adr, u8 bitmask)</td></tr>
-<tr class="separator:a9e20e526d0fc2e36b4da4298ba42c63f inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f8216d1a1b20a655ad80576f5066800 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a8f8216d1a1b20a655ad80576f5066800"></a>
+<tr class="separator:a3621cf94386873f9fed9de31118dc47e inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d256b19fd0ae04c219b7b0191d02b14 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a9d256b19fd0ae04c219b7b0191d02b14"></a>
 constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>set_if_bit</b> (u16 adr, u8 bitmask, bool value)</td></tr>
-<tr class="separator:a8f8216d1a1b20a655ad80576f5066800 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2358edfdb5b438f36aaf59a4077e8a1f inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a2358edfdb5b438f36aaf59a4077e8a1f"></a>
-virtual u8&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> (u16 adr)=0</td></tr>
-<tr class="separator:a2358edfdb5b438f36aaf59a4077e8a1f inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40321f1991c7e0cb19d8e4daf08da58f inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a40321f1991c7e0cb19d8e4daf08da58f"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (u16 adr, u8 byte)=0</td></tr>
-<tr class="separator:a40321f1991c7e0cb19d8e4daf08da58f inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a936ae85b4b49eba0fcf151410a8b6d inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a4a936ae85b4b49eba0fcf151410a8b6d"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>write_lock</b> ()=0</td></tr>
-<tr class="separator:a4a936ae85b4b49eba0fcf151410a8b6d inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada19bb260f0ea64c0fdfbb65a2a83b68 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="ada19bb260f0ea64c0fdfbb65a2a83b68"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>write_unlock</b> ()=0</td></tr>
-<tr class="separator:ada19bb260f0ea64c0fdfbb65a2a83b68 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60907e51dec4389fe35bfd8d2a6fb087 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a60907e51dec4389fe35bfd8d2a6fb087"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()=0</td></tr>
-<tr class="separator:a60907e51dec4389fe35bfd8d2a6fb087 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a9d256b19fd0ae04c219b7b0191d02b14 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade923e46176265c6db021f741d109dba inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="ade923e46176265c6db021f741d109dba"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_w_locked</b> () const</td></tr>
+<tr class="separator:ade923e46176265c6db021f741d109dba inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57e0746acc76ec3ac4cd6d7b0ad5f853 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a57e0746acc76ec3ac4cd6d7b0ad5f853"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>w_lock</b> ()</td></tr>
+<tr class="separator:a57e0746acc76ec3ac4cd6d7b0ad5f853 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d920b036be2033a5c337a683bde300c inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a9d920b036be2033a5c337a683bde300c"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>w_unlock</b> ()</td></tr>
+<tr class="separator:a9d920b036be2033a5c337a683bde300c inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a133fcec7327ff3e848ca0c7e0c2e8122 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a133fcec7327ff3e848ca0c7e0c2e8122"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_irq</b> () const</td></tr>
+<tr class="separator:a133fcec7327ff3e848ca0c7e0c2e8122 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fb39af0849465b4c4c97a5871eda951 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a9fb39af0849465b4c4c97a5871eda951"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>set_irq</b> (bool value)</td></tr>
+<tr class="separator:a9fb39af0849465b4c4c97a5871eda951 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ef348c61f7138914f015c57d2f6a0be inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a4ef348c61f7138914f015c57d2f6a0be"></a>
+virtual std::array&lt; u8, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>get_irq</b> ()=0</td></tr>
+<tr class="separator:a4ef348c61f7138914f015c57d2f6a0be inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;usize start_adr, usize base_clock = 19200&gt;<br />
+<div class="textblock"><h3>template&lt;usize start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt;<br />
 class serial_card&lt; start_adr, base_clock &gt;</h3>
 
 <p>Based on the MC6850 ACIA. </p><dl class="section warning"><dt>Warning</dt><dd>Out of range addresses are not checked, they should be checked by the bus instead, to avoid calling in_range() twice. </dd></dl>
@@ -151,7 +160,7 @@ class serial_card&lt; start_adr, base_clock &gt;</h3>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;usize start_adr, usize base_clock = 19200&gt; </div>
+template&lt;usize start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -166,12 +175,14 @@ template&lt;usize start_adr, usize base_clock = 19200&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 <p>TX_DATA is write-only</p>
 <p>CONTROL is write-only</p>
+
+<p>Implements <a class="el" href="classcard.html">card</a>.</p>
 
 </div>
 </div>
@@ -181,7 +192,7 @@ template&lt;usize start_adr, usize base_clock = 19200&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;usize start_adr, usize base_clock = 19200&gt; </div>
+template&lt;usize start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -206,16 +217,18 @@ template&lt;usize start_adr, usize base_clock = 19200&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 <p>RX_DATA is read-only</p>
 <p>Counter Divide select bits</p>
 <p>Word Select bits</p>
-<p>Transmit Control bits</p>
-<p>Interrupt Enable bit</p>
+<p>Transmit Control bits (TODO: missing interrupt controls)</p>
+<p>Interrupt Enable bit (TODO: probably wrong behavior)</p>
 <p>STATUS is read-only</p>
+
+<p>Implements <a class="el" href="classcard.html">card</a>.</p>
 
 </div>
 </div>

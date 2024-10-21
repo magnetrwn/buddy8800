@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['unset_5fflag_104',['unset_flag',['../structcpu__state.html#ad2172487d40c164820b74a21b267af84',1,'cpu_state']]]
+  ['to_5fhex_5fs_103',['to_hex_s',['../classutil.html#ae1f4a14430dd6b38f33b5c6116714fc9',1,'util']]]
 ];

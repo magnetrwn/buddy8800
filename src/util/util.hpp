@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <iomanip>
 
 #include "typedef.hpp"
 
@@ -76,6 +78,15 @@ public:
         for (usize i = 0; i < 8 * sizeof(T); ++i)
             p += (value >> i) & 1;
         return p & 1;
+    }
+
+    /// @brief Make an integer into an hexadecimal std::string.
+    template <typename T>
+    static std::string to_hex_s(T value, usize zfill = 4) {
+        static_assert(std::is_integral<T>::value, "T must be an integral type");
+        std::stringstream stream;
+        stream << "0x" << std::setfill('0') << std::setw(zfill) << std::hex << value;
+        return stream.str();
     }
 
     /// @brief Get the disassembled name of an opcode.

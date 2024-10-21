@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>buddy8800: card&lt; start_adr, adr_range &gt; Class Template Reference</title>
+<title>buddy8800: card Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,42 +86,64 @@ $(document).ready(function(){initNavTree('classcard.html',''); initResizable(); 
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classcard-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">card&lt; start_adr, adr_range &gt; Class Template Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">card Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="dynheader">
+Inheritance diagram for card:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classcard.png" usemap="#card_map" alt=""/>
+  <map id="card_map" name="card_map">
+<area href="classdata__card.html" alt="data_card&lt; start_adr, capacity, construct_then_write_lock &gt;" shape="rect" coords="0,56,356,80"/>
+<area href="classserial__card.html" alt="serial_card&lt; start_adr, base_clock &gt;" shape="rect" coords="366,56,722,80"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af014521c10fc5142b20948e75481b51b"><td class="memItemLeft" align="right" valign="top"><a id="af014521c10fc5142b20948e75481b51b"></a>
-constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>in_range</b> (u16 adr) const</td></tr>
-<tr class="separator:af014521c10fc5142b20948e75481b51b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9ce4692d2f026b242ce15947037015c"><td class="memItemLeft" align="right" valign="top"><a id="ab9ce4692d2f026b242ce15947037015c"></a>
+<tr class="memitem:a6a2cc0e6f0ea76d9005f1c82a6de3bc1"><td class="memItemLeft" align="right" valign="top"><a id="a6a2cc0e6f0ea76d9005f1c82a6de3bc1"></a>
 constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>set_bit</b> (u16 adr, u8 bitmask)</td></tr>
-<tr class="separator:ab9ce4692d2f026b242ce15947037015c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e20e526d0fc2e36b4da4298ba42c63f"><td class="memItemLeft" align="right" valign="top"><a id="a9e20e526d0fc2e36b4da4298ba42c63f"></a>
+<tr class="separator:a6a2cc0e6f0ea76d9005f1c82a6de3bc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3621cf94386873f9fed9de31118dc47e"><td class="memItemLeft" align="right" valign="top"><a id="a3621cf94386873f9fed9de31118dc47e"></a>
 constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>unset_bit</b> (u16 adr, u8 bitmask)</td></tr>
-<tr class="separator:a9e20e526d0fc2e36b4da4298ba42c63f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f8216d1a1b20a655ad80576f5066800"><td class="memItemLeft" align="right" valign="top"><a id="a8f8216d1a1b20a655ad80576f5066800"></a>
+<tr class="separator:a3621cf94386873f9fed9de31118dc47e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d256b19fd0ae04c219b7b0191d02b14"><td class="memItemLeft" align="right" valign="top"><a id="a9d256b19fd0ae04c219b7b0191d02b14"></a>
 constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>set_if_bit</b> (u16 adr, u8 bitmask, bool value)</td></tr>
-<tr class="separator:a8f8216d1a1b20a655ad80576f5066800"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2358edfdb5b438f36aaf59a4077e8a1f"><td class="memItemLeft" align="right" valign="top"><a id="a2358edfdb5b438f36aaf59a4077e8a1f"></a>
+<tr class="separator:a9d256b19fd0ae04c219b7b0191d02b14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4546161dbd0754626a4883f66ad2d45e"><td class="memItemLeft" align="right" valign="top"><a id="a4546161dbd0754626a4883f66ad2d45e"></a>
+virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><b>identify</b> () const</td></tr>
+<tr class="separator:a4546161dbd0754626a4883f66ad2d45e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ed2b72cca9db35d23873352a4af90a5"><td class="memItemLeft" align="right" valign="top"><a id="a5ed2b72cca9db35d23873352a4af90a5"></a>
 virtual u8&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> (u16 adr)=0</td></tr>
-<tr class="separator:a2358edfdb5b438f36aaf59a4077e8a1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40321f1991c7e0cb19d8e4daf08da58f"><td class="memItemLeft" align="right" valign="top"><a id="a40321f1991c7e0cb19d8e4daf08da58f"></a>
+<tr class="separator:a5ed2b72cca9db35d23873352a4af90a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4b1863113c0e72b7de13f3774776fdb"><td class="memItemLeft" align="right" valign="top"><a id="ae4b1863113c0e72b7de13f3774776fdb"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (u16 adr, u8 byte)=0</td></tr>
-<tr class="separator:a40321f1991c7e0cb19d8e4daf08da58f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a936ae85b4b49eba0fcf151410a8b6d"><td class="memItemLeft" align="right" valign="top"><a id="a4a936ae85b4b49eba0fcf151410a8b6d"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>write_lock</b> ()=0</td></tr>
-<tr class="separator:a4a936ae85b4b49eba0fcf151410a8b6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada19bb260f0ea64c0fdfbb65a2a83b68"><td class="memItemLeft" align="right" valign="top"><a id="ada19bb260f0ea64c0fdfbb65a2a83b68"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>write_unlock</b> ()=0</td></tr>
-<tr class="separator:ada19bb260f0ea64c0fdfbb65a2a83b68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a341cef8af64e58fa9b08f2e2e61548f6"><td class="memItemLeft" align="right" valign="top"><a id="a341cef8af64e58fa9b08f2e2e61548f6"></a>
+<tr class="separator:ae4b1863113c0e72b7de13f3774776fdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade923e46176265c6db021f741d109dba"><td class="memItemLeft" align="right" valign="top"><a id="ade923e46176265c6db021f741d109dba"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_w_locked</b> () const</td></tr>
+<tr class="separator:ade923e46176265c6db021f741d109dba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57e0746acc76ec3ac4cd6d7b0ad5f853"><td class="memItemLeft" align="right" valign="top"><a id="a57e0746acc76ec3ac4cd6d7b0ad5f853"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>w_lock</b> ()</td></tr>
+<tr class="separator:a57e0746acc76ec3ac4cd6d7b0ad5f853"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d920b036be2033a5c337a683bde300c"><td class="memItemLeft" align="right" valign="top"><a id="a9d920b036be2033a5c337a683bde300c"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>w_unlock</b> ()</td></tr>
+<tr class="separator:a9d920b036be2033a5c337a683bde300c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae39a92dd99c80e0756cc1d8ea28ca6c4"><td class="memItemLeft" align="right" valign="top"><a id="ae39a92dd99c80e0756cc1d8ea28ca6c4"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>refresh</b> ()=0</td></tr>
-<tr class="separator:a341cef8af64e58fa9b08f2e2e61548f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60907e51dec4389fe35bfd8d2a6fb087"><td class="memItemLeft" align="right" valign="top"><a id="a60907e51dec4389fe35bfd8d2a6fb087"></a>
+<tr class="separator:ae39a92dd99c80e0756cc1d8ea28ca6c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a133fcec7327ff3e848ca0c7e0c2e8122"><td class="memItemLeft" align="right" valign="top"><a id="a133fcec7327ff3e848ca0c7e0c2e8122"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_irq</b> () const</td></tr>
+<tr class="separator:a133fcec7327ff3e848ca0c7e0c2e8122"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fb39af0849465b4c4c97a5871eda951"><td class="memItemLeft" align="right" valign="top"><a id="a9fb39af0849465b4c4c97a5871eda951"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>set_irq</b> (bool value)</td></tr>
+<tr class="separator:a9fb39af0849465b4c4c97a5871eda951"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ef348c61f7138914f015c57d2f6a0be"><td class="memItemLeft" align="right" valign="top"><a id="a4ef348c61f7138914f015c57d2f6a0be"></a>
+virtual std::array&lt; u8, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>get_irq</b> ()=0</td></tr>
+<tr class="separator:a4ef348c61f7138914f015c57d2f6a0be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c2e9d54296d2c7dc1c89295575b1eb4"><td class="memItemLeft" align="right" valign="top"><a id="a1c2e9d54296d2c7dc1c89295575b1eb4"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()=0</td></tr>
-<tr class="separator:a60907e51dec4389fe35bfd8d2a6fb087"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a1c2e9d54296d2c7dc1c89295575b1eb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/bus/<a class="el" href="card_8hpp_source.html">card.hpp</a></li>

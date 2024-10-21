@@ -1,5 +1,6 @@
 var annotated_dup =
 [
+    [ "bus", "classbus.html", null ],
     [ "card", "classcard.html", "classcard" ],
     [ "cpu", "classcpu.html", "classcpu" ],
     [ "cpu_state", "structcpu__state.html", "structcpu__state" ],

@@ -7,22 +7,32 @@
 
 #include "typedef.hpp"
 #include "pty.hpp"
+#include "util.hpp"
 
-template <usize start_adr, usize adr_range>
 class card {
+private:
+    bool write_locked = false;
+    bool irq_await = false;
+
 public:
-    constexpr inline bool in_range(u16 adr) const {return adr >= start_adr and adr <= (start_adr + adr_range); }
     constexpr inline void set_bit(u16 adr, u8 bitmask) { write(adr, read(adr) | bitmask); }
     constexpr inline void unset_bit(u16 adr, u8 bitmask) { write(adr, read(adr) & ~bitmask); }
     constexpr inline void set_if_bit(u16 adr, u8 bitmask, bool value) { value ? set_bit(adr, bitmask) : unset_bit(adr, bitmask); }
 
+    virtual std::string identify() const { return "unknown: unknown"; };
+
     virtual u8 read(u16 adr) = 0;
 
     virtual void write(u16 adr, u8 byte) = 0;
-    virtual void write_lock() = 0;
-    virtual void write_unlock() = 0;
+    virtual bool is_w_locked() const { return write_locked; }
+    virtual void w_lock() { write_locked = true; }
+    virtual void w_unlock() { write_locked = false; }
 
     virtual void refresh() = 0;
+
+    virtual bool is_irq() const { return irq_await; }
+    virtual void set_irq(bool value) { irq_await = value; }
+    virtual std::array<u8, 3> get_irq() = 0;
 
     virtual void clear() = 0;
 
@@ -33,17 +43,23 @@ public:
  * @warning Out of range addresses are not checked, they should be checked by the bus instead, to avoid calling in_range() twice.
  */
 template <usize start_adr, usize capacity, bool construct_then_write_lock>
-class data_card : public card<start_adr, capacity> {
+class data_card : public card {
 private:
     std::array<u8, capacity> data;
-    bool write_locked;
 
 public:
-    data_card(bool lock = construct_then_write_lock) : write_locked(lock) {}
+    constexpr inline bool in_range(u16 adr) const { return adr >= start_adr and adr <= (start_adr + capacity); }
+
+    data_card(bool lock = construct_then_write_lock) { this->write_locked = lock; }
 
     template <typename iter_t>
-    data_card(iter_t begin, iter_t end, bool lock = construct_then_write_lock) : write_locked(lock) {
+    data_card(iter_t begin, iter_t end, bool lock = construct_then_write_lock) {
         std::copy(begin, end, data.begin());
+        this->write_locked = lock;
+    }
+
+    inline std::string identify() const {
+        return util::to_hex_s(start_adr) + " - " + util::to_hex_s(start_adr + capacity) + ": " + (this->write_locked ? "ROM" : "RAM");
     }
 
     inline u8 read(u16 adr) override {
@@ -51,20 +67,12 @@ public:
     }
 
     inline void write(u16 adr, u8 byte) override {
-        if (!write_locked)
+        if (!this->write_locked)
             data[adr - start_adr] = byte;
     }
 
-    inline void write_lock() override {
-        write_locked = true;
-    }
-
-    inline void write_unlock() override {
-        write_locked = false;
-    }
-
     inline void clear() override {
-        if (!write_locked)
+        if (!this->write_locked)
             data.fill(0x00);
     }
 };
@@ -89,12 +97,15 @@ enum serial_status_flags {
     RDRF = 0x01, TDRE = 0x02, DCD = 0x04, CTS = 0x08, FE = 0x10, OVRN = 0x20, PE = 0x40, IRQ = 0x80
 };
 
+constexpr static usize SERIAL_IO_ADDRESSES = 4;
+constexpr static usize SERIAL_BASE_CLOCK = 19200;
+
 /**
  * Based on the MC6850 ACIA.
  * @warning Out of range addresses are not checked, they should be checked by the bus instead, to avoid calling in_range() twice.
  */
-template <usize start_adr, usize base_clock = 19200>
-class serial_card : public card<start_adr, 4> {
+template <usize start_adr, usize base_clock = SERIAL_BASE_CLOCK>
+class serial_card : public card {
 private:
     pty serial;
     std::array<u8, 3> registers;
@@ -131,16 +142,18 @@ private:
 
     constexpr void reset() {
         registers.fill(0x00);
-        serial.set_baud_rate(base_clock);
+        serial.set_baud_rate(base_clock >> 4);
         TDRE(true);
         RTS(true);
     }
 
 public:
-    serial_card() {
-        serial.open();
-        std::cout << "Serial card '0x" << std::hex << start_adr << "' available on '" << serial.name() << "'." << std::endl;
-        reset();
+    constexpr inline bool in_range(u16 adr) const { return adr >= start_adr and adr <= (start_adr + SERIAL_IO_ADDRESSES); }
+
+    serial_card() { serial.open(); reset(); }
+
+    inline std::string identify() const {
+        return util::to_hex_s(start_adr) + " - " + util::to_hex_s(start_adr + SERIAL_IO_ADDRESSES) + ": serial, '" + serial.name() + "'";
     }
 
     inline void refresh() override {
@@ -191,7 +204,7 @@ public:
                     case 0b00011000: serial.setup(8, pty_parity::EVEN, 1); break;
                     case 0b00011100: serial.setup(8, pty_parity::ODD, 1); break;
                 }
-                /// Transmit Control bits
+                /// Transmit Control bits (TODO: missing interrupt controls)
                 switch (byte & 0b01100000) {
                     //     .CC.....
                     case 0b00000000: RTS(true); break;
@@ -199,7 +212,7 @@ public:
                     case 0b01000000: RTS(false); break;
                     case 0b01100000: RTS(true); serial.send_break(); break;
                 }
-                /// Interrupt Enable bit
+                /// Interrupt Enable bit (TODO: probably wrong behavior)
                 switch (byte & 0b10000000) {
                     //     I.......
                     case 0b00000000: IRQ(false); break;
@@ -210,6 +223,8 @@ public:
             case 0x03: break; /// STATUS is read-only
         }
     }
+
+    inline void clear() override { reset(); }
 };
 
 #endif

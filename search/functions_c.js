@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['write_105',['write',['../classserial__card.html#abfff847039d36c47cbf4a0133d9719b2',1,'serial_card']]]
+  ['unset_5fflag_104',['unset_flag',['../structcpu__state.html#ad2172487d40c164820b74a21b267af84',1,'cpu_state']]]
 ];
