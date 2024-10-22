@@ -3,7 +3,7 @@ var classcard =
     [ "~card", "classcard.html#aeff0d58a3d3beec7b1bbbd8a08230b04", null ],
     [ "clear", "classcard.html#a1c2e9d54296d2c7dc1c89295575b1eb4", null ],
     [ "get_irq", "classcard.html#a4ef348c61f7138914f015c57d2f6a0be", null ],
-    [ "identify", "classcard.html#a9697e3d042e53cd91522243cced6625c", null ],
+    [ "identify", "classcard.html#aaf025b6d566884d0b82c07ac8a94666e", null ],
     [ "in_range", "classcard.html#ab32f79943888d74e0a506e78b2d7406c", null ],
     [ "is_irq", "classcard.html#a133fcec7327ff3e848ca0c7e0c2e8122", null ],
     [ "is_w_locked", "classcard.html#ade923e46176265c6db021f741d109dba", null ],

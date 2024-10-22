@@ -23,28 +23,40 @@ private:
     bool irq_raised = false;
 
 public:
+    /// @name Bit utilities.
+    /// \{
+
     constexpr inline void set_bit(u16 adr, u8 bitmask) { write(adr, read(adr) | bitmask); }
     constexpr inline void unset_bit(u16 adr, u8 bitmask) { write(adr, read(adr) & ~bitmask); }
     constexpr inline void set_if_bit(u16 adr, u8 bitmask, bool value) { value ? set_bit(adr, bitmask) : unset_bit(adr, bitmask); }
 
-    virtual bool in_range(u16 adr) const = 0;
+    /// \}
+    /// @name Abstract methods.
+    /// \{
 
-    virtual card_identify identify() const { return card_identify(); };
+    virtual bool in_range(u16 adr) const = 0;
+    virtual card_identify identify() const = 0;
 
     virtual u8 read(u16 adr) = 0;
-
     virtual void write(u16 adr, u8 byte) = 0;
+    virtual void refresh() = 0;
+
+    virtual std::array<u8, 3> get_irq() = 0;
+
+    virtual void clear() = 0;
+
+    /// \}
+    /// @name Overloadable, commonly used methods.
+    /// \{
+
     virtual bool is_w_locked() const { return write_locked; }
     virtual void w_lock() { write_locked = true; }
     virtual void w_unlock() { write_locked = false; }
 
-    virtual void refresh() = 0;
-
     virtual bool is_irq() const { return irq_raised; }
     virtual void raise_irq(bool value) { irq_raised = value; }
-    virtual std::array<u8, 3> get_irq() = 0;
 
-    virtual void clear() = 0;
+    /// \}
 
     virtual ~card() = default;
 };
@@ -66,9 +78,9 @@ public:
         this->write_locked = lock;
     }
 
-    inline bool in_range(u16 adr) const { return adr >= start_adr and adr <= (start_adr + capacity); }
+    inline bool in_range(u16 adr) const override { return adr >= start_adr and adr <= (start_adr + capacity); }
 
-    inline card_identify identify() const { return { start_adr, capacity, (this->write_locked ? "rom area" : "ram area") }; }
+    inline card_identify identify() const override { return { start_adr, capacity, (this->write_locked ? "rom area" : "ram area") }; }
 
     inline u8 read(u16 adr) override {
         return data[adr - start_adr];
@@ -83,6 +95,14 @@ public:
         if (!this->write_locked)
             data.fill(0x00);
     }
+
+    /// @note Unused methods.
+    /// \{
+
+    inline void refresh() override {}
+    inline std::array<u8, 3> get_irq() override { return { BAD_U8, BAD_U8, BAD_U8 }; }
+
+    /// \}
 };
 
 template <u16 start_adr, u16 capacity>
@@ -158,9 +178,9 @@ private:
 public:
     serial_card() { serial.open(); reset(); }
 
-    inline bool in_range(u16 adr) const { return adr >= start_adr and adr <= (start_adr + SERIAL_IO_ADDRESSES); }
+    inline bool in_range(u16 adr) const override { return adr >= start_adr and adr <= (start_adr + SERIAL_IO_ADDRESSES); }
 
-    inline card_identify identify() const { return { 0, 0, "serial uart", serial.name() }; }
+    inline card_identify identify() const override { return { 0, 0, "serial uart", serial.name() }; }
 
     inline void refresh() override {
         if (!RDRF() and serial.poll()) {
@@ -231,6 +251,13 @@ public:
     }
 
     inline void clear() override { reset(); }
+
+    /// @note Unused methods.
+    /// \{
+
+    inline std::array<u8, 3> get_irq() override { return { BAD_U8, BAD_U8, BAD_U8 }; }
+
+    /// \}
 };
 
 #endif

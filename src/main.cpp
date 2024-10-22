@@ -1,4 +1,6 @@
 #include "cpu.hpp"
+#include "bus.hpp"
+#include "card.hpp"
 
 int main(int argc, char** argv) {
     if (argc != 2) {
@@ -6,6 +8,7 @@ int main(int argc, char** argv) {
         return 1;
     }
 
+    ram_card<0x0000, 65535> ram;
     cpu processor;
 
     std::ifstream file(argv[1], std::ios::binary);
