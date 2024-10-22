@@ -31,4 +31,6 @@ typedef ssize_t isize;
 
 using namespace type_definitions;
 
+static constexpr u8 BAD_U8 = 0xFF;
+
 #endif
