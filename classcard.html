@@ -111,9 +111,12 @@ constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>unset_bit</
 <tr class="memitem:a9d256b19fd0ae04c219b7b0191d02b14"><td class="memItemLeft" align="right" valign="top"><a id="a9d256b19fd0ae04c219b7b0191d02b14"></a>
 constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>set_if_bit</b> (u16 adr, u8 bitmask, bool value)</td></tr>
 <tr class="separator:a9d256b19fd0ae04c219b7b0191d02b14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4546161dbd0754626a4883f66ad2d45e"><td class="memItemLeft" align="right" valign="top"><a id="a4546161dbd0754626a4883f66ad2d45e"></a>
-virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><b>identify</b> () const</td></tr>
-<tr class="separator:a4546161dbd0754626a4883f66ad2d45e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab32f79943888d74e0a506e78b2d7406c"><td class="memItemLeft" align="right" valign="top"><a id="ab32f79943888d74e0a506e78b2d7406c"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>in_range</b> (u16 adr) const =0</td></tr>
+<tr class="separator:ab32f79943888d74e0a506e78b2d7406c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9697e3d042e53cd91522243cced6625c"><td class="memItemLeft" align="right" valign="top"><a id="a9697e3d042e53cd91522243cced6625c"></a>
+virtual <a class="el" href="structcard__identify.html">card_identify</a>&#160;</td><td class="memItemRight" valign="bottom"><b>identify</b> () const</td></tr>
+<tr class="separator:a9697e3d042e53cd91522243cced6625c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ed2b72cca9db35d23873352a4af90a5"><td class="memItemLeft" align="right" valign="top"><a id="a5ed2b72cca9db35d23873352a4af90a5"></a>
 virtual u8&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> (u16 adr)=0</td></tr>
 <tr class="separator:a5ed2b72cca9db35d23873352a4af90a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -135,9 +138,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>refresh</b> (
 <tr class="memitem:a133fcec7327ff3e848ca0c7e0c2e8122"><td class="memItemLeft" align="right" valign="top"><a id="a133fcec7327ff3e848ca0c7e0c2e8122"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_irq</b> () const</td></tr>
 <tr class="separator:a133fcec7327ff3e848ca0c7e0c2e8122"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fb39af0849465b4c4c97a5871eda951"><td class="memItemLeft" align="right" valign="top"><a id="a9fb39af0849465b4c4c97a5871eda951"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>set_irq</b> (bool value)</td></tr>
-<tr class="separator:a9fb39af0849465b4c4c97a5871eda951"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a831cb33b9e66de3808fa0ca5a7458e34"><td class="memItemLeft" align="right" valign="top"><a id="a831cb33b9e66de3808fa0ca5a7458e34"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>raise_irq</b> (bool value)</td></tr>
+<tr class="separator:a831cb33b9e66de3808fa0ca5a7458e34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ef348c61f7138914f015c57d2f6a0be"><td class="memItemLeft" align="right" valign="top"><a id="a4ef348c61f7138914f015c57d2f6a0be"></a>
 virtual std::array&lt; u8, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>get_irq</b> ()=0</td></tr>
 <tr class="separator:a4ef348c61f7138914f015c57d2f6a0be"><td class="memSeparator" colspan="2">&#160;</td></tr>

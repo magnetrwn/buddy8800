@@ -103,12 +103,12 @@ Inheritance diagram for serial_card&lt; start_adr, base_clock &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a145389db40a1ab9a201e261beb681c57"><td class="memItemLeft" align="right" valign="top"><a id="a145389db40a1ab9a201e261beb681c57"></a>
-constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>in_range</b> (u16 adr) const</td></tr>
-<tr class="separator:a145389db40a1ab9a201e261beb681c57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80f7a483b2e04f284a73bf70601d4360"><td class="memItemLeft" align="right" valign="top"><a id="a80f7a483b2e04f284a73bf70601d4360"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>identify</b> () const</td></tr>
-<tr class="separator:a80f7a483b2e04f284a73bf70601d4360"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1c7ba656c8c741ed4f5f48b3d2a266e"><td class="memItemLeft" align="right" valign="top"><a id="aa1c7ba656c8c741ed4f5f48b3d2a266e"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>in_range</b> (u16 adr) const</td></tr>
+<tr class="separator:aa1c7ba656c8c741ed4f5f48b3d2a266e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08498b5413b2c2b1c43e795a7a8cd770"><td class="memItemLeft" align="right" valign="top"><a id="a08498b5413b2c2b1c43e795a7a8cd770"></a>
+<a class="el" href="structcard__identify.html">card_identify</a>&#160;</td><td class="memItemRight" valign="bottom"><b>identify</b> () const</td></tr>
+<tr class="separator:a08498b5413b2c2b1c43e795a7a8cd770"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3471a3d7caed345f690b1c72601800da"><td class="memItemLeft" align="right" valign="top"><a id="a3471a3d7caed345f690b1c72601800da"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>refresh</b> () override</td></tr>
 <tr class="separator:a3471a3d7caed345f690b1c72601800da"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,15 +141,15 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>w_unlock</b> 
 <tr class="memitem:a133fcec7327ff3e848ca0c7e0c2e8122 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a133fcec7327ff3e848ca0c7e0c2e8122"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_irq</b> () const</td></tr>
 <tr class="separator:a133fcec7327ff3e848ca0c7e0c2e8122 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fb39af0849465b4c4c97a5871eda951 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a9fb39af0849465b4c4c97a5871eda951"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>set_irq</b> (bool value)</td></tr>
-<tr class="separator:a9fb39af0849465b4c4c97a5871eda951 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a831cb33b9e66de3808fa0ca5a7458e34 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a831cb33b9e66de3808fa0ca5a7458e34"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>raise_irq</b> (bool value)</td></tr>
+<tr class="separator:a831cb33b9e66de3808fa0ca5a7458e34 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ef348c61f7138914f015c57d2f6a0be inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a4ef348c61f7138914f015c57d2f6a0be"></a>
 virtual std::array&lt; u8, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>get_irq</b> ()=0</td></tr>
 <tr class="separator:a4ef348c61f7138914f015c57d2f6a0be inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;usize start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt;<br />
+<div class="textblock"><h3>template&lt;u16 start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt;<br />
 class serial_card&lt; start_adr, base_clock &gt;</h3>
 
 <p>Based on the MC6850 ACIA. </p><dl class="section warning"><dt>Warning</dt><dd>Out of range addresses are not checked, they should be checked by the bus instead, to avoid calling in_range() twice. </dd></dl>
@@ -160,7 +160,7 @@ class serial_card&lt; start_adr, base_clock &gt;</h3>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;usize start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt; </div>
+template&lt;u16 start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -192,7 +192,7 @@ template&lt;usize start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;usize start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt; </div>
+template&lt;u16 start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">

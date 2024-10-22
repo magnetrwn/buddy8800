@@ -1,5 +1,4 @@
 #include "cpu.hpp"
-#include "pty.hpp"
 
 int main(int argc, char** argv) {
     if (argc != 2) {
@@ -19,12 +18,6 @@ int main(int argc, char** argv) {
 
     processor.load(cpudiag.begin(), cpudiag.end(), 0x100, true);
     processor.do_pseudo_bdos(true);
-
-    pty term;
-    term.open();
-    term.set_echo_received_back(true);
-    std::cout << "Waiting for a connection on '" << term.name() << "'. Send any character to start." << std::endl;
-    term.getch();
 
     while (!processor.is_halted())
         processor.step();

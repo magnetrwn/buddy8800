@@ -103,9 +103,6 @@ Inheritance diagram for data_card&lt; start_adr, capacity, construct_then_write_
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac6b294b8aed7573c164871d9497f9b5e"><td class="memItemLeft" align="right" valign="top"><a id="ac6b294b8aed7573c164871d9497f9b5e"></a>
-constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>in_range</b> (u16 adr) const</td></tr>
-<tr class="separator:ac6b294b8aed7573c164871d9497f9b5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec902e00ab69498870cbab8bb7ba4df8"><td class="memItemLeft" align="right" valign="top"><a id="aec902e00ab69498870cbab8bb7ba4df8"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>data_card</b> (bool lock=construct_then_write_lock)</td></tr>
 <tr class="separator:aec902e00ab69498870cbab8bb7ba4df8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -113,9 +110,12 @@ constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>in_range</b
 template&lt;typename iter_t &gt; </td></tr>
 <tr class="memitem:abd216ef67613fde7f36e11eaec02b820"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>data_card</b> (iter_t begin, iter_t end, bool lock=construct_then_write_lock)</td></tr>
 <tr class="separator:abd216ef67613fde7f36e11eaec02b820"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18c2b8496216c1c5b436694a03d15af1"><td class="memItemLeft" align="right" valign="top"><a id="a18c2b8496216c1c5b436694a03d15af1"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>identify</b> () const</td></tr>
-<tr class="separator:a18c2b8496216c1c5b436694a03d15af1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe3de9d60dd5e0e08e5e8367e461d408"><td class="memItemLeft" align="right" valign="top"><a id="abe3de9d60dd5e0e08e5e8367e461d408"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>in_range</b> (u16 adr) const</td></tr>
+<tr class="separator:abe3de9d60dd5e0e08e5e8367e461d408"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbc7a8b665fe7e476c73bdc9717dd29b"><td class="memItemLeft" align="right" valign="top"><a id="adbc7a8b665fe7e476c73bdc9717dd29b"></a>
+<a class="el" href="structcard__identify.html">card_identify</a>&#160;</td><td class="memItemRight" valign="bottom"><b>identify</b> () const</td></tr>
+<tr class="separator:adbc7a8b665fe7e476c73bdc9717dd29b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a809399f9f7a254645de1cc6916501828"><td class="memItemLeft" align="right" valign="top"><a id="a809399f9f7a254645de1cc6916501828"></a>
 u8&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> (u16 adr) override</td></tr>
 <tr class="separator:a809399f9f7a254645de1cc6916501828"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,15 +150,15 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>refresh</b> (
 <tr class="memitem:a133fcec7327ff3e848ca0c7e0c2e8122 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a133fcec7327ff3e848ca0c7e0c2e8122"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_irq</b> () const</td></tr>
 <tr class="separator:a133fcec7327ff3e848ca0c7e0c2e8122 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fb39af0849465b4c4c97a5871eda951 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a9fb39af0849465b4c4c97a5871eda951"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>set_irq</b> (bool value)</td></tr>
-<tr class="separator:a9fb39af0849465b4c4c97a5871eda951 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a831cb33b9e66de3808fa0ca5a7458e34 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a831cb33b9e66de3808fa0ca5a7458e34"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>raise_irq</b> (bool value)</td></tr>
+<tr class="separator:a831cb33b9e66de3808fa0ca5a7458e34 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ef348c61f7138914f015c57d2f6a0be inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a4ef348c61f7138914f015c57d2f6a0be"></a>
 virtual std::array&lt; u8, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>get_irq</b> ()=0</td></tr>
 <tr class="separator:a4ef348c61f7138914f015c57d2f6a0be inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;usize start_adr, usize capacity, bool construct_then_write_lock&gt;<br />
+<div class="textblock"><h3>template&lt;u16 start_adr, u16 capacity, bool construct_then_write_lock&gt;<br />
 class data_card&lt; start_adr, capacity, construct_then_write_lock &gt;</h3>
 
 <dl class="section warning"><dt>Warning</dt><dd>Out of range addresses are not checked, they should be checked by the bus instead, to avoid calling in_range() twice. </dd></dl>
