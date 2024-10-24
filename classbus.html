@@ -198,7 +198,11 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>When the 8080 accepts an interrupt request, it will look for an instruction on the data bus to run. Most commonly this is either a <code>RST</code> or a <code>CALL</code> instruction. While <code>RST</code> has a bunch of fixed offsets, <code>CALL</code> instead makes the 8080 run an extra two fetches for a 16-bit address to jump to. Because of this, an array of 3 bytes has to be returned in case of the latter, otherwise they would be just 0x00. </p>
+<p>When the 8080 accepts an interrupt request, it will look for an instruction on the data bus to run. Most commonly this is either a <code>RST</code> or a <code>CALL</code> instruction. While <code>RST</code> has a bunch of fixed offsets, <code>CALL</code> instead makes the 8080 run an extra two fetches for a 16-bit address to jump to. Because of this, an array of 3 bytes has to be returned in case of the latter, otherwise they would be just 0x00.</p>
+<dl class="section note"><dt>Note</dt><dd>This method should be called after <code><a class="el" href="classbus.html#ae35dadd5a5ae3a060bd18facb8bb4f31" title="Checks if an IRQ is raised.">is_irq()</a></code> returns true. </dd></dl>
+<dl class="section user"><dt></dt><dd></dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The order of returned interrupts is preferential to the order of cards on the bus. This is because many S-100 systems used simple daisy-chaining for IRQs, and the closest slot to raise an IRQ concurrent to another would be the first to be serviced. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Verify this last claim (we may need an 8259 PIC instead...). </dd></dl>
 
 </div>
 </div>
