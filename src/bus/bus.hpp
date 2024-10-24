@@ -228,6 +228,13 @@ public:
      * this is either a `RST` or a `CALL` instruction. While `RST` has a bunch of fixed offsets, `CALL` instead makes the
      * 8080 run an extra two fetches for a 16-bit address to jump to. Because of this, an array of 3 bytes has to be returned
      * in case of the latter, otherwise they would be just 0x00.
+     *
+     * @note This method should be called after `is_irq()` returns true.
+     * @par
+     * @note The order of returned interrupts is preferential to the order of cards on the bus. This is because many S-100
+     * systems used simple daisy-chaining for IRQs, and the closest slot to raise an IRQ concurrent to another would be the 
+     * first to be serviced.
+     * @todo Verify this last claim (we may need an 8259 PIC instead...).
      */
     inline std::array<u8, 3> get_irq() {
         for (card* card : cards)
