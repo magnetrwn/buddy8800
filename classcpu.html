@@ -83,6 +83,7 @@ $(document).ready(function(){initNavTree('classcpu.html',''); initResizable(); }
 
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classcpu-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">cpu Class Reference</div>  </div>
@@ -96,6 +97,9 @@ $(document).ready(function(){initNavTree('classcpu.html',''); initResizable(); }
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a8fa4d18a4f5d31e98ef898f56e6e5876"><td class="memItemLeft" align="right" valign="top"><a id="a8fa4d18a4f5d31e98ef898f56e6e5876"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>cpu</b> (<a class="el" href="classbus.html">bus</a> &amp;cardbus)</td></tr>
+<tr class="separator:a8fa4d18a4f5d31e98ef898f56e6e5876"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">CPU API methods.</div></td></tr>
 <tr class="memitem:a8ba6089ae338a2747c78bc98fae67a46"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a8ba6089ae338a2747c78bc98fae67a46">step</a> ()</td></tr>
 <tr class="memdesc:a8ba6089ae338a2747c78bc98fae67a46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Steps the CPU by one instruction (and its operands).  <a href="classcpu.html#a8ba6089ae338a2747c78bc98fae67a46">More...</a><br /></td></tr>
@@ -104,7 +108,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a639550f25a52725e4470c46d061e32ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a single opcode.  <a href="classcpu.html#a639550f25a52725e4470c46d061e32ed">More...</a><br /></td></tr>
 <tr class="separator:a639550f25a52725e4470c46d061e32ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2cfed77b955c7a00c330ba7b56aea76c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a2cfed77b955c7a00c330ba7b56aea76c">load</a> (std::vector&lt; u8 &gt;::iterator begin, std::vector&lt; u8 &gt;::iterator end, usize offset=0, bool auto_reset_vector=false)</td></tr>
-<tr class="memdesc:a2cfed77b955c7a00c330ba7b56aea76c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads data into memory.  <a href="classcpu.html#a2cfed77b955c7a00c330ba7b56aea76c">More...</a><br /></td></tr>
+<tr class="memdesc:a2cfed77b955c7a00c330ba7b56aea76c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads data into cardbus.  <a href="classcpu.html#a2cfed77b955c7a00c330ba7b56aea76c">More...</a><br /></td></tr>
 <tr class="separator:a2cfed77b955c7a00c330ba7b56aea76c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a166c79829cb2c3540389efa304382139"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a166c79829cb2c3540389efa304382139">load_state</a> (const <a class="el" href="structcpu__state.html">cpu_state</a> &amp;new_state)</td></tr>
 <tr class="memdesc:a166c79829cb2c3540389efa304382139"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load CPU state.  <a href="classcpu.html#a166c79829cb2c3540389efa304382139">More...</a><br /></td></tr>
@@ -132,7 +136,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents the CPU of the emulator. </p>
-<p>This is the 8080 CPU emulator and interpreter. It abstracts the CPU functionality into straightforward methods and presents a way to step and interact with state. Being an interpreter, each opcode starting from the program counter address in memory is fetched and executed according to what it represents and including further fetches to opcode operands. The API also provides public access to <a class="el" href="classcpu.html#a639550f25a52725e4470c46d061e32ed" title="Executes a single opcode.">execute()</a>, should the user want to manually ask for instructions.</p>
+<p>This is the 8080 CPU emulator and interpreter. It abstracts the CPU functionality into straightforward methods and presents a way to step and interact with state. Being an interpreter, each opcode starting from the program counter address in cardbus is fetched and executed according to what it represents and including further fetches to opcode operands. The API also provides public access to <a class="el" href="classcpu.html#a639550f25a52725e4470c46d061e32ed" title="Executes a single opcode.">execute()</a>, should the user want to manually ask for instructions.</p>
 <p>For a use case example you can look at <code>ŧests/test_cpu.hpp</code>. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a170fe10d4fcedd82bafd0d438d95acbe"></a>
@@ -186,7 +190,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </dd>
 </dl>
 <p>This method is a comprehensive jump table for all the opcodes the 8080 CPU can execute. It effectively groups the decode and execute phases of the CPU into a single method, and is used by the step method to execute instructions.</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Currently, this method is useless for instructions with operands, since their implementation always fetches from the address bus the CPU is aware of. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Currently, this method is useless for instructions with operands, since their implementation always fetches from the address bus the CPU is aware of. </dd></dl>
 
 </div>
 </div>
@@ -248,7 +252,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
       </table>
 </div><div class="memdoc">
 
-<p>Loads data into memory. </p>
+<p>Loads data into cardbus. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">begin</td><td>Vector iterator to the beginning of data. </td></tr>
@@ -260,12 +264,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">&lt;tt&gt;std::out_of_range&lt;/tt&gt;</td><td>if data won't fit in memory. </td></tr>
+    <tr><td class="paramname">&lt;tt&gt;std::out_of_range&lt;/tt&gt;</td><td>if data won't fit in cardbus. </td></tr>
     <tr><td class="paramname">&lt;tt&gt;std::out_of_range&lt;/tt&gt;</td><td>if enabled auto reset vector will overwrite the first few bytes loaded.</td></tr>
   </table>
   </dd>
 </dl>
-<p>This method can be useful to load programs, libraries, or data into the emulator's memory. It will copy the data at the specified offset, check if it will fit, and if auto_reset_vector is true, it will set the zero page (the first 3 bytes of memory, specifically a jump instruction and a 2 byte argument) to point to the start of the loaded data. </p>
+<p>This method can be useful to load programs, libraries, or data into the emulator's cardbus. It will copy the data at the specified offset, check if it will fit, and if auto_reset_vector is true, it will set the zero page (the first 3 bytes of cardbus, specifically a jump instruction and a 2 byte argument) to point to the start of the loaded data. </p>
 
 </div>
 </div>
@@ -359,7 +363,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div><div class="memdoc">
 
 <p>Steps the CPU by one instruction (and its operands). </p>
-<p>Calling the step method will fetch the next instruction opcode from memory and execute it. Internally, on every fetch the PC is incremented, and each instruction is also responsible for fetching its operands, so a step is effectively a full instruction step.</p>
+<p>Calling the step method will fetch the next instruction opcode from cardbus and execute it. Internally, on every fetch the PC is incremented, and each instruction is also responsible for fetching its operands, so a step is effectively a full instruction step.</p>
 <p>If the CPU is set to handle BDOS calls, it will provide some pseudo BDOS functionality, currently only for printing characters and strings to wherever the printer is set to, stdout by default.</p>
 <dl class="section note"><dt>Note</dt><dd>If the CPU is halted, this method will return immediately. </dd></dl>
 <dl class="section user"><dt></dt><dd></dd></dl>

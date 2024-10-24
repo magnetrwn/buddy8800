@@ -83,40 +83,460 @@ $(document).ready(function(){initNavTree('classbus.html',''); initResizable(); }
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classbus-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">bus Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents the S-100 bus of the emulator.  
+ <a href="classbus.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="bus_8hpp_source.html">bus.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aef6e4de3df548561b9545f0cb341e143"><td class="memItemLeft" align="right" valign="top"><a id="aef6e4de3df548561b9545f0cb341e143"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>insert</b> (<a class="el" href="classcard.html">card</a> *<a class="el" href="classcard.html">card</a>, usize slot, bool allow_conflict=false)</td></tr>
+<tr class="memitem:aef6e4de3df548561b9545f0cb341e143"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#aef6e4de3df548561b9545f0cb341e143">insert</a> (<a class="el" href="classcard.html">card</a> *<a class="el" href="classcard.html">card</a>, usize slot, bool allow_conflict=false)</td></tr>
+<tr class="memdesc:aef6e4de3df548561b9545f0cb341e143"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a card into a slot on the bus.  <a href="classbus.html#aef6e4de3df548561b9545f0cb341e143">More...</a><br /></td></tr>
 <tr class="separator:aef6e4de3df548561b9545f0cb341e143"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac452a5305b4fcb30b6e40172d63fba4a"><td class="memItemLeft" align="right" valign="top"><a id="ac452a5305b4fcb30b6e40172d63fba4a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>remove</b> (usize slot)</td></tr>
+<tr class="memitem:ac452a5305b4fcb30b6e40172d63fba4a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#ac452a5305b4fcb30b6e40172d63fba4a">remove</a> (usize slot)</td></tr>
+<tr class="memdesc:ac452a5305b4fcb30b6e40172d63fba4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a card from a slot on the bus.  <a href="classbus.html#ac452a5305b4fcb30b6e40172d63fba4a">More...</a><br /></td></tr>
 <tr class="separator:ac452a5305b4fcb30b6e40172d63fba4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1193e1643aea2d06e1a8e35425ae216"><td class="memItemLeft" align="right" valign="top"><a id="ad1193e1643aea2d06e1a8e35425ae216"></a>
-u8&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> (u16 adr)</td></tr>
+<tr class="memitem:a40eeeeb2ba939e469bdff3d35c3f5f67"><td class="memItemLeft" align="right" valign="top">constexpr usize&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#a40eeeeb2ba939e469bdff3d35c3f5f67">size</a> () const</td></tr>
+<tr class="memdesc:a40eeeeb2ba939e469bdff3d35c3f5f67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the maximum number of addressable locations on the bus.  <a href="classbus.html#a40eeeeb2ba939e469bdff3d35c3f5f67">More...</a><br /></td></tr>
+<tr class="separator:a40eeeeb2ba939e469bdff3d35c3f5f67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1193e1643aea2d06e1a8e35425ae216"><td class="memItemLeft" align="right" valign="top">u8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#ad1193e1643aea2d06e1a8e35425ae216">read</a> (u16 adr)</td></tr>
+<tr class="memdesc:ad1193e1643aea2d06e1a8e35425ae216"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a byte from the bus.  <a href="classbus.html#ad1193e1643aea2d06e1a8e35425ae216">More...</a><br /></td></tr>
 <tr class="separator:ad1193e1643aea2d06e1a8e35425ae216"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05d0d594ca803a6f713e3078dcdaf22a"><td class="memItemLeft" align="right" valign="top"><a id="a05d0d594ca803a6f713e3078dcdaf22a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (u16 adr, u8 byte)</td></tr>
+<tr class="memitem:a05d0d594ca803a6f713e3078dcdaf22a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#a05d0d594ca803a6f713e3078dcdaf22a">write</a> (u16 adr, u8 byte)</td></tr>
+<tr class="memdesc:a05d0d594ca803a6f713e3078dcdaf22a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a byte to the bus.  <a href="classbus.html#a05d0d594ca803a6f713e3078dcdaf22a">More...</a><br /></td></tr>
 <tr class="separator:a05d0d594ca803a6f713e3078dcdaf22a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac158680334e36add350e716e6a0ec69b"><td class="memItemLeft" align="right" valign="top"><a id="ac158680334e36add350e716e6a0ec69b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>refresh</b> ()</td></tr>
+<tr class="memitem:a437a9e982484088673f7635af77795a6"><td class="memItemLeft" align="right" valign="top">bus_subscr_iface&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#a437a9e982484088673f7635af77795a6">operator[]</a> (u16 adr)</td></tr>
+<tr class="memdesc:a437a9e982484088673f7635af77795a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscripts the bus.  <a href="classbus.html#a437a9e982484088673f7635af77795a6">More...</a><br /></td></tr>
+<tr class="separator:a437a9e982484088673f7635af77795a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac158680334e36add350e716e6a0ec69b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#ac158680334e36add350e716e6a0ec69b">refresh</a> ()</td></tr>
+<tr class="memdesc:ac158680334e36add350e716e6a0ec69b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refreshes all cards on the bus.  <a href="classbus.html#ac158680334e36add350e716e6a0ec69b">More...</a><br /></td></tr>
 <tr class="separator:ac158680334e36add350e716e6a0ec69b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae35dadd5a5ae3a060bd18facb8bb4f31"><td class="memItemLeft" align="right" valign="top"><a id="ae35dadd5a5ae3a060bd18facb8bb4f31"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_irq</b> () const</td></tr>
+<tr class="memitem:ae35dadd5a5ae3a060bd18facb8bb4f31"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#ae35dadd5a5ae3a060bd18facb8bb4f31">is_irq</a> () const</td></tr>
+<tr class="memdesc:ae35dadd5a5ae3a060bd18facb8bb4f31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if an IRQ is raised.  <a href="classbus.html#ae35dadd5a5ae3a060bd18facb8bb4f31">More...</a><br /></td></tr>
 <tr class="separator:ae35dadd5a5ae3a060bd18facb8bb4f31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1673002793a022d9e89aacfbeeeb71fc"><td class="memItemLeft" align="right" valign="top"><a id="a1673002793a022d9e89aacfbeeeb71fc"></a>
-std::array&lt; u8, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>get_irq</b> ()</td></tr>
+<tr class="memitem:a1673002793a022d9e89aacfbeeeb71fc"><td class="memItemLeft" align="right" valign="top">std::array&lt; u8, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#a1673002793a022d9e89aacfbeeeb71fc">get_irq</a> ()</td></tr>
+<tr class="memdesc:a1673002793a022d9e89aacfbeeeb71fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the IRQ instruction(s).  <a href="classbus.html#a1673002793a022d9e89aacfbeeeb71fc">More...</a><br /></td></tr>
 <tr class="separator:a1673002793a022d9e89aacfbeeeb71fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a254a00b9a58c961c99e1e983eafbb90b"><td class="memItemLeft" align="right" valign="top"><a id="a254a00b9a58c961c99e1e983eafbb90b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_mmap</b> ()</td></tr>
+<tr class="memitem:a254a00b9a58c961c99e1e983eafbb90b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#a254a00b9a58c961c99e1e983eafbb90b">print_mmap</a> ()</td></tr>
+<tr class="memdesc:a254a00b9a58c961c99e1e983eafbb90b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a detailed memory map of the bus.  <a href="classbus.html#a254a00b9a58c961c99e1e983eafbb90b">More...</a><br /></td></tr>
 <tr class="separator:a254a00b9a58c961c99e1e983eafbb90b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a653c79df108c47ff654d18cc601d4d67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#a653c79df108c47ff654d18cc601d4d67">clear</a> ()</td></tr>
+<tr class="memdesc:a653c79df108c47ff654d18cc601d4d67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all cards on the bus.  <a href="classbus.html#a653c79df108c47ff654d18cc601d4d67">More...</a><br /></td></tr>
+<tr class="separator:a653c79df108c47ff654d18cc601d4d67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents the S-100 bus of the emulator. </p>
+<p>This class holds the necessary structures and methods to handle inter-operation of the Intel 8080 CPU with any assortment of cards interacting through a data, address, and control bus according to the S-100 specs, including interrupt vectors.</p>
+<p>A design choice was made to try to stay as close as possible as an indexable array of memory with the bus, so that it can be easily replaced by a simple <code>std::array&lt;u8, 65536&gt;</code>. This is why the <code><a class="el" href="classbus.html#ad1193e1643aea2d06e1a8e35425ae216" title="Reads a byte from the bus.">read()</a></code> and <code><a class="el" href="classbus.html#a05d0d594ca803a6f713e3078dcdaf22a" title="Writes a byte to the bus.">write()</a></code> methods are called by an additional middle class, <code>bus_subscr_iface</code>, which acts as a proxy to address locations and call reads and writes by the cast and assignment operators.</p>
+<dl class="section note"><dt>Note</dt><dd>The CPU, while in reality is placed on a card, it's not here. The bus acts as glue between the plentitude of cards and the CPU itself. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>The <code><a class="el" href="classbus.html#a40eeeeb2ba939e469bdff3d35c3f5f67" title="Returns the maximum number of addressable locations on the bus.">size()</a></code> method returns the maximum number of addressable locations on the bus (65536), not the number of cards. While this might look misleading, it's actually an attempt at keeping the same interface as there would be if the instanced bus were to be replaced by a normal <code>std::array&lt;u8, 65536&gt;</code>. </dd></dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a653c79df108c47ff654d18cc601d4d67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a653c79df108c47ff654d18cc601d4d67">&#9670;&nbsp;</a></span>clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bus::clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Clears all cards on the bus. </p>
+<p>This method will call each card's possibly distinct way to clear, which will depend on the type of card, some will clear data, others might reset configuration settings. </p>
+
+</div>
+</div>
+<a id="a1673002793a022d9e89aacfbeeeb71fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1673002793a022d9e89aacfbeeeb71fc">&#9670;&nbsp;</a></span>get_irq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::array&lt;u8, 3&gt; bus::get_irq </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the IRQ instruction(s). </p>
+<dl class="section return"><dt>Returns</dt><dd>A few instructions according to the type of interrupt the device uses to send. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>if no IRQ is raised.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>When the 8080 accepts an interrupt request, it will look for an instruction on the data bus to run. Most commonly this is either a <code>RST</code> or a <code>CALL</code> instruction. While <code>RST</code> has a bunch of fixed offsets, <code>CALL</code> instead makes the 8080 run an extra two fetches for a 16-bit address to jump to. Because of this, an array of 3 bytes has to be returned in case of the latter, otherwise they would be just 0x00. </p>
+
+</div>
+</div>
+<a id="aef6e4de3df548561b9545f0cb341e143"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef6e4de3df548561b9545f0cb341e143">&#9670;&nbsp;</a></span>insert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bus::insert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcard.html">card</a> *&#160;</td>
+          <td class="paramname"><em>card</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">usize&#160;</td>
+          <td class="paramname"><em>slot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>allow_conflict</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inserts a card into a slot on the bus. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">card</td><td>A pointer to the card to insert. </td></tr>
+    <tr><td class="paramname">slot</td><td>The slot number to insert the card into. </td></tr>
+    <tr><td class="paramname">allow_conflict</td><td>Whether to allow bus conflicts (run a conflict check) or not. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::invalid_argument</td><td>if the card is nullptr. </td></tr>
+    <tr><td class="paramname">std::out_of_range</td><td>if the slot is out of range. </td></tr>
+    <tr><td class="paramname">std::invalid_argument</td><td>if the slot is already occupied. </td></tr>
+    <tr><td class="paramname">std::invalid_argument</td><td>if a bus conflict is detected and allow_conflict is false. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae35dadd5a5ae3a060bd18facb8bb4f31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae35dadd5a5ae3a060bd18facb8bb4f31">&#9670;&nbsp;</a></span>is_irq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool bus::is_irq </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if an IRQ is raised. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if an IRQ is raised, false otherwise. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This method should be a condition for a loop at the end of an emulation cycle, so that all IRQs can be handled if occasionally concurrent. </dd></dl>
+
+</div>
+</div>
+<a id="a437a9e982484088673f7635af77795a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a437a9e982484088673f7635af77795a6">&#9670;&nbsp;</a></span>operator[]()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bus_subscr_iface bus::operator[] </td>
+          <td>(</td>
+          <td class="paramtype">u16&#160;</td>
+          <td class="paramname"><em>adr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Subscripts the bus. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">adr</td><td>The address to subscript. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A proxy object to subscript the bus. </dd></dl>
+
+</div>
+</div>
+<a id="a254a00b9a58c961c99e1e983eafbb90b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a254a00b9a58c961c99e1e983eafbb90b">&#9670;&nbsp;</a></span>print_mmap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bus::print_mmap </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Prints a detailed memory map of the bus. </p>
+<p>This method will print the memory map of the bus, showing the start and end addresses of each card, along with the card's type (name) and additional details.</p>
+<p>The output is formatted as follows: </p><div class="fragment"><div class="line">slot: start-address/address-range: <a class="code" href="classcard.html">card</a>-type, <a class="code" href="classcard.html">card</a>-details</div>
+<div class="ttc" id="aclasscard_html"><div class="ttname"><a href="classcard.html">card</a></div><div class="ttdef"><b>Definition:</b> card.hpp:22</div></div>
+</div><!-- fragment --> 
+</div>
+</div>
+<a id="ad1193e1643aea2d06e1a8e35425ae216"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1193e1643aea2d06e1a8e35425ae216">&#9670;&nbsp;</a></span>read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">u8 bus::read </td>
+          <td>(</td>
+          <td class="paramtype">u16&#160;</td>
+          <td class="paramname"><em>adr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reads a byte from the bus. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">adr</td><td>The address to read from. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The byte read from the first valid card on the bus. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>This method will return only the first valid card slot that is in range of the address. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Handle this warning. </dd></dl>
+
+</div>
+</div>
+<a id="ac158680334e36add350e716e6a0ec69b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac158680334e36add350e716e6a0ec69b">&#9670;&nbsp;</a></span>refresh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bus::refresh </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Refreshes all cards on the bus. </p>
+<p>This method will call each card's possibly distinct way to refresh, which is important for example to let a serial card be able to poll or send new data. </p>
+
+</div>
+</div>
+<a id="ac452a5305b4fcb30b6e40172d63fba4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac452a5305b4fcb30b6e40172d63fba4a">&#9670;&nbsp;</a></span>remove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bus::remove </td>
+          <td>(</td>
+          <td class="paramtype">usize&#160;</td>
+          <td class="paramname"><em>slot</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Removes a card from a slot on the bus. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">slot</td><td>The slot number to remove the card from. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::out_of_range</td><td>if the slot is out of range. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a40eeeeb2ba939e469bdff3d35c3f5f67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40eeeeb2ba939e469bdff3d35c3f5f67">&#9670;&nbsp;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr usize bus::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the maximum number of addressable locations on the bus. </p>
+<dl class="section return"><dt>Returns</dt><dd>The maximum number of addressable locations on the bus. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>This method returns a fixed value of max addressable locations on the bus (65536), not the number of cards! </dd></dl>
+
+</div>
+</div>
+<a id="a05d0d594ca803a6f713e3078dcdaf22a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05d0d594ca803a6f713e3078dcdaf22a">&#9670;&nbsp;</a></span>write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bus::write </td>
+          <td>(</td>
+          <td class="paramtype">u16&#160;</td>
+          <td class="paramname"><em>adr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8&#160;</td>
+          <td class="paramname"><em>byte</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Writes a byte to the bus. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">adr</td><td>The address to write to. </td></tr>
+    <tr><td class="paramname">byte</td><td>The byte to write. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This method will write to all cards in range of the address. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/bus/<a class="el" href="bus_8hpp_source.html">bus.hpp</a></li>
 </ul>

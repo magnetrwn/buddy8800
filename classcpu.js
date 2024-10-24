@@ -1,6 +1,6 @@
 var classcpu =
 [
-    [ "cpu", "classcpu.html#a22c701a37704bc8f4e255e6d3e336346", null ],
+    [ "cpu", "classcpu.html#a8fa4d18a4f5d31e98ef898f56e6e5876", null ],
     [ "clear", "classcpu.html#a33993087c93e12b684d0124570645c04", null ],
     [ "do_pseudo_bdos", "classcpu.html#a170fe10d4fcedd82bafd0d438d95acbe", null ],
     [ "execute", "classcpu.html#a639550f25a52725e4470c46d061e32ed", null ],
