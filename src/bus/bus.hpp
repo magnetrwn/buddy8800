@@ -10,7 +10,7 @@
 
 class bus {
 private:
-    static constexpr usize MAX_BUS_CARDS = 10;
+    static constexpr usize MAX_BUS_CARDS = 18;
     static constexpr card* NO_CARD = nullptr;
 
     std::array<card*, MAX_BUS_CARDS> cards;
@@ -30,7 +30,7 @@ private:
     }
 
 public:
-    inline void insert(card* card, usize slot) {
+    inline void insert(card* card, usize slot, bool allow_conflict = false) {
         if (!card)
             throw std::invalid_argument("cannot insert nullptr");
         if (slot >= MAX_BUS_CARDS)
@@ -40,7 +40,7 @@ public:
 
         cards[slot] = card;
 
-        if (test_for_bus_conflict())
+        if (!allow_conflict and test_for_bus_conflict())
             throw std::invalid_argument("bus conflict detected");
     }
 
@@ -51,6 +51,7 @@ public:
         cards[slot] = NO_CARD;
     }
 
+    // NOTE: stops at the first one in range,
     inline u8 read(u16 adr) {
         for (card* card : cards)
             if (card != NO_CARD and card->in_range(adr))
@@ -59,6 +60,7 @@ public:
         return BAD_U8;
     }
 
+    // NOTE: writes to all of the ones in range, not just the first one!
     inline void write(u16 adr, u8 byte) {
         for (card* card : cards)
             if (card != NO_CARD and card->in_range(adr))
@@ -92,10 +94,11 @@ public:
             if (cards[i] != NO_CARD) {
                 u16 start_adr = cards[i]->identify().start_adr;
                 u16 end_adr = start_adr + cards[i]->identify().adr_range;
+                const char* detail = cards[i]->identify().detail;
                 std::cout 
                     << i << ": " 
-                    << util::to_hex_s(start_adr) << "-" << util::to_hex_s(end_adr) << ": " 
-                    << cards[i]->identify().name << ", " << cards[i]->identify().detail 
+                    << util::to_hex_s(start_adr) << "/" << util::to_hex_s(end_adr) << ": " 
+                    << cards[i]->identify().name << (*detail ? ", " : "") << (*detail ? detail : "")
                     << std::endl;
             }
     }
