@@ -26,8 +26,8 @@
 class cpu {
 private:
     cpu_state state;
-    bus& cardbus;
-    bool just_booted; // turn this into "wait"
+    bus& cardbus; // <-- You can in-place an array of memory, since it's conveniently using the [] operator!
+    bool just_booted;
     bool halted;
     bool do_handle_bdos;
     bool interrupts_enabled;
