@@ -62,6 +62,7 @@ Here are some of the resources I used to figure out various aspects of this proj
 + [S100Computers](http://www.s100computers.com/index.html), a comprehensive collection of hardware information on S-100 systems.
 + [What additional hardware was required for BASIC on an Altair 8800](https://retrocomputing.stackexchange.com/questions/14675/what-additional-hardware-was-required-for-basic-on-an-altair-8800), a very nice explanation of how Altair 8800 systems originally shipped.
 + [Why 18 expansion slots on the Altair 8800?](https://retrocomputing.stackexchange.com/questions/24117/why-18-expansion-slots-on-the-altair-8800).
++ [Intel 8080 and Altair 8800. 256 I/O ports, but only 7 free RST (interrupt subroutines) — how does it work?](https://retrocomputing.stackexchange.com/questions/6849/intel-8080-and-altair-8800-256-i-o-ports-but-only-7-free-rst-interrupt-subrou?rq=1), a good explanation of how the Altair 8800's I/O ports and interrupts work.
 
 **Motorola 6850 ACIA**
 

@@ -2,9 +2,11 @@
 #define CARD_HPP_
 
 #include <array>
+#include <cstring>
 
 #include "typedef.hpp"
 #include "pty.hpp"
+#include "util.hpp"
 
 struct card_identify {
     u16 start_adr;
@@ -18,7 +20,7 @@ struct card_identify {
 };
 
 class card {
-private:
+protected:
     bool write_locked = false;
     bool irq_raised = false;
 
@@ -26,16 +28,16 @@ public:
     /// @name Bit utilities.
     /// \{
 
-    constexpr inline void set_bit(u16 adr, u8 bitmask) { write(adr, read(adr) | bitmask); }
-    constexpr inline void unset_bit(u16 adr, u8 bitmask) { write(adr, read(adr) & ~bitmask); }
-    constexpr inline void set_if_bit(u16 adr, u8 bitmask, bool value) { value ? set_bit(adr, bitmask) : unset_bit(adr, bitmask); }
+    inline void set_bit(u16 adr, u8 bitmask) { write(adr, read(adr) | bitmask); }
+    inline void unset_bit(u16 adr, u8 bitmask) { write(adr, read(adr) & ~bitmask); }
+    inline void set_if_bit(u16 adr, u8 bitmask, bool value) { value ? set_bit(adr, bitmask) : unset_bit(adr, bitmask); }
 
     /// \}
     /// @name Abstract methods.
     /// \{
 
     virtual bool in_range(u16 adr) const = 0;
-    virtual card_identify identify() const = 0;
+    virtual card_identify identify() = 0;
 
     virtual u8 read(u16 adr) = 0;
     virtual void write(u16 adr, u8 byte) = 0;
@@ -80,7 +82,7 @@ public:
 
     inline bool in_range(u16 adr) const override { return adr >= start_adr and adr <= (start_adr + capacity); }
 
-    inline card_identify identify() const override { return { start_adr, capacity, (this->write_locked ? "rom area" : "ram area") }; }
+    inline card_identify identify() override { return { start_adr, capacity, (this->write_locked ? "rom area" : "ram area") }; }
 
     inline u8 read(u16 adr) override {
         return data[adr - start_adr];
@@ -115,7 +117,7 @@ using rom_card = data_card<start_adr, capacity, true>;
  * Based on the MC6850 ACIA.
  */
 enum serial_register {
-    TX_DATA, RX_DATA, /*CONTROL,*/ STATUS
+    TX_DATA, RX_DATA, CONTROL, STATUS
 };
 
 /**
@@ -135,17 +137,20 @@ constexpr static usize SERIAL_BASE_CLOCK = 19200;
 template <u16 start_adr, usize base_clock = SERIAL_BASE_CLOCK>
 class serial_card : public card {
 private:
+    constexpr static usize MAX_SERIAL_DETAIL_LENGTH = 64;
+
     pty serial;
-    std::array<u8, 3> registers;
+    std::array<u8, 4> registers;
+    char detail[MAX_SERIAL_DETAIL_LENGTH];
     bool rts;
 
     constexpr u8 TX_DATA() const { return registers[static_cast<usize>(serial_register::TX_DATA)]; }
     constexpr u8 RX_DATA() const { return registers[static_cast<usize>(serial_register::RX_DATA)]; }
-    //constexpr u8 CONTROL() const { return registers[static_cast<usize>(serial_register::CONTROL)]; }
+    constexpr u8 CONTROL() const { return registers[static_cast<usize>(serial_register::CONTROL)]; }
     constexpr u8 STATUS() const { return registers[static_cast<usize>(serial_register::STATUS)]; }
     constexpr void TX_DATA(u8 value) { registers[static_cast<usize>(serial_register::TX_DATA)] = value; }
     constexpr void RX_DATA(u8 value) { registers[static_cast<usize>(serial_register::RX_DATA)] = value; }
-    //constexpr void CONTROL(u8 value) { registers[static_cast<usize>(serial_register::CONTROL)] = value; }
+    constexpr void CONTROL(u8 value) { registers[static_cast<usize>(serial_register::CONTROL)] = value; }
     constexpr void STATUS(u8 value) { registers[static_cast<usize>(serial_register::STATUS)] = value; }
 
     constexpr bool RDRF() const { return STATUS() & static_cast<u8>(serial_status_flags::RDRF); }
@@ -171,6 +176,7 @@ private:
     constexpr void reset() {
         registers.fill(0x00);
         serial.set_baud_rate(base_clock >> 4);
+        CONTROL(0b10010101);
         TDRE(true);
         RTS(true);
     }
@@ -180,7 +186,15 @@ public:
 
     inline bool in_range(u16 adr) const override { return adr >= start_adr and adr <= (start_adr + SERIAL_IO_ADDRESSES); }
 
-    inline card_identify identify() const override { return { 0, 0, "serial uart", serial.name() }; }
+    inline card_identify identify() override {
+        std::snprintf(
+            detail, sizeof(detail), 
+            "ctrl: %s, pty: '%s'", 
+            util::to_hex_s(static_cast<usize>(CONTROL()), 2).c_str(), serial.name()
+        );
+
+        return { 0, 0, "serial uart", detail };
+    }
 
     inline void refresh() override {
         if (!RDRF() and serial.poll()) {
@@ -189,7 +203,7 @@ public:
         }
 
         if (!TDRE()) {
-            serial.send(reinterpret_cast<const char*>(&TX_DATA()), 1);
+            serial.putch(TX_DATA());
             TDRE(true);
         }
     }
@@ -201,6 +215,8 @@ public:
             case 0x02: return BAD_U8; /// CONTROL is write-only
             case 0x03: return STATUS();
         }
+
+        return BAD_U8;
     }
 
     inline void write(u16 adr, u8 byte) override {
@@ -244,6 +260,8 @@ public:
                     case 0b00000000: IRQ(false); break;
                     case 0b10000000: IRQ(true); break;
                 }
+
+                CONTROL(byte);
                 break;
 
             case 0x03: break; /// STATUS is read-only

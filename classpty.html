@@ -115,6 +115,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af46ce3f92e8dc2077afec7a54c6b85b0"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0">getch</a> () const</td></tr>
 <tr class="memdesc:af46ce3f92e8dc2077afec7a54c6b85b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a single byte from the PTY interface master side.  <a href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0">More...</a><br /></td></tr>
 <tr class="separator:af46ce3f92e8dc2077afec7a54c6b85b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9e7847a4ade52e8bea78e13f49c4c76"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpty.html#ac9e7847a4ade52e8bea78e13f49c4c76">putch</a> (char c) const</td></tr>
+<tr class="memdesc:ac9e7847a4ade52e8bea78e13f49c4c76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a single byte to the PTY interface master side.  <a href="classpty.html#ac9e7847a4ade52e8bea78e13f49c4c76">More...</a><br /></td></tr>
+<tr class="separator:ac9e7847a4ade52e8bea78e13f49c4c76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ad90a7e8c2e8a1b273b4f5859cae35c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpty.html#a9ad90a7e8c2e8a1b273b4f5859cae35c">poll</a> () const</td></tr>
 <tr class="memdesc:a9ad90a7e8c2e8a1b273b4f5859cae35c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if there is data available to be read from the PTY interface master side.  <a href="classpty.html#a9ad90a7e8c2e8a1b273b4f5859cae35c">More...</a><br /></td></tr>
 <tr class="separator:a9ad90a7e8c2e8a1b273b4f5859cae35c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -239,6 +242,40 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </dd>
 </dl>
 <p>This method polls the PTY interface master side to check if there is data available to be read. It uses the <code><a class="el" href="classpty.html#a9ad90a7e8c2e8a1b273b4f5859cae35c" title="Check if there is data available to be read from the PTY interface master side.">poll()</a></code> system call to check if there is data available to be read from the master file descriptor. This allows a blocking <code><a class="el" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0" title="Get a single byte from the PTY interface master side.">getch()</a></code> operation to be non-blocking by employing a call to this method before reading. </p>
+
+</div>
+</div>
+<a id="ac9e7847a4ade52e8bea78e13f49c4c76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9e7847a4ade52e8bea78e13f49c4c76">&#9670;&nbsp;</a></span>putch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pty::putch </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Send a single byte to the PTY interface master side. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>The byte to be sent. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">&lt;tt&gt;std::runtime_error&lt;/tt&gt;</td><td>if the PTY interface had an error.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This method sends a single byte/char to the PTY interface master side. It uses the <code>write()</code> system call.</p>
+<dl class="section warning"><dt>Warning</dt><dd>This method will block until the byte is sent. </dd></dl>
 
 </div>
 </div>

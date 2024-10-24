@@ -48,6 +48,11 @@ char pty::getch() const {
     return c;
 }
 
+void pty::putch(char c) const {
+    if (write(master_fd, &c, 1) < 0)
+        throw std::runtime_error("write() failed");
+}
+
 bool pty::poll() const {
     struct pollfd poll_ds;
     poll_ds.fd = master_fd;

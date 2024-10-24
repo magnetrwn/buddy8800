@@ -7,6 +7,7 @@ var classpty =
     [ "name", "classpty.html#aaee682964bcc6906eab0cadbde4bc6fe", null ],
     [ "open", "classpty.html#a50aec75ef08fc8368e6a3668821309cb", null ],
     [ "poll", "classpty.html#a9ad90a7e8c2e8a1b273b4f5859cae35c", null ],
+    [ "putch", "classpty.html#ac9e7847a4ade52e8bea78e13f49c4c76", null ],
     [ "recv", "classpty.html#a22e150200a8581e9da66e309f9ee2ec6", null ],
     [ "send", "classpty.html#a42411f2b12218401f748cbc94fe12062", null ],
     [ "send", "classpty.html#afde0990ca2d8300af613c1bf15836ac6", null ],

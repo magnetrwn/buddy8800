@@ -83,6 +83,7 @@ $(document).ready(function(){initNavTree('classcard.html',''); initResizable(); 
 
 <div class="header">
   <div class="summary">
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classcard-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">card Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
@@ -102,22 +103,22 @@ Inheritance diagram for card:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Bit utilities.</div></td></tr>
-<tr class="memitem:a6a2cc0e6f0ea76d9005f1c82a6de3bc1"><td class="memItemLeft" align="right" valign="top"><a id="a6a2cc0e6f0ea76d9005f1c82a6de3bc1"></a>
-constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>set_bit</b> (u16 adr, u8 bitmask)</td></tr>
-<tr class="separator:a6a2cc0e6f0ea76d9005f1c82a6de3bc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3621cf94386873f9fed9de31118dc47e"><td class="memItemLeft" align="right" valign="top"><a id="a3621cf94386873f9fed9de31118dc47e"></a>
-constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>unset_bit</b> (u16 adr, u8 bitmask)</td></tr>
-<tr class="separator:a3621cf94386873f9fed9de31118dc47e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d256b19fd0ae04c219b7b0191d02b14"><td class="memItemLeft" align="right" valign="top"><a id="a9d256b19fd0ae04c219b7b0191d02b14"></a>
-constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>set_if_bit</b> (u16 adr, u8 bitmask, bool value)</td></tr>
-<tr class="separator:a9d256b19fd0ae04c219b7b0191d02b14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9962ee86c02b544e158cd94388df9bd"><td class="memItemLeft" align="right" valign="top"><a id="aa9962ee86c02b544e158cd94388df9bd"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_bit</b> (u16 adr, u8 bitmask)</td></tr>
+<tr class="separator:aa9962ee86c02b544e158cd94388df9bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecb2677fb4c62b9a1a08e5890ea4743b"><td class="memItemLeft" align="right" valign="top"><a id="aecb2677fb4c62b9a1a08e5890ea4743b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>unset_bit</b> (u16 adr, u8 bitmask)</td></tr>
+<tr class="separator:aecb2677fb4c62b9a1a08e5890ea4743b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab210eb529f3a153ab99822cda9492b3c"><td class="memItemLeft" align="right" valign="top"><a id="ab210eb529f3a153ab99822cda9492b3c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_if_bit</b> (u16 adr, u8 bitmask, bool value)</td></tr>
+<tr class="separator:ab210eb529f3a153ab99822cda9492b3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Abstract methods.</div></td></tr>
 <tr class="memitem:ab32f79943888d74e0a506e78b2d7406c"><td class="memItemLeft" align="right" valign="top"><a id="ab32f79943888d74e0a506e78b2d7406c"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>in_range</b> (u16 adr) const =0</td></tr>
 <tr class="separator:ab32f79943888d74e0a506e78b2d7406c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf025b6d566884d0b82c07ac8a94666e"><td class="memItemLeft" align="right" valign="top"><a id="aaf025b6d566884d0b82c07ac8a94666e"></a>
-virtual <a class="el" href="structcard__identify.html">card_identify</a>&#160;</td><td class="memItemRight" valign="bottom"><b>identify</b> () const =0</td></tr>
-<tr class="separator:aaf025b6d566884d0b82c07ac8a94666e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa242bc5baf3e6276c4c3ba5ddf7610a4"><td class="memItemLeft" align="right" valign="top"><a id="aa242bc5baf3e6276c4c3ba5ddf7610a4"></a>
+virtual <a class="el" href="structcard__identify.html">card_identify</a>&#160;</td><td class="memItemRight" valign="bottom"><b>identify</b> ()=0</td></tr>
+<tr class="separator:aa242bc5baf3e6276c4c3ba5ddf7610a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ed2b72cca9db35d23873352a4af90a5"><td class="memItemLeft" align="right" valign="top"><a id="a5ed2b72cca9db35d23873352a4af90a5"></a>
 virtual u8&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> (u16 adr)=0</td></tr>
 <tr class="separator:a5ed2b72cca9db35d23873352a4af90a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -149,6 +150,15 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_irq</b> ()
 <tr class="memitem:a831cb33b9e66de3808fa0ca5a7458e34"><td class="memItemLeft" align="right" valign="top"><a id="a831cb33b9e66de3808fa0ca5a7458e34"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>raise_irq</b> (bool value)</td></tr>
 <tr class="separator:a831cb33b9e66de3808fa0ca5a7458e34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:add4575c38bf4776502a8d93b80145271"><td class="memItemLeft" align="right" valign="top"><a id="add4575c38bf4776502a8d93b80145271"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>write_locked</b> = false</td></tr>
+<tr class="separator:add4575c38bf4776502a8d93b80145271"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a787e564e151cf8bf2a5550690d4b9677"><td class="memItemLeft" align="right" valign="top"><a id="a787e564e151cf8bf2a5550690d4b9677"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = false</td></tr>
+<tr class="separator:a787e564e151cf8bf2a5550690d4b9677"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/bus/<a class="el" href="card_8hpp_source.html">card.hpp</a></li>

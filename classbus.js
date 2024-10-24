@@ -2,7 +2,7 @@ var classbus =
 [
     [ "bus", "classbus.html#a9b5cc24f8accc0ba6defb9c89f9ba53d", null ],
     [ "get_irq", "classbus.html#a1673002793a022d9e89aacfbeeeb71fc", null ],
-    [ "insert", "classbus.html#aefda1010e8840d9996d1fb770200bcaf", null ],
+    [ "insert", "classbus.html#aef6e4de3df548561b9545f0cb341e143", null ],
     [ "is_irq", "classbus.html#ae35dadd5a5ae3a060bd18facb8bb4f31", null ],
     [ "print_mmap", "classbus.html#a254a00b9a58c961c99e1e983eafbb90b", null ],
     [ "read", "classbus.html#ad1193e1643aea2d06e1a8e35425ae216", null ],

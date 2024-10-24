@@ -28,7 +28,7 @@ class pty {
 private:
     static constexpr usize MAX_SLAVE_DEVICE_NAME = 64;
 
-    static constexpr u32 DEFAULT_BAUD_RATE       = 300;
+    static constexpr u32 DEFAULT_BAUD_RATE       = 19200;
     static constexpr u32 DEFAULT_DATA_BITS       = 8;
     static constexpr pty_parity DEFAULT_PARITY   = pty_parity::NONE;
     static constexpr u32 DEFAULT_STOP_BITS       = 1;
@@ -111,6 +111,17 @@ public:
      * @warning This method will block until a byte is read.
      */
     char getch() const;
+
+    /**
+     * @brief Send a single byte to the PTY interface master side.
+     * @param c The byte to be sent.
+     * @throw `std::runtime_error` if the PTY interface had an error.
+     *
+     * This method sends a single byte/char to the PTY interface master side. It uses the `write()` system call.
+     *
+     * @warning This method will block until the byte is sent.
+     */
+    void putch(char c) const;
 
     /**
      * @brief Check if there is data available to be read from the PTY interface master side.
