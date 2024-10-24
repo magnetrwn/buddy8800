@@ -10,13 +10,14 @@
 #include "cpu_state.hpp"
 #include "typedef.hpp"
 #include "util.hpp"
+#include "bus.hpp"
 
 /**
  * @brief Represents the CPU of the emulator.
  *
  * This is the 8080 CPU emulator and interpreter. It abstracts the CPU functionality into straightforward methods
  * and presents a way to step and interact with state. Being an interpreter, each opcode starting from the program
- * counter address in memory is fetched and executed according to what it represents and including further
+ * counter address in cardbus is fetched and executed according to what it represents and including further
  * fetches to opcode operands. The API also provides public access to execute(), should the user want to manually
  * ask for instructions.
  *
@@ -25,7 +26,7 @@
 class cpu {
 private:
     cpu_state state;
-    std::array<u8, 0x10000> memory;
+    bus& cardbus;
     bool just_booted; // turn this into "wait"
     bool halted;
     bool do_handle_bdos;
@@ -33,7 +34,7 @@ private:
     
     util::print_helper printer;
 
-    inline u8 fetch() { return memory[state.get_then_inc_register16(cpu_registers16::PC)]; }
+    inline u8 fetch() { return cardbus[state.get_then_inc_register16(cpu_registers16::PC)]; }
     inline u16 fetch2() { u16 lo = fetch(); u16 hi = fetch(); return (hi << 8) | lo; }
 
     template <usize ops>
@@ -42,9 +43,9 @@ private:
         if constexpr (ops == 1)
             printf("%04hX    %02hhX      \t %s\n", state.PC() - 1, opc, util::get_opcode_str(opc));
         else if constexpr (ops == 2)
-            printf("%04hX    %02hhX %02hhX   \t %s\n", state.PC() - 1, opc, memory[state.PC()], util::get_opcode_str(opc));
+            printf("%04hX    %02hhX %02hhX   \t %s\n", state.PC() - 1, opc, cardbus[state.PC()], util::get_opcode_str(opc));
         else if constexpr (ops == 3)
-            printf("%04hX    %02hhX %02hhX %02hhX\t %s\n", state.PC() - 1, opc, memory[state.PC()], memory[state.PC() + 1], util::get_opcode_str(opc));
+            printf("%04hX    %02hhX %02hhX %02hhX\t %s\n", state.PC() - 1, opc, cardbus[state.PC()], cardbus[state.PC() + 1], util::get_opcode_str(opc));
         #endif
     }
 
@@ -64,7 +65,7 @@ private:
 
     inline void LXI(cpu_registers16 pair) { state.set_register16(pair, fetch2()); }
 
-    inline void STAX(cpu_registers16 pair) { memory[state.get_register16(pair)] = state.A(); }
+    inline void STAX(cpu_registers16 pair) { cardbus[state.get_register16(pair)] = state.A(); }
 
     inline void INX(cpu_registers16 pair) { state.inc_register16(pair); }
 
@@ -77,7 +78,7 @@ private:
     }
 
     inline void _INR_M() { 
-        u8 value = ++memory[state.HL()];
+        u8 value = ++cardbus[state.HL()];
         state.flgAC((value ^ (value - 1)) & 0x10);
         state.set_Z_S_P_flags(value);
     }
@@ -91,14 +92,14 @@ private:
     }
 
     inline void _DCR_M() {
-        u8 value = --memory[state.HL()];
+        u8 value = --cardbus[state.HL()];
         state.flgAC(~(value ^ (value + 1)) & 0x10);
         state.set_Z_S_P_flags(value);
     }
 
     inline void MVI(cpu_registers8 reg) { if (is_memref(reg)) return _MVI_M(); state.set_register8(reg, fetch()); }
 
-    inline void _MVI_M() { memory[state.HL()] = fetch(); }
+    inline void _MVI_M() { cardbus[state.HL()] = fetch(); }
 
     inline void DAD(cpu_registers16 pair) {
         u32 hl = state.HL();
@@ -108,7 +109,7 @@ private:
         state.HL(result);
     }
 
-    inline void LDAX(cpu_registers16 pair) { state.A(memory[state.get_register16(pair)]); }
+    inline void LDAX(cpu_registers16 pair) { state.A(cardbus[state.get_register16(pair)]); }
 
     inline void DCX(cpu_registers16 pair) { state.set_register16(pair, state.get_register16(pair) - 1); }
 
@@ -128,7 +129,7 @@ private:
         state.flgC(a & 0x01);
     }
 
-    inline void SHLD() { u16 adr = fetch2(); memory[adr] = state.L(); memory[adr + 1] = state.H(); }
+    inline void SHLD() { u16 adr = fetch2(); cardbus[adr] = state.L(); cardbus[adr + 1] = state.H(); }
 
     inline void DAA() {
         u16 a = state.A();
@@ -140,15 +141,15 @@ private:
         state.set_Z_S_P_flags(a);
     }
 
-    inline void LHLD() { u16 adr = fetch2(); state.L(memory[adr]); state.H(memory[adr + 1]); }
+    inline void LHLD() { u16 adr = fetch2(); state.L(cardbus[adr]); state.H(cardbus[adr + 1]); }
 
     inline void CMA() { state.A(~state.A()); }
 
-    inline void STA() { memory[fetch2()] = state.A(); }
+    inline void STA() { cardbus[fetch2()] = state.A(); }
 
     inline void STC() { state.flgC(true); }
 
-    inline void LDA() { state.A(memory[fetch2()]); }
+    inline void LDA() { state.A(cardbus[fetch2()]); }
 
     inline void CMC() { state.flgC(!state.flgC()); }
 
@@ -158,15 +159,15 @@ private:
         state.set_register8(dst, state.get_register8(src)); 
     }
 
-    inline void _MOV_FROM_M(cpu_registers8 dst) { state.set_register8(dst, memory[state.HL()]); }
+    inline void _MOV_FROM_M(cpu_registers8 dst) { state.set_register8(dst, cardbus[state.HL()]); }
 
-    inline void _MOV_TO_M(cpu_registers8 src) { memory[state.HL()] = state.get_register8(src); }
+    inline void _MOV_TO_M(cpu_registers8 src) { cardbus[state.HL()] = state.get_register8(src); }
 
     inline void HLT() { halted = true; }
 
     inline void _ALU(cpu_registers8 src, u8 alu, bool is_immediate) {
         u16 a = state.A();
-        u16 with = (is_immediate) ? fetch() : ((is_memref(src)) ? memory[state.HL()] : state.get_register8(src));
+        u16 with = (is_immediate) ? fetch() : ((is_memref(src)) ? cardbus[state.HL()] : state.get_register8(src));
         u16 result;
         
         switch (alu) {
@@ -213,8 +214,8 @@ private:
     inline void POP(cpu_registers16 pair) {
         if (pair == cpu_registers16::SP) pair = cpu_registers16::AF;
         //_trace_stackptr16_deref();
-        u16 lo = memory[state.SP()];
-        u16 hi = memory[state.SP() + 1];
+        u16 lo = cardbus[state.SP()];
+        u16 hi = cardbus[state.SP() + 1];
         state.set_register16(pair, (hi << 8) | lo);
         state.SP(state.SP() + 2);
     }
@@ -228,8 +229,8 @@ private:
     inline void PUSH(cpu_registers16 pair) {
         if (pair == cpu_registers16::SP) pair = cpu_registers16::AF;
         state.SP(state.SP() - 2);
-        memory[state.SP()] = state.get_register16(pair) & 0xFF;
-        memory[state.SP() + 1] = state.get_register16(pair) >> 8;
+        cardbus[state.SP()] = state.get_register16(pair) & 0xFF;
+        cardbus[state.SP() + 1] = state.get_register16(pair) >> 8;
         //_trace_stackptr16_deref();
     }
 
@@ -244,12 +245,12 @@ private:
     inline void IN() { throw std::runtime_error("IN not implemented."); }
 
     inline void XTHL() {
-        u16 stackmem_lo = memory[state.SP()];
-        u16 stackmem_hi = memory[state.SP() + 1];
+        u16 stackmem_lo = cardbus[state.SP()];
+        u16 stackmem_hi = cardbus[state.SP() + 1];
         u16 hl = state.HL();
         state.HL((stackmem_hi << 8) | stackmem_lo);
-        memory[state.SP()] = hl & 0xFF;
-        memory[state.SP() + 1] = hl >> 8;
+        cardbus[state.SP()] = hl & 0xFF;
+        cardbus[state.SP() + 1] = hl >> 8;
     }
 
     inline void PCHL() { state.PC(state.HL()); }
@@ -271,7 +272,7 @@ public:
     /**
      * @brief Steps the CPU by one instruction (and its operands).
      *
-     * Calling the step method will fetch the next instruction opcode from memory and execute it. Internally, on every
+     * Calling the step method will fetch the next instruction opcode from cardbus and execute it. Internally, on every
      * fetch the PC is incremented, and each instruction is also responsible for fetching its operands, so a step is
      * effectively a full instruction step.
      *
@@ -297,17 +298,17 @@ public:
     void execute(u8 opcode);
 
     /**
-     * @brief Loads data into memory.
+     * @brief Loads data into cardbus.
      * @param begin Vector iterator to the beginning of data.
      * @param end Vector iterator to the end of data.
      * @param offset Offset to try to start loading at.
      * @param auto_reset_vector Whether the zero page should point to the start of loaded data automatically.
-     * @throw `std::out_of_range` if data won't fit in memory.
+     * @throw `std::out_of_range` if data won't fit in cardbus.
      * @throw `std::out_of_range` if enabled auto reset vector will overwrite the first few bytes loaded.
      *
-     * This method can be useful to load programs, libraries, or data into the emulator's memory. It will copy the data
+     * This method can be useful to load programs, libraries, or data into the emulator's cardbus. It will copy the data
      * at the specified offset, check if it will fit, and if auto_reset_vector is true, it will set the zero page (the first
-     * 3 bytes of memory, specifically a jump instruction and a 2 byte argument) to point to the start of the loaded data.
+     * 3 bytes of cardbus, specifically a jump instruction and a 2 byte argument) to point to the start of the loaded data.
      */
     void load(std::vector<u8>::iterator begin, std::vector<u8>::iterator end, usize offset = 0, bool auto_reset_vector = false);
 
@@ -361,7 +362,7 @@ public:
 
     /// \}
 
-    cpu() : state(), memory({}), just_booted(true), halted(false), do_handle_bdos(false), 
+    cpu(bus& cardbus) : state(), cardbus(cardbus), just_booted(true), halted(false), do_handle_bdos(false), 
             interrupts_enabled(true), printer(std::cout) {}
 };
 

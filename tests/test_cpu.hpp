@@ -7,6 +7,7 @@
 
 #include "typedef.hpp"
 #include "cpu.hpp"
+#include "bus.hpp"
 
 constexpr static const usize TESTS_N = 4;
 constexpr static const char* TESTFILE[TESTS_N] = { "cpudiag.bin", "test.com", "8080pre.com", "diag2.com" };
@@ -47,7 +48,10 @@ inline void test(cpu& emu, const char* prg, const char* ok) {
 }
 
 TEST_CASE("CPU running various diagnostics", "[cpu]") {
-    cpu emu;
+    bus cardbus;
+    cardbus.insert(new ram_card<0x0000, 65535>, 0);
+
+    cpu emu(cardbus);
 
     for (usize i = 0; i < TESTS_N; ++i)
         SECTION("Running " + std::string(TESTFILE[i]))

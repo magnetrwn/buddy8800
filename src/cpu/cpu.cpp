@@ -44,16 +44,16 @@ void cpu::_trace_reg16_deref([[maybe_unused]] cpu_registers16 reg) {
             (reg == cpu_registers16::SP) ? "SP" : 
             "PC",
         state.get_register16(reg),
-        memory[state.get_register16(reg)]);
+        cardbus[state.get_register16(reg)]);
     #endif
 }
 
 /*void cpu::_trace_memref16_deref() {
     #ifdef ENABLE_TRACE
     printf("\x1B[41;01m(%02hhX%02hhX): %02hhX                       \x1B[0m\n",
-        memory[state.PC() + 1],
-        memory[state.PC()],
-        memory[(memory[state.PC() + 1] << 8) | memory[state.PC()]]);
+        cardbus[state.PC() + 1],
+        cardbus[state.PC()],
+        cardbus[(cardbus[state.PC() + 1] << 8) | cardbus[state.PC()]]);
     #endif
 }*/
 
@@ -61,9 +61,9 @@ void cpu::_trace_stackptr16_deref() {
     #ifdef ENABLE_TRACE
     printf("\x1B[42;01m(%04hX): %02hhX (%04hX): %02hhX            \x1B[0m\n",
         state.get_register16(cpu_registers16::SP),
-        memory[state.get_register16(cpu_registers16::SP)],
+        cardbus[state.get_register16(cpu_registers16::SP)],
         state.get_register16(cpu_registers16::SP) + 1,
-        memory[state.get_register16(cpu_registers16::SP) + 1]);
+        cardbus[state.get_register16(cpu_registers16::SP) + 1]);
     #endif
 }
 
@@ -104,7 +104,7 @@ void cpu::handle_bdos() {
         puts("\x1B[47;01mBDOS 0x0000: That's all folks!   \x1B[0m");
         #endif
 
-        memory[0] = 0b01110110;
+        cardbus[0] = 0b01110110;
     }
 
     if (state.PC() == 0x0005) {
@@ -122,8 +122,8 @@ void cpu::handle_bdos() {
             printer << state.E();
 
         else if (c == 0x09)
-            for (u16 de = state.DE(); memory[de] != '$'; ++de)
-                printer << memory[de];
+            for (u16 de = state.DE(); cardbus[de] != '$'; ++de)
+                printer << cardbus[de];
 
         else
             throw std::runtime_error("Unknown BDOS 0x0005 call parameters.");
@@ -166,18 +166,20 @@ void cpu::step() {
 void cpu::load(std::vector<u8>::iterator begin, std::vector<u8>::iterator end, usize offset, bool auto_reset_vector) {
     usize dist = std::distance(begin, end);
 
-    if (dist > memory.size() - offset)
-        throw std::out_of_range("Not enough space in emulated memory.");
+    if (dist > cardbus.size() - offset)
+        throw std::out_of_range("Not enough space in emulated cardbus.");
 
-    std::copy(begin, end, memory.begin() + offset);
+    //std::copy(begin, end, cardbus.begin() + offset);
+    for (usize i = 0; i < dist; ++i)
+        cardbus[offset + i] = *(begin + i);
 
     if (auto_reset_vector) {
         if (offset <= 2)
             throw std::out_of_range("First program bytes will be overwritten by reset vector.");
 
-        memory[0] = 0xC3;
-        memory[1] = static_cast<u8>(offset & 0xFF);
-        memory[2] = static_cast<u8>(offset >> 8);
+        cardbus[0] = 0xC3;
+        cardbus[1] = static_cast<u8>(offset & 0xFF);
+        cardbus[2] = static_cast<u8>(offset >> 8);
     }
 }
 
@@ -196,7 +198,7 @@ bool cpu::is_halted() const {
 void cpu::clear() {
     state = cpu_state();
     just_booted = true;
-    memory.fill(0);
+    cardbus.clear();
     halted = false;
 }
 

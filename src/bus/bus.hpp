@@ -10,6 +10,58 @@
 
 class bus {
 private:
+    class bus_subscr_iface {
+    private:
+        bus& bus_ref;
+        u16 adr;
+
+    public:
+        /// @brief Casts a subscripted location on the bus to a u8.
+        inline operator u8() const { return bus_ref.read(adr); }
+        
+        /// @brief Prefix operator, increments subscripted bus location.
+        inline u8 operator++() {
+            u8 value = bus_ref.read(adr);
+            bus_ref.write(adr, value + 1);
+            return value + 1;
+        }
+
+        /// @brief Prefix operator, decrements subscripted bus location.
+        inline u8 operator--() {
+            u8 value = bus_ref.read(adr);
+            bus_ref.write(adr, value - 1);
+            return value - 1;
+        }
+
+        /// @brief Postfix operator, increments subscripted bus location.
+        inline u8 operator++(int) {
+            u8 value = bus_ref.read(adr);
+            bus_ref.write(adr, value + 1);
+            return value;
+        }
+
+        /// @brief Postfix operator, decrements subscripted bus location.
+        inline u8 operator--(int) {
+            u8 value = bus_ref.read(adr);
+            bus_ref.write(adr, value - 1);
+            return value;
+        }
+
+        /// @brief Assignment operator, writes a byte to the subscripted bus location.
+        inline bus_subscr_iface& operator=(u8 byte) { bus_ref.write(adr, byte); return *this; }
+        
+        /// @brief Assignment operator, writes a byte read from another subscripted bus location.
+        /// @note This method prevents self-assignment.
+        inline bus_subscr_iface& operator=(const bus_subscr_iface& other) {
+            if (this != &other)
+                bus_ref.write(adr, other.bus_ref.read(other.adr));
+
+            return *this;
+        }
+
+        bus_subscr_iface(bus& b, u16 adr) : bus_ref(b), adr(adr) {}
+    };
+
     static constexpr usize MAX_BUS_CARDS = 18;
     static constexpr card* NO_CARD = nullptr;
 
@@ -51,6 +103,8 @@ public:
         cards[slot] = NO_CARD;
     }
 
+    inline usize size() const { return 65536; }
+
     // NOTE: stops at the first one in range,
     inline u8 read(u16 adr) {
         for (card* card : cards)
@@ -66,6 +120,8 @@ public:
             if (card != NO_CARD and card->in_range(adr))
                 card->write(adr, byte);
     }
+
+    inline bus_subscr_iface operator[](u16 adr) { return bus_subscr_iface(*this, adr); }
 
     inline void refresh() {
         for (card* card : cards)
@@ -103,8 +159,13 @@ public:
             }
     }
 
+    inline void clear() {
+        for (card* card : cards)
+            if (card != NO_CARD)
+                card->clear();
+    }
+
     bus() : cards({ NO_CARD }) {}
 };
-
 
 #endif
