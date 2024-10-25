@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('classdata__card.html',''); initResizab
 </div><!--header-->
 <div class="contents">
 
-<p>A card that holds a fixed amount of data. It's mainly a superclass for ROM and RAM cards.  
+<p>A card that holds a fixed amount of data.  
  <a href="classdata__card.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="card_8hpp_source.html">card.hpp</a>&gt;</code></p>
@@ -184,16 +184,19 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 <div class="textblock"><h3>template&lt;u16 start_adr, u16 capacity, bool construct_then_write_lock&gt;<br />
 class data_card&lt; start_adr, capacity, construct_then_write_lock &gt;</h3>
 
-<p>A card that holds a fixed amount of data. It's mainly a superclass for ROM and RAM cards. </p>
+<p>A card that holds a fixed amount of data. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">start_adr</td><td>The starting address of the card. </td></tr>
     <tr><td class="paramname">capacity</td><td>The size in bytes of the card starting from the start address. </td></tr>
-    <tr><td class="paramname">construct_then_write_lock</td><td>Whether the card should be write-locked after construction. </td></tr>
+    <tr><td class="paramname">construct_then_write_lock</td><td>Whether the card should be write-locked after construction.</td></tr>
   </table>
   </dd>
 </dl>
+<p>This class is a template that can be used to create cards that hold a fixed amount of data. It allows copying data to the card immediately after construction, and can be write-locked after construction if needed. Write locking can also be toggled at any time.</p>
+<dl class="section note"><dt>Note</dt><dd>For convenience, use the aliases <code>ram_card</code> and <code>rom_card</code> instead of this class. </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Out of range addresses are not checked, they should be checked by the bus instead, to avoid calling <a class="el" href="classdata__card.html#a7a3504e6a4394ef2b0f8d490d22b9029" title="Check if an address on the bus is in the card&#39;s range.">in_range()</a> twice. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd>ram_card, rom_card </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="aa83d86727fadf2f0da35ea8c9b59495b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa83d86727fadf2f0da35ea8c9b59495b">&#9670;&nbsp;</a></span>get_irq()</h2>

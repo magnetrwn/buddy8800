@@ -122,11 +122,18 @@ public:
 };
 
 /**
- * @brief A card that holds a fixed amount of data. It's mainly a superclass for ROM and RAM cards.
+ * @brief A card that holds a fixed amount of data.
  * @tparam start_adr The starting address of the card.
  * @tparam capacity The size in bytes of the card starting from the start address.
  * @tparam construct_then_write_lock Whether the card should be write-locked after construction.
+ *
+ * This class is a template that can be used to create cards that hold a fixed amount of data. It allows copying data to the
+ * card immediately after construction, and can be write-locked after construction if needed. Write locking can also be toggled
+ * at any time.
+ *
+ * @note For convenience, use the aliases `ram_card` and `rom_card` instead of this class.
  * @warning Out of range addresses are not checked, they should be checked by the bus instead, to avoid calling in_range() twice.
+ * @see ram_card, rom_card
  */
 template <u16 start_adr, u16 capacity, bool construct_then_write_lock>
 class data_card : public card {
@@ -173,31 +180,42 @@ public:
     /// \}
 };
 
+/// @brief A card that holds random access memory.
 template <u16 start_adr, u16 capacity>
 using ram_card = data_card<start_adr, capacity, false>;
 
+/// @brief A card that holds read-only memory.
 template <u16 start_adr, u16 capacity>
 using rom_card = data_card<start_adr, capacity, true>;
 
-/**
- * Based on the MC6850 ACIA.
- */
-enum serial_register {
+/// @brief Enum of the main registers of the MC6850 ACIA (UART).
+enum class serial_register {
     TX_DATA, RX_DATA, CONTROL, STATUS
 };
 
-/**
- * Based on the MC6850 ACIA.
- */
-enum serial_status_flags {
+/// @brief Enum of bitmasks of the status register bits of the MC6850 ACIA (UART).
+enum class serial_status_flags {
     RDRF = 0x01, TDRE = 0x02, DCD = 0x04, CTS = 0x08, FE = 0x10, OVRN = 0x20, PE = 0x40, IRQ = 0x80
 };
 
+/// @brief The number of I/O addresses of the MC6850 ACIA (UART).
 constexpr static u16 SERIAL_IO_ADDRESSES = 4;
+
+/// @brief The base clock speed of the MC6850 ACIA (UART).
 constexpr static usize SERIAL_BASE_CLOCK = 19200;
 
 /**
- * Based on the MC6850 ACIA.
+ * @brief A card that emulates an MC6850 ACIA (UART), close to a MITS 88 SIOB card.
+ * @tparam start_adr The starting address of the card.
+ * @tparam base_clock The base clock speed of the UART (it can be further divided), default is SERIAL_BASE_CLOCK.
+ *
+ * This card handles interaction with a pseudo-terminal connected to the card UART. Emulation follows the Motorola 6850 ACIA
+ * (Asynchronous Communications Interface Adapter) specifications, but quite simplified. The card has 4 I/O addresses that
+ * correspond to the TX_DATA (write-only), RX_DATA (read-only), CONTROL (write-only) and STATUS (read-only) registers of the
+ * UART. The card is also able to trigger IRQ according to different conditions.
+ *
+ * @note The `refresh()` method is fundamental here, as it will poll the pseudo-terminal for new data and send data to it regularly.
+ * Not periodically refreshing the bus, and by consequence the card, will make the card unable to send or receive data.
  * @warning Out of range addresses are not checked, they should be checked by the bus instead, to avoid calling in_range() twice.
  */
 template <u16 start_adr, usize base_clock = SERIAL_BASE_CLOCK>
@@ -250,8 +268,11 @@ private:
 public:
     serial_card() { serial.open(); reset(); }
 
+    /// @brief Check if an address on the bus is in the card's range.
     inline bool in_range(u16 adr) const override { return adr >= start_adr and adr <= (start_adr + SERIAL_IO_ADDRESSES); }
 
+    /// @brief Get information about the serial card.
+    /// @note The detail contains the base clock, control register (hex) and the pseudo-terminal name.
     inline card_identify identify() override {
         std::snprintf(
             detail, sizeof(detail), 
@@ -262,6 +283,7 @@ public:
         return { start_adr, SERIAL_IO_ADDRESSES, "serial uart", detail };
     }
 
+    /// @brief Refresh the UART for data I/O.
     inline void refresh() override {
         if (!RDRF() and serial.poll()) {
             RX_DATA(serial.getch());
@@ -274,6 +296,8 @@ public:
         }
     }
 
+    /// @brief Read a byte from the serial registers.
+    /// @returns The byte read from the serial registers, or BAD_U8 if the address is invalid.
     inline u8 read(u16 adr) const override {
         switch (adr) {
             case 0x00: return BAD_U8; /// TX_DATA is write-only
@@ -285,6 +309,8 @@ public:
         return BAD_U8;
     }
 
+    /// @brief Write a byte to the serial registers.
+    /// @note This method will also handle the UART configuration by writing to the CONTROL register.
     inline void write(u16 adr, u8 byte) override {
         switch (adr) {
             case 0x00: TX_DATA(byte); TDRE(false); break;
@@ -334,6 +360,7 @@ public:
         }
     }
 
+    /// @brief Clear the serial card state and configuration.
     inline void clear() override { reset(); }
 
     /// @note Unused methods.

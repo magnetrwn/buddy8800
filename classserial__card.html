@@ -90,6 +90,9 @@ $(document).ready(function(){initNavTree('classserial__card.html',''); initResiz
 </div><!--header-->
 <div class="contents">
 
+<p>A card that emulates an MC6850 ACIA (UART), close to a MITS 88 SIOB card.  
+ <a href="classserial__card.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="card_8hpp_source.html">card.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for serial_card&lt; start_adr, base_clock &gt;:</div>
@@ -103,24 +106,26 @@ Inheritance diagram for serial_card&lt; start_adr, base_clock &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad98165537a34d39af6d7b46279656ecb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#ad98165537a34d39af6d7b46279656ecb">in_range</a> (u16 adr) const override</td></tr>
-<tr class="memdesc:ad98165537a34d39af6d7b46279656ecb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if an address on the bus is in the card's range.  <a href="classserial__card.html#ad98165537a34d39af6d7b46279656ecb">More...</a><br /></td></tr>
+<tr class="memitem:ad98165537a34d39af6d7b46279656ecb"><td class="memItemLeft" align="right" valign="top"><a id="ad98165537a34d39af6d7b46279656ecb"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#ad98165537a34d39af6d7b46279656ecb">in_range</a> (u16 adr) const override</td></tr>
+<tr class="memdesc:ad98165537a34d39af6d7b46279656ecb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if an address on the bus is in the card's range. <br /></td></tr>
 <tr class="separator:ad98165537a34d39af6d7b46279656ecb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c9538c4dd7523fa67952e30d648ca4c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcard__identify.html">card_identify</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#a3c9538c4dd7523fa67952e30d648ca4c">identify</a> () override</td></tr>
-<tr class="memdesc:a3c9538c4dd7523fa67952e30d648ca4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get information about the card.  <a href="classserial__card.html#a3c9538c4dd7523fa67952e30d648ca4c">More...</a><br /></td></tr>
+<tr class="memdesc:a3c9538c4dd7523fa67952e30d648ca4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get information about the serial card.  <a href="classserial__card.html#a3c9538c4dd7523fa67952e30d648ca4c">More...</a><br /></td></tr>
 <tr class="separator:a3c9538c4dd7523fa67952e30d648ca4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3471a3d7caed345f690b1c72601800da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#a3471a3d7caed345f690b1c72601800da">refresh</a> () override</td></tr>
-<tr class="memdesc:a3471a3d7caed345f690b1c72601800da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refresh the card to allow periodic I/O, timer or sync operation.  <a href="classserial__card.html#a3471a3d7caed345f690b1c72601800da">More...</a><br /></td></tr>
+<tr class="memitem:a3471a3d7caed345f690b1c72601800da"><td class="memItemLeft" align="right" valign="top"><a id="a3471a3d7caed345f690b1c72601800da"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#a3471a3d7caed345f690b1c72601800da">refresh</a> () override</td></tr>
+<tr class="memdesc:a3471a3d7caed345f690b1c72601800da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refresh the UART for data I/O. <br /></td></tr>
 <tr class="separator:a3471a3d7caed345f690b1c72601800da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a358e394bf90213f8958d44603f3aaaf2"><td class="memItemLeft" align="right" valign="top">u8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#a358e394bf90213f8958d44603f3aaaf2">read</a> (u16 adr) const override</td></tr>
-<tr class="memdesc:a358e394bf90213f8958d44603f3aaaf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a byte from the card.  <a href="classserial__card.html#a358e394bf90213f8958d44603f3aaaf2">More...</a><br /></td></tr>
+<tr class="memdesc:a358e394bf90213f8958d44603f3aaaf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a byte from the serial registers.  <a href="classserial__card.html#a358e394bf90213f8958d44603f3aaaf2">More...</a><br /></td></tr>
 <tr class="separator:a358e394bf90213f8958d44603f3aaaf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfff847039d36c47cbf4a0133d9719b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#abfff847039d36c47cbf4a0133d9719b2">write</a> (u16 adr, u8 byte) override</td></tr>
-<tr class="memdesc:abfff847039d36c47cbf4a0133d9719b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a byte to the card.  <a href="classserial__card.html#abfff847039d36c47cbf4a0133d9719b2">More...</a><br /></td></tr>
+<tr class="memdesc:abfff847039d36c47cbf4a0133d9719b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a byte to the serial registers.  <a href="classserial__card.html#abfff847039d36c47cbf4a0133d9719b2">More...</a><br /></td></tr>
 <tr class="separator:abfff847039d36c47cbf4a0133d9719b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af189f02c49c43bf587290ba93baa0996"><td class="memItemLeft" align="right" valign="top"><a id="af189f02c49c43bf587290ba93baa0996"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#af189f02c49c43bf587290ba93baa0996">clear</a> () override</td></tr>
-<tr class="memdesc:af189f02c49c43bf587290ba93baa0996"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the card data or configuration. <br /></td></tr>
+<tr class="memdesc:af189f02c49c43bf587290ba93baa0996"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the serial card state and configuration. <br /></td></tr>
 <tr class="separator:af189f02c49c43bf587290ba93baa0996"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:a11a4a0b669e5f954b9f8ce7c098d9ae0"><td class="memItemLeft" align="right" valign="top">std::array&lt; u8, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#a11a4a0b669e5f954b9f8ce7c098d9ae0">get_irq</a> () override</td></tr>
@@ -170,7 +175,17 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 <div class="textblock"><h3>template&lt;u16 start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt;<br />
 class serial_card&lt; start_adr, base_clock &gt;</h3>
 
-<p>Based on the MC6850 ACIA. </p><dl class="section warning"><dt>Warning</dt><dd>Out of range addresses are not checked, they should be checked by the bus instead, to avoid calling <a class="el" href="classserial__card.html#ad98165537a34d39af6d7b46279656ecb" title="Check if an address on the bus is in the card&#39;s range.">in_range()</a> twice. </dd></dl>
+<p>A card that emulates an MC6850 ACIA (UART), close to a MITS 88 SIOB card. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">start_adr</td><td>The starting address of the card. </td></tr>
+    <tr><td class="paramname">base_clock</td><td>The base clock speed of the UART (it can be further divided), default is SERIAL_BASE_CLOCK.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This card handles interaction with a pseudo-terminal connected to the card UART. Emulation follows the Motorola 6850 ACIA (Asynchronous Communications Interface Adapter) specifications, but quite simplified. The card has 4 I/O addresses that correspond to the TX_DATA (write-only), RX_DATA (read-only), CONTROL (write-only) and STATUS (read-only) registers of the UART. The card is also able to trigger IRQ according to different conditions.</p>
+<dl class="section note"><dt>Note</dt><dd>The <code><a class="el" href="classserial__card.html#a3471a3d7caed345f690b1c72601800da" title="Refresh the UART for data I/O.">refresh()</a></code> method is fundamental here, as it will poll the pseudo-terminal for new data and send data to it regularly. Not periodically refreshing the bus, and by consequence the card, will make the card unable to send or receive data. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Out of range addresses are not checked, they should be checked by the bus instead, to avoid calling <a class="el" href="classserial__card.html#ad98165537a34d39af6d7b46279656ecb" title="Check if an address on the bus is in the card&#39;s range.">in_range()</a> twice. </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a11a4a0b669e5f954b9f8ce7c098d9ae0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a11a4a0b669e5f954b9f8ce7c098d9ae0">&#9670;&nbsp;</a></span>get_irq()</h2>
@@ -227,50 +242,10 @@ template&lt;u16 start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Get information about the card. </p>
-<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structcard__identify.html" title="Holds information that can be used to identify a card.">card_identify</a> struct with lengthy details about the card. </dd></dl>
+<p>Get information about the serial card. </p>
+<dl class="section note"><dt>Note</dt><dd>The detail contains the base clock, control register (hex) and the pseudo-terminal name. </dd></dl>
 
 <p>Implements <a class="el" href="classcard.html#aa242bc5baf3e6276c4c3ba5ddf7610a4">card</a>.</p>
-
-</div>
-</div>
-<a id="ad98165537a34d39af6d7b46279656ecb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad98165537a34d39af6d7b46279656ecb">&#9670;&nbsp;</a></span>in_range()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;u16 start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="classserial__card.html">serial_card</a>&lt; start_adr, base_clock &gt;::in_range </td>
-          <td>(</td>
-          <td class="paramtype">u16&#160;</td>
-          <td class="paramname"><em>adr</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Check if an address on the bus is in the card's range. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">adr</td><td>The address to check. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if the address is in the card's range, false otherwise. </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>This method should always be used when interacting with cards from the bus, to avoid out of range accesses. It is not used by the cards themselves to avoid double checking. </dd></dl>
-
-<p>Implements <a class="el" href="classcard.html#ab32f79943888d74e0a506e78b2d7406c">card</a>.</p>
 
 </div>
 </div>
@@ -300,50 +275,12 @@ template&lt;u16 start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Read a byte from the card. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">adr</td><td>The address to read from. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The byte read from the card. </dd></dl>
+<p>Read a byte from the serial registers. </p>
+<dl class="section return"><dt>Returns</dt><dd>The byte read from the serial registers, or BAD_U8 if the address is invalid. </dd></dl>
 <p>TX_DATA is write-only</p>
 <p>CONTROL is write-only</p>
 
 <p>Implements <a class="el" href="classcard.html#a0ea76feb6cf75cf51ba3362f4ab50190">card</a>.</p>
-
-</div>
-</div>
-<a id="a3471a3d7caed345f690b1c72601800da"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3471a3d7caed345f690b1c72601800da">&#9670;&nbsp;</a></span>refresh()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;u16 start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classserial__card.html">serial_card</a>&lt; start_adr, base_clock &gt;::refresh </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Refresh the card to allow periodic I/O, timer or sync operation. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classbus.html#ac158680334e36add350e716e6a0ec69b" title="Refreshes all cards on the bus.">bus::refresh()</a> </dd></dl>
-
-<p>Implements <a class="el" href="classcard.html#ae39a92dd99c80e0756cc1d8ea28ca6c4">card</a>.</p>
 
 </div>
 </div>
@@ -383,14 +320,8 @@ template&lt;u16 start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Write a byte to the card. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">adr</td><td>The address to write to. </td></tr>
-    <tr><td class="paramname">byte</td><td>The byte to write. </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Write a byte to the serial registers. </p>
+<dl class="section note"><dt>Note</dt><dd>This method will also handle the UART configuration by writing to the CONTROL register. </dd></dl>
 <p>RX_DATA is read-only</p>
 <p>Counter Divide select bits</p>
 <p>Word Select bits</p>
