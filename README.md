@@ -2,7 +2,6 @@
 
 **An Intel 8080 emulated on an S-100 bus with a MITS 88 2SIO (2x Motorola 6850) serial expansion card. Designed for running BASIC and CP/M over a PTY.**
 
-<!--![Altair 8800B](media/altair-wikipedia-public-domain-360w.webp)-->
 ![Looping cpudiag.bin runs on the CPU.](media/cpudiag-in-a-loop.gif)
 
 ### Getting Started
@@ -60,6 +59,8 @@ Here are some of the resources I used to figure out various aspects of this proj
 + [How do interrupts work on the Intel 8080?](https://stackoverflow.com/questions/2165914/how-do-interrupts-work-on-the-intel-8080).
 
 **Altair 8800**
+
+![Altair 8800B](media/altair-wikipedia-public-domain-360w.webp)
 
 + [S100Computers](http://www.s100computers.com/index.html), a comprehensive collection of hardware information on S-100 systems.
 + [What additional hardware was required for BASIC on an Altair 8800](https://retrocomputing.stackexchange.com/questions/14675/what-additional-hardware-was-required-for-basic-on-an-altair-8800), a very nice explanation of how Altair 8800 systems originally shipped.
