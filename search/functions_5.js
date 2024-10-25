@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['load_94',['load',['../classcpu.html#a2cfed77b955c7a00c330ba7b56aea76c',1,'cpu']]],
-  ['load_5fstate_95',['load_state',['../classcpu.html#a166c79829cb2c3540389efa304382139',1,'cpu']]]
+  ['load_107',['load',['../classcpu.html#a6e84cf78a4fbeb96d538fd24d0bd3678',1,'cpu']]],
+  ['load_5fstate_108',['load_state',['../classcpu.html#a6c72852ac69a7814d8e0faa836d3abf3',1,'cpu']]]
 ];

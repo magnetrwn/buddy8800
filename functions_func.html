@@ -87,6 +87,10 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 <h3><a id="index_c"></a>- c -</h3><ul>
 <li>clear()
 : <a class="el" href="classbus.html#a653c79df108c47ff654d18cc601d4d67">bus</a>
+, <a class="el" href="classcard.html#a1c2e9d54296d2c7dc1c89295575b1eb4">card</a>
+, <a class="el" href="classcpu.html#a2431272df1fa9db7b37770dd95702807">cpu&lt; bus_iface &gt;</a>
+, <a class="el" href="classdata__card.html#aecf65712fbe1deb721ca2bb4add15ff1">data_card&lt; start_adr, capacity, construct_then_write_lock &gt;</a>
+, <a class="el" href="classserial__card.html#af189f02c49c43bf587290ba93baa0996">serial_card&lt; start_adr, base_clock &gt;</a>
 </li>
 <li>close()
 : <a class="el" href="classpty.html#a0d795020dcb52657c7828f952306e687">pty</a>
@@ -95,15 +99,18 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 
 
 <h3><a id="index_d"></a>- d -</h3><ul>
+<li>data_card()
+: <a class="el" href="classdata__card.html#abd216ef67613fde7f36e11eaec02b820">data_card&lt; start_adr, capacity, construct_then_write_lock &gt;</a>
+</li>
 <li>do_pseudo_bdos()
-: <a class="el" href="classcpu.html#a170fe10d4fcedd82bafd0d438d95acbe">cpu</a>
+: <a class="el" href="classcpu.html#ad684d25913e8aaf0139fa3dc47ce9e40">cpu&lt; bus_iface &gt;</a>
 </li>
 </ul>
 
 
 <h3><a id="index_e"></a>- e -</h3><ul>
 <li>execute()
-: <a class="el" href="classcpu.html#a639550f25a52725e4470c46d061e32ed">cpu</a>
+: <a class="el" href="classcpu.html#a9d70c847732b6891a759352d27e896ee">cpu&lt; bus_iface &gt;</a>
 </li>
 </ul>
 
@@ -114,6 +121,8 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 </li>
 <li>get_irq()
 : <a class="el" href="classbus.html#a1673002793a022d9e89aacfbeeeb71fc">bus</a>
+, <a class="el" href="classcard.html#a4ef348c61f7138914f015c57d2f6a0be">card</a>
+, <a class="el" href="classdata__card.html#aa83d86727fadf2f0da35ea8c9b59495b">data_card&lt; start_adr, capacity, construct_then_write_lock &gt;</a>
 , <a class="el" href="classserial__card.html#a11a4a0b669e5f954b9f8ce7c098d9ae0">serial_card&lt; start_adr, base_clock &gt;</a>
 </li>
 <li>get_opcode_str()
@@ -141,6 +150,16 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 
 
 <h3><a id="index_i"></a>- i -</h3><ul>
+<li>identify()
+: <a class="el" href="classcard.html#aa242bc5baf3e6276c4c3ba5ddf7610a4">card</a>
+, <a class="el" href="classdata__card.html#ab6d9264a691316e9eb5d17fcd0587918">data_card&lt; start_adr, capacity, construct_then_write_lock &gt;</a>
+, <a class="el" href="classserial__card.html#a3c9538c4dd7523fa67952e30d648ca4c">serial_card&lt; start_adr, base_clock &gt;</a>
+</li>
+<li>in_range()
+: <a class="el" href="classcard.html#ab32f79943888d74e0a506e78b2d7406c">card</a>
+, <a class="el" href="classdata__card.html#a7a3504e6a4394ef2b0f8d490d22b9029">data_card&lt; start_adr, capacity, construct_then_write_lock &gt;</a>
+, <a class="el" href="classserial__card.html#ad98165537a34d39af6d7b46279656ecb">serial_card&lt; start_adr, base_clock &gt;</a>
+</li>
 <li>inc_register16()
 : <a class="el" href="structcpu__state.html#a96f5e9dead7b9d7f9622818d13aff5db">cpu_state</a>
 </li>
@@ -151,20 +170,24 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 : <a class="el" href="classbus.html#aef6e4de3df548561b9545f0cb341e143">bus</a>
 </li>
 <li>is_halted()
-: <a class="el" href="classcpu.html#a39edbddfff0360a2da08cd1d401a0026">cpu</a>
+: <a class="el" href="classcpu.html#a010e335fc9f1797e72bfc5585e9238f6">cpu&lt; bus_iface &gt;</a>
 </li>
 <li>is_irq()
 : <a class="el" href="classbus.html#ae35dadd5a5ae3a060bd18facb8bb4f31">bus</a>
+, <a class="el" href="classcard.html#a5aca5465f1771a8fa77cd0deb33ed996">card</a>
+</li>
+<li>is_w_locked()
+: <a class="el" href="classcard.html#acda2f3ac26f4d8e8f2e583799458e366">card</a>
 </li>
 </ul>
 
 
 <h3><a id="index_l"></a>- l -</h3><ul>
 <li>load()
-: <a class="el" href="classcpu.html#a2cfed77b955c7a00c330ba7b56aea76c">cpu</a>
+: <a class="el" href="classcpu.html#a6e84cf78a4fbeb96d538fd24d0bd3678">cpu&lt; bus_iface &gt;</a>
 </li>
 <li>load_state()
-: <a class="el" href="classcpu.html#a166c79829cb2c3540389efa304382139">cpu</a>
+: <a class="el" href="classcpu.html#a6c72852ac69a7814d8e0faa836d3abf3">cpu&lt; bus_iface &gt;</a>
 </li>
 </ul>
 
@@ -184,7 +207,7 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 : <a class="el" href="classutil_1_1print__helper.html#a08832a7d7d51c20fca69c4e9b726ab2e">util::print_helper</a>
 </li>
 <li>operator[]()
-: <a class="el" href="classbus.html#a437a9e982484088673f7635af77795a6">bus</a>
+: <a class="el" href="classbus.html#a823fe0fdf5aad85763fdeb840a3c4df2">bus</a>
 </li>
 </ul>
 
@@ -206,16 +229,23 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 
 
 <h3><a id="index_r"></a>- r -</h3><ul>
+<li>raise_irq()
+: <a class="el" href="classcard.html#ab4841b21668816977ff2266d6667593e">card</a>
+</li>
 <li>read()
-: <a class="el" href="classbus.html#ad1193e1643aea2d06e1a8e35425ae216">bus</a>
-, <a class="el" href="classserial__card.html#a912517ea46c7e3b702d94c8ddba2af32">serial_card&lt; start_adr, base_clock &gt;</a>
+: <a class="el" href="classbus.html#ac0d63d27fb997063625aff06b25fd47b">bus</a>
+, <a class="el" href="classcard.html#a0ea76feb6cf75cf51ba3362f4ab50190">card</a>
+, <a class="el" href="classdata__card.html#aebcbd2eec95acd01dfa217d741b85a6c">data_card&lt; start_adr, capacity, construct_then_write_lock &gt;</a>
+, <a class="el" href="classserial__card.html#a358e394bf90213f8958d44603f3aaaf2">serial_card&lt; start_adr, base_clock &gt;</a>
 </li>
 <li>recv()
 : <a class="el" href="classpty.html#a22e150200a8581e9da66e309f9ee2ec6">pty</a>
 </li>
 <li>refresh()
 : <a class="el" href="classbus.html#ac158680334e36add350e716e6a0ec69b">bus</a>
+, <a class="el" href="classcard.html#ae39a92dd99c80e0756cc1d8ea28ca6c4">card</a>
 , <a class="el" href="classdata__card.html#a1ef6d64e85c7c9c30396b8b1920589a4">data_card&lt; start_adr, capacity, construct_then_write_lock &gt;</a>
+, <a class="el" href="classserial__card.html#a3471a3d7caed345f690b1c72601800da">serial_card&lt; start_adr, base_clock &gt;</a>
 </li>
 <li>remove()
 : <a class="el" href="classbus.html#ac452a5305b4fcb30b6e40172d63fba4a">bus</a>
@@ -224,14 +254,14 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 : <a class="el" href="classutil_1_1print__helper.html#a7bbd968d8ae6ccec11b3bf507fc7bf6f">util::print_helper</a>
 </li>
 <li>reset_pseudo_bdos_redirect()
-: <a class="el" href="classcpu.html#a799dee05a8d3ddaea1d88d1827833c0d">cpu</a>
+: <a class="el" href="classcpu.html#a850125d4d67383c10cbb1ba594d1db18">cpu&lt; bus_iface &gt;</a>
 </li>
 </ul>
 
 
 <h3><a id="index_s"></a>- s -</h3><ul>
 <li>save_state()
-: <a class="el" href="classcpu.html#af63f9154a462efd8c1b8a64122de1442">cpu</a>
+: <a class="el" href="classcpu.html#ae6100df727ce03c23512fee8d2698fc5">cpu&lt; bus_iface &gt;</a>
 </li>
 <li>send()
 : <a class="el" href="classpty.html#a42411f2b12218401f748cbc94fe12062">pty</a>
@@ -245,17 +275,23 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 <li>set_baud_rate()
 : <a class="el" href="classpty.html#a757f8fc7156ea5215922e9646b65daaa">pty</a>
 </li>
+<li>set_bit()
+: <a class="el" href="classcard.html#aa9962ee86c02b544e158cd94388df9bd">card</a>
+</li>
 <li>set_echo_received_back()
 : <a class="el" href="classpty.html#a361a2ef0fc27c6c1f2aac8e05aa0f89c">pty</a>
 </li>
 <li>set_flag()
 : <a class="el" href="structcpu__state.html#a88086422013ebb4ddb691a5d4ec090aa">cpu_state</a>
 </li>
+<li>set_if_bit()
+: <a class="el" href="classcard.html#ab210eb529f3a153ab99822cda9492b3c">card</a>
+</li>
 <li>set_if_flag()
 : <a class="el" href="structcpu__state.html#aedbda43148055f040a9b18c5fc16bfd1">cpu_state</a>
 </li>
 <li>set_pseudo_bdos_redirect()
-: <a class="el" href="classcpu.html#a5d5f21f65abae02c6d9bc0bc9b8ba413">cpu</a>
+: <a class="el" href="classcpu.html#abbf017b99cf39776da5a4bf517fb9226">cpu&lt; bus_iface &gt;</a>
 </li>
 <li>set_register16()
 : <a class="el" href="structcpu__state.html#ac9b4c2b78269d7e1f39a02d9b7a27007">cpu_state</a>
@@ -273,7 +309,7 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 : <a class="el" href="classbus.html#a40eeeeb2ba939e469bdff3d35c3f5f67">bus</a>
 </li>
 <li>step()
-: <a class="el" href="classcpu.html#a8ba6089ae338a2747c78bc98fae67a46">cpu</a>
+: <a class="el" href="classcpu.html#acd0b563c6831d88a883f3bcd7d2257b4">cpu&lt; bus_iface &gt;</a>
 </li>
 </ul>
 
@@ -286,6 +322,9 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 
 
 <h3><a id="index_u"></a>- u -</h3><ul>
+<li>unset_bit()
+: <a class="el" href="classcard.html#aecb2677fb4c62b9a1a08e5890ea4743b">card</a>
+</li>
 <li>unset_flag()
 : <a class="el" href="structcpu__state.html#ad2172487d40c164820b74a21b267af84">cpu_state</a>
 </li>
@@ -293,8 +332,16 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 
 
 <h3><a id="index_w"></a>- w -</h3><ul>
+<li>w_lock()
+: <a class="el" href="classcard.html#a08987729c7f53ba0fd3462e2d5ca8eae">card</a>
+</li>
+<li>w_unlock()
+: <a class="el" href="classcard.html#aeb5526b21831ac5fe40ade8de19c9ed3">card</a>
+</li>
 <li>write()
 : <a class="el" href="classbus.html#a05d0d594ca803a6f713e3078dcdaf22a">bus</a>
+, <a class="el" href="classcard.html#ae4b1863113c0e72b7de13f3774776fdb">card</a>
+, <a class="el" href="classdata__card.html#a06a184b77e0e679a4852eeed77ef6e72">data_card&lt; start_adr, capacity, construct_then_write_lock &gt;</a>
 , <a class="el" href="classserial__card.html#abfff847039d36c47cbf4a0133d9719b2">serial_card&lt; start_adr, base_clock &gt;</a>
 </li>
 </ul>

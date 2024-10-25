@@ -1,14 +1,14 @@
 var classcpu =
 [
-    [ "cpu", "classcpu.html#a8fa4d18a4f5d31e98ef898f56e6e5876", null ],
-    [ "clear", "classcpu.html#a33993087c93e12b684d0124570645c04", null ],
-    [ "do_pseudo_bdos", "classcpu.html#a170fe10d4fcedd82bafd0d438d95acbe", null ],
-    [ "execute", "classcpu.html#a639550f25a52725e4470c46d061e32ed", null ],
-    [ "is_halted", "classcpu.html#a39edbddfff0360a2da08cd1d401a0026", null ],
-    [ "load", "classcpu.html#a2cfed77b955c7a00c330ba7b56aea76c", null ],
-    [ "load_state", "classcpu.html#a166c79829cb2c3540389efa304382139", null ],
-    [ "reset_pseudo_bdos_redirect", "classcpu.html#a799dee05a8d3ddaea1d88d1827833c0d", null ],
-    [ "save_state", "classcpu.html#af63f9154a462efd8c1b8a64122de1442", null ],
-    [ "set_pseudo_bdos_redirect", "classcpu.html#a5d5f21f65abae02c6d9bc0bc9b8ba413", null ],
-    [ "step", "classcpu.html#a8ba6089ae338a2747c78bc98fae67a46", null ]
+    [ "cpu", "classcpu.html#a3370e515b29f14c07755eb9990d9aa31", null ],
+    [ "clear", "classcpu.html#a2431272df1fa9db7b37770dd95702807", null ],
+    [ "do_pseudo_bdos", "classcpu.html#ad684d25913e8aaf0139fa3dc47ce9e40", null ],
+    [ "execute", "classcpu.html#a9d70c847732b6891a759352d27e896ee", null ],
+    [ "is_halted", "classcpu.html#a010e335fc9f1797e72bfc5585e9238f6", null ],
+    [ "load", "classcpu.html#a6e84cf78a4fbeb96d538fd24d0bd3678", null ],
+    [ "load_state", "classcpu.html#a6c72852ac69a7814d8e0faa836d3abf3", null ],
+    [ "reset_pseudo_bdos_redirect", "classcpu.html#a850125d4d67383c10cbb1ba594d1db18", null ],
+    [ "save_state", "classcpu.html#ae6100df727ce03c23512fee8d2698fc5", null ],
+    [ "set_pseudo_bdos_redirect", "classcpu.html#abbf017b99cf39776da5a4bf517fb9226", null ],
+    [ "step", "classcpu.html#acd0b563c6831d88a883f3bcd7d2257b4", null ]
 ];

@@ -8,6 +8,12 @@
 #include "pty.hpp"
 #include "util.hpp"
 
+/**
+ * @brief Holds information that can be used to identify a card.
+ *
+ * This struct groups the start address, address range, a name C-string and details C-string of a card.
+ * Its main application is to have an instance of it returned by the `identify()` method of a card.
+ */
 struct card_identify {
     u16 start_adr;
     u16 adr_range;
@@ -19,6 +25,13 @@ struct card_identify {
     card_identify(u16 start_adr, u16 adr_range, const char* name, const char* detail) : start_adr(start_adr), adr_range(adr_range), name(name), detail(detail) {};
 };
 
+/**
+ * @brief Base class for all cards.
+ *
+ * This class is the base class for all cards, it provides a set of methods that should be implemented by all cards that
+ * want to interface with the bus class. It also provides some prepared methods that can be used by the bus or the card
+ * itself to handle some common operations.
+ */
 class card {
 protected:
     bool write_locked = false;
@@ -28,35 +41,80 @@ public:
     /// @name Bit utilities.
     /// \{
 
+    /// @brief Set a bit in a byte on the bus.
+    /// @warning This method does not check if the address is in the card's range.
     inline void set_bit(u16 adr, u8 bitmask) { write(adr, read(adr) | bitmask); }
+
+    /// @brief Unset a bit in a byte on the bus.
+    /// @warning This method does not check if the address is in the card's range.
     inline void unset_bit(u16 adr, u8 bitmask) { write(adr, read(adr) & ~bitmask); }
+
+    /// @brief Un/set a bit in a byte on the bus by condition.
+    /// @warning This method does not check if the address is in the card's range.
     inline void set_if_bit(u16 adr, u8 bitmask, bool value) { value ? set_bit(adr, bitmask) : unset_bit(adr, bitmask); }
+
+    /// \}
+    /// @name Commonly used methods.
+    /// \{
+
+    /// @brief Check if the card is write-locked.
+    inline bool is_w_locked() const { return write_locked; }
+
+    /// @brief Lock the card for writing.
+    inline void w_lock() { write_locked = true; }
+
+    /// @brief Unlock the card for writing.
+    inline void w_unlock() { write_locked = false; }
+
+    /// @brief Check if the card has an IRQ raised.
+    inline bool is_irq() const { return irq_raised; }
+
+    /// @brief Raise or clear the IRQ trigger.
+    inline void raise_irq(bool value) { irq_raised = value; }
 
     /// \}
     /// @name Abstract methods.
     /// \{
 
+    /**
+     * @brief Check if an address on the bus is in the card's range.
+     * @param adr The address to check.
+     * @returns True if the address is in the card's range, false otherwise.
+     * @note This method should always be used when interacting with cards from the bus, to avoid out of range accesses.
+     * It is not used by the cards themselves to avoid double checking.
+     */ 
     virtual bool in_range(u16 adr) const = 0;
+
+    /**
+     * @brief Get information about the card.
+     * @returns A card_identify struct with lengthy details about the card.
+     */
     virtual card_identify identify() = 0;
 
-    virtual u8 read(u16 adr) = 0;
+    /**
+     * @brief Read a byte from the card.
+     * @param adr The address to read from.
+     * @returns The byte read from the card.
+     */
+    virtual u8 read(u16 adr) const = 0;
+
+    /**
+     * @brief Write a byte to the card.
+     * @param adr The address to write to.
+     * @param byte The byte to write.
+     */
     virtual void write(u16 adr, u8 byte) = 0;
+
+    /// @brief Refresh the card to allow periodic I/O, timer or sync operation.
+    /// @see bus::refresh()
     virtual void refresh() = 0;
 
+    /// @brief Get the IRQ instruction (and possible operands).
+    /// @see bus::get_irq()
     virtual std::array<u8, 3> get_irq() = 0;
 
+    /// @brief Clears the card data or configuration.
     virtual void clear() = 0;
-
-    /// \}
-    /// @name Overloadable, commonly used methods.
-    /// \{
-
-    virtual bool is_w_locked() const { return write_locked; }
-    virtual void w_lock() { write_locked = true; }
-    virtual void w_unlock() { write_locked = false; }
-
-    virtual bool is_irq() const { return irq_raised; }
-    virtual void raise_irq(bool value) { irq_raised = value; }
 
     /// \}
 
@@ -64,6 +122,10 @@ public:
 };
 
 /**
+ * @brief A card that holds a fixed amount of data. It's mainly a superclass for ROM and RAM cards.
+ * @tparam start_adr The starting address of the card.
+ * @tparam capacity The size in bytes of the card starting from the start address.
+ * @tparam construct_then_write_lock Whether the card should be write-locked after construction.
  * @warning Out of range addresses are not checked, they should be checked by the bus instead, to avoid calling in_range() twice.
  */
 template <u16 start_adr, u16 capacity, bool construct_then_write_lock>
@@ -74,17 +136,21 @@ private:
 public:
     data_card(bool lock = construct_then_write_lock) { this->write_locked = lock; }
 
+    /// @brief Construct a card and copy data from an iterator pair immediately.
     template <typename iter_t>
     data_card(iter_t begin, iter_t end, bool lock = construct_then_write_lock) {
         std::copy(begin, end, data.begin());
         this->write_locked = lock;
     }
 
+    /// @brief Check if an address on the bus is in the card's range.
     inline bool in_range(u16 adr) const override { return adr >= start_adr and adr <= (start_adr + capacity); }
 
+    /// @brief Get information about the data card.
     inline card_identify identify() override { return { start_adr, capacity, (this->write_locked ? "rom area" : "ram area") }; }
 
-    inline u8 read(u16 adr) override {
+    /// @brief Read a byte from the data card.
+    inline u8 read(u16 adr) const override {
         return data[adr - start_adr];
     }
 
@@ -189,11 +255,11 @@ public:
     inline card_identify identify() override {
         std::snprintf(
             detail, sizeof(detail), 
-            "ctrl: %s, pty: '%s'", 
-            util::to_hex_s(static_cast<usize>(CONTROL()), 2).c_str(), serial.name()
+            "base: %lu, ctrl: %s, pty: '%s'", 
+            base_clock, util::to_hex_s(static_cast<usize>(CONTROL()), 2).c_str(), serial.name()
         );
 
-        return { 0, 0, "serial uart", detail };
+        return { start_adr, SERIAL_IO_ADDRESSES, "serial uart", detail };
     }
 
     inline void refresh() override {
@@ -208,7 +274,7 @@ public:
         }
     }
 
-    inline u8 read(u16 adr) override {
+    inline u8 read(u16 adr) const override {
         switch (adr) {
             case 0x00: return BAD_U8; /// TX_DATA is write-only
             case 0x01: return RX_DATA();

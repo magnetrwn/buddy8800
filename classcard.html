@@ -89,13 +89,18 @@ $(document).ready(function(){initNavTree('classcard.html',''); initResizable(); 
 <div class="title">card Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Base class for all cards.  
+ <a href="classcard.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="card_8hpp_source.html">card.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for card:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classcard.png" usemap="#card_map" alt=""/>
   <map id="card_map" name="card_map">
-<area href="classdata__card.html" alt="data_card&lt; start_adr, capacity, construct_then_write_lock &gt;" shape="rect" coords="0,56,356,80"/>
+<area href="classdata__card.html" title="A card that holds a fixed amount of data. It&#39;s mainly a superclass for ROM and RAM cards." alt="data_card&lt; start_adr, capacity, construct_then_write_lock &gt;" shape="rect" coords="0,56,356,80"/>
 <area href="classserial__card.html" alt="serial_card&lt; start_adr, base_clock &gt;" shape="rect" coords="366,56,722,80"/>
   </map>
 </div></div>
@@ -103,53 +108,59 @@ Inheritance diagram for card:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Bit utilities.</div></td></tr>
-<tr class="memitem:aa9962ee86c02b544e158cd94388df9bd"><td class="memItemLeft" align="right" valign="top"><a id="aa9962ee86c02b544e158cd94388df9bd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_bit</b> (u16 adr, u8 bitmask)</td></tr>
+<tr class="memitem:aa9962ee86c02b544e158cd94388df9bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#aa9962ee86c02b544e158cd94388df9bd">set_bit</a> (u16 adr, u8 bitmask)</td></tr>
+<tr class="memdesc:aa9962ee86c02b544e158cd94388df9bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a bit in a byte on the bus.  <a href="classcard.html#aa9962ee86c02b544e158cd94388df9bd">More...</a><br /></td></tr>
 <tr class="separator:aa9962ee86c02b544e158cd94388df9bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecb2677fb4c62b9a1a08e5890ea4743b"><td class="memItemLeft" align="right" valign="top"><a id="aecb2677fb4c62b9a1a08e5890ea4743b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>unset_bit</b> (u16 adr, u8 bitmask)</td></tr>
+<tr class="memitem:aecb2677fb4c62b9a1a08e5890ea4743b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#aecb2677fb4c62b9a1a08e5890ea4743b">unset_bit</a> (u16 adr, u8 bitmask)</td></tr>
+<tr class="memdesc:aecb2677fb4c62b9a1a08e5890ea4743b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unset a bit in a byte on the bus.  <a href="classcard.html#aecb2677fb4c62b9a1a08e5890ea4743b">More...</a><br /></td></tr>
 <tr class="separator:aecb2677fb4c62b9a1a08e5890ea4743b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab210eb529f3a153ab99822cda9492b3c"><td class="memItemLeft" align="right" valign="top"><a id="ab210eb529f3a153ab99822cda9492b3c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_if_bit</b> (u16 adr, u8 bitmask, bool value)</td></tr>
+<tr class="memitem:ab210eb529f3a153ab99822cda9492b3c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#ab210eb529f3a153ab99822cda9492b3c">set_if_bit</a> (u16 adr, u8 bitmask, bool value)</td></tr>
+<tr class="memdesc:ab210eb529f3a153ab99822cda9492b3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Un/set a bit in a byte on the bus by condition.  <a href="classcard.html#ab210eb529f3a153ab99822cda9492b3c">More...</a><br /></td></tr>
 <tr class="separator:ab210eb529f3a153ab99822cda9492b3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Commonly used methods.</div></td></tr>
+<tr class="memitem:acda2f3ac26f4d8e8f2e583799458e366"><td class="memItemLeft" align="right" valign="top"><a id="acda2f3ac26f4d8e8f2e583799458e366"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#acda2f3ac26f4d8e8f2e583799458e366">is_w_locked</a> () const</td></tr>
+<tr class="memdesc:acda2f3ac26f4d8e8f2e583799458e366"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the card is write-locked. <br /></td></tr>
+<tr class="separator:acda2f3ac26f4d8e8f2e583799458e366"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08987729c7f53ba0fd3462e2d5ca8eae"><td class="memItemLeft" align="right" valign="top"><a id="a08987729c7f53ba0fd3462e2d5ca8eae"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#a08987729c7f53ba0fd3462e2d5ca8eae">w_lock</a> ()</td></tr>
+<tr class="memdesc:a08987729c7f53ba0fd3462e2d5ca8eae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lock the card for writing. <br /></td></tr>
+<tr class="separator:a08987729c7f53ba0fd3462e2d5ca8eae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb5526b21831ac5fe40ade8de19c9ed3"><td class="memItemLeft" align="right" valign="top"><a id="aeb5526b21831ac5fe40ade8de19c9ed3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#aeb5526b21831ac5fe40ade8de19c9ed3">w_unlock</a> ()</td></tr>
+<tr class="memdesc:aeb5526b21831ac5fe40ade8de19c9ed3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unlock the card for writing. <br /></td></tr>
+<tr class="separator:aeb5526b21831ac5fe40ade8de19c9ed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5aca5465f1771a8fa77cd0deb33ed996"><td class="memItemLeft" align="right" valign="top"><a id="a5aca5465f1771a8fa77cd0deb33ed996"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#a5aca5465f1771a8fa77cd0deb33ed996">is_irq</a> () const</td></tr>
+<tr class="memdesc:a5aca5465f1771a8fa77cd0deb33ed996"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the card has an IRQ raised. <br /></td></tr>
+<tr class="separator:a5aca5465f1771a8fa77cd0deb33ed996"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4841b21668816977ff2266d6667593e"><td class="memItemLeft" align="right" valign="top"><a id="ab4841b21668816977ff2266d6667593e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#ab4841b21668816977ff2266d6667593e">raise_irq</a> (bool value)</td></tr>
+<tr class="memdesc:ab4841b21668816977ff2266d6667593e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raise or clear the IRQ trigger. <br /></td></tr>
+<tr class="separator:ab4841b21668816977ff2266d6667593e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Abstract methods.</div></td></tr>
-<tr class="memitem:ab32f79943888d74e0a506e78b2d7406c"><td class="memItemLeft" align="right" valign="top"><a id="ab32f79943888d74e0a506e78b2d7406c"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>in_range</b> (u16 adr) const =0</td></tr>
+<tr class="memitem:ab32f79943888d74e0a506e78b2d7406c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#ab32f79943888d74e0a506e78b2d7406c">in_range</a> (u16 adr) const =0</td></tr>
+<tr class="memdesc:ab32f79943888d74e0a506e78b2d7406c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if an address on the bus is in the card's range.  <a href="classcard.html#ab32f79943888d74e0a506e78b2d7406c">More...</a><br /></td></tr>
 <tr class="separator:ab32f79943888d74e0a506e78b2d7406c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa242bc5baf3e6276c4c3ba5ddf7610a4"><td class="memItemLeft" align="right" valign="top"><a id="aa242bc5baf3e6276c4c3ba5ddf7610a4"></a>
-virtual <a class="el" href="structcard__identify.html">card_identify</a>&#160;</td><td class="memItemRight" valign="bottom"><b>identify</b> ()=0</td></tr>
+<tr class="memitem:aa242bc5baf3e6276c4c3ba5ddf7610a4"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structcard__identify.html">card_identify</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#aa242bc5baf3e6276c4c3ba5ddf7610a4">identify</a> ()=0</td></tr>
+<tr class="memdesc:aa242bc5baf3e6276c4c3ba5ddf7610a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get information about the card.  <a href="classcard.html#aa242bc5baf3e6276c4c3ba5ddf7610a4">More...</a><br /></td></tr>
 <tr class="separator:aa242bc5baf3e6276c4c3ba5ddf7610a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ed2b72cca9db35d23873352a4af90a5"><td class="memItemLeft" align="right" valign="top"><a id="a5ed2b72cca9db35d23873352a4af90a5"></a>
-virtual u8&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> (u16 adr)=0</td></tr>
-<tr class="separator:a5ed2b72cca9db35d23873352a4af90a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4b1863113c0e72b7de13f3774776fdb"><td class="memItemLeft" align="right" valign="top"><a id="ae4b1863113c0e72b7de13f3774776fdb"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (u16 adr, u8 byte)=0</td></tr>
+<tr class="memitem:a0ea76feb6cf75cf51ba3362f4ab50190"><td class="memItemLeft" align="right" valign="top">virtual u8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#a0ea76feb6cf75cf51ba3362f4ab50190">read</a> (u16 adr) const =0</td></tr>
+<tr class="memdesc:a0ea76feb6cf75cf51ba3362f4ab50190"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a byte from the card.  <a href="classcard.html#a0ea76feb6cf75cf51ba3362f4ab50190">More...</a><br /></td></tr>
+<tr class="separator:a0ea76feb6cf75cf51ba3362f4ab50190"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4b1863113c0e72b7de13f3774776fdb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#ae4b1863113c0e72b7de13f3774776fdb">write</a> (u16 adr, u8 byte)=0</td></tr>
+<tr class="memdesc:ae4b1863113c0e72b7de13f3774776fdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a byte to the card.  <a href="classcard.html#ae4b1863113c0e72b7de13f3774776fdb">More...</a><br /></td></tr>
 <tr class="separator:ae4b1863113c0e72b7de13f3774776fdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae39a92dd99c80e0756cc1d8ea28ca6c4"><td class="memItemLeft" align="right" valign="top"><a id="ae39a92dd99c80e0756cc1d8ea28ca6c4"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>refresh</b> ()=0</td></tr>
+<tr class="memitem:ae39a92dd99c80e0756cc1d8ea28ca6c4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#ae39a92dd99c80e0756cc1d8ea28ca6c4">refresh</a> ()=0</td></tr>
+<tr class="memdesc:ae39a92dd99c80e0756cc1d8ea28ca6c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refresh the card to allow periodic I/O, timer or sync operation.  <a href="classcard.html#ae39a92dd99c80e0756cc1d8ea28ca6c4">More...</a><br /></td></tr>
 <tr class="separator:ae39a92dd99c80e0756cc1d8ea28ca6c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ef348c61f7138914f015c57d2f6a0be"><td class="memItemLeft" align="right" valign="top"><a id="a4ef348c61f7138914f015c57d2f6a0be"></a>
-virtual std::array&lt; u8, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>get_irq</b> ()=0</td></tr>
+<tr class="memitem:a4ef348c61f7138914f015c57d2f6a0be"><td class="memItemLeft" align="right" valign="top">virtual std::array&lt; u8, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#a4ef348c61f7138914f015c57d2f6a0be">get_irq</a> ()=0</td></tr>
+<tr class="memdesc:a4ef348c61f7138914f015c57d2f6a0be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the IRQ instruction (and possible operands).  <a href="classcard.html#a4ef348c61f7138914f015c57d2f6a0be">More...</a><br /></td></tr>
 <tr class="separator:a4ef348c61f7138914f015c57d2f6a0be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c2e9d54296d2c7dc1c89295575b1eb4"><td class="memItemLeft" align="right" valign="top"><a id="a1c2e9d54296d2c7dc1c89295575b1eb4"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()=0</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#a1c2e9d54296d2c7dc1c89295575b1eb4">clear</a> ()=0</td></tr>
+<tr class="memdesc:a1c2e9d54296d2c7dc1c89295575b1eb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the card data or configuration. <br /></td></tr>
 <tr class="separator:a1c2e9d54296d2c7dc1c89295575b1eb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">Overloadable, commonly used methods.</div></td></tr>
-<tr class="memitem:ade923e46176265c6db021f741d109dba"><td class="memItemLeft" align="right" valign="top"><a id="ade923e46176265c6db021f741d109dba"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_w_locked</b> () const</td></tr>
-<tr class="separator:ade923e46176265c6db021f741d109dba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57e0746acc76ec3ac4cd6d7b0ad5f853"><td class="memItemLeft" align="right" valign="top"><a id="a57e0746acc76ec3ac4cd6d7b0ad5f853"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>w_lock</b> ()</td></tr>
-<tr class="separator:a57e0746acc76ec3ac4cd6d7b0ad5f853"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d920b036be2033a5c337a683bde300c"><td class="memItemLeft" align="right" valign="top"><a id="a9d920b036be2033a5c337a683bde300c"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>w_unlock</b> ()</td></tr>
-<tr class="separator:a9d920b036be2033a5c337a683bde300c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a133fcec7327ff3e848ca0c7e0c2e8122"><td class="memItemLeft" align="right" valign="top"><a id="a133fcec7327ff3e848ca0c7e0c2e8122"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_irq</b> () const</td></tr>
-<tr class="separator:a133fcec7327ff3e848ca0c7e0c2e8122"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a831cb33b9e66de3808fa0ca5a7458e34"><td class="memItemLeft" align="right" valign="top"><a id="a831cb33b9e66de3808fa0ca5a7458e34"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>raise_irq</b> (bool value)</td></tr>
-<tr class="separator:a831cb33b9e66de3808fa0ca5a7458e34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -160,6 +171,345 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>write_locked</b> = fa
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = false</td></tr>
 <tr class="separator:a787e564e151cf8bf2a5550690d4b9677"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Base class for all cards. </p>
+<p>This class is the base class for all cards, it provides a set of methods that should be implemented by all cards that want to interface with the bus class. It also provides some prepared methods that can be used by the bus or the card itself to handle some common operations. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a4ef348c61f7138914f015c57d2f6a0be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ef348c61f7138914f015c57d2f6a0be">&#9670;&nbsp;</a></span>get_irq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::array&lt;u8, 3&gt; card::get_irq </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the IRQ instruction (and possible operands). </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classbus.html#a1673002793a022d9e89aacfbeeeb71fc" title="Gets the IRQ instruction (and possible operands).">bus::get_irq()</a> </dd></dl>
+
+<p>Implemented in <a class="el" href="classserial__card.html#a11a4a0b669e5f954b9f8ce7c098d9ae0">serial_card&lt; start_adr, base_clock &gt;</a>, and <a class="el" href="classdata__card.html#aa83d86727fadf2f0da35ea8c9b59495b">data_card&lt; start_adr, capacity, construct_then_write_lock &gt;</a>.</p>
+
+</div>
+</div>
+<a id="aa242bc5baf3e6276c4c3ba5ddf7610a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa242bc5baf3e6276c4c3ba5ddf7610a4">&#9670;&nbsp;</a></span>identify()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="structcard__identify.html">card_identify</a> card::identify </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get information about the card. </p>
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structcard__identify.html" title="Holds information that can be used to identify a card.">card_identify</a> struct with lengthy details about the card. </dd></dl>
+
+<p>Implemented in <a class="el" href="classserial__card.html#a3c9538c4dd7523fa67952e30d648ca4c">serial_card&lt; start_adr, base_clock &gt;</a>, and <a class="el" href="classdata__card.html#ab6d9264a691316e9eb5d17fcd0587918">data_card&lt; start_adr, capacity, construct_then_write_lock &gt;</a>.</p>
+
+</div>
+</div>
+<a id="ab32f79943888d74e0a506e78b2d7406c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab32f79943888d74e0a506e78b2d7406c">&#9670;&nbsp;</a></span>in_range()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool card::in_range </td>
+          <td>(</td>
+          <td class="paramtype">u16&#160;</td>
+          <td class="paramname"><em>adr</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if an address on the bus is in the card's range. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">adr</td><td>The address to check. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the address is in the card's range, false otherwise. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This method should always be used when interacting with cards from the bus, to avoid out of range accesses. It is not used by the cards themselves to avoid double checking. </dd></dl>
+
+<p>Implemented in <a class="el" href="classserial__card.html#ad98165537a34d39af6d7b46279656ecb">serial_card&lt; start_adr, base_clock &gt;</a>, and <a class="el" href="classdata__card.html#a7a3504e6a4394ef2b0f8d490d22b9029">data_card&lt; start_adr, capacity, construct_then_write_lock &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a0ea76feb6cf75cf51ba3362f4ab50190"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ea76feb6cf75cf51ba3362f4ab50190">&#9670;&nbsp;</a></span>read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual u8 card::read </td>
+          <td>(</td>
+          <td class="paramtype">u16&#160;</td>
+          <td class="paramname"><em>adr</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read a byte from the card. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">adr</td><td>The address to read from. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The byte read from the card. </dd></dl>
+
+<p>Implemented in <a class="el" href="classserial__card.html#a358e394bf90213f8958d44603f3aaaf2">serial_card&lt; start_adr, base_clock &gt;</a>, and <a class="el" href="classdata__card.html#aebcbd2eec95acd01dfa217d741b85a6c">data_card&lt; start_adr, capacity, construct_then_write_lock &gt;</a>.</p>
+
+</div>
+</div>
+<a id="ae39a92dd99c80e0756cc1d8ea28ca6c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae39a92dd99c80e0756cc1d8ea28ca6c4">&#9670;&nbsp;</a></span>refresh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void card::refresh </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Refresh the card to allow periodic I/O, timer or sync operation. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classbus.html#ac158680334e36add350e716e6a0ec69b" title="Refreshes all cards on the bus.">bus::refresh()</a> </dd></dl>
+
+<p>Implemented in <a class="el" href="classserial__card.html#a3471a3d7caed345f690b1c72601800da">serial_card&lt; start_adr, base_clock &gt;</a>, and <a class="el" href="classdata__card.html#a1ef6d64e85c7c9c30396b8b1920589a4">data_card&lt; start_adr, capacity, construct_then_write_lock &gt;</a>.</p>
+
+</div>
+</div>
+<a id="aa9962ee86c02b544e158cd94388df9bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9962ee86c02b544e158cd94388df9bd">&#9670;&nbsp;</a></span>set_bit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void card::set_bit </td>
+          <td>(</td>
+          <td class="paramtype">u16&#160;</td>
+          <td class="paramname"><em>adr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8&#160;</td>
+          <td class="paramname"><em>bitmask</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set a bit in a byte on the bus. </p>
+<dl class="section warning"><dt>Warning</dt><dd>This method does not check if the address is in the card's range. </dd></dl>
+
+</div>
+</div>
+<a id="ab210eb529f3a153ab99822cda9492b3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab210eb529f3a153ab99822cda9492b3c">&#9670;&nbsp;</a></span>set_if_bit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void card::set_if_bit </td>
+          <td>(</td>
+          <td class="paramtype">u16&#160;</td>
+          <td class="paramname"><em>adr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8&#160;</td>
+          <td class="paramname"><em>bitmask</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Un/set a bit in a byte on the bus by condition. </p>
+<dl class="section warning"><dt>Warning</dt><dd>This method does not check if the address is in the card's range. </dd></dl>
+
+</div>
+</div>
+<a id="aecb2677fb4c62b9a1a08e5890ea4743b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecb2677fb4c62b9a1a08e5890ea4743b">&#9670;&nbsp;</a></span>unset_bit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void card::unset_bit </td>
+          <td>(</td>
+          <td class="paramtype">u16&#160;</td>
+          <td class="paramname"><em>adr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8&#160;</td>
+          <td class="paramname"><em>bitmask</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Unset a bit in a byte on the bus. </p>
+<dl class="section warning"><dt>Warning</dt><dd>This method does not check if the address is in the card's range. </dd></dl>
+
+</div>
+</div>
+<a id="ae4b1863113c0e72b7de13f3774776fdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4b1863113c0e72b7de13f3774776fdb">&#9670;&nbsp;</a></span>write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void card::write </td>
+          <td>(</td>
+          <td class="paramtype">u16&#160;</td>
+          <td class="paramname"><em>adr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8&#160;</td>
+          <td class="paramname"><em>byte</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write a byte to the card. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">adr</td><td>The address to write to. </td></tr>
+    <tr><td class="paramname">byte</td><td>The byte to write. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classserial__card.html#abfff847039d36c47cbf4a0133d9719b2">serial_card&lt; start_adr, base_clock &gt;</a>, and <a class="el" href="classdata__card.html#a06a184b77e0e679a4852eeed77ef6e72">data_card&lt; start_adr, capacity, construct_then_write_lock &gt;</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/bus/<a class="el" href="card_8hpp_source.html">card.hpp</a></li>
 </ul>

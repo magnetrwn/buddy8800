@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>buddy8800: cpu Class Reference</title>
+<title>buddy8800: cpu&lt; bus_iface &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,7 +86,7 @@ $(document).ready(function(){initNavTree('classcpu.html',''); initResizable(); }
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classcpu-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">cpu Class Reference</div>  </div>
+<div class="title">cpu&lt; bus_iface &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -97,62 +97,80 @@ $(document).ready(function(){initNavTree('classcpu.html',''); initResizable(); }
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8fa4d18a4f5d31e98ef898f56e6e5876"><td class="memItemLeft" align="right" valign="top"><a id="a8fa4d18a4f5d31e98ef898f56e6e5876"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>cpu</b> (<a class="el" href="classbus.html">bus</a> &amp;cardbus)</td></tr>
-<tr class="separator:a8fa4d18a4f5d31e98ef898f56e6e5876"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3370e515b29f14c07755eb9990d9aa31"><td class="memItemLeft" align="right" valign="top"><a id="a3370e515b29f14c07755eb9990d9aa31"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>cpu</b> (bus_iface init_adr_space)</td></tr>
+<tr class="separator:a3370e515b29f14c07755eb9990d9aa31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">CPU API methods.</div></td></tr>
-<tr class="memitem:a8ba6089ae338a2747c78bc98fae67a46"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a8ba6089ae338a2747c78bc98fae67a46">step</a> ()</td></tr>
-<tr class="memdesc:a8ba6089ae338a2747c78bc98fae67a46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Steps the CPU by one instruction (and its operands).  <a href="classcpu.html#a8ba6089ae338a2747c78bc98fae67a46">More...</a><br /></td></tr>
-<tr class="separator:a8ba6089ae338a2747c78bc98fae67a46"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a639550f25a52725e4470c46d061e32ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a639550f25a52725e4470c46d061e32ed">execute</a> (u8 opcode)</td></tr>
-<tr class="memdesc:a639550f25a52725e4470c46d061e32ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a single opcode.  <a href="classcpu.html#a639550f25a52725e4470c46d061e32ed">More...</a><br /></td></tr>
-<tr class="separator:a639550f25a52725e4470c46d061e32ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2cfed77b955c7a00c330ba7b56aea76c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a2cfed77b955c7a00c330ba7b56aea76c">load</a> (std::vector&lt; u8 &gt;::iterator begin, std::vector&lt; u8 &gt;::iterator end, usize offset=0, bool auto_reset_vector=false)</td></tr>
-<tr class="memdesc:a2cfed77b955c7a00c330ba7b56aea76c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads data into cardbus.  <a href="classcpu.html#a2cfed77b955c7a00c330ba7b56aea76c">More...</a><br /></td></tr>
-<tr class="separator:a2cfed77b955c7a00c330ba7b56aea76c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a166c79829cb2c3540389efa304382139"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a166c79829cb2c3540389efa304382139">load_state</a> (const <a class="el" href="structcpu__state.html">cpu_state</a> &amp;new_state)</td></tr>
-<tr class="memdesc:a166c79829cb2c3540389efa304382139"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load CPU state.  <a href="classcpu.html#a166c79829cb2c3540389efa304382139">More...</a><br /></td></tr>
-<tr class="separator:a166c79829cb2c3540389efa304382139"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af63f9154a462efd8c1b8a64122de1442"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcpu__state.html">cpu_state</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#af63f9154a462efd8c1b8a64122de1442">save_state</a> () const</td></tr>
-<tr class="memdesc:af63f9154a462efd8c1b8a64122de1442"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save CPU state.  <a href="classcpu.html#af63f9154a462efd8c1b8a64122de1442">More...</a><br /></td></tr>
-<tr class="separator:af63f9154a462efd8c1b8a64122de1442"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39edbddfff0360a2da08cd1d401a0026"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a39edbddfff0360a2da08cd1d401a0026">is_halted</a> () const</td></tr>
-<tr class="memdesc:a39edbddfff0360a2da08cd1d401a0026"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the CPU is halted.  <a href="classcpu.html#a39edbddfff0360a2da08cd1d401a0026">More...</a><br /></td></tr>
-<tr class="separator:a39edbddfff0360a2da08cd1d401a0026"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33993087c93e12b684d0124570645c04"><td class="memItemLeft" align="right" valign="top"><a id="a33993087c93e12b684d0124570645c04"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
-<tr class="separator:a33993087c93e12b684d0124570645c04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd0b563c6831d88a883f3bcd7d2257b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#acd0b563c6831d88a883f3bcd7d2257b4">step</a> ()</td></tr>
+<tr class="memdesc:acd0b563c6831d88a883f3bcd7d2257b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Steps the CPU by one instruction (and its operands).  <a href="classcpu.html#acd0b563c6831d88a883f3bcd7d2257b4">More...</a><br /></td></tr>
+<tr class="separator:acd0b563c6831d88a883f3bcd7d2257b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d70c847732b6891a759352d27e896ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a9d70c847732b6891a759352d27e896ee">execute</a> (u8 opcode)</td></tr>
+<tr class="memdesc:a9d70c847732b6891a759352d27e896ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a single opcode.  <a href="classcpu.html#a9d70c847732b6891a759352d27e896ee">More...</a><br /></td></tr>
+<tr class="separator:a9d70c847732b6891a759352d27e896ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e84cf78a4fbeb96d538fd24d0bd3678"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a6e84cf78a4fbeb96d538fd24d0bd3678">load</a> (std::vector&lt; u8 &gt;::iterator begin, std::vector&lt; u8 &gt;::iterator end, usize offset=0, bool auto_reset_vector=false)</td></tr>
+<tr class="memdesc:a6e84cf78a4fbeb96d538fd24d0bd3678"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads data into cardbus.  <a href="classcpu.html#a6e84cf78a4fbeb96d538fd24d0bd3678">More...</a><br /></td></tr>
+<tr class="separator:a6e84cf78a4fbeb96d538fd24d0bd3678"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c72852ac69a7814d8e0faa836d3abf3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a6c72852ac69a7814d8e0faa836d3abf3">load_state</a> (const <a class="el" href="structcpu__state.html">cpu_state</a> &amp;new_state)</td></tr>
+<tr class="memdesc:a6c72852ac69a7814d8e0faa836d3abf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load CPU state.  <a href="classcpu.html#a6c72852ac69a7814d8e0faa836d3abf3">More...</a><br /></td></tr>
+<tr class="separator:a6c72852ac69a7814d8e0faa836d3abf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6100df727ce03c23512fee8d2698fc5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcpu__state.html">cpu_state</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#ae6100df727ce03c23512fee8d2698fc5">save_state</a> () const</td></tr>
+<tr class="memdesc:ae6100df727ce03c23512fee8d2698fc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save CPU state.  <a href="classcpu.html#ae6100df727ce03c23512fee8d2698fc5">More...</a><br /></td></tr>
+<tr class="separator:ae6100df727ce03c23512fee8d2698fc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a010e335fc9f1797e72bfc5585e9238f6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a010e335fc9f1797e72bfc5585e9238f6">is_halted</a> () const</td></tr>
+<tr class="memdesc:a010e335fc9f1797e72bfc5585e9238f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the CPU is halted.  <a href="classcpu.html#a010e335fc9f1797e72bfc5585e9238f6">More...</a><br /></td></tr>
+<tr class="separator:a010e335fc9f1797e72bfc5585e9238f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2431272df1fa9db7b37770dd95702807"><td class="memItemLeft" align="right" valign="top"><a id="a2431272df1fa9db7b37770dd95702807"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a2431272df1fa9db7b37770dd95702807">clear</a> ()</td></tr>
+<tr class="memdesc:a2431272df1fa9db7b37770dd95702807"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the CPU and connected devices to clear state. <br /></td></tr>
+<tr class="separator:a2431272df1fa9db7b37770dd95702807"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Test related methods.</div></td></tr>
-<tr class="memitem:a170fe10d4fcedd82bafd0d438d95acbe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a170fe10d4fcedd82bafd0d438d95acbe">do_pseudo_bdos</a> (bool should)</td></tr>
-<tr class="memdesc:a170fe10d4fcedd82bafd0d438d95acbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the CPU to resolve calls to BDOS internally.  <a href="classcpu.html#a170fe10d4fcedd82bafd0d438d95acbe">More...</a><br /></td></tr>
-<tr class="separator:a170fe10d4fcedd82bafd0d438d95acbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d5f21f65abae02c6d9bc0bc9b8ba413"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a5d5f21f65abae02c6d9bc0bc9b8ba413">set_pseudo_bdos_redirect</a> (const char *filename)</td></tr>
-<tr class="memdesc:a5d5f21f65abae02c6d9bc0bc9b8ba413"><td class="mdescLeft">&#160;</td><td class="mdescRight">Redirect pseudo BDOS print routines to a file.  <a href="classcpu.html#a5d5f21f65abae02c6d9bc0bc9b8ba413">More...</a><br /></td></tr>
-<tr class="separator:a5d5f21f65abae02c6d9bc0bc9b8ba413"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a799dee05a8d3ddaea1d88d1827833c0d"><td class="memItemLeft" align="right" valign="top"><a id="a799dee05a8d3ddaea1d88d1827833c0d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a799dee05a8d3ddaea1d88d1827833c0d">reset_pseudo_bdos_redirect</a> ()</td></tr>
-<tr class="memdesc:a799dee05a8d3ddaea1d88d1827833c0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Redirect pseudo BDOS print routines back to stdout. <br /></td></tr>
-<tr class="separator:a799dee05a8d3ddaea1d88d1827833c0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad684d25913e8aaf0139fa3dc47ce9e40"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#ad684d25913e8aaf0139fa3dc47ce9e40">do_pseudo_bdos</a> (bool should)</td></tr>
+<tr class="memdesc:ad684d25913e8aaf0139fa3dc47ce9e40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the CPU to resolve calls to BDOS internally.  <a href="classcpu.html#ad684d25913e8aaf0139fa3dc47ce9e40">More...</a><br /></td></tr>
+<tr class="separator:ad684d25913e8aaf0139fa3dc47ce9e40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbf017b99cf39776da5a4bf517fb9226"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#abbf017b99cf39776da5a4bf517fb9226">set_pseudo_bdos_redirect</a> (const char *filename)</td></tr>
+<tr class="memdesc:abbf017b99cf39776da5a4bf517fb9226"><td class="mdescLeft">&#160;</td><td class="mdescRight">Redirect pseudo BDOS print routines to a file.  <a href="classcpu.html#abbf017b99cf39776da5a4bf517fb9226">More...</a><br /></td></tr>
+<tr class="separator:abbf017b99cf39776da5a4bf517fb9226"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a850125d4d67383c10cbb1ba594d1db18"><td class="memItemLeft" align="right" valign="top"><a id="a850125d4d67383c10cbb1ba594d1db18"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a850125d4d67383c10cbb1ba594d1db18">reset_pseudo_bdos_redirect</a> ()</td></tr>
+<tr class="memdesc:a850125d4d67383c10cbb1ba594d1db18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Redirect pseudo BDOS print routines back to stdout. <br /></td></tr>
+<tr class="separator:a850125d4d67383c10cbb1ba594d1db18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Represents the CPU of the emulator. </p>
-<p>This is the 8080 CPU emulator and interpreter. It abstracts the CPU functionality into straightforward methods and presents a way to step and interact with state. Being an interpreter, each opcode starting from the program counter address in cardbus is fetched and executed according to what it represents and including further fetches to opcode operands. The API also provides public access to <a class="el" href="classcpu.html#a639550f25a52725e4470c46d061e32ed" title="Executes a single opcode.">execute()</a>, should the user want to manually ask for instructions.</p>
-<p>For a use case example you can look at <code>ŧests/test_cpu.hpp</code>. </p>
+<div class="textblock"><h3>template&lt;class bus_iface = bus&amp;&gt;<br />
+class cpu&lt; bus_iface &gt;</h3>
+
+<p>Represents the CPU of the emulator. </p>
+<p>This is the 8080 CPU emulator and interpreter. It abstracts the CPU functionality into straightforward methods and presents a way to step and interact with state. Being an interpreter, each opcode starting from the program counter address in cardbus is fetched and executed according to what it represents and including further fetches to opcode operands. The API also provides public access to <a class="el" href="classcpu.html#a9d70c847732b6891a759352d27e896ee" title="Executes a single opcode.">execute()</a>, should the user want to manually ask for instructions.</p>
+<dl class="section note"><dt>Note</dt><dd>The class is completely defined in this header to allow templating the class to determine what bus interface <code>bus_iface</code> to use. For example, you can:<ul>
+<li><code>cpu&lt;bus&amp;&gt; <a class="el" href="classcpu.html" title="Represents the CPU of the emulator.">cpu(cardbus)</a>;</code> or <code>cpu&lt;&gt; <a class="el" href="classcpu.html" title="Represents the CPU of the emulator.">cpu(cardbus)</a>;</code> to create a standard CPU that interacts with a bus, or</li>
+<li><code>cpu&lt;std::array&lt;u8, 65536&gt;&gt; cpu({ 0 });</code> to instead have an empty array as a bus, for max performance! </li>
+</ul>
+</dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a170fe10d4fcedd82bafd0d438d95acbe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a170fe10d4fcedd82bafd0d438d95acbe">&#9670;&nbsp;</a></span>do_pseudo_bdos()</h2>
+<a id="ad684d25913e8aaf0139fa3dc47ce9e40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad684d25913e8aaf0139fa3dc47ce9e40">&#9670;&nbsp;</a></span>do_pseudo_bdos()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class bus_iface  = bus&amp;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void cpu::do_pseudo_bdos </td>
+          <td class="memname">void <a class="el" href="classcpu.html">cpu</a>&lt; bus_iface &gt;::do_pseudo_bdos </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>should</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Set the CPU to resolve calls to BDOS internally. </p>
@@ -166,20 +184,30 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a id="a639550f25a52725e4470c46d061e32ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a639550f25a52725e4470c46d061e32ed">&#9670;&nbsp;</a></span>execute()</h2>
+<a id="a9d70c847732b6891a759352d27e896ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d70c847732b6891a759352d27e896ee">&#9670;&nbsp;</a></span>execute()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class bus_iface  = bus&amp;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void cpu::execute </td>
+          <td class="memname">void <a class="el" href="classcpu.html">cpu</a>&lt; bus_iface &gt;::execute </td>
           <td>(</td>
           <td class="paramtype">u8&#160;</td>
           <td class="paramname"><em>opcode</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Executes a single opcode. </p>
@@ -194,19 +222,29 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a id="a39edbddfff0360a2da08cd1d401a0026"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a39edbddfff0360a2da08cd1d401a0026">&#9670;&nbsp;</a></span>is_halted()</h2>
+<a id="a010e335fc9f1797e72bfc5585e9238f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a010e335fc9f1797e72bfc5585e9238f6">&#9670;&nbsp;</a></span>is_halted()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class bus_iface  = bus&amp;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool cpu::is_halted </td>
+          <td class="memname">bool <a class="el" href="classcpu.html">cpu</a>&lt; bus_iface &gt;::is_halted </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Check if the CPU is halted. </p>
@@ -214,14 +252,19 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a id="a2cfed77b955c7a00c330ba7b56aea76c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2cfed77b955c7a00c330ba7b56aea76c">&#9670;&nbsp;</a></span>load()</h2>
+<a id="a6e84cf78a4fbeb96d538fd24d0bd3678"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e84cf78a4fbeb96d538fd24d0bd3678">&#9670;&nbsp;</a></span>load()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class bus_iface  = bus&amp;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void cpu::load </td>
+          <td class="memname">void <a class="el" href="classcpu.html">cpu</a>&lt; bus_iface &gt;::load </td>
           <td>(</td>
           <td class="paramtype">std::vector&lt; u8 &gt;::iterator&#160;</td>
           <td class="paramname"><em>begin</em>, </td>
@@ -250,6 +293,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Loads data into cardbus. </p>
@@ -273,20 +321,30 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a id="a166c79829cb2c3540389efa304382139"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a166c79829cb2c3540389efa304382139">&#9670;&nbsp;</a></span>load_state()</h2>
+<a id="a6c72852ac69a7814d8e0faa836d3abf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c72852ac69a7814d8e0faa836d3abf3">&#9670;&nbsp;</a></span>load_state()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class bus_iface  = bus&amp;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void cpu::load_state </td>
+          <td class="memname">void <a class="el" href="classcpu.html">cpu</a>&lt; bus_iface &gt;::load_state </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structcpu__state.html">cpu_state</a> &amp;&#160;</td>
           <td class="paramname"><em>new_state</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Load CPU state. </p>
@@ -300,19 +358,29 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a id="af63f9154a462efd8c1b8a64122de1442"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af63f9154a462efd8c1b8a64122de1442">&#9670;&nbsp;</a></span>save_state()</h2>
+<a id="ae6100df727ce03c23512fee8d2698fc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6100df727ce03c23512fee8d2698fc5">&#9670;&nbsp;</a></span>save_state()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class bus_iface  = bus&amp;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structcpu__state.html">cpu_state</a> cpu::save_state </td>
+          <td class="memname"><a class="el" href="structcpu__state.html">cpu_state</a> <a class="el" href="classcpu.html">cpu</a>&lt; bus_iface &gt;::save_state </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Save CPU state. </p>
@@ -321,20 +389,30 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a id="a5d5f21f65abae02c6d9bc0bc9b8ba413"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d5f21f65abae02c6d9bc0bc9b8ba413">&#9670;&nbsp;</a></span>set_pseudo_bdos_redirect()</h2>
+<a id="abbf017b99cf39776da5a4bf517fb9226"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbf017b99cf39776da5a4bf517fb9226">&#9670;&nbsp;</a></span>set_pseudo_bdos_redirect()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class bus_iface  = bus&amp;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void cpu::set_pseudo_bdos_redirect </td>
+          <td class="memname">void <a class="el" href="classcpu.html">cpu</a>&lt; bus_iface &gt;::set_pseudo_bdos_redirect </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>filename</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Redirect pseudo BDOS print routines to a file. </p>
@@ -347,19 +425,29 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a id="a8ba6089ae338a2747c78bc98fae67a46"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8ba6089ae338a2747c78bc98fae67a46">&#9670;&nbsp;</a></span>step()</h2>
+<a id="acd0b563c6831d88a883f3bcd7d2257b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd0b563c6831d88a883f3bcd7d2257b4">&#9670;&nbsp;</a></span>step()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class bus_iface  = bus&amp;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void cpu::step </td>
+          <td class="memname">void <a class="el" href="classcpu.html">cpu</a>&lt; bus_iface &gt;::step </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Steps the CPU by one instruction (and its operands). </p>
@@ -371,9 +459,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/cpu/<a class="el" href="cpu_8hpp_source.html">cpu.hpp</a></li>
-<li>src/cpu/cpu.cpp</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

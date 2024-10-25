@@ -90,6 +90,9 @@ $(document).ready(function(){initNavTree('classdata__card.html',''); initResizab
 </div><!--header-->
 <div class="contents">
 
+<p>A card that holds a fixed amount of data. It's mainly a superclass for ROM and RAM cards.  
+ <a href="classdata__card.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="card_8hpp_source.html">card.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for data_card&lt; start_adr, capacity, construct_then_write_lock &gt;:</div>
@@ -97,7 +100,7 @@ Inheritance diagram for data_card&lt; start_adr, capacity, construct_then_write_
  <div class="center">
   <img src="classdata__card.png" usemap="#data_5Fcard_3C_20start_5Fadr_2C_20capacity_2C_20construct_5Fthen_5Fwrite_5Flock_20_3E_map" alt=""/>
   <map id="data_5Fcard_3C_20start_5Fadr_2C_20capacity_2C_20construct_5Fthen_5Fwrite_5Flock_20_3E_map" name="data_5Fcard_3C_20start_5Fadr_2C_20capacity_2C_20construct_5Fthen_5Fwrite_5Flock_20_3E_map">
-<area href="classcard.html" alt="card" shape="rect" coords="0,0,356,24"/>
+<area href="classcard.html" title="Base class for all cards." alt="card" shape="rect" coords="0,0,356,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -108,54 +111,64 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aec902e00ab69498870cbab8bb7ba4df8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd216ef67613fde7f36e11eaec02b820"><td class="memTemplParams" colspan="2"><a id="abd216ef67613fde7f36e11eaec02b820"></a>
 template&lt;typename iter_t &gt; </td></tr>
-<tr class="memitem:abd216ef67613fde7f36e11eaec02b820"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>data_card</b> (iter_t begin, iter_t end, bool lock=construct_then_write_lock)</td></tr>
+<tr class="memitem:abd216ef67613fde7f36e11eaec02b820"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classdata__card.html#abd216ef67613fde7f36e11eaec02b820">data_card</a> (iter_t begin, iter_t end, bool lock=construct_then_write_lock)</td></tr>
+<tr class="memdesc:abd216ef67613fde7f36e11eaec02b820"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a card and copy data from an iterator pair immediately. <br /></td></tr>
 <tr class="separator:abd216ef67613fde7f36e11eaec02b820"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a3504e6a4394ef2b0f8d490d22b9029"><td class="memItemLeft" align="right" valign="top"><a id="a7a3504e6a4394ef2b0f8d490d22b9029"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>in_range</b> (u16 adr) const override</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#a7a3504e6a4394ef2b0f8d490d22b9029">in_range</a> (u16 adr) const override</td></tr>
+<tr class="memdesc:a7a3504e6a4394ef2b0f8d490d22b9029"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if an address on the bus is in the card's range. <br /></td></tr>
 <tr class="separator:a7a3504e6a4394ef2b0f8d490d22b9029"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6d9264a691316e9eb5d17fcd0587918"><td class="memItemLeft" align="right" valign="top"><a id="ab6d9264a691316e9eb5d17fcd0587918"></a>
-<a class="el" href="structcard__identify.html">card_identify</a>&#160;</td><td class="memItemRight" valign="bottom"><b>identify</b> () override</td></tr>
+<a class="el" href="structcard__identify.html">card_identify</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#ab6d9264a691316e9eb5d17fcd0587918">identify</a> () override</td></tr>
+<tr class="memdesc:ab6d9264a691316e9eb5d17fcd0587918"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get information about the data card. <br /></td></tr>
 <tr class="separator:ab6d9264a691316e9eb5d17fcd0587918"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a809399f9f7a254645de1cc6916501828"><td class="memItemLeft" align="right" valign="top"><a id="a809399f9f7a254645de1cc6916501828"></a>
-u8&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> (u16 adr) override</td></tr>
-<tr class="separator:a809399f9f7a254645de1cc6916501828"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06a184b77e0e679a4852eeed77ef6e72"><td class="memItemLeft" align="right" valign="top"><a id="a06a184b77e0e679a4852eeed77ef6e72"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (u16 adr, u8 byte) override</td></tr>
+<tr class="memitem:aebcbd2eec95acd01dfa217d741b85a6c"><td class="memItemLeft" align="right" valign="top"><a id="aebcbd2eec95acd01dfa217d741b85a6c"></a>
+u8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#aebcbd2eec95acd01dfa217d741b85a6c">read</a> (u16 adr) const override</td></tr>
+<tr class="memdesc:aebcbd2eec95acd01dfa217d741b85a6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a byte from the data card. <br /></td></tr>
+<tr class="separator:aebcbd2eec95acd01dfa217d741b85a6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06a184b77e0e679a4852eeed77ef6e72"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#a06a184b77e0e679a4852eeed77ef6e72">write</a> (u16 adr, u8 byte) override</td></tr>
+<tr class="memdesc:a06a184b77e0e679a4852eeed77ef6e72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a byte to the card.  <a href="classdata__card.html#a06a184b77e0e679a4852eeed77ef6e72">More...</a><br /></td></tr>
 <tr class="separator:a06a184b77e0e679a4852eeed77ef6e72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecf65712fbe1deb721ca2bb4add15ff1"><td class="memItemLeft" align="right" valign="top"><a id="aecf65712fbe1deb721ca2bb4add15ff1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> () override</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#aecf65712fbe1deb721ca2bb4add15ff1">clear</a> () override</td></tr>
+<tr class="memdesc:aecf65712fbe1deb721ca2bb4add15ff1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the card data or configuration. <br /></td></tr>
 <tr class="separator:aecf65712fbe1deb721ca2bb4add15ff1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:a1ef6d64e85c7c9c30396b8b1920589a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#a1ef6d64e85c7c9c30396b8b1920589a4">refresh</a> () override</td></tr>
 <tr class="separator:a1ef6d64e85c7c9c30396b8b1920589a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa83d86727fadf2f0da35ea8c9b59495b"><td class="memItemLeft" align="right" valign="top"><a id="aa83d86727fadf2f0da35ea8c9b59495b"></a>
-std::array&lt; u8, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>get_irq</b> () override</td></tr>
+<tr class="memitem:aa83d86727fadf2f0da35ea8c9b59495b"><td class="memItemLeft" align="right" valign="top">std::array&lt; u8, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#aa83d86727fadf2f0da35ea8c9b59495b">get_irq</a> () override</td></tr>
+<tr class="memdesc:aa83d86727fadf2f0da35ea8c9b59495b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the IRQ instruction (and possible operands).  <a href="classdata__card.html#aa83d86727fadf2f0da35ea8c9b59495b">More...</a><br /></td></tr>
 <tr class="separator:aa83d86727fadf2f0da35ea8c9b59495b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classcard"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classcard')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classcard.html">card</a></td></tr>
-<tr class="memitem:aa9962ee86c02b544e158cd94388df9bd inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="aa9962ee86c02b544e158cd94388df9bd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_bit</b> (u16 adr, u8 bitmask)</td></tr>
+<tr class="memitem:aa9962ee86c02b544e158cd94388df9bd inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#aa9962ee86c02b544e158cd94388df9bd">set_bit</a> (u16 adr, u8 bitmask)</td></tr>
+<tr class="memdesc:aa9962ee86c02b544e158cd94388df9bd inherit pub_methods_classcard"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a bit in a byte on the bus.  <a href="classcard.html#aa9962ee86c02b544e158cd94388df9bd">More...</a><br /></td></tr>
 <tr class="separator:aa9962ee86c02b544e158cd94388df9bd inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecb2677fb4c62b9a1a08e5890ea4743b inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="aecb2677fb4c62b9a1a08e5890ea4743b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>unset_bit</b> (u16 adr, u8 bitmask)</td></tr>
+<tr class="memitem:aecb2677fb4c62b9a1a08e5890ea4743b inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#aecb2677fb4c62b9a1a08e5890ea4743b">unset_bit</a> (u16 adr, u8 bitmask)</td></tr>
+<tr class="memdesc:aecb2677fb4c62b9a1a08e5890ea4743b inherit pub_methods_classcard"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unset a bit in a byte on the bus.  <a href="classcard.html#aecb2677fb4c62b9a1a08e5890ea4743b">More...</a><br /></td></tr>
 <tr class="separator:aecb2677fb4c62b9a1a08e5890ea4743b inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab210eb529f3a153ab99822cda9492b3c inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="ab210eb529f3a153ab99822cda9492b3c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_if_bit</b> (u16 adr, u8 bitmask, bool value)</td></tr>
+<tr class="memitem:ab210eb529f3a153ab99822cda9492b3c inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#ab210eb529f3a153ab99822cda9492b3c">set_if_bit</a> (u16 adr, u8 bitmask, bool value)</td></tr>
+<tr class="memdesc:ab210eb529f3a153ab99822cda9492b3c inherit pub_methods_classcard"><td class="mdescLeft">&#160;</td><td class="mdescRight">Un/set a bit in a byte on the bus by condition.  <a href="classcard.html#ab210eb529f3a153ab99822cda9492b3c">More...</a><br /></td></tr>
 <tr class="separator:ab210eb529f3a153ab99822cda9492b3c inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade923e46176265c6db021f741d109dba inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="ade923e46176265c6db021f741d109dba"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_w_locked</b> () const</td></tr>
-<tr class="separator:ade923e46176265c6db021f741d109dba inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57e0746acc76ec3ac4cd6d7b0ad5f853 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a57e0746acc76ec3ac4cd6d7b0ad5f853"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>w_lock</b> ()</td></tr>
-<tr class="separator:a57e0746acc76ec3ac4cd6d7b0ad5f853 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d920b036be2033a5c337a683bde300c inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a9d920b036be2033a5c337a683bde300c"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>w_unlock</b> ()</td></tr>
-<tr class="separator:a9d920b036be2033a5c337a683bde300c inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a133fcec7327ff3e848ca0c7e0c2e8122 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a133fcec7327ff3e848ca0c7e0c2e8122"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_irq</b> () const</td></tr>
-<tr class="separator:a133fcec7327ff3e848ca0c7e0c2e8122 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a831cb33b9e66de3808fa0ca5a7458e34 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a831cb33b9e66de3808fa0ca5a7458e34"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>raise_irq</b> (bool value)</td></tr>
-<tr class="separator:a831cb33b9e66de3808fa0ca5a7458e34 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acda2f3ac26f4d8e8f2e583799458e366 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="acda2f3ac26f4d8e8f2e583799458e366"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#acda2f3ac26f4d8e8f2e583799458e366">is_w_locked</a> () const</td></tr>
+<tr class="memdesc:acda2f3ac26f4d8e8f2e583799458e366 inherit pub_methods_classcard"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the card is write-locked. <br /></td></tr>
+<tr class="separator:acda2f3ac26f4d8e8f2e583799458e366 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08987729c7f53ba0fd3462e2d5ca8eae inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a08987729c7f53ba0fd3462e2d5ca8eae"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#a08987729c7f53ba0fd3462e2d5ca8eae">w_lock</a> ()</td></tr>
+<tr class="memdesc:a08987729c7f53ba0fd3462e2d5ca8eae inherit pub_methods_classcard"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lock the card for writing. <br /></td></tr>
+<tr class="separator:a08987729c7f53ba0fd3462e2d5ca8eae inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb5526b21831ac5fe40ade8de19c9ed3 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="aeb5526b21831ac5fe40ade8de19c9ed3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#aeb5526b21831ac5fe40ade8de19c9ed3">w_unlock</a> ()</td></tr>
+<tr class="memdesc:aeb5526b21831ac5fe40ade8de19c9ed3 inherit pub_methods_classcard"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unlock the card for writing. <br /></td></tr>
+<tr class="separator:aeb5526b21831ac5fe40ade8de19c9ed3 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5aca5465f1771a8fa77cd0deb33ed996 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a5aca5465f1771a8fa77cd0deb33ed996"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#a5aca5465f1771a8fa77cd0deb33ed996">is_irq</a> () const</td></tr>
+<tr class="memdesc:a5aca5465f1771a8fa77cd0deb33ed996 inherit pub_methods_classcard"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the card has an IRQ raised. <br /></td></tr>
+<tr class="separator:a5aca5465f1771a8fa77cd0deb33ed996 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4841b21668816977ff2266d6667593e inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="ab4841b21668816977ff2266d6667593e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#ab4841b21668816977ff2266d6667593e">raise_irq</a> (bool value)</td></tr>
+<tr class="memdesc:ab4841b21668816977ff2266d6667593e inherit pub_methods_classcard"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raise or clear the IRQ trigger. <br /></td></tr>
+<tr class="separator:ab4841b21668816977ff2266d6667593e inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -171,8 +184,49 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 <div class="textblock"><h3>template&lt;u16 start_adr, u16 capacity, bool construct_then_write_lock&gt;<br />
 class data_card&lt; start_adr, capacity, construct_then_write_lock &gt;</h3>
 
-<dl class="section warning"><dt>Warning</dt><dd>Out of range addresses are not checked, they should be checked by the bus instead, to avoid calling in_range() twice. </dd></dl>
+<p>A card that holds a fixed amount of data. It's mainly a superclass for ROM and RAM cards. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">start_adr</td><td>The starting address of the card. </td></tr>
+    <tr><td class="paramname">capacity</td><td>The size in bytes of the card starting from the start address. </td></tr>
+    <tr><td class="paramname">construct_then_write_lock</td><td>Whether the card should be write-locked after construction. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section warning"><dt>Warning</dt><dd>Out of range addresses are not checked, they should be checked by the bus instead, to avoid calling <a class="el" href="classdata__card.html#a7a3504e6a4394ef2b0f8d490d22b9029" title="Check if an address on the bus is in the card&#39;s range.">in_range()</a> twice. </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa83d86727fadf2f0da35ea8c9b59495b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa83d86727fadf2f0da35ea8c9b59495b">&#9670;&nbsp;</a></span>get_irq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;u16 start_adr, u16 capacity, bool construct_then_write_lock&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::array&lt;u8, 3&gt; <a class="el" href="classdata__card.html">data_card</a>&lt; start_adr, capacity, construct_then_write_lock &gt;::get_irq </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the IRQ instruction (and possible operands). </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classbus.html#a1673002793a022d9e89aacfbeeeb71fc" title="Gets the IRQ instruction (and possible operands).">bus::get_irq()</a> </dd></dl>
+
+<p>Implements <a class="el" href="classcard.html#a4ef348c61f7138914f015c57d2f6a0be">card</a>.</p>
+
+</div>
+</div>
 <a id="a1ef6d64e85c7c9c30396b8b1920589a4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1ef6d64e85c7c9c30396b8b1920589a4">&#9670;&nbsp;</a></span>refresh()</h2>
 
@@ -199,7 +253,56 @@ template&lt;u16 start_adr, u16 capacity, bool construct_then_write_lock&gt; </di
 </div><div class="memdoc">
 <dl class="section note"><dt>Note</dt><dd>Unused methods. </dd></dl>
 
-<p>Implements <a class="el" href="classcard.html">card</a>.</p>
+<p>Implements <a class="el" href="classcard.html#ae39a92dd99c80e0756cc1d8ea28ca6c4">card</a>.</p>
+
+</div>
+</div>
+<a id="a06a184b77e0e679a4852eeed77ef6e72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06a184b77e0e679a4852eeed77ef6e72">&#9670;&nbsp;</a></span>write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;u16 start_adr, u16 capacity, bool construct_then_write_lock&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classdata__card.html">data_card</a>&lt; start_adr, capacity, construct_then_write_lock &gt;::write </td>
+          <td>(</td>
+          <td class="paramtype">u16&#160;</td>
+          <td class="paramname"><em>adr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8&#160;</td>
+          <td class="paramname"><em>byte</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write a byte to the card. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">adr</td><td>The address to write to. </td></tr>
+    <tr><td class="paramname">byte</td><td>The byte to write. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classcard.html#ae4b1863113c0e72b7de13f3774776fdb">card</a>.</p>
 
 </div>
 </div>

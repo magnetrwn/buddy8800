@@ -83,23 +83,23 @@ $(document).ready(function(){initNavTree('classcpu.html',''); initResizable(); }
 
 <div class="header">
   <div class="headertitle">
-<div class="title">cpu Member List</div>  </div>
+<div class="title">cpu&lt; bus_iface &gt; Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="classcpu.html">cpu</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a>, including all inherited members.</p>
 <table class="directory">
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>clear</b>() (defined in <a class="el" href="classcpu.html">cpu</a>)</td><td class="entry"><a class="el" href="classcpu.html">cpu</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>cpu</b>(bus &amp;cardbus) (defined in <a class="el" href="classcpu.html">cpu</a>)</td><td class="entry"><a class="el" href="classcpu.html">cpu</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classcpu.html#a170fe10d4fcedd82bafd0d438d95acbe">do_pseudo_bdos</a>(bool should)</td><td class="entry"><a class="el" href="classcpu.html">cpu</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classcpu.html#a639550f25a52725e4470c46d061e32ed">execute</a>(u8 opcode)</td><td class="entry"><a class="el" href="classcpu.html">cpu</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classcpu.html#a39edbddfff0360a2da08cd1d401a0026">is_halted</a>() const</td><td class="entry"><a class="el" href="classcpu.html">cpu</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classcpu.html#a2cfed77b955c7a00c330ba7b56aea76c">load</a>(std::vector&lt; u8 &gt;::iterator begin, std::vector&lt; u8 &gt;::iterator end, usize offset=0, bool auto_reset_vector=false)</td><td class="entry"><a class="el" href="classcpu.html">cpu</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classcpu.html#a166c79829cb2c3540389efa304382139">load_state</a>(const cpu_state &amp;new_state)</td><td class="entry"><a class="el" href="classcpu.html">cpu</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classcpu.html#a799dee05a8d3ddaea1d88d1827833c0d">reset_pseudo_bdos_redirect</a>()</td><td class="entry"><a class="el" href="classcpu.html">cpu</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classcpu.html#af63f9154a462efd8c1b8a64122de1442">save_state</a>() const</td><td class="entry"><a class="el" href="classcpu.html">cpu</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classcpu.html#a5d5f21f65abae02c6d9bc0bc9b8ba413">set_pseudo_bdos_redirect</a>(const char *filename)</td><td class="entry"><a class="el" href="classcpu.html">cpu</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classcpu.html#a8ba6089ae338a2747c78bc98fae67a46">step</a>()</td><td class="entry"><a class="el" href="classcpu.html">cpu</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classcpu.html#a2431272df1fa9db7b37770dd95702807">clear</a>()</td><td class="entry"><a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>cpu</b>(bus_iface init_adr_space) (defined in <a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a>)</td><td class="entry"><a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classcpu.html#ad684d25913e8aaf0139fa3dc47ce9e40">do_pseudo_bdos</a>(bool should)</td><td class="entry"><a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classcpu.html#a9d70c847732b6891a759352d27e896ee">execute</a>(u8 opcode)</td><td class="entry"><a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classcpu.html#a010e335fc9f1797e72bfc5585e9238f6">is_halted</a>() const</td><td class="entry"><a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classcpu.html#a6e84cf78a4fbeb96d538fd24d0bd3678">load</a>(std::vector&lt; u8 &gt;::iterator begin, std::vector&lt; u8 &gt;::iterator end, usize offset=0, bool auto_reset_vector=false)</td><td class="entry"><a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classcpu.html#a6c72852ac69a7814d8e0faa836d3abf3">load_state</a>(const cpu_state &amp;new_state)</td><td class="entry"><a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classcpu.html#a850125d4d67383c10cbb1ba594d1db18">reset_pseudo_bdos_redirect</a>()</td><td class="entry"><a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classcpu.html#ae6100df727ce03c23512fee8d2698fc5">save_state</a>() const</td><td class="entry"><a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classcpu.html#abbf017b99cf39776da5a4bf517fb9226">set_pseudo_bdos_redirect</a>(const char *filename)</td><td class="entry"><a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classcpu.html#acd0b563c6831d88a883f3bcd7d2257b4">step</a>()</td><td class="entry"><a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

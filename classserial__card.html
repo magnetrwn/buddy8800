@@ -97,56 +97,64 @@ Inheritance diagram for serial_card&lt; start_adr, base_clock &gt;:</div>
  <div class="center">
   <img src="classserial__card.png" usemap="#serial_5Fcard_3C_20start_5Fadr_2C_20base_5Fclock_20_3E_map" alt=""/>
   <map id="serial_5Fcard_3C_20start_5Fadr_2C_20base_5Fclock_20_3E_map" name="serial_5Fcard_3C_20start_5Fadr_2C_20base_5Fclock_20_3E_map">
-<area href="classcard.html" alt="card" shape="rect" coords="0,0,223,24"/>
+<area href="classcard.html" title="Base class for all cards." alt="card" shape="rect" coords="0,0,223,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad98165537a34d39af6d7b46279656ecb"><td class="memItemLeft" align="right" valign="top"><a id="ad98165537a34d39af6d7b46279656ecb"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>in_range</b> (u16 adr) const override</td></tr>
+<tr class="memitem:ad98165537a34d39af6d7b46279656ecb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#ad98165537a34d39af6d7b46279656ecb">in_range</a> (u16 adr) const override</td></tr>
+<tr class="memdesc:ad98165537a34d39af6d7b46279656ecb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if an address on the bus is in the card's range.  <a href="classserial__card.html#ad98165537a34d39af6d7b46279656ecb">More...</a><br /></td></tr>
 <tr class="separator:ad98165537a34d39af6d7b46279656ecb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c9538c4dd7523fa67952e30d648ca4c"><td class="memItemLeft" align="right" valign="top"><a id="a3c9538c4dd7523fa67952e30d648ca4c"></a>
-<a class="el" href="structcard__identify.html">card_identify</a>&#160;</td><td class="memItemRight" valign="bottom"><b>identify</b> () override</td></tr>
+<tr class="memitem:a3c9538c4dd7523fa67952e30d648ca4c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcard__identify.html">card_identify</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#a3c9538c4dd7523fa67952e30d648ca4c">identify</a> () override</td></tr>
+<tr class="memdesc:a3c9538c4dd7523fa67952e30d648ca4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get information about the card.  <a href="classserial__card.html#a3c9538c4dd7523fa67952e30d648ca4c">More...</a><br /></td></tr>
 <tr class="separator:a3c9538c4dd7523fa67952e30d648ca4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3471a3d7caed345f690b1c72601800da"><td class="memItemLeft" align="right" valign="top"><a id="a3471a3d7caed345f690b1c72601800da"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>refresh</b> () override</td></tr>
+<tr class="memitem:a3471a3d7caed345f690b1c72601800da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#a3471a3d7caed345f690b1c72601800da">refresh</a> () override</td></tr>
+<tr class="memdesc:a3471a3d7caed345f690b1c72601800da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refresh the card to allow periodic I/O, timer or sync operation.  <a href="classserial__card.html#a3471a3d7caed345f690b1c72601800da">More...</a><br /></td></tr>
 <tr class="separator:a3471a3d7caed345f690b1c72601800da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a912517ea46c7e3b702d94c8ddba2af32"><td class="memItemLeft" align="right" valign="top">u8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#a912517ea46c7e3b702d94c8ddba2af32">read</a> (u16 adr) override</td></tr>
-<tr class="separator:a912517ea46c7e3b702d94c8ddba2af32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a358e394bf90213f8958d44603f3aaaf2"><td class="memItemLeft" align="right" valign="top">u8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#a358e394bf90213f8958d44603f3aaaf2">read</a> (u16 adr) const override</td></tr>
+<tr class="memdesc:a358e394bf90213f8958d44603f3aaaf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a byte from the card.  <a href="classserial__card.html#a358e394bf90213f8958d44603f3aaaf2">More...</a><br /></td></tr>
+<tr class="separator:a358e394bf90213f8958d44603f3aaaf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfff847039d36c47cbf4a0133d9719b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#abfff847039d36c47cbf4a0133d9719b2">write</a> (u16 adr, u8 byte) override</td></tr>
+<tr class="memdesc:abfff847039d36c47cbf4a0133d9719b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a byte to the card.  <a href="classserial__card.html#abfff847039d36c47cbf4a0133d9719b2">More...</a><br /></td></tr>
 <tr class="separator:abfff847039d36c47cbf4a0133d9719b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af189f02c49c43bf587290ba93baa0996"><td class="memItemLeft" align="right" valign="top"><a id="af189f02c49c43bf587290ba93baa0996"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> () override</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#af189f02c49c43bf587290ba93baa0996">clear</a> () override</td></tr>
+<tr class="memdesc:af189f02c49c43bf587290ba93baa0996"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the card data or configuration. <br /></td></tr>
 <tr class="separator:af189f02c49c43bf587290ba93baa0996"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:a11a4a0b669e5f954b9f8ce7c098d9ae0"><td class="memItemLeft" align="right" valign="top">std::array&lt; u8, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#a11a4a0b669e5f954b9f8ce7c098d9ae0">get_irq</a> () override</td></tr>
 <tr class="separator:a11a4a0b669e5f954b9f8ce7c098d9ae0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classcard"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classcard')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classcard.html">card</a></td></tr>
-<tr class="memitem:aa9962ee86c02b544e158cd94388df9bd inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="aa9962ee86c02b544e158cd94388df9bd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_bit</b> (u16 adr, u8 bitmask)</td></tr>
+<tr class="memitem:aa9962ee86c02b544e158cd94388df9bd inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#aa9962ee86c02b544e158cd94388df9bd">set_bit</a> (u16 adr, u8 bitmask)</td></tr>
+<tr class="memdesc:aa9962ee86c02b544e158cd94388df9bd inherit pub_methods_classcard"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a bit in a byte on the bus.  <a href="classcard.html#aa9962ee86c02b544e158cd94388df9bd">More...</a><br /></td></tr>
 <tr class="separator:aa9962ee86c02b544e158cd94388df9bd inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecb2677fb4c62b9a1a08e5890ea4743b inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="aecb2677fb4c62b9a1a08e5890ea4743b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>unset_bit</b> (u16 adr, u8 bitmask)</td></tr>
+<tr class="memitem:aecb2677fb4c62b9a1a08e5890ea4743b inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#aecb2677fb4c62b9a1a08e5890ea4743b">unset_bit</a> (u16 adr, u8 bitmask)</td></tr>
+<tr class="memdesc:aecb2677fb4c62b9a1a08e5890ea4743b inherit pub_methods_classcard"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unset a bit in a byte on the bus.  <a href="classcard.html#aecb2677fb4c62b9a1a08e5890ea4743b">More...</a><br /></td></tr>
 <tr class="separator:aecb2677fb4c62b9a1a08e5890ea4743b inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab210eb529f3a153ab99822cda9492b3c inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="ab210eb529f3a153ab99822cda9492b3c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_if_bit</b> (u16 adr, u8 bitmask, bool value)</td></tr>
+<tr class="memitem:ab210eb529f3a153ab99822cda9492b3c inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#ab210eb529f3a153ab99822cda9492b3c">set_if_bit</a> (u16 adr, u8 bitmask, bool value)</td></tr>
+<tr class="memdesc:ab210eb529f3a153ab99822cda9492b3c inherit pub_methods_classcard"><td class="mdescLeft">&#160;</td><td class="mdescRight">Un/set a bit in a byte on the bus by condition.  <a href="classcard.html#ab210eb529f3a153ab99822cda9492b3c">More...</a><br /></td></tr>
 <tr class="separator:ab210eb529f3a153ab99822cda9492b3c inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade923e46176265c6db021f741d109dba inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="ade923e46176265c6db021f741d109dba"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_w_locked</b> () const</td></tr>
-<tr class="separator:ade923e46176265c6db021f741d109dba inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57e0746acc76ec3ac4cd6d7b0ad5f853 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a57e0746acc76ec3ac4cd6d7b0ad5f853"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>w_lock</b> ()</td></tr>
-<tr class="separator:a57e0746acc76ec3ac4cd6d7b0ad5f853 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d920b036be2033a5c337a683bde300c inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a9d920b036be2033a5c337a683bde300c"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>w_unlock</b> ()</td></tr>
-<tr class="separator:a9d920b036be2033a5c337a683bde300c inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a133fcec7327ff3e848ca0c7e0c2e8122 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a133fcec7327ff3e848ca0c7e0c2e8122"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_irq</b> () const</td></tr>
-<tr class="separator:a133fcec7327ff3e848ca0c7e0c2e8122 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a831cb33b9e66de3808fa0ca5a7458e34 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a831cb33b9e66de3808fa0ca5a7458e34"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>raise_irq</b> (bool value)</td></tr>
-<tr class="separator:a831cb33b9e66de3808fa0ca5a7458e34 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acda2f3ac26f4d8e8f2e583799458e366 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="acda2f3ac26f4d8e8f2e583799458e366"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#acda2f3ac26f4d8e8f2e583799458e366">is_w_locked</a> () const</td></tr>
+<tr class="memdesc:acda2f3ac26f4d8e8f2e583799458e366 inherit pub_methods_classcard"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the card is write-locked. <br /></td></tr>
+<tr class="separator:acda2f3ac26f4d8e8f2e583799458e366 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08987729c7f53ba0fd3462e2d5ca8eae inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a08987729c7f53ba0fd3462e2d5ca8eae"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#a08987729c7f53ba0fd3462e2d5ca8eae">w_lock</a> ()</td></tr>
+<tr class="memdesc:a08987729c7f53ba0fd3462e2d5ca8eae inherit pub_methods_classcard"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lock the card for writing. <br /></td></tr>
+<tr class="separator:a08987729c7f53ba0fd3462e2d5ca8eae inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb5526b21831ac5fe40ade8de19c9ed3 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="aeb5526b21831ac5fe40ade8de19c9ed3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#aeb5526b21831ac5fe40ade8de19c9ed3">w_unlock</a> ()</td></tr>
+<tr class="memdesc:aeb5526b21831ac5fe40ade8de19c9ed3 inherit pub_methods_classcard"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unlock the card for writing. <br /></td></tr>
+<tr class="separator:aeb5526b21831ac5fe40ade8de19c9ed3 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5aca5465f1771a8fa77cd0deb33ed996 inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="a5aca5465f1771a8fa77cd0deb33ed996"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#a5aca5465f1771a8fa77cd0deb33ed996">is_irq</a> () const</td></tr>
+<tr class="memdesc:a5aca5465f1771a8fa77cd0deb33ed996 inherit pub_methods_classcard"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the card has an IRQ raised. <br /></td></tr>
+<tr class="separator:a5aca5465f1771a8fa77cd0deb33ed996 inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4841b21668816977ff2266d6667593e inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top"><a id="ab4841b21668816977ff2266d6667593e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#ab4841b21668816977ff2266d6667593e">raise_irq</a> (bool value)</td></tr>
+<tr class="memdesc:ab4841b21668816977ff2266d6667593e inherit pub_methods_classcard"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raise or clear the IRQ trigger. <br /></td></tr>
+<tr class="separator:ab4841b21668816977ff2266d6667593e inherit pub_methods_classcard"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -162,7 +170,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 <div class="textblock"><h3>template&lt;u16 start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt;<br />
 class serial_card&lt; start_adr, base_clock &gt;</h3>
 
-<p>Based on the MC6850 ACIA. </p><dl class="section warning"><dt>Warning</dt><dd>Out of range addresses are not checked, they should be checked by the bus instead, to avoid calling in_range() twice. </dd></dl>
+<p>Based on the MC6850 ACIA. </p><dl class="section warning"><dt>Warning</dt><dd>Out of range addresses are not checked, they should be checked by the bus instead, to avoid calling <a class="el" href="classserial__card.html#ad98165537a34d39af6d7b46279656ecb" title="Check if an address on the bus is in the card&#39;s range.">in_range()</a> twice. </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a11a4a0b669e5f954b9f8ce7c098d9ae0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a11a4a0b669e5f954b9f8ce7c098d9ae0">&#9670;&nbsp;</a></span>get_irq()</h2>
@@ -190,12 +198,84 @@ template&lt;u16 start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt; </div>
 </div><div class="memdoc">
 <dl class="section note"><dt>Note</dt><dd>Unused methods. </dd></dl>
 
-<p>Implements <a class="el" href="classcard.html">card</a>.</p>
+<p>Implements <a class="el" href="classcard.html#a4ef348c61f7138914f015c57d2f6a0be">card</a>.</p>
 
 </div>
 </div>
-<a id="a912517ea46c7e3b702d94c8ddba2af32"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a912517ea46c7e3b702d94c8ddba2af32">&#9670;&nbsp;</a></span>read()</h2>
+<a id="a3c9538c4dd7523fa67952e30d648ca4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c9538c4dd7523fa67952e30d648ca4c">&#9670;&nbsp;</a></span>identify()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;u16 start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcard__identify.html">card_identify</a> <a class="el" href="classserial__card.html">serial_card</a>&lt; start_adr, base_clock &gt;::identify </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get information about the card. </p>
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structcard__identify.html" title="Holds information that can be used to identify a card.">card_identify</a> struct with lengthy details about the card. </dd></dl>
+
+<p>Implements <a class="el" href="classcard.html#aa242bc5baf3e6276c4c3ba5ddf7610a4">card</a>.</p>
+
+</div>
+</div>
+<a id="ad98165537a34d39af6d7b46279656ecb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad98165537a34d39af6d7b46279656ecb">&#9670;&nbsp;</a></span>in_range()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;u16 start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classserial__card.html">serial_card</a>&lt; start_adr, base_clock &gt;::in_range </td>
+          <td>(</td>
+          <td class="paramtype">u16&#160;</td>
+          <td class="paramname"><em>adr</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if an address on the bus is in the card's range. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">adr</td><td>The address to check. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the address is in the card's range, false otherwise. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This method should always be used when interacting with cards from the bus, to avoid out of range accesses. It is not used by the cards themselves to avoid double checking. </dd></dl>
+
+<p>Implements <a class="el" href="classcard.html#ab32f79943888d74e0a506e78b2d7406c">card</a>.</p>
+
+</div>
+</div>
+<a id="a358e394bf90213f8958d44603f3aaaf2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a358e394bf90213f8958d44603f3aaaf2">&#9670;&nbsp;</a></span>read()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -210,6 +290,46 @@ template&lt;u16 start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt; </div>
           <td>(</td>
           <td class="paramtype">u16&#160;</td>
           <td class="paramname"><em>adr</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read a byte from the card. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">adr</td><td>The address to read from. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The byte read from the card. </dd></dl>
+<p>TX_DATA is write-only</p>
+<p>CONTROL is write-only</p>
+
+<p>Implements <a class="el" href="classcard.html#a0ea76feb6cf75cf51ba3362f4ab50190">card</a>.</p>
+
+</div>
+</div>
+<a id="a3471a3d7caed345f690b1c72601800da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3471a3d7caed345f690b1c72601800da">&#9670;&nbsp;</a></span>refresh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;u16 start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classserial__card.html">serial_card</a>&lt; start_adr, base_clock &gt;::refresh </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -219,10 +339,11 @@ template&lt;u16 start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>TX_DATA is write-only</p>
-<p>CONTROL is write-only</p>
 
-<p>Implements <a class="el" href="classcard.html">card</a>.</p>
+<p>Refresh the card to allow periodic I/O, timer or sync operation. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classbus.html#ac158680334e36add350e716e6a0ec69b" title="Refreshes all cards on the bus.">bus::refresh()</a> </dd></dl>
+
+<p>Implements <a class="el" href="classcard.html#ae39a92dd99c80e0756cc1d8ea28ca6c4">card</a>.</p>
 
 </div>
 </div>
@@ -261,6 +382,15 @@ template&lt;u16 start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Write a byte to the card. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">adr</td><td>The address to write to. </td></tr>
+    <tr><td class="paramname">byte</td><td>The byte to write. </td></tr>
+  </table>
+  </dd>
+</dl>
 <p>RX_DATA is read-only</p>
 <p>Counter Divide select bits</p>
 <p>Word Select bits</p>
@@ -268,7 +398,7 @@ template&lt;u16 start_adr, usize base_clock = SERIAL_BASE_CLOCK&gt; </div>
 <p>Interrupt Enable bit (TODO: probably wrong behavior)</p>
 <p>STATUS is read-only</p>
 
-<p>Implements <a class="el" href="classcard.html">card</a>.</p>
+<p>Implements <a class="el" href="classcard.html#ae4b1863113c0e72b7de13f3774776fdb">card</a>.</p>
 
 </div>
 </div>
