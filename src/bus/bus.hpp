@@ -17,7 +17,7 @@
  *
  * A design choice was made to try to stay as close as possible as an indexable array of memory with the bus, so that it can
  * be easily replaced by a simple `std::array<u8, 65536>`. This is why the `read()` and `write()` methods are called by an
- * additional middle class, `bus_subscr_iface`, which acts as a proxy to address locations and call reads and writes by the
+ * additional middle class, `bus_index_iface`, which acts as a proxy to address locations and call reads and writes by the
  * cast and assignment operators.
  *
  * @note The CPU, while in reality is placed on a card, it's not here. The bus acts as glue between the plentitude
@@ -30,63 +30,65 @@ class bus {
 private:
 
     /**
-     * @brief Proxy class to subscript (index) the bus.
+     * @brief Proxy class to index the bus.
      *
      * This class puts itself in-between each index to the bus. It allows for a more natural way to read and write to the bus,
      * by calling the `read()` and `write()` methods via cast and assignment operators. There are also increment and decrement
      * operators for convenience, which will read the value, increment or decrement it, and write it back to the bus. This could
      * have interesting effects on non-memory devices.
      */
-    class bus_subscr_iface {
+    class bus_index_iface {
     private:
         bus& bus_ref;
         u16 adr;
 
     public:
-        /// @brief Casts a subscripted location on the bus to a u8.
+        /// @brief Casts a indexed location on the bus to a u8.
         inline operator u8() const { return bus_ref.read(adr); }
         
-        /// @brief Prefix operator, increments subscripted bus location.
+        /// @brief Prefix operator, increments indexed bus location.
+        /// @note The double read in this method is due to possibly interfacing with MMIO that doesn't behave like a simple value.
         inline u8 operator++() {
             u8 value = bus_ref.read(adr);
             bus_ref.write(adr, value + 1);
-            return value + 1;
+            return bus_ref.read(adr);
         }
 
-        /// @brief Prefix operator, decrements subscripted bus location.
+        /// @brief Prefix operator, decrements indexed bus location.
+        /// @note The double read in this method is due to possibly interfacing with MMIO that doesn't behave like a simple value.
         inline u8 operator--() {
             u8 value = bus_ref.read(adr);
             bus_ref.write(adr, value - 1);
-            return value - 1;
+            return bus_ref.read(adr);
         }
 
-        /// @brief Postfix operator, increments subscripted bus location.
+        /// @brief Postfix operator, increments indexed bus location.
         inline u8 operator++(int) {
             u8 value = bus_ref.read(adr);
             bus_ref.write(adr, value + 1);
             return value;
         }
 
-        /// @brief Postfix operator, decrements subscripted bus location.
+        /// @brief Postfix operator, decrements indexed bus location.
         inline u8 operator--(int) {
             u8 value = bus_ref.read(adr);
             bus_ref.write(adr, value - 1);
             return value;
         }
 
-        /// @brief Assignment operator, writes a byte to the subscripted bus location.
-        inline bus_subscr_iface& operator=(u8 byte) { bus_ref.write(adr, byte); return *this; }
+        /// @brief Assignment operator, writes a byte to the indexed bus location.
+        inline bus_index_iface& operator=(u8 byte) { bus_ref.write(adr, byte); return *this; }
         
-        /// @brief Assignment operator, writes a byte read from another subscripted bus location.
+        /// @brief Assignment operator, writes a byte read from another indexed bus location.
         /// @note This method prevents self-assignment.
-        inline bus_subscr_iface& operator=(const bus_subscr_iface& other) {
+        inline bus_index_iface& operator=(const bus_index_iface& other) {
             if (this != &other)
                 bus_ref.write(adr, other.bus_ref.read(other.adr));
 
             return *this;
         }
 
-        bus_subscr_iface(bus& b, u16 adr) : bus_ref(b), adr(adr) {}
+        bus_index_iface(bus& b, u16 adr) : bus_ref(b), adr(adr) {}
     };
 
     static constexpr usize MAX_BUS_CARDS = 18;
@@ -164,9 +166,10 @@ public:
      * @param adr The address to read from.
      * @return The byte read from the first valid card on the bus.
      * @warning This method will return only the first valid card slot that is in range of the address.
+     * You may want to place MMIO that overlaps with memory cards in earlier slots...
      * @todo Handle this warning.
      */
-    inline u8 read(u16 adr) {
+    inline u8 read(u16 adr) const {
         for (card* card : cards)
             if (card != NO_CARD and card->in_range(adr))
                 return card->read(adr);
@@ -187,11 +190,18 @@ public:
     }
 
     /**
-     * @brief Subscripts the bus.
-     * @param adr The address to subscript.
-     * @return A proxy object to subscript the bus.
+     * @brief Indexes the bus.
+     * @param adr The address to index.
+     * @return A proxy object to index the bus.
      */
-    inline bus_subscr_iface operator[](u16 adr) { return bus_subscr_iface(*this, adr); }
+    inline bus_index_iface operator[](u16 adr) { return bus_index_iface(*this, adr); }
+
+    /**
+     * @brief A shortcut to read the bus using an index directly without a proxy object.
+     * @param adr The address to index.
+     * @return The byte read from the bus.
+     */
+    inline u8 operator[](u16 adr) const { return this->read(adr); }
 
     /**
      * @brief Refreshes all cards on the bus.
@@ -220,8 +230,8 @@ public:
     }
 
     /**
-     * @brief Gets the IRQ instruction(s).
-     * @return A few instructions according to the type of interrupt the device uses to send.
+     * @brief Gets the IRQ instruction (and possible operands).
+     * @return An instruction according to the type of interrupt the device uses to send.
      * @throws std::runtime_error if no IRQ is raised.
      *
      * When the 8080 accepts an interrupt request, it will look for an instruction on the data bus to run. Most commonly
@@ -252,19 +262,17 @@ public:
      *
      * The output is formatted as follows:
      * ```
-     * slot: start-address/address-range: card-type, card-details
+     * slot: start-address-hex/address-range: card-type, card-details
      * ```
      */
     inline void print_mmap() {
         for (usize i = 0; i < MAX_BUS_CARDS; ++i)
             if (cards[i] != NO_CARD) {
-                u16 start_adr = cards[i]->identify().start_adr;
-                u16 end_adr = start_adr + cards[i]->identify().adr_range;
-                const char* detail = cards[i]->identify().detail;
+                card_identify ident = cards[i]->identify();
                 std::cout 
                     << i << ": " 
-                    << util::to_hex_s(start_adr) << "/" << util::to_hex_s(end_adr) << ": " 
-                    << cards[i]->identify().name << (*detail ? ", " : "") << (*detail ? detail : "")
+                    << util::to_hex_s(ident.start_adr) << "/" << ident.adr_range << ": " 
+                    << ident.name << (*ident.detail ? ", " : "") << (*ident.detail ? ident.detail : "")
                     << std::endl;
             }
     }

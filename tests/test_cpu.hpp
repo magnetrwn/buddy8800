@@ -14,6 +14,8 @@ constexpr static const char* TESTFILE[TESTS_N] = { "cpudiag.bin", "test.com", "8
 constexpr static const char* PASSED[TESTS_N] = { "ok_cpudiag.txt", "ok_test.txt", "ok_8080pre.txt", "ok_diag2.txt" };
 constexpr static const char* OUTPUT = "out.txt";
 
+using cpu_t = cpu<std::array<u8, 65536>>;
+
 inline std::vector<u8> read_bin(const char* filename) {
     std::ifstream file(filename, std::ios::binary);
     if (!file.is_open())
@@ -21,7 +23,7 @@ inline std::vector<u8> read_bin(const char* filename) {
     return std::vector<u8>(std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>());
 }
 
-inline void test(cpu& emu, const char* prg, const char* ok) {
+inline void test(cpu_t& emu, const char* prg, const char* ok) {
     std::vector<u8> programv = read_bin(prg);
     std::vector<u8> okv = read_bin(ok);
 
@@ -48,10 +50,7 @@ inline void test(cpu& emu, const char* prg, const char* ok) {
 }
 
 TEST_CASE("CPU running various diagnostics", "[cpu]") {
-    bus cardbus;
-    cardbus.insert(new ram_card<0x0000, 65535>, 0);
-
-    cpu emu(cardbus);
+    cpu_t emu({0});
 
     for (usize i = 0; i < TESTS_N; ++i)
         SECTION("Running " + std::string(TESTFILE[i]))

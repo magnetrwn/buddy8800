@@ -2,7 +2,8 @@
 
 **An Intel 8080 emulated on an S-100 bus with a MITS 88 2SIO (2x Motorola 6850) serial expansion card. Designed for running BASIC and CP/M over a PTY.**
 
-![Altair 8800B](media/altair-wikipedia-public-domain-360w.webp)
+<!--![Altair 8800B](media/altair-wikipedia-public-domain-360w.webp)-->
+![Looping cpudiag.bin runs on the CPU.](media/cpudiag-in-a-loop.gif)
 
 ### Getting Started
 
@@ -56,6 +57,7 @@ Here are some of the resources I used to figure out various aspects of this proj
 + [space-invade.rs/cpudiag.lst](https://github.com/cbeust/space-invade.rs/blob/main/emulator/cpudiag.lst), a very useful listing of the assembled `cpudiag.bin` program.
 + [Altair Clone/Programmers Manual](https://altairclone.com/downloads/manuals/8080%20Programmers%20Manual.pdf), very useful for understanding how opcodes run and patterns in the instruction set.
 + [Auxiliary Carry and the Intel 8080's logical instructions](https://retrocomputing.stackexchange.com/questions/14977/auxiliary-carry-and-the-intel-8080s-logical-instructions), a very specific question that fixed diagnostics failing and is not very easy to find.
++ [How do interrupts work on the Intel 8080?](https://stackoverflow.com/questions/2165914/how-do-interrupts-work-on-the-intel-8080).
 
 **Altair 8800**
 
@@ -70,6 +72,7 @@ Here are some of the resources I used to figure out various aspects of this proj
 
 + [This Slide](https://ocw.ump.edu.my/pluginfile.php/423/mod_resource/content/1/Chapter%2013.pdf) provides a general overview in a neat format, but not very in-depth.
 + [Motorola 6850 ACIA Datasheet](https://www.cpcwiki.eu/imgs/3/3f/MC6850.pdf), the original datasheet for the Motorola 6850 ACIA.
++ [Motorola 6850 ACIA](http://beyondbrown.d-bug.me/post/motorola-mc6850-acia/), a partial OCR of the datasheet.
 
 **CP/M**
 
