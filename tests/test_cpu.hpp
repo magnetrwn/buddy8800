@@ -7,7 +7,6 @@
 
 #include "typedef.hpp"
 #include "cpu.hpp"
-#include "bus.hpp"
 
 constexpr static const usize TESTS_N = 4;
 constexpr static const char* TESTFILE[TESTS_N] = { "cpudiag.bin", "test.com", "8080pre.com", "diag2.com" };

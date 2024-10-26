@@ -128,9 +128,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1673002793a022d9e89aacfbeeeb71fc"><td class="memItemLeft" align="right" valign="top">std::array&lt; u8, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#a1673002793a022d9e89aacfbeeeb71fc">get_irq</a> ()</td></tr>
 <tr class="memdesc:a1673002793a022d9e89aacfbeeeb71fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the IRQ instruction (and possible operands).  <a href="classbus.html#a1673002793a022d9e89aacfbeeeb71fc">More...</a><br /></td></tr>
 <tr class="separator:a1673002793a022d9e89aacfbeeeb71fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a254a00b9a58c961c99e1e983eafbb90b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#a254a00b9a58c961c99e1e983eafbb90b">print_mmap</a> ()</td></tr>
-<tr class="memdesc:a254a00b9a58c961c99e1e983eafbb90b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a detailed memory map of the bus.  <a href="classbus.html#a254a00b9a58c961c99e1e983eafbb90b">More...</a><br /></td></tr>
-<tr class="separator:a254a00b9a58c961c99e1e983eafbb90b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70d78c8af1a0e52c760801dea2b54de2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#a70d78c8af1a0e52c760801dea2b54de2">print_mmap</a> () const</td></tr>
+<tr class="memdesc:a70d78c8af1a0e52c760801dea2b54de2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a detailed memory map of the bus.  <a href="classbus.html#a70d78c8af1a0e52c760801dea2b54de2">More...</a><br /></td></tr>
+<tr class="separator:a70d78c8af1a0e52c760801dea2b54de2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1600c50ee9b9e2aeb648a6529b234cf8"><td class="memItemLeft" align="right" valign="top">u8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#a1600c50ee9b9e2aeb648a6529b234cf8">get_slot_by_adr</a> (u16 adr) const</td></tr>
+<tr class="memdesc:a1600c50ee9b9e2aeb648a6529b234cf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get in which slot a card is according to an address.  <a href="classbus.html#a1600c50ee9b9e2aeb648a6529b234cf8">More...</a><br /></td></tr>
+<tr class="separator:a1600c50ee9b9e2aeb648a6529b234cf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a653c79df108c47ff654d18cc601d4d67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#a653c79df108c47ff654d18cc601d4d67">clear</a> ()</td></tr>
 <tr class="memdesc:a653c79df108c47ff654d18cc601d4d67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all cards on the bus.  <a href="classbus.html#a653c79df108c47ff654d18cc601d4d67">More...</a><br /></td></tr>
 <tr class="separator:a653c79df108c47ff654d18cc601d4d67"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,6 +142,8 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><p>Represents the S-100 bus of the emulator. </p>
 <p>This class holds the necessary structures and methods to handle inter-operation of the Intel 8080 CPU with any assortment of cards interacting through a data, address, and control bus according to the S-100 specs, including interrupt vectors.</p>
 <p>A design choice was made to try to stay as close as possible as an indexable array of memory with the bus, so that it can be easily replaced by a simple <code>std::array&lt;u8, 65536&gt;</code>. This is why the <code><a class="el" href="classbus.html#ac0d63d27fb997063625aff06b25fd47b" title="Reads a byte from the bus.">read()</a></code> and <code><a class="el" href="classbus.html#a05d0d594ca803a6f713e3078dcdaf22a" title="Writes a byte to the bus.">write()</a></code> methods are called by an additional middle class, <code>bus_index_iface</code>, which acts as a proxy to address locations and call reads and writes by the cast and assignment operators.</p>
+<dl class="section note"><dt>Note</dt><dd>Conflicting address ranges are allowed but must be explicitly toggled by an <code><a class="el" href="classbus.html#aef6e4de3df548561b9545f0cb341e143" title="Inserts a card into a slot on the bus.">insert()</a></code>. </dd></dl>
+<dl class="section user"><dt></dt><dd></dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The CPU, while in reality is placed on a card, it's not here. The bus acts as glue between the plentitude of cards and the CPU itself. </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>The <code><a class="el" href="classbus.html#a40eeeeb2ba939e469bdff3d35c3f5f67" title="Returns the maximum number of addressable locations on the bus.">size()</a></code> method returns the maximum number of addressable locations on the bus (65536), not the number of cards. While this might look misleading, it's actually an attempt at keeping the same interface as there would be if the instanced bus were to be replaced by a normal <code>std::array&lt;u8, 65536&gt;</code>. </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -209,6 +214,35 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a1600c50ee9b9e2aeb648a6529b234cf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1600c50ee9b9e2aeb648a6529b234cf8">&#9670;&nbsp;</a></span>get_slot_by_adr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">u8 bus::get_slot_by_adr </td>
+          <td>(</td>
+          <td class="paramtype">u16&#160;</td>
+          <td class="paramname"><em>adr</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get in which slot a card is according to an address. </p>
+<dl class="section return"><dt>Returns</dt><dd>The slot closest that accepts the address in its range, 255 if none. </dd></dl>
+
+</div>
+</div>
 <a id="aef6e4de3df548561b9545f0cb341e143"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aef6e4de3df548561b9545f0cb341e143">&#9670;&nbsp;</a></span>insert()</h2>
 
@@ -267,6 +301,7 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section warning"><dt>Warning</dt><dd>This method allows a bus conflict, but in such event, only the earlier slot card will be able to be read from! </dd></dl>
 
 </div>
 </div>
@@ -369,8 +404,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a254a00b9a58c961c99e1e983eafbb90b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a254a00b9a58c961c99e1e983eafbb90b">&#9670;&nbsp;</a></span>print_mmap()</h2>
+<a id="a70d78c8af1a0e52c760801dea2b54de2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70d78c8af1a0e52c760801dea2b54de2">&#9670;&nbsp;</a></span>print_mmap()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -382,7 +417,7 @@ Public Member Functions</h2></td></tr>
           <td class="memname">void bus::print_mmap </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>

@@ -6,7 +6,8 @@ var searchData=
   ['get_5fparity_14',['get_parity',['../classutil.html#a2bfe780e713c7ca26f32f201601cd0e1',1,'util']]],
   ['get_5fregister16_15',['get_register16',['../structcpu__state.html#acc765e63850a9833a7486e49621df66b',1,'cpu_state']]],
   ['get_5fregister8_16',['get_register8',['../structcpu__state.html#aa5c19ebd81fbc6a35100fefb3dce00a3',1,'cpu_state']]],
-  ['get_5fthen_5finc_5fregister16_17',['get_then_inc_register16',['../structcpu__state.html#a1f58d98c7630414fae28f7903b1bcd95',1,'cpu_state']]],
-  ['get_5fthen_5finc_5fregister8_18',['get_then_inc_register8',['../structcpu__state.html#a3a35aaf04e1c04644a5a30ae34def37e',1,'cpu_state']]],
-  ['getch_19',['getch',['../classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0',1,'pty']]]
+  ['get_5fslot_5fby_5fadr_17',['get_slot_by_adr',['../classbus.html#a1600c50ee9b9e2aeb648a6529b234cf8',1,'bus']]],
+  ['get_5fthen_5finc_5fregister16_18',['get_then_inc_register16',['../structcpu__state.html#a1f58d98c7630414fae28f7903b1bcd95',1,'cpu_state']]],
+  ['get_5fthen_5finc_5fregister8_19',['get_then_inc_register8',['../structcpu__state.html#a3a35aaf04e1c04644a5a30ae34def37e',1,'cpu_state']]],
+  ['getch_20',['getch',['../classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0',1,'pty']]]
 ];

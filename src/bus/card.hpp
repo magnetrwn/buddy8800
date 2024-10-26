@@ -16,13 +16,13 @@
  */
 struct card_identify {
     u16 start_adr;
-    u16 adr_range;
+    usize adr_range;
     const char* name;
     const char* detail;
 
     card_identify() : start_adr(0xFF), adr_range(0), name("unknown"), detail("") {};
-    card_identify(u16 start_adr, u16 adr_range, const char* name) : start_adr(start_adr), adr_range(adr_range), name(name), detail("") {};
-    card_identify(u16 start_adr, u16 adr_range, const char* name, const char* detail) : start_adr(start_adr), adr_range(adr_range), name(name), detail(detail) {};
+    card_identify(u16 start_adr, usize adr_range, const char* name) : start_adr(start_adr), adr_range(adr_range), name(name), detail("") {};
+    card_identify(u16 start_adr, usize adr_range, const char* name, const char* detail) : start_adr(start_adr), adr_range(adr_range), name(name), detail(detail) {};
 };
 
 /**
@@ -135,13 +135,18 @@ public:
  * @warning Out of range addresses are not checked, they should be checked by the bus instead, to avoid calling in_range() twice.
  * @see ram_card, rom_card
  */
-template <u16 start_adr, u16 capacity, bool construct_then_write_lock>
+template <u16 start_adr, usize capacity, bool construct_then_write_lock>
 class data_card : public card {
 private:
     std::array<u8, capacity> data;
 
 public:
     data_card(bool lock = construct_then_write_lock) { this->write_locked = lock; }
+
+    data_card(u8 fill, bool lock = construct_then_write_lock) {
+        data.fill(fill);
+        this->write_locked = lock;
+    }
 
     /// @brief Construct a card and copy data from an iterator pair immediately.
     template <typename iter_t>
@@ -151,7 +156,7 @@ public:
     }
 
     /// @brief Check if an address on the bus is in the card's range.
-    inline bool in_range(u16 adr) const override { return adr >= start_adr and adr <= (start_adr + capacity); }
+    inline bool in_range(u16 adr) const override { return adr >= start_adr and adr < (start_adr + capacity); }
 
     /// @brief Get information about the data card.
     inline card_identify identify() override { return { start_adr, capacity, (this->write_locked ? "rom area" : "ram area") }; }
@@ -181,11 +186,11 @@ public:
 };
 
 /// @brief A card that holds random access memory.
-template <u16 start_adr, u16 capacity>
+template <u16 start_adr, usize capacity>
 using ram_card = data_card<start_adr, capacity, false>;
 
 /// @brief A card that holds read-only memory.
-template <u16 start_adr, u16 capacity>
+template <u16 start_adr, usize capacity>
 using rom_card = data_card<start_adr, capacity, true>;
 
 /// @brief Enum of the main registers of the MC6850 ACIA (UART).
@@ -269,7 +274,7 @@ public:
     serial_card() { serial.open(); reset(); }
 
     /// @brief Check if an address on the bus is in the card's range.
-    inline bool in_range(u16 adr) const override { return adr >= start_adr and adr <= (start_adr + SERIAL_IO_ADDRESSES); }
+    inline bool in_range(u16 adr) const override { return adr >= start_adr and adr < (start_adr + SERIAL_IO_ADDRESSES); }
 
     /// @brief Get information about the serial card.
     /// @note The detail contains the base clock, control register (hex) and the pseudo-terminal name.

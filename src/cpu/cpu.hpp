@@ -855,11 +855,10 @@ public:
     /// @return True if the CPU is halted, false otherwise.
     bool is_halted() const { return halted; }
 
-    /// @brief Reset the CPU and connected devices to clear state.
+    /// @brief Reset the CPU.
     void clear() {
         state = cpu_state();
         just_booted = true;
-        //cardbus.clear();
         halted = false;
     }
 
