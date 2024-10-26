@@ -69,6 +69,30 @@ body, table, div, p, dl {
     font: 16px/28px, Roboto, Arial;
 }
 
+/* added custom colors here */
+
+dl.reflist dd {
+    background-color: var(--mem-content-bg);
+}
+
+dl.reflist dt {
+    background-color: var(--mem-subtitle-bg);
+}
+
+dl.classindex.even {
+    background-color: var(--mem-content-bg);
+}
+
+dl.classindex.odd {
+    background-color: var(--mem-content-border);
+}
+
+td.desc, td.entry {
+    background-color: var(--mem-content-bg);
+}
+
+/* --- */
+
 div.contents {
     margin: 20px 40px;
 }
@@ -119,8 +143,8 @@ div.contents ul {
 }
 
 #main-menu a, #main-menu a:hover {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 /* Menu button */
@@ -130,7 +154,7 @@ div.contents ul {
     font-family: Arial;
     text-transform: uppercase;
     text-shadow: none;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
 }
 
@@ -163,10 +187,11 @@ div.contents ul {
 #MSearchBox {
     border-radius: 0;
     box-shadow: none;
+    margin-bottom: 3px;
 }
 
 #MSearchBox>span {
-    margin: 10px;
+    margin: 16px;
 }
 
 #main-menu>li:last-child {
@@ -182,9 +207,9 @@ div.contents ul {
 }
 
 #MSearchResultsWindow {
-    border: 1px solid var(--bg3font2);
+    border: 2px dotted var(--bg3font2);
     background-color: var(--bg3color);
-    padding: 10px;
+    padding: 16px;
 }
 
 body.SRPage, body.SRPage * {
@@ -289,19 +314,19 @@ li.navelem a {
 .memtitle {
     padding: 15px;
     margin-top: 30px;
+    margin-bottom: 1px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
 }
 
 .memtitle, .memtitle *, .memtitle a:visited {
-    border: none;
     background-image: none;
     color: var(--mem-title-font);
     background-color: var(--mem-title-bg);
 }
 
 .memproto {
-    padding: 10px;
+    padding: 16px;
     text-shadow: none;
     padding: 20px;
     border-top-right-radius: 0px;
@@ -323,9 +348,9 @@ li.navelem a {
 }
 
 .memdoc {
-    border-bottom: 1px solid var(--mem-content-border);
-    border-left: 1px solid var(--mem-content-border);
-    border-right: 1px solid var(--mem-content-border);
+    border-bottom: 2px dotted var(--mem-content-border);
+    border-left: 2px dotted var(--mem-content-border);
+    border-right: 2px dotted var(--mem-content-border);
     background-color: var(--mem-content-bg);
     color: var(--mem-content-font);
     border-bottom-left-radius: 0px;
@@ -399,7 +424,7 @@ span.mlabel {
     border-left: none;
     border-right: none;
     border-bottom: none;
-    padding: 10px;
+    padding: 16px;
     border-radius: 0px;
 }
 
@@ -434,17 +459,17 @@ span.lineno a:hover {
 
 .iconfclosed {
     background-image: url(closed-folder.png);
-    margin-right: 10px;
+    margin-right: 16px;
 }
 
 .iconfopen {
     background-image: url(opened-folder.png);
-    margin-right: 10px;
+    margin-right: 16px;
 }
 
 .icondoc {
     background-image: url(document.png);
-    margin-right: 10px;
+    margin-right: 16px;
 }
 
 .arrow {
@@ -513,7 +538,7 @@ table.classindex a.el {
 /***********************************/
 
 div.directory {
-    border-top: 1px solid var(--bgborder);
+    border-top: 2px dotted var(--bgborder);
     border-bottom: none;
     margin: 20px 0px;
 }
@@ -546,7 +571,7 @@ hr.footer {
 }
 
 .mdescRight {
-    padding: 0px 30px 10px 30px;
+    padding: 0px 30px 16px 30px;
 }
 
 .memberdecls * {
@@ -554,7 +579,7 @@ hr.footer {
 }
 
 .memSeparator {
-    border-bottom: 1px solid var(--bgborder2);
+    border-bottom: 2px dotted var(--bgborder2);
 }
 
 .memTemplParams {
@@ -579,13 +604,14 @@ hr.footer {
 
 #nav-tree .item {
     background-color: var(--nav-tree-bg);
-    font-family: Arial;
-    text-transform: uppercase;
     text-shadow: none;
-    font-size: 14px;
-    font-weight: 700;
-    padding: 10px;
+    font-size: 16px;
+    padding: 6px;
+    margin-top: 4px;
     color: var(--nav-tree-font);
+    box-sizing: border-box;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
 }
 
 #nav-tree .arrow {
