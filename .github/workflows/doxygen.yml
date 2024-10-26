@@ -19,7 +19,7 @@ jobs:
         run: doxygen Doxyfile
 
       - name: Copy necessary files
-        run: cp -r .doxygen/html/* .
+        run: cp -r .doxygen/html/* .; cp extern/doxygen_theme_flat_design/img/* .
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
