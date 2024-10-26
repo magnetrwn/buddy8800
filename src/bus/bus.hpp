@@ -20,6 +20,8 @@
  * additional middle class, `bus_index_iface`, which acts as a proxy to address locations and call reads and writes by the
  * cast and assignment operators.
  *
+ * @note Conflicting address ranges are allowed but must be explicitly toggled by an `insert()`.
+ * @par
  * @note The CPU, while in reality is placed on a card, it's not here. The bus acts as glue between the plentitude
  * of cards and the CPU itself.
  * @warning The `size()` method returns the maximum number of addressable locations on the bus (65536), not the number of cards.
@@ -97,20 +99,14 @@ private:
     std::array<card*, MAX_BUS_CARDS> cards;
     std::array<bool, MAX_BUS_CARDS> ignore_conflicts;
 
-    inline bool test_for_bus_conflict() const {
-        for (usize i = 0; i < MAX_BUS_CARDS; ++i) {
-            if (ignore_conflicts[i])
-                continue;
-
-            for (usize j = i + 1; j < MAX_BUS_CARDS; ++j)
-                if (cards[i] != NO_CARD 
-                and cards[j] != NO_CARD
-                and (
-                    cards[i]->in_range(cards[j]->identify().start_adr) 
-                    or cards[j]->in_range(cards[i]->identify().start_adr)
-                ))
-                    return true;
-        }
+    inline bool test_for_bus_conflict(card* card) const {
+        for (usize i = 0; i < MAX_BUS_CARDS; ++i)
+            if (!ignore_conflicts[i] and cards[i] != NO_CARD
+            and (cards[i]->in_range(card->identify().start_adr)
+                 or (card->in_range(cards[i]->identify().start_adr))
+                )
+            )
+                return true;
 
         return false;
     }
@@ -125,6 +121,8 @@ public:
      * @throws std::out_of_range if the slot is out of range.
      * @throws std::invalid_argument if the slot is already occupied.
      * @throws std::invalid_argument if a bus conflict is detected and allow_conflict is false.
+     * @warning This method allows a bus conflict, but in such event, only the earlier slot card will be able
+     * to be read from!
      */
     inline void insert(card* card, usize slot, bool allow_conflict = false) {
         if (!card)
@@ -133,12 +131,11 @@ public:
             throw std::out_of_range("slot out of range");
         if (cards[slot] != NO_CARD)
             throw std::invalid_argument("slot already occupied");
+        if (!allow_conflict and test_for_bus_conflict(card))
+            throw std::invalid_argument("bus conflict detected");
 
         cards[slot] = card;
         ignore_conflicts[slot] = allow_conflict;
-
-        if (!allow_conflict and test_for_bus_conflict())
-            throw std::invalid_argument("bus conflict detected");
     }
 
     /**
@@ -265,7 +262,7 @@ public:
      * slot: start-address-hex/address-range: card-type, card-details
      * ```
      */
-    inline void print_mmap() {
+    inline void print_mmap() const {
         for (usize i = 0; i < MAX_BUS_CARDS; ++i)
             if (cards[i] != NO_CARD) {
                 card_identify ident = cards[i]->identify();
@@ -275,6 +272,18 @@ public:
                     << ident.name << (*ident.detail ? ", " : "") << (*ident.detail ? ident.detail : "")
                     << std::endl;
             }
+    }
+
+    /**
+     * @brief Get in which slot a card is according to an address.
+     * @returns The slot closest that accepts the address in its range, 255 if none.
+     */
+    inline u8 get_slot_by_adr(u16 adr) const {
+        for (usize i = 0; i < MAX_BUS_CARDS; ++i)
+            if (cards[i] != NO_CARD and cards[i]->in_range(adr))
+                return i;
+
+        return 255;
     }
 
     /**
