@@ -52,6 +52,7 @@ cd ..
 
 if [ "$BUILD_DOCS" = "ON" ]
 then
+  cp extern/doxygen_theme_flat_design/img/* .doxygen/html/
   doxygen Doxyfile
 fi
 
