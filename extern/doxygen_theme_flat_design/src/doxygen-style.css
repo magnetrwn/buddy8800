@@ -45,7 +45,7 @@
     --qindex-icon-bg: #138ab9;
     --qindex-icon-font: #1E1E1E;
     /* Member table */
-    --mem-title-bg: #1E1E1E;
+    --mem-title-bg: #1e1e1e;
     --mem-title-font: #E0E0E0;
     --mem-subtitle-bg: #064e6b;
     --mem-subtitle-font: #E0E0E0;
@@ -89,6 +89,21 @@ dl.classindex.odd {
 
 td.desc, td.entry {
     background-color: var(--mem-content-bg);
+}
+
+h2.groupheader {
+    /* 390 */
+    padding: 12px;
+    font-style: italic;
+    background-color: var(--mem-title-bg);
+    color: var(--mem-title-font);
+    font-size: 200%;
+    border-bottom: none;
+}
+
+div.groupHeader {
+    font-size: 20px;
+    color: var(--mem-subtitle-font-hover)
 }
 
 /* --- */
@@ -143,8 +158,8 @@ div.contents ul {
 }
 
 #main-menu a, #main-menu a:hover {
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 4px;
+    padding-bottom: 6px;
 }
 
 /* Menu button */
@@ -187,11 +202,11 @@ div.contents ul {
 #MSearchBox {
     border-radius: 0;
     box-shadow: none;
-    margin-bottom: 3px;
+    margin-bottom: 5px;
 }
 
 #MSearchBox>span {
-    margin: 16px;
+    margin: 10px;
 }
 
 #main-menu>li:last-child {
@@ -246,13 +261,17 @@ body.SRPage, body.SRPage * {
 /***********************************/
 
 div.headertitle {
-    padding: 5px 40px;
+    padding: 72px 0 7px 30px;
 }
 
 div.header, div.header * {
     color: var(--bg3font);
     background-color: var(--bg3color);
     border-bottom: none;
+}
+
+div.title {
+    font-size: 28px;
 }
 
 div.summary {
@@ -313,16 +332,25 @@ li.navelem a {
 
 .memtitle {
     padding: 15px;
-    margin-top: 30px;
-    margin-bottom: 1px;
-    border-top-left-radius: 0px;
+    margin: 30px 0 0;
+    border-top-left-radius: 16px;
     border-top-right-radius: 0px;
+    border: 3px solid var(--mem-subtitle-bg);
+    border-bottom: none;
 }
 
 .memtitle, .memtitle *, .memtitle a:visited {
     background-image: none;
     color: var(--mem-title-font);
     background-color: var(--mem-title-bg);
+}
+
+.memtitle a {
+    padding: 6px 6px 4px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -5px;
 }
 
 .memproto {
@@ -381,15 +409,6 @@ a.anchor {
 
 /***********************************/
 
-h2.groupheader {
-    color: #303030;
-    font-size: 200%;
-    font-weight: bold;
-    border-bottom: none;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
 div.fragment, pre.fragment {
     border: none;
     padding: 20px;
@@ -424,8 +443,10 @@ span.mlabel {
     border-left: none;
     border-right: none;
     border-bottom: none;
-    padding: 16px;
-    border-radius: 0px;
+    padding: 12px;
+    box-sizing: border-box;
+    border-radius: 16px;
+    margin: 4px;
 }
 
 a.code {

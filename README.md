@@ -1,8 +1,8 @@
 # Buddy8800 -- An Altair 8800 S-100 Emulator
 
-**An Intel 8080 emulated on an S-100 bus with a MITS 88 2SIO (2x Motorola 6850) serial expansion card. Designed for running BASIC and CP/M over a PTY.**
+**An Intel 8080 emulated on an S-100 bus with a Motorola 6850 ACIA serial expansion card. Designed for running BASIC and CP/M over a PTY.**
 
-![Looping cpudiag.bin runs on the CPU.](media/cpudiag-in-a-loop.gif)
+![Running `cpudiag.bin`](media/cpudiag-in-a-loop.gif)
 
 ### Getting Started
 

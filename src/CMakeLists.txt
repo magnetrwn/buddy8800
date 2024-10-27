@@ -7,7 +7,7 @@ target_include_directories(buddylib PUBLIC
     ${PROJECT_SOURCE_DIR}/src/core/iface
     ${PROJECT_SOURCE_DIR}/src/core/bus
     ${PROJECT_SOURCE_DIR}/src/util
-    ${PROJECT_SOURCE_DIR}/src/emulator
+    ${PROJECT_SOURCE_DIR}/src/ux
 )
 add_executable(buddy8800 main.cpp)
 target_link_libraries(buddy8800 PRIVATE buddylib)
