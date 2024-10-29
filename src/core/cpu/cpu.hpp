@@ -25,7 +25,7 @@
  * @note The class is completely defined in this header to allow templating the class to determine what bus interface
  * `bus_iface` to use. For example, you can:
  * - `cpu<bus&> cpu(cardbus);` or `cpu<> cpu(cardbus);` to create a standard CPU that interacts with a bus, or
- * - `cpu<std::array<u8, 65536>> cpu({ 0 });` to instead have an empty array as a bus, for max performance!
+ * - `cpu<std::array<u8, 65536>> cpu;` to instead have an empty array as a bus, for max performance!
  */
 template <class bus_iface = bus&>
 class cpu {

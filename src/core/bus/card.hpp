@@ -153,10 +153,10 @@ public:
         this->write_locked = lock;
     }
 
-    /// @brief Construct a card, detect size and copy data from an iterator pair immediately.
+    /// @brief Construct a card and copy data from an iterator pair immediately.
     template <typename T, T_ITERATOR_SFINAE>
     data_card(u16 start_adr, T begin, T end, bool lock = construct_then_write_lock) 
-        : start_adr(start_adr), capacity(capacity(std::distance(begin, end))) {
+        : start_adr(start_adr), capacity(std::distance(begin, end)) {
 
         data.reserve(capacity);
         std::copy(begin, end, data.begin());
