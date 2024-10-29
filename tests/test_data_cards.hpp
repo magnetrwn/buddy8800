@@ -5,12 +5,12 @@
 
 TEST_CASE("Check bus with RAM and ROM cards", "[bus]") {    
     bus cardbus;
-    REQUIRE_NOTHROW(cardbus.insert(new rom_card<0x0000, 1024>((u8) 0x5A), 4));
-    REQUIRE_NOTHROW(cardbus.insert(new ram_card<0x0400, 4096>, 3));
-    REQUIRE_NOTHROW(cardbus.insert(new rom_card<0x1400, 11264>((u8) 0x5A), 2));
-    REQUIRE_NOTHROW(cardbus.insert(new ram_card<0x4000, 1024>, 1));
-    REQUIRE_THROWS_AS(cardbus.insert(new rom_card<0x4100, 1024>((u8) 0x5A), 0), std::invalid_argument);
-    REQUIRE_NOTHROW(cardbus.insert(new rom_card<0x4100, 1024>((u8) 0x5A), 0, true));
+    REQUIRE_NOTHROW(cardbus.insert(new rom_card(0x0000, 1024, 0x5A), 4));
+    REQUIRE_NOTHROW(cardbus.insert(new ram_card(0x0400, 4096), 3));
+    REQUIRE_NOTHROW(cardbus.insert(new rom_card(0x1400, 11264, 0x5A), 2));
+    REQUIRE_NOTHROW(cardbus.insert(new ram_card(0x4000, 1024), 1));
+    REQUIRE_THROWS_AS(cardbus.insert(new rom_card(0x4100, 1024, 0x5A), 0), std::invalid_argument);
+    REQUIRE_NOTHROW(cardbus.insert(new rom_card(0x4100, 1024, 0x5A), 0, true));
 
     // Memory map:
     // 0x0000 to 0x03ff: r, filled with 0x5A

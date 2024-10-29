@@ -11,6 +11,7 @@
 #include "typedef.hpp"
 #include "util.hpp"
 #include "bus.hpp"
+#include "defines.hpp"
 
 /**
  * @brief Represents the CPU of the emulator.
@@ -804,8 +805,8 @@ public:
 
     /**
      * @brief Loads data into cardbus.
-     * @param begin Vector iterator to the beginning of data.
-     * @param end Vector iterator to the end of data.
+     * @param begin Iterator to the beginning of data.
+     * @param end Iterator to the end of data.
      * @param offset Offset to try to start loading at.
      * @param auto_reset_vector Whether the zero page should point to the start of loaded data automatically.
      * @throw `std::out_of_range` if data won't fit in cardbus.
@@ -815,7 +816,8 @@ public:
      * at the specified offset, check if it will fit, and if auto_reset_vector is true, it will set the zero page (the first
      * 3 bytes of cardbus, specifically a jump instruction and a 2 byte argument) to point to the start of the loaded data.
      */
-    void load(std::vector<u8>::iterator begin, std::vector<u8>::iterator end, usize offset = 0, bool auto_reset_vector = false) {
+    template <typename T, T_ITERATOR_SFINAE>
+    void load(T begin, T end, usize offset = 0, bool auto_reset_vector = false) {
         usize dist = std::distance(begin, end);
 
         if (dist > cardbus.size() - offset)
