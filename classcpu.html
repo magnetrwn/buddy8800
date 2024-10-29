@@ -145,7 +145,7 @@ class cpu&lt; bus_iface &gt;</h3>
 <p>This is the 8080 CPU emulator and interpreter. It abstracts the CPU functionality into straightforward methods and presents a way to step and interact with state. Being an interpreter, each opcode starting from the program counter address in cardbus is fetched and executed according to what it represents and including further fetches to opcode operands. The API also provides public access to <a class="el" href="classcpu.html#a9d70c847732b6891a759352d27e896ee" title="Executes a single opcode.">execute()</a>, should the user want to manually ask for instructions.</p>
 <dl class="section note"><dt>Note</dt><dd>The class is completely defined in this header to allow templating the class to determine what bus interface <code>bus_iface</code> to use. For example, you can:<ul>
 <li><code>cpu&lt;bus&amp;&gt; <a class="el" href="classcpu.html" title="Represents the CPU of the emulator.">cpu(cardbus)</a>;</code> or <code>cpu&lt;&gt; <a class="el" href="classcpu.html" title="Represents the CPU of the emulator.">cpu(cardbus)</a>;</code> to create a standard CPU that interacts with a bus, or</li>
-<li><code>cpu&lt;std::array&lt;u8, 65536&gt;&gt; cpu({ 0 });</code> to instead have an empty array as a bus, for max performance! </li>
+<li><code>cpu&lt;std::array&lt;u8, 65536&gt;&gt; cpu;</code> to instead have an empty array as a bus, for max performance! </li>
 </ul>
 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
