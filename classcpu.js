@@ -5,7 +5,7 @@ var classcpu =
     [ "do_pseudo_bdos", "classcpu.html#ad684d25913e8aaf0139fa3dc47ce9e40", null ],
     [ "execute", "classcpu.html#a9d70c847732b6891a759352d27e896ee", null ],
     [ "is_halted", "classcpu.html#a010e335fc9f1797e72bfc5585e9238f6", null ],
-    [ "load", "classcpu.html#a6e84cf78a4fbeb96d538fd24d0bd3678", null ],
+    [ "load", "classcpu.html#a0d839c16cc808245a4f0c38a430a342a", null ],
     [ "load_state", "classcpu.html#a6c72852ac69a7814d8e0faa836d3abf3", null ],
     [ "reset_pseudo_bdos_redirect", "classcpu.html#a850125d4d67383c10cbb1ba594d1db18", null ],
     [ "save_state", "classcpu.html#ae6100df727ce03c23512fee8d2698fc5", null ],

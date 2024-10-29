@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>buddy8800: Member List</title>
+<title>buddy8800: src/util/defines.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -64,7 +64,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('classcpu.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('defines_8hpp_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -84,28 +84,21 @@ $(document).ready(function(){initNavTree('classcpu.html',''); initResizable(); }
 
 <div class="header">
   <div class="headertitle">
-<div class="title">cpu&lt; bus_iface &gt; Member List</div>  </div>
+<div class="title">defines.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>This is the complete list of members for <a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="classcpu.html#a2431272df1fa9db7b37770dd95702807">clear</a>()</td><td class="entry"><a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>cpu</b>(bus_iface init_adr_space) (defined in <a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a>)</td><td class="entry"><a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classcpu.html#ad684d25913e8aaf0139fa3dc47ce9e40">do_pseudo_bdos</a>(bool should)</td><td class="entry"><a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classcpu.html#a9d70c847732b6891a759352d27e896ee">execute</a>(u8 opcode)</td><td class="entry"><a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classcpu.html#a010e335fc9f1797e72bfc5585e9238f6">is_halted</a>() const</td><td class="entry"><a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classcpu.html#a0d839c16cc808245a4f0c38a430a342a">load</a>(T begin, T end, usize offset=0, bool auto_reset_vector=false)</td><td class="entry"><a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classcpu.html#a6c72852ac69a7814d8e0faa836d3abf3">load_state</a>(const cpu_state &amp;new_state)</td><td class="entry"><a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classcpu.html#a850125d4d67383c10cbb1ba594d1db18">reset_pseudo_bdos_redirect</a>()</td><td class="entry"><a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classcpu.html#ae6100df727ce03c23512fee8d2698fc5">save_state</a>() const</td><td class="entry"><a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classcpu.html#abbf017b99cf39776da5a4bf517fb9226">set_pseudo_bdos_redirect</a>(const char *filename)</td><td class="entry"><a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classcpu.html#acd0b563c6831d88a883f3bcd7d2257b4">step</a>()</td><td class="entry"><a class="el" href="classcpu.html">cpu&lt; bus_iface &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-</table></div><!-- contents -->
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef DEFINES_HPP_</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define DEFINES_HPP_</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#define T_ITERATOR_SFINAE typename = typename std::enable_if&lt;std::is_convertible&lt;typename std::iterator_traits&lt;T&gt;::iterator_category, std::input_iterator_tag&gt;::value&gt;::type</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#endif</span></div>
+</div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b7878ad5ecbf2506f4125b9d34c97e45.html">util</a></li><li class="navelem"><b>defines.hpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

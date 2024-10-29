@@ -108,9 +108,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9d70c847732b6891a759352d27e896ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a9d70c847732b6891a759352d27e896ee">execute</a> (u8 opcode)</td></tr>
 <tr class="memdesc:a9d70c847732b6891a759352d27e896ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a single opcode.  <a href="classcpu.html#a9d70c847732b6891a759352d27e896ee">More...</a><br /></td></tr>
 <tr class="separator:a9d70c847732b6891a759352d27e896ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e84cf78a4fbeb96d538fd24d0bd3678"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a6e84cf78a4fbeb96d538fd24d0bd3678">load</a> (std::vector&lt; u8 &gt;::iterator begin, std::vector&lt; u8 &gt;::iterator end, usize offset=0, bool auto_reset_vector=false)</td></tr>
-<tr class="memdesc:a6e84cf78a4fbeb96d538fd24d0bd3678"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads data into cardbus.  <a href="classcpu.html#a6e84cf78a4fbeb96d538fd24d0bd3678">More...</a><br /></td></tr>
-<tr class="separator:a6e84cf78a4fbeb96d538fd24d0bd3678"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d839c16cc808245a4f0c38a430a342a"><td class="memTemplParams" colspan="2">template&lt;typename T , T_ITERATOR_SFINAE &gt; </td></tr>
+<tr class="memitem:a0d839c16cc808245a4f0c38a430a342a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcpu.html#a0d839c16cc808245a4f0c38a430a342a">load</a> (T begin, T end, usize offset=0, bool auto_reset_vector=false)</td></tr>
+<tr class="memdesc:a0d839c16cc808245a4f0c38a430a342a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads data into cardbus.  <a href="classcpu.html#a0d839c16cc808245a4f0c38a430a342a">More...</a><br /></td></tr>
+<tr class="separator:a0d839c16cc808245a4f0c38a430a342a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c72852ac69a7814d8e0faa836d3abf3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a6c72852ac69a7814d8e0faa836d3abf3">load_state</a> (const <a class="el" href="structcpu__state.html">cpu_state</a> &amp;new_state)</td></tr>
 <tr class="memdesc:a6c72852ac69a7814d8e0faa836d3abf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load CPU state.  <a href="classcpu.html#a6c72852ac69a7814d8e0faa836d3abf3">More...</a><br /></td></tr>
 <tr class="separator:a6c72852ac69a7814d8e0faa836d3abf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -253,13 +254,15 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
 
 </div>
 </div>
-<a id="a6e84cf78a4fbeb96d538fd24d0bd3678"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e84cf78a4fbeb96d538fd24d0bd3678">&#9670;&nbsp;</a></span>load()</h2>
+<a id="a0d839c16cc808245a4f0c38a430a342a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d839c16cc808245a4f0c38a430a342a">&#9670;&nbsp;</a></span>load()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class bus_iface  = bus&amp;&gt; </div>
+<div class="memtemplate">
+template&lt;typename T , T_ITERATOR_SFINAE &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -267,13 +270,13 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classcpu.html">cpu</a>&lt; bus_iface &gt;::load </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; u8 &gt;::iterator&#160;</td>
+          <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>begin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; u8 &gt;::iterator&#160;</td>
+          <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>end</em>, </td>
         </tr>
         <tr>
@@ -304,8 +307,8 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
 <p>Loads data into cardbus. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">begin</td><td>Vector iterator to the beginning of data. </td></tr>
-    <tr><td class="paramname">end</td><td>Vector iterator to the end of data. </td></tr>
+    <tr><td class="paramname">begin</td><td>Iterator to the beginning of data. </td></tr>
+    <tr><td class="paramname">end</td><td>Iterator to the end of data. </td></tr>
     <tr><td class="paramname">offset</td><td>Offset to try to start loading at. </td></tr>
     <tr><td class="paramname">auto_reset_vector</td><td>Whether the zero page should point to the start of loaded data automatically. </td></tr>
   </table>

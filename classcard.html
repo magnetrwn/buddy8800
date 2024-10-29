@@ -103,8 +103,8 @@ $(document).ready(function(){initNavTree('classcard.html',''); initResizable(); 
  <div class="center">
   <img src="classcard.png" usemap="#card_map" alt=""/>
   <map id="card_map" name="card_map">
-<area href="classdata__card.html" title="A card that holds a fixed amount of data." alt="data_card&lt; start_adr, capacity, construct_then_write_lock &gt;" shape="rect" coords="0,56,356,80"/>
-<area href="classserial__card.html" title="A card that emulates an MC6850 ACIA (UART), close to a MITS 88 SIOB card." alt="serial_card&lt; start_adr, base_clock &gt;" shape="rect" coords="366,56,722,80"/>
+<area href="classdata__card.html" title="A card that holds a fixed amount of data." alt="data_card&lt; construct_then_write_lock &gt;" shape="rect" coords="0,56,240,80"/>
+<area href="classserial__card.html" title="A card that emulates a 6850 ACIA." alt="serial_card" shape="rect" coords="250,56,490,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -204,7 +204,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 <p>Get the IRQ instruction (and possible operands). </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classbus.html#a1673002793a022d9e89aacfbeeeb71fc" title="Gets the IRQ instruction (and possible operands).">bus::get_irq()</a> </dd></dl>
 
-<p>Implemented in <a class="el" href="classserial__card.html#a11a4a0b669e5f954b9f8ce7c098d9ae0">serial_card&lt; start_adr, base_clock &gt;</a>, and <a class="el" href="classdata__card.html#aa83d86727fadf2f0da35ea8c9b59495b">data_card&lt; start_adr, capacity, construct_then_write_lock &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classserial__card.html#a310898ff8b156d8553f9b759eea38420">serial_card</a>, and <a class="el" href="classdata__card.html#a4bf6bce79c1a37be037ccdb01d475146">data_card&lt; construct_then_write_lock &gt;</a>.</p>
 
 </div>
 </div>
@@ -234,7 +234,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 <p>Get information about the card. </p>
 <dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structcard__identify.html" title="Holds information that can be used to identify a card.">card_identify</a> struct with lengthy details about the card. </dd></dl>
 
-<p>Implemented in <a class="el" href="classserial__card.html#a3c9538c4dd7523fa67952e30d648ca4c">serial_card&lt; start_adr, base_clock &gt;</a>, and <a class="el" href="classdata__card.html#ab6d9264a691316e9eb5d17fcd0587918">data_card&lt; start_adr, capacity, construct_then_write_lock &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classserial__card.html#a1f29b0bb8ad083bf74af151628b7acf3">serial_card</a>, and <a class="el" href="classdata__card.html#a3c21b71079491b84c9d50cdba8f5db5a">data_card&lt; construct_then_write_lock &gt;</a>.</p>
 
 </div>
 </div>
@@ -272,7 +272,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 <dl class="section return"><dt>Returns</dt><dd>True if the address is in the card's range, false otherwise. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>This method should always be used when interacting with cards from the bus, to avoid out of range accesses. It is not used by the cards themselves to avoid double checking. </dd></dl>
 
-<p>Implemented in <a class="el" href="classserial__card.html#ad98165537a34d39af6d7b46279656ecb">serial_card&lt; start_adr, base_clock &gt;</a>, and <a class="el" href="classdata__card.html#a7a3504e6a4394ef2b0f8d490d22b9029">data_card&lt; start_adr, capacity, construct_then_write_lock &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classserial__card.html#afec24d99079048e6555c21b3eaf3be66">serial_card</a>, and <a class="el" href="classdata__card.html#af921f54ef18d2f7c799e7335fd82e68e">data_card&lt; construct_then_write_lock &gt;</a>.</p>
 
 </div>
 </div>
@@ -309,7 +309,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The byte read from the card. </dd></dl>
 
-<p>Implemented in <a class="el" href="classserial__card.html#a358e394bf90213f8958d44603f3aaaf2">serial_card&lt; start_adr, base_clock &gt;</a>, and <a class="el" href="classdata__card.html#aebcbd2eec95acd01dfa217d741b85a6c">data_card&lt; start_adr, capacity, construct_then_write_lock &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classserial__card.html#a70a58b548817e1590efb55652d772e67">serial_card</a>, and <a class="el" href="classdata__card.html#ae4cc3d8e3c84ca0e19bb788f7941267f">data_card&lt; construct_then_write_lock &gt;</a>.</p>
 
 </div>
 </div>
@@ -339,7 +339,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 <p>Refresh the card to allow periodic I/O, timer or sync operation. </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classbus.html#ac158680334e36add350e716e6a0ec69b" title="Refreshes all cards on the bus.">bus::refresh()</a> </dd></dl>
 
-<p>Implemented in <a class="el" href="classserial__card.html#a3471a3d7caed345f690b1c72601800da">serial_card&lt; start_adr, base_clock &gt;</a>, and <a class="el" href="classdata__card.html#a1ef6d64e85c7c9c30396b8b1920589a4">data_card&lt; start_adr, capacity, construct_then_write_lock &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classserial__card.html#a2d9f292d7be1f9deebf49fa5d748c039">serial_card</a>, and <a class="el" href="classdata__card.html#a54a52cf3e47f0d1dbf3ad4c1be66c440">data_card&lt; construct_then_write_lock &gt;</a>.</p>
 
 </div>
 </div>
@@ -509,7 +509,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classserial__card.html#abfff847039d36c47cbf4a0133d9719b2">serial_card&lt; start_adr, base_clock &gt;</a>, and <a class="el" href="classdata__card.html#a06a184b77e0e679a4852eeed77ef6e72">data_card&lt; start_adr, capacity, construct_then_write_lock &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classserial__card.html#a87b17dad886b8847836ebd214c3c14ad">serial_card</a>, and <a class="el" href="classdata__card.html#a838d64e1c4e8ba9450812e406ac2ba3c">data_card&lt; construct_then_write_lock &gt;</a>.</p>
 
 </div>
 </div>

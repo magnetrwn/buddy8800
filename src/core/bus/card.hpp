@@ -3,10 +3,12 @@
 
 #include <array>
 #include <cstring>
+#include <vector>
 
 #include "typedef.hpp"
 #include "pty.hpp"
 #include "util.hpp"
+#include "defines.hpp"
 
 /**
  * @brief Holds information that can be used to identify a card.
@@ -123,34 +125,40 @@ public:
 
 /**
  * @brief A card that holds a fixed amount of data.
- * @tparam start_adr The starting address of the card.
- * @tparam capacity The size in bytes of the card starting from the start address.
- * @tparam construct_then_write_lock Whether the card should be write-locked after construction.
+ * @param start_adr The starting address of the card.
+ * @param capacity The size in bytes of the card starting from the start address.
+ * @param construct_then_write_lock Whether the card should be write-locked after construction.
  *
- * This class is a template that can be used to create cards that hold a fixed amount of data. It allows copying data to the
- * card immediately after construction, and can be write-locked after construction if needed. Write locking can also be toggled
- * at any time.
+ * This class can be used to create cards that hold a fixed amount of data. It allows copying data to the
+ * card immediately after construction, and can be write-locked after construction if needed. Write locking 
+ * can also be toggled at any time.
  *
  * @note For convenience, use the aliases `ram_card` and `rom_card` instead of this class.
- * @warning Out of range addresses are not checked, they should be checked by the bus instead, to avoid calling in_range() twice.
+ * @warning Out of range addresses are not checked, they should be checked by the bus instead, to avoid 
+ * calling in_range() twice.
  * @see ram_card, rom_card
  */
-template <u16 start_adr, usize capacity, bool construct_then_write_lock>
+template <bool construct_then_write_lock>
 class data_card : public card {
 private:
-    std::array<u8, capacity> data;
+    const u16 start_adr;
+    const usize capacity;
+    std::vector<u8> data;
 
 public:
-    data_card(bool lock = construct_then_write_lock) { this->write_locked = lock; }
+    data_card(u16 start_adr, usize capacity, u8 fill = 0x00, bool lock = construct_then_write_lock) 
+        : start_adr(start_adr), capacity(capacity) { 
 
-    data_card(u8 fill, bool lock = construct_then_write_lock) {
-        data.fill(fill);
+        data.resize(capacity, fill);
         this->write_locked = lock;
     }
 
-    /// @brief Construct a card and copy data from an iterator pair immediately.
-    template <typename iter_t>
-    data_card(iter_t begin, iter_t end, bool lock = construct_then_write_lock) {
+    /// @brief Construct a card, detect size and copy data from an iterator pair immediately.
+    template <typename T, T_ITERATOR_SFINAE>
+    data_card(u16 start_adr, T begin, T end, bool lock = construct_then_write_lock) 
+        : start_adr(start_adr), capacity(capacity(std::distance(begin, end))) {
+
+        data.reserve(capacity);
         std::copy(begin, end, data.begin());
         this->write_locked = lock;
     }
@@ -173,7 +181,7 @@ public:
 
     inline void clear() override {
         if (!this->write_locked)
-            data.fill(0x00);
+            data.clear();
     }
 
     /// @note Unused methods.
@@ -186,12 +194,10 @@ public:
 };
 
 /// @brief A card that holds random access memory.
-template <u16 start_adr, usize capacity>
-using ram_card = data_card<start_adr, capacity, false>;
+using ram_card = data_card<false>;
 
 /// @brief A card that holds read-only memory.
-template <u16 start_adr, usize capacity>
-using rom_card = data_card<start_adr, capacity, true>;
+using rom_card = data_card<true>;
 
 /// @brief Enum of the main registers of the MC6850 ACIA (UART).
 enum class serial_register {
@@ -210,9 +216,9 @@ constexpr static u16 SERIAL_IO_ADDRESSES = 4;
 constexpr static usize SERIAL_BASE_CLOCK = 19200;
 
 /**
- * @brief A card that emulates an MC6850 ACIA (UART), close to a MITS 88 SIOB card.
- * @tparam start_adr The starting address of the card.
- * @tparam base_clock The base clock speed of the UART (it can be further divided), default is SERIAL_BASE_CLOCK.
+ * @brief A card that emulates a 6850 ACIA.
+ * @param start_adr The starting address of the card.
+ * @param base_clock The base clock speed of the UART (it can be further divided), default is SERIAL_BASE_CLOCK.
  *
  * This card handles interaction with a pseudo-terminal connected to the card UART. Emulation follows the Motorola 6850 ACIA
  * (Asynchronous Communications Interface Adapter) specifications, but quite simplified. The card has 4 I/O addresses that
@@ -223,10 +229,12 @@ constexpr static usize SERIAL_BASE_CLOCK = 19200;
  * Not periodically refreshing the bus, and by consequence the card, will make the card unable to send or receive data.
  * @warning Out of range addresses are not checked, they should be checked by the bus instead, to avoid calling in_range() twice.
  */
-template <u16 start_adr, usize base_clock = SERIAL_BASE_CLOCK>
 class serial_card : public card {
 private:
     constexpr static usize MAX_SERIAL_DETAIL_LENGTH = 64;
+
+    const u16 start_adr;
+    const usize base_clock;
 
     pty serial;
     std::array<u8, 4> registers;
@@ -250,19 +258,20 @@ private:
     //constexpr bool OVRN() const { return STATUS() & static_cast<u8>(serial_status_flags::OVRN); }
     //constexpr bool PE() const { return STATUS() & static_cast<u8>(serial_status_flags::PE); }
     constexpr bool IRQ() const { return STATUS() & static_cast<u8>(serial_status_flags::IRQ); }
-    constexpr void RDRF(bool value) { this->set_if_bit(start_adr + static_cast<usize>(serial_register::STATUS), static_cast<u8>(serial_status_flags::RDRF), value); }
-    constexpr void TDRE(bool value) { this->set_if_bit(start_adr + static_cast<usize>(serial_register::STATUS), static_cast<u8>(serial_status_flags::TDRE), value); }
-    //constexpr void DCD(bool value) { this->set_if_bit(start_adr + static_cast<usize>(serial_register::STATUS), static_cast<u8>(serial_status_flags::DCD), value); }
-    //constexpr void CTS(bool value) { this->set_if_bit(start_adr + static_cast<usize>(serial_register::STATUS), static_cast<u8>(serial_status_flags::CTS), value); }
-    //constexpr void FE(bool value) { this->set_if_bit(start_adr + static_cast<usize>(serial_register::STATUS), static_cast<u8>(serial_status_flags::FE), value); }
-    //constexpr void OVRN(bool value) { this->set_if_bit(start_adr + static_cast<usize>(serial_register::STATUS), static_cast<u8>(serial_status_flags::OVRN), value); }
-    //constexpr void PE(bool value) { this->set_if_bit(start_adr + static_cast<usize>(serial_register::STATUS), static_cast<u8>(serial_status_flags::PE), value); }
-    constexpr void IRQ(bool value) { this->set_if_bit(start_adr + static_cast<usize>(serial_register::STATUS), static_cast<u8>(serial_status_flags::IRQ), value); }
+
+    void RDRF(bool value) { this->set_if_bit(start_adr + static_cast<usize>(serial_register::STATUS), static_cast<u8>(serial_status_flags::RDRF), value); }
+    void TDRE(bool value) { this->set_if_bit(start_adr + static_cast<usize>(serial_register::STATUS), static_cast<u8>(serial_status_flags::TDRE), value); }
+    //void DCD(bool value) { this->set_if_bit(start_adr + static_cast<usize>(serial_register::STATUS), static_cast<u8>(serial_status_flags::DCD), value); }
+    //void CTS(bool value) { this->set_if_bit(start_adr + static_cast<usize>(serial_register::STATUS), static_cast<u8>(serial_status_flags::CTS), value); }
+    //void FE(bool value) { this->set_if_bit(start_adr + static_cast<usize>(serial_register::STATUS), static_cast<u8>(serial_status_flags::FE), value); }
+    //void OVRN(bool value) { this->set_if_bit(start_adr + static_cast<usize>(serial_register::STATUS), static_cast<u8>(serial_status_flags::OVRN), value); }
+    //void PE(bool value) { this->set_if_bit(start_adr + static_cast<usize>(serial_register::STATUS), static_cast<u8>(serial_status_flags::PE), value); }
+    void IRQ(bool value) { this->set_if_bit(start_adr + static_cast<usize>(serial_register::STATUS), static_cast<u8>(serial_status_flags::IRQ), value); }
 
     constexpr bool RTS() const { return rts; }
     constexpr void RTS(bool value) { rts = value; }
 
-    constexpr void reset() {
+    void reset() {
         registers.fill(0x00);
         serial.set_baud_rate(base_clock >> 4);
         CONTROL(0b10010101);
@@ -271,7 +280,8 @@ private:
     }
 
 public:
-    serial_card() { serial.open(); reset(); }
+    serial_card(u16 start_adr, usize base_clock = SERIAL_BASE_CLOCK) 
+        : start_adr(start_adr), base_clock(base_clock) { serial.open(); reset(); }
 
     /// @brief Check if an address on the bus is in the card's range.
     inline bool in_range(u16 adr) const override { return adr >= start_adr and adr < (start_adr + SERIAL_IO_ADDRESSES); }

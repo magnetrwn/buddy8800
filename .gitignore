@@ -6,3 +6,4 @@ compile_commands.json
 .doxygen/
 perf.data
 testrun.txt
+.gdb_history

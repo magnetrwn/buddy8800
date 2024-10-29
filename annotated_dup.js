@@ -8,5 +8,6 @@ var annotated_dup =
     [ "data_card", "classdata__card.html", "classdata__card" ],
     [ "pty", "classpty.html", "classpty" ],
     [ "serial_card", "classserial__card.html", "classserial__card" ],
+    [ "terminal_emulator_ux", "structterminal__emulator__ux.html", "structterminal__emulator__ux" ],
     [ "util", "classutil.html", "classutil" ]
 ];
