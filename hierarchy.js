@@ -7,9 +7,10 @@ var hierarchy =
     ] ],
     [ "card_identify", "structcard__identify.html", null ],
     [ "cpu< bus_iface >", "classcpu.html", null ],
+    [ "cpu< bus & >", "classcpu.html", null ],
     [ "cpu_state", "structcpu__state.html", null ],
+    [ "emulator", "classemulator.html", null ],
     [ "util::print_helper", "classutil_1_1print__helper.html", null ],
     [ "pty", "classpty.html", null ],
-    [ "terminal_emulator_ux", "structterminal__emulator__ux.html", null ],
     [ "util", "classutil.html", null ]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['terminal_5femulator_5fux_85',['terminal_emulator_ux',['../structterminal__emulator__ux.html',1,'']]]
+  ['serial_5fcard_87',['serial_card',['../classserial__card.html',1,'']]]
 ];
