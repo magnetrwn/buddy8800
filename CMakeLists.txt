@@ -25,19 +25,9 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g -O0 -no-pie -fno-omit-frame-pointer")
 set(CMAKE_CXX_FLAGS_RELEASE "-Ofast -Werror -flto")
 
 add_subdirectory(src)
+add_subdirectory(extern/toml11)
 
 if(ENABLE_TESTING)
-    message(STATUS "Testing enabled. Looking for Catch2...")
-    enable_testing()
-
-    find_package(Catch2 3)
-
-    if(NOT Catch2_FOUND)
-        message(STATUS "Catch2 not found, fetching from submodule.")
-        add_subdirectory(extern/Catch2)
-    else()
-        message(STATUS "Catch2 found.")
-    endif()
-
+    add_subdirectory(extern/Catch2)
     add_subdirectory(tests)
 endif()

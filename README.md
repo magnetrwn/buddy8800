@@ -19,7 +19,7 @@ You can view the [Doxygen documentation](https://magnetrwn.github.io/buddy8800),
 
 + Make sure you have installed CMake on your system.
 + Clone the repository and navigate to the root directory.
-+ **Optional for testing:** Either install Catch2 globally or run `git submodule update --init --recursive` to add it as a git submodule.
++ Run `git submodule update --init --recursive` to fetch `Catch2` (v3) and `toml11`.
 + Run `./build.sh` from the root directory. Some flags are listed next.
 + The final executable will be placed in the `bin/` directory.
 
