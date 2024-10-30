@@ -34,6 +34,7 @@ By default, the build script will output a release build that has no tracing and
 | `-T`       | `--tests`           | Build with tests enabled, compiling and running the Catch2 tests through CTest |  |
 | `-P`       | `--perf-stat`       | Run performance metrics at the end of the build, then show the results. |  |
 |            | `--perf-report`     | Run performance metrics and let the user browse detailed results. |  |
+| `-V`       | `--memcheck`        | Run Valgrind's Memcheck tool on the final executable. |  |
 
 Development builds are usually compiled with `./build.sh -d -T`.
 

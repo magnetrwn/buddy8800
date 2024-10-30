@@ -9,6 +9,7 @@ ENABLE_TRACE="OFF"
 ENABLE_TRACE_ESSENTIAL="OFF"
 RUN_PERF_STAT="OFF"
 RUN_PERF_RECORD="OFF"
+RUN_MEMCHECK="OFF"
 
 # --- Defaults ---
 
@@ -24,6 +25,7 @@ do
        --trace-essential) ENABLE_TRACE_ESSENTIAL="ON";;
     -P|--perf-stat)       RUN_PERF_STAT="ON";;
        --perf-record)     RUN_PERF_RECORD="ON";;
+    -V|--memcheck)        RUN_MEMCHECK="ON";;
     *)
       echo "$0: unknown option \"$i\""
       exit 1
@@ -40,7 +42,7 @@ cmake .. \
   -DENABLE_TRACE=$ENABLE_TRACE \
   -DENABLE_TRACE_ESSENTIAL=$ENABLE_TRACE_ESSENTIAL
 
-make -j4
+make
 mv compile_commands.json .. || true
 
 if [ "$ENABLE_TESTING" = "ON" ]
@@ -70,5 +72,16 @@ else
     perf record -F 8000 -g -- bin/buddy8800 tests/res/diag2.com
     perf report
     rm perf.data
+  fi
+fi
+
+if ! command -v valgrind &> /dev/null
+then
+  echo "valgrind could not be found."
+else
+  if [ "$RUN_MEMCHECK" = "ON" ]
+  then
+    #valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes bin/buddy8800 tests/res/diag2.com
+    valgrind --tool=memcheck bin/buddy8800 "tests/res/cpudiag.bin"
   fi
 fi
