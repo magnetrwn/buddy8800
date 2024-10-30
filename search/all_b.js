@@ -15,7 +15,7 @@ var searchData=
   ['set_5fregister16_62',['set_register16',['../structcpu__state.html#ac9b4c2b78269d7e1f39a02d9b7a27007',1,'cpu_state']]],
   ['set_5fregister8_63',['set_register8',['../structcpu__state.html#a02e774e783ac8deb8e0580ff63855871',1,'cpu_state']]],
   ['set_5fz_5fs_5fp_5fflags_64',['set_Z_S_P_flags',['../structcpu__state.html#ac065e7b10c522bb1a3fcd4b6fc9ee428',1,'cpu_state']]],
-  ['setup_65',['setup',['../classpty.html#acacb920c29edf75bc85388b4e347aa4e',1,'pty']]],
+  ['setup_65',['setup',['../classpty.html#acacb920c29edf75bc85388b4e347aa4e',1,'pty::setup()'],['../classemulator.html#a9675c475c469acd1840c62f575de5086',1,'emulator::setup()']]],
   ['size_66',['size',['../classbus.html#a40eeeeb2ba939e469bdff3d35c3f5f67',1,'bus']]],
   ['step_67',['step',['../classcpu.html#acd0b563c6831d88a883f3bcd7d2257b4',1,'cpu']]]
 ];

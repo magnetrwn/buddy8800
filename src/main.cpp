@@ -1,6 +1,6 @@
 #include "ux.hpp"
 
 int main(int argc, char** argv) {
-    emulator ux;
+    terminal_ux ux;
     return ux.main(argc, argv);
 }

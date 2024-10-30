@@ -5,6 +5,13 @@ var namespaces_dup =
     [ "Building", "index.html#autotoc_md3", null ],
     [ "Resources and Documentation", "index.html#autotoc_md4", null ],
     [ "Screenshots", "index.html#autotoc_md5", null ],
+    [ "errors", null, [
+      [ "errno_enum", "ux_8hpp.html#a99ea06eb35ad9517b370b8d8a2ed2b8f", [
+        [ "SUCCESS", "ux_8hpp.html#a99ea06eb35ad9517b370b8d8a2ed2b8fad0749aaba8b833466dfcbb0428e4f89c", null ],
+        [ "FILE_NOT_FOUND", "ux_8hpp.html#a99ea06eb35ad9517b370b8d8a2ed2b8facd54d99c8efb3c2db794197045f5b83c", null ],
+        [ "INVALID_ARGS", "ux_8hpp.html#a99ea06eb35ad9517b370b8d8a2ed2b8fa8713ca80fae7c3c5b87796dc072f4df1", null ]
+      ] ]
+    ] ],
     [ "type_definitions", "namespacetype__definitions.html", [
       [ "f32", "namespacetype__definitions.html#a26101d1810f9ae3b1a09b78fe15879fc", null ],
       [ "f64", "namespacetype__definitions.html#a4c5c0cdc6976b7d81b42537c2434ced2", null ],
