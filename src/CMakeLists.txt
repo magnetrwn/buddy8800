@@ -8,6 +8,8 @@ target_include_directories(buddylib PUBLIC
     ${PROJECT_SOURCE_DIR}/src/core/bus
     ${PROJECT_SOURCE_DIR}/src/util
     ${PROJECT_SOURCE_DIR}/src/ux
+    ${PROJECT_SOURCE_DIR}/extern/toml11/include
 )
+
 add_executable(buddy8800 main.cpp)
-target_link_libraries(buddy8800 PRIVATE buddylib)
+target_link_libraries(buddy8800 PRIVATE buddylib toml11)

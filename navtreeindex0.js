@@ -1,6 +1,5 @@
 var NAVTREEINDEX0 =
 {
-"":[2,0,5],
 "annotated.html":[3,0],
 "bus_8hpp_source.html":[4,0,0,0,0,0],
 "card_8hpp_source.html":[4,0,0,0,0,1],
@@ -216,5 +215,6 @@ var NAVTREEINDEX0 =
 "ux_8hpp.html#a99ea06eb35ad9517b370b8d8a2ed2b8fa8713ca80fae7c3c5b87796dc072f4df1":[2,0,5,0,2],
 "ux_8hpp.html#a99ea06eb35ad9517b370b8d8a2ed2b8facd54d99c8efb3c2db794197045f5b83c":[2,0,5,0,1],
 "ux_8hpp.html#a99ea06eb35ad9517b370b8d8a2ed2b8fad0749aaba8b833466dfcbb0428e4f89c":[2,0,5,0,0],
-"ux_8hpp_source.html":[4,0,0,2,0]
+"ux_8hpp_source.html":[4,0,0,2,0],
+"":[2,0,5]
 };
