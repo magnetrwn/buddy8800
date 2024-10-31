@@ -42,8 +42,10 @@ cmake .. \
   -DENABLE_TRACE=$ENABLE_TRACE \
   -DENABLE_TRACE_ESSENTIAL=$ENABLE_TRACE_ESSENTIAL
 
-make
+make -j8
 mv compile_commands.json .. || true
+cp ../static/config.toml ../bin/
+cp ../static/config.toml ../build/
 
 if [ "$ENABLE_TESTING" = "ON" ]
 then

@@ -12,6 +12,7 @@ var hierarchy =
     [ "emulator", "classemulator.html", null ],
     [ "util::print_helper", "classutil_1_1print__helper.html", null ],
     [ "pty", "classpty.html", null ],
+    [ "system_config", "classsystem__config.html", null ],
     [ "terminal_ux", "structterminal__ux.html", null ],
     [ "util", "classutil.html", null ]
 ];

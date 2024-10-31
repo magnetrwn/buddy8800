@@ -300,7 +300,7 @@ public:
 
     /// @brief Refresh the UART for data I/O.
     inline void refresh() override {
-        if (!RDRF() and serial.poll()) {
+        if (/*!RDRF() and*/ serial.poll()) { // Looks like correct behavior is to allow fast incoming data to overwrite.
             RX_DATA(serial.getch());
             RDRF(true);
         }
