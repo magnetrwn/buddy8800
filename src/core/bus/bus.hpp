@@ -20,7 +20,9 @@
  * additional middle class, `bus_index_iface`, which acts as a proxy to address locations and call reads and writes by the
  * cast and assignment operators.
  *
- * @note Conflicting address ranges are allowed but must be explicitly toggled by an `insert()`.
+ * @note Conflicting address ranges are allowed but must be explicitly toggled by an `insert()`. Make sure you actually want
+ * a conflict, since cards have an IORQ signal that can be used to determine if the cards belong to memory or I/O addressable
+ * ranges, which can overlap but be separated by the IORQ signal being set or not.
  * @par
  * @note The CPU, while in reality is placed on a card, it's not here. The bus acts as glue between the plentitude
  * of cards and the CPU itself.
@@ -93,6 +95,7 @@ private:
         bus_index_iface(bus& b, u16 adr) : bus_ref(b), adr(adr) {}
     };
 
+    /// @todo MAX_BUS_CARDS might be a bit hard to find, and doesn't exactly serve a purpose other than hard limit.
     static constexpr usize MAX_BUS_CARDS = 18;
     static constexpr card* NO_CARD = nullptr;
 
@@ -102,6 +105,7 @@ private:
     inline bool test_for_bus_conflict(card* card) const {
         for (usize i = 0; i < MAX_BUS_CARDS; ++i)
             if (!ignore_conflicts[i] and cards[i] != NO_CARD
+            and cards[i]->is_io() == card->is_io()
             and (cards[i]->in_range(card->identify().start_adr)
                  or (card->in_range(cards[i]->identify().start_adr))
                 )
@@ -115,7 +119,7 @@ public:
     /**
      * @brief Inserts a card into a slot on the bus.
      * @param card A pointer to the card to insert.
-     * @param slot The slot number to insert the card into.
+     * @param slot The slot number to insert the card into, counting from 0 to MAX_BUS_CARDS - 1.
      * @param allow_conflict Whether to allow bus conflicts (run a conflict check) or not.
      * @throws std::invalid_argument if the card is nullptr.
      * @throws std::out_of_range if the slot is out of range.
@@ -161,14 +165,15 @@ public:
     /**
      * @brief Reads a byte from the bus.
      * @param adr The address to read from.
+     * @param iorq Whether the IORQ signal is set or not.
      * @return The byte read from the first valid card on the bus.
      * @warning This method will return only the first valid card slot that is in range of the address.
      * You may want to place MMIO that overlaps with memory cards in earlier slots...
      * @todo Handle this warning.
      */
-    inline u8 read(u16 adr) const {
+    inline u8 read(u16 adr, bool iorq = false) const {
         for (card* card : cards)
-            if (card != NO_CARD and card->in_range(adr))
+            if (card != NO_CARD and card->in_range(adr) and iorq == card->is_io())
                 return card->read(adr);
 
         return BAD_U8;
@@ -178,11 +183,12 @@ public:
      * @brief Writes a byte to the bus.
      * @param adr The address to write to.
      * @param byte The byte to write.
+     * @param iorq Whether the IORQ signal is set or not.
      * @note This method will write to all cards in range of the address.
      */
-    inline void write(u16 adr, u8 byte) {
+    inline void write(u16 adr, u8 byte, bool iorq = false) {
         for (card* card : cards)
-            if (card != NO_CARD and card->in_range(adr))
+            if (card != NO_CARD and card->in_range(adr) and iorq == card->is_io())
                 card->write(adr, byte);
     }
 
@@ -190,11 +196,12 @@ public:
      * @brief Writes a byte to the bus, without considering write lock.
      * @param adr The address to write to.
      * @param byte The byte to write.
+     * @param iorq Whether the IORQ signal is set or not.
      * @note This method will write to all cards in range of the address.
      */
-    inline void write_force(u16 adr, u8 byte) {
+    inline void write_force(u16 adr, u8 byte, bool iorq = false) {
         for (card* card : cards)
-            if (card != NO_CARD and card->in_range(adr))
+            if (card != NO_CARD and card->in_range(adr) and iorq == card->is_io())
                 card->write_force(adr, byte);
     }
 
@@ -271,7 +278,7 @@ public:
      *
      * The output is formatted as follows:
      * ```
-     * slot: start-address-hex/address-range: card-type, card-details
+     * slot: [type] start-address-hex/address-range: card-type, card-details
      * ```
      */
     inline void print_mmap() const {
@@ -279,7 +286,7 @@ public:
             if (cards[i] != NO_CARD) {
                 card_identify ident = cards[i]->identify();
                 std::cout 
-                    << i << ": " 
+                    << "Slot " << i << ": " << "[" << (cards[i]->is_io() ? "I/O" : "MEM") << "] "
                     << util::to_hex_s(ident.start_adr) << "/" << ident.adr_range << ": " 
                     << ident.name << (*ident.detail ? ", " : "") << (*ident.detail ? ident.detail : "")
                     << std::endl;
