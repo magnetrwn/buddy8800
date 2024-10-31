@@ -5,6 +5,7 @@ var classserial__card =
     [ "get_irq", "classserial__card.html#a310898ff8b156d8553f9b759eea38420", null ],
     [ "identify", "classserial__card.html#a1f29b0bb8ad083bf74af151628b7acf3", null ],
     [ "in_range", "classserial__card.html#afec24d99079048e6555c21b3eaf3be66", null ],
+    [ "is_io", "classserial__card.html#a63b70caf2fd303c6d8246a28bd50dc68", null ],
     [ "read", "classserial__card.html#a70a58b548817e1590efb55652d772e67", null ],
     [ "refresh", "classserial__card.html#a2d9f292d7be1f9deebf49fa5d748c039", null ],
     [ "write", "classserial__card.html#a87b17dad886b8847836ebd214c3c14ad", null ],

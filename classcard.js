@@ -5,6 +5,7 @@ var classcard =
     [ "get_irq", "classcard.html#a4ef348c61f7138914f015c57d2f6a0be", null ],
     [ "identify", "classcard.html#aa242bc5baf3e6276c4c3ba5ddf7610a4", null ],
     [ "in_range", "classcard.html#ab32f79943888d74e0a506e78b2d7406c", null ],
+    [ "is_io", "classcard.html#af41da29e90a5b92e6df323da37822060", null ],
     [ "is_irq", "classcard.html#a5aca5465f1771a8fa77cd0deb33ed996", null ],
     [ "is_w_locked", "classcard.html#acda2f3ac26f4d8e8f2e583799458e366", null ],
     [ "raise_irq", "classcard.html#ab4841b21668816977ff2266d6667593e", null ],

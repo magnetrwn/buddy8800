@@ -137,12 +137,17 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#af5458172552b57ac4a7e5de2a31aa0c9">write_force</a> (u16 adr, u8 byte) override</td></tr>
 <tr class="memdesc:af5458172552b57ac4a7e5de2a31aa0c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a byte to the data card regardless of write lock. <br /></td></tr>
 <tr class="separator:af5458172552b57ac4a7e5de2a31aa0c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d5e0fc519f03e8ab010cbca151654ef"><td class="memItemLeft" align="right" valign="top"><a id="a1d5e0fc519f03e8ab010cbca151654ef"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#a1d5e0fc519f03e8ab010cbca151654ef">is_io</a> () const override</td></tr>
+<tr class="memdesc:a1d5e0fc519f03e8ab010cbca151654ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the card is an I/O card. <br /></td></tr>
+<tr class="separator:a1d5e0fc519f03e8ab010cbca151654ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac53bf5238948b7a8299f456e047d3157"><td class="memItemLeft" align="right" valign="top"><a id="ac53bf5238948b7a8299f456e047d3157"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#ac53bf5238948b7a8299f456e047d3157">clear</a> () override</td></tr>
 <tr class="memdesc:ac53bf5238948b7a8299f456e047d3157"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the data card. <br /></td></tr>
 <tr class="separator:ac53bf5238948b7a8299f456e047d3157"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
+<tr><td colspan="2"><div class="groupHeader">Unused methods.</div></td></tr>
 <tr class="memitem:a54a52cf3e47f0d1dbf3ad4c1be66c440"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#a54a52cf3e47f0d1dbf3ad4c1be66c440">refresh</a> () override</td></tr>
+<tr class="memdesc:a54a52cf3e47f0d1dbf3ad4c1be66c440"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refresh the card to allow periodic I/O, timer or sync operation.  <a href="classdata__card.html#a54a52cf3e47f0d1dbf3ad4c1be66c440">More...</a><br /></td></tr>
 <tr class="separator:a54a52cf3e47f0d1dbf3ad4c1be66c440"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bf6bce79c1a37be037ccdb01d475146"><td class="memItemLeft" align="right" valign="top">std::array&lt; u8, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#a4bf6bce79c1a37be037ccdb01d475146">get_irq</a> () override</td></tr>
 <tr class="memdesc:a4bf6bce79c1a37be037ccdb01d475146"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the IRQ instruction (and possible operands).  <a href="classdata__card.html#a4bf6bce79c1a37be037ccdb01d475146">More...</a><br /></td></tr>
@@ -262,7 +267,9 @@ template&lt;bool construct_then_write_lock&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section note"><dt>Note</dt><dd>Unused methods. </dd></dl>
+
+<p>Refresh the card to allow periodic I/O, timer or sync operation. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classbus.html#ac158680334e36add350e716e6a0ec69b" title="Refreshes all cards on the bus.">bus::refresh()</a> </dd></dl>
 
 <p>Implements <a class="el" href="classcard.html#ae39a92dd99c80e0756cc1d8ea28ca6c4">card</a>.</p>
 

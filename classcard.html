@@ -157,6 +157,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a4db633403be8c709db66fafa54c43989"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#a4db633403be8c709db66fafa54c43989">write_force</a> (u16 adr, u8 byte)=0</td></tr>
 <tr class="memdesc:a4db633403be8c709db66fafa54c43989"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a byte to the card regardless of write lock.  <a href="classcard.html#a4db633403be8c709db66fafa54c43989">More...</a><br /></td></tr>
 <tr class="separator:a4db633403be8c709db66fafa54c43989"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af41da29e90a5b92e6df323da37822060"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#af41da29e90a5b92e6df323da37822060">is_io</a> () const =0</td></tr>
+<tr class="memdesc:af41da29e90a5b92e6df323da37822060"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the card is an I/O card.  <a href="classcard.html#af41da29e90a5b92e6df323da37822060">More...</a><br /></td></tr>
+<tr class="separator:af41da29e90a5b92e6df323da37822060"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae39a92dd99c80e0756cc1d8ea28ca6c4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#ae39a92dd99c80e0756cc1d8ea28ca6c4">refresh</a> ()=0</td></tr>
 <tr class="memdesc:ae39a92dd99c80e0756cc1d8ea28ca6c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refresh the card to allow periodic I/O, timer or sync operation.  <a href="classcard.html#ae39a92dd99c80e0756cc1d8ea28ca6c4">More...</a><br /></td></tr>
 <tr class="separator:ae39a92dd99c80e0756cc1d8ea28ca6c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -276,6 +279,36 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 <dl class="section note"><dt>Note</dt><dd>This method should always be used when interacting with cards from the bus, to avoid out of range accesses. It is not used by the cards themselves to avoid double checking. </dd></dl>
 
 <p>Implemented in <a class="el" href="classserial__card.html#afec24d99079048e6555c21b3eaf3be66">serial_card</a>, and <a class="el" href="classdata__card.html#af921f54ef18d2f7c799e7335fd82e68e">data_card&lt; construct_then_write_lock &gt;</a>.</p>
+
+</div>
+</div>
+<a id="af41da29e90a5b92e6df323da37822060"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af41da29e90a5b92e6df323da37822060">&#9670;&nbsp;</a></span>is_io()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool card::is_io </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if the card is an I/O card. </p>
+<dl class="section return"><dt>Returns</dt><dd>False on a memory card, true on an I/O card. </dd></dl>
+
+<p>Implemented in <a class="el" href="classserial__card.html#a63b70caf2fd303c6d8246a28bd50dc68">serial_card</a>, and <a class="el" href="classdata__card.html#a1d5e0fc519f03e8ab010cbca151654ef">data_card&lt; construct_then_write_lock &gt;</a>.</p>
 
 </div>
 </div>

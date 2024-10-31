@@ -12,13 +12,16 @@ pseudo_bdos_enabled = true      # Redirect and handle calls that match addresses
 # - range: Size or address range (like I/O register count) of the card in bytes.
 # - let_collide: Allow the card to have overlapping address range with other cards.
 #
+# IMPORTANT: cards can be de/activated by the IORQ signal according to them being memory or I/O, so
+#            you might not need to enable overlapping, as overlap of I/O and memory is expected.
+#            Only use this in case of overlap of the same type of card (e.g. two RAM cards).
+#
 # Note: there is (usually) a limit of 18 cards in the system.
 
 [[card]]
-slot        = 3
+slot        = 10
 type        = "serial"
 at          = 0x0010
-let_collide = true
 
 [[card]]
 slot        = 4

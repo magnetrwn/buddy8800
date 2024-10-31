@@ -114,6 +114,10 @@ public:
      */
     virtual void write_force(u16 adr, u8 byte) = 0;
 
+    /// @brief Check if the card is an I/O card.
+    /// @returns False on a memory card, true on an I/O card.
+    virtual bool is_io() const = 0;
+
     /// @brief Refresh the card to allow periodic I/O, timer or sync operation.
     /// @see bus::refresh()
     virtual void refresh() = 0;
@@ -177,9 +181,7 @@ public:
     inline card_identify identify() override { return { start_adr, capacity, (this->write_locked ? "rom area" : "ram area") }; }
 
     /// @brief Read a byte from the data card.
-    inline u8 read(u16 adr) const override {
-        return data[adr - start_adr];
-    }
+    inline u8 read(u16 adr) const override { return data[adr - start_adr]; }
 
     /// @brief Write a byte to the data card.
     inline void write(u16 adr, u8 byte) override {
@@ -188,9 +190,10 @@ public:
     }
 
     /// @brief Write a byte to the data card regardless of write lock.
-    inline void write_force(u16 adr, u8 byte) override {
-        data[adr - start_adr] = byte;
-    }
+    inline void write_force(u16 adr, u8 byte) override { data[adr - start_adr] = byte; }
+
+    /// @brief Check if the card is an I/O card.
+    inline bool is_io() const override { return false; }
 
     /// @brief Clear the data card.
     inline void clear() override {
@@ -198,7 +201,7 @@ public:
             data.clear();
     }
 
-    /// @note Unused methods.
+    /// @name Unused methods.
     /// \{
 
     inline void refresh() override {}
@@ -389,10 +392,13 @@ public:
         }
     }
 
+    /// @brief Check if the card is an I/O card.
+    inline bool is_io() const override { return true; }
+
     /// @brief Clear the serial card state and configuration.
     inline void clear() override { reset(); }
 
-    /// @note Unused methods.
+    /// @name Unused methods.
     /// \{
 
     inline void write_force(u16 adr, u8 byte) override { write(adr, byte); }

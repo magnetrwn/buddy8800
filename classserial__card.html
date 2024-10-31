@@ -128,12 +128,17 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a87b17dad886b8847836ebd214c3c14ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#a87b17dad886b8847836ebd214c3c14ad">write</a> (u16 adr, u8 byte) override</td></tr>
 <tr class="memdesc:a87b17dad886b8847836ebd214c3c14ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a byte to the serial registers.  <a href="classserial__card.html#a87b17dad886b8847836ebd214c3c14ad">More...</a><br /></td></tr>
 <tr class="separator:a87b17dad886b8847836ebd214c3c14ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63b70caf2fd303c6d8246a28bd50dc68"><td class="memItemLeft" align="right" valign="top"><a id="a63b70caf2fd303c6d8246a28bd50dc68"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#a63b70caf2fd303c6d8246a28bd50dc68">is_io</a> () const override</td></tr>
+<tr class="memdesc:a63b70caf2fd303c6d8246a28bd50dc68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the card is an I/O card. <br /></td></tr>
+<tr class="separator:a63b70caf2fd303c6d8246a28bd50dc68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a35e093e5dc372cc98d17bf3b167c1e"><td class="memItemLeft" align="right" valign="top"><a id="a3a35e093e5dc372cc98d17bf3b167c1e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#a3a35e093e5dc372cc98d17bf3b167c1e">clear</a> () override</td></tr>
 <tr class="memdesc:a3a35e093e5dc372cc98d17bf3b167c1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the serial card state and configuration. <br /></td></tr>
 <tr class="separator:a3a35e093e5dc372cc98d17bf3b167c1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
+<tr><td colspan="2"><div class="groupHeader">Unused methods.</div></td></tr>
 <tr class="memitem:a692446f7540c8ae4601737bdf2833ebf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#a692446f7540c8ae4601737bdf2833ebf">write_force</a> (u16 adr, u8 byte) override</td></tr>
+<tr class="memdesc:a692446f7540c8ae4601737bdf2833ebf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a byte to the card regardless of write lock.  <a href="classserial__card.html#a692446f7540c8ae4601737bdf2833ebf">More...</a><br /></td></tr>
 <tr class="separator:a692446f7540c8ae4601737bdf2833ebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a310898ff8b156d8553f9b759eea38420"><td class="memItemLeft" align="right" valign="top">std::array&lt; u8, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#a310898ff8b156d8553f9b759eea38420">get_irq</a> () override</td></tr>
 <tr class="memdesc:a310898ff8b156d8553f9b759eea38420"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the IRQ instruction (and possible operands).  <a href="classserial__card.html#a310898ff8b156d8553f9b759eea38420">More...</a><br /></td></tr>
@@ -395,7 +400,15 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section note"><dt>Note</dt><dd>Unused methods. </dd></dl>
+
+<p>Write a byte to the card regardless of write lock. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">adr</td><td>The address to write to. </td></tr>
+    <tr><td class="paramname">byte</td><td>The byte to write. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Implements <a class="el" href="classcard.html#a4db633403be8c709db66fafa54c43989">card</a>.</p>
 

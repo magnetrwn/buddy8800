@@ -6,6 +6,7 @@ var searchData=
   ['inc_5fregister8_30',['inc_register8',['../structcpu__state.html#a996a8f507607206d89e3149679332352',1,'cpu_state']]],
   ['insert_31',['insert',['../classbus.html#aef6e4de3df548561b9545f0cb341e143',1,'bus']]],
   ['is_5fhalted_32',['is_halted',['../classcpu.html#a010e335fc9f1797e72bfc5585e9238f6',1,'cpu']]],
-  ['is_5firq_33',['is_irq',['../classbus.html#ae35dadd5a5ae3a060bd18facb8bb4f31',1,'bus::is_irq()'],['../classcard.html#a5aca5465f1771a8fa77cd0deb33ed996',1,'card::is_irq() const']]],
-  ['is_5fw_5flocked_34',['is_w_locked',['../classcard.html#acda2f3ac26f4d8e8f2e583799458e366',1,'card']]]
+  ['is_5fio_33',['is_io',['../classcard.html#af41da29e90a5b92e6df323da37822060',1,'card::is_io()'],['../classdata__card.html#a1d5e0fc519f03e8ab010cbca151654ef',1,'data_card::is_io()'],['../classserial__card.html#a63b70caf2fd303c6d8246a28bd50dc68',1,'serial_card::is_io()']]],
+  ['is_5firq_34',['is_irq',['../classbus.html#ae35dadd5a5ae3a060bd18facb8bb4f31',1,'bus::is_irq()'],['../classcard.html#a5aca5465f1771a8fa77cd0deb33ed996',1,'card::is_irq() const']]],
+  ['is_5fw_5flocked_35',['is_w_locked',['../classcard.html#acda2f3ac26f4d8e8f2e583799458e366',1,'card']]]
 ];

@@ -108,15 +108,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a40eeeeb2ba939e469bdff3d35c3f5f67"><td class="memItemLeft" align="right" valign="top">constexpr usize&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#a40eeeeb2ba939e469bdff3d35c3f5f67">size</a> () const</td></tr>
 <tr class="memdesc:a40eeeeb2ba939e469bdff3d35c3f5f67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the maximum number of addressable locations on the bus.  <a href="classbus.html#a40eeeeb2ba939e469bdff3d35c3f5f67">More...</a><br /></td></tr>
 <tr class="separator:a40eeeeb2ba939e469bdff3d35c3f5f67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0d63d27fb997063625aff06b25fd47b"><td class="memItemLeft" align="right" valign="top">u8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#ac0d63d27fb997063625aff06b25fd47b">read</a> (u16 adr) const</td></tr>
-<tr class="memdesc:ac0d63d27fb997063625aff06b25fd47b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a byte from the bus.  <a href="classbus.html#ac0d63d27fb997063625aff06b25fd47b">More...</a><br /></td></tr>
-<tr class="separator:ac0d63d27fb997063625aff06b25fd47b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05d0d594ca803a6f713e3078dcdaf22a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#a05d0d594ca803a6f713e3078dcdaf22a">write</a> (u16 adr, u8 byte)</td></tr>
-<tr class="memdesc:a05d0d594ca803a6f713e3078dcdaf22a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a byte to the bus.  <a href="classbus.html#a05d0d594ca803a6f713e3078dcdaf22a">More...</a><br /></td></tr>
-<tr class="separator:a05d0d594ca803a6f713e3078dcdaf22a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91190b9b4cffd45516d7f6571d4f4889"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#a91190b9b4cffd45516d7f6571d4f4889">write_force</a> (u16 adr, u8 byte)</td></tr>
-<tr class="memdesc:a91190b9b4cffd45516d7f6571d4f4889"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a byte to the bus, without considering write lock.  <a href="classbus.html#a91190b9b4cffd45516d7f6571d4f4889">More...</a><br /></td></tr>
-<tr class="separator:a91190b9b4cffd45516d7f6571d4f4889"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a646ce34496749cf727065ad8afc133ad"><td class="memItemLeft" align="right" valign="top">u8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#a646ce34496749cf727065ad8afc133ad">read</a> (u16 adr, bool iorq=false) const</td></tr>
+<tr class="memdesc:a646ce34496749cf727065ad8afc133ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a byte from the bus.  <a href="classbus.html#a646ce34496749cf727065ad8afc133ad">More...</a><br /></td></tr>
+<tr class="separator:a646ce34496749cf727065ad8afc133ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b4588f782550a9bdc62541dcc0a5fe7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#a5b4588f782550a9bdc62541dcc0a5fe7">write</a> (u16 adr, u8 byte, bool iorq=false)</td></tr>
+<tr class="memdesc:a5b4588f782550a9bdc62541dcc0a5fe7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a byte to the bus.  <a href="classbus.html#a5b4588f782550a9bdc62541dcc0a5fe7">More...</a><br /></td></tr>
+<tr class="separator:a5b4588f782550a9bdc62541dcc0a5fe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a519566c1f9e18ebc947b4afa3d7c6795"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#a519566c1f9e18ebc947b4afa3d7c6795">write_force</a> (u16 adr, u8 byte, bool iorq=false)</td></tr>
+<tr class="memdesc:a519566c1f9e18ebc947b4afa3d7c6795"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a byte to the bus, without considering write lock.  <a href="classbus.html#a519566c1f9e18ebc947b4afa3d7c6795">More...</a><br /></td></tr>
+<tr class="separator:a519566c1f9e18ebc947b4afa3d7c6795"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a823fe0fdf5aad85763fdeb840a3c4df2"><td class="memItemLeft" align="right" valign="top">bus_index_iface&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#a823fe0fdf5aad85763fdeb840a3c4df2">operator[]</a> (u16 adr)</td></tr>
 <tr class="memdesc:a823fe0fdf5aad85763fdeb840a3c4df2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexes the bus.  <a href="classbus.html#a823fe0fdf5aad85763fdeb840a3c4df2">More...</a><br /></td></tr>
 <tr class="separator:a823fe0fdf5aad85763fdeb840a3c4df2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -145,8 +145,8 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents the S-100 bus of the emulator. </p>
 <p>This class holds the necessary structures and methods to handle inter-operation of the Intel 8080 CPU with any assortment of cards interacting through a data, address, and control bus according to the S-100 specs, including interrupt vectors.</p>
-<p>A design choice was made to try to stay as close as possible as an indexable array of memory with the bus, so that it can be easily replaced by a simple <code>std::array&lt;u8, 65536&gt;</code>. This is why the <code><a class="el" href="classbus.html#ac0d63d27fb997063625aff06b25fd47b" title="Reads a byte from the bus.">read()</a></code> and <code><a class="el" href="classbus.html#a05d0d594ca803a6f713e3078dcdaf22a" title="Writes a byte to the bus.">write()</a></code> methods are called by an additional middle class, <code>bus_index_iface</code>, which acts as a proxy to address locations and call reads and writes by the cast and assignment operators.</p>
-<dl class="section note"><dt>Note</dt><dd>Conflicting address ranges are allowed but must be explicitly toggled by an <code><a class="el" href="classbus.html#aef6e4de3df548561b9545f0cb341e143" title="Inserts a card into a slot on the bus.">insert()</a></code>. </dd></dl>
+<p>A design choice was made to try to stay as close as possible as an indexable array of memory with the bus, so that it can be easily replaced by a simple <code>std::array&lt;u8, 65536&gt;</code>. This is why the <code><a class="el" href="classbus.html#a646ce34496749cf727065ad8afc133ad" title="Reads a byte from the bus.">read()</a></code> and <code><a class="el" href="classbus.html#a5b4588f782550a9bdc62541dcc0a5fe7" title="Writes a byte to the bus.">write()</a></code> methods are called by an additional middle class, <code>bus_index_iface</code>, which acts as a proxy to address locations and call reads and writes by the cast and assignment operators.</p>
+<dl class="section note"><dt>Note</dt><dd>Conflicting address ranges are allowed but must be explicitly toggled by an <code><a class="el" href="classbus.html#aef6e4de3df548561b9545f0cb341e143" title="Inserts a card into a slot on the bus.">insert()</a></code>. Make sure you actually want a conflict, since cards have an IORQ signal that can be used to determine if the cards belong to memory or I/O addressable ranges, which can overlap but be separated by the IORQ signal being set or not. </dd></dl>
 <dl class="section user"><dt></dt><dd></dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The CPU, while in reality is placed on a card, it's not here. The bus acts as glue between the plentitude of cards and the CPU itself. </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>The <code><a class="el" href="classbus.html#a40eeeeb2ba939e469bdff3d35c3f5f67" title="Returns the maximum number of addressable locations on the bus.">size()</a></code> method returns the maximum number of addressable locations on the bus (65536), not the number of cards. While this might look misleading, it's actually an attempt at keeping the same interface as there would be if the instanced bus were to be replaced by a normal <code>std::array&lt;u8, 65536&gt;</code>. </dd></dl>
@@ -214,7 +214,7 @@ Public Member Functions</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>This method should be called after <code><a class="el" href="classbus.html#ae35dadd5a5ae3a060bd18facb8bb4f31" title="Checks if an IRQ is raised.">is_irq()</a></code> returns true. </dd></dl>
 <dl class="section user"><dt></dt><dd></dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The order of returned interrupts is preferential to the order of cards on the bus. This is because many S-100 systems used simple daisy-chaining for IRQs, and the closest slot to raise an IRQ concurrent to another would be the first to be serviced. </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Verify this last claim (we may need an 8259 PIC instead...). </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Verify this last claim (we may need an 8259 PIC instead...). </dd></dl>
 
 </div>
 </div>
@@ -291,7 +291,7 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">card</td><td>A pointer to the card to insert. </td></tr>
-    <tr><td class="paramname">slot</td><td>The slot number to insert the card into. </td></tr>
+    <tr><td class="paramname">slot</td><td>The slot number to insert the card into, counting from 0 to MAX_BUS_CARDS - 1. </td></tr>
     <tr><td class="paramname">allow_conflict</td><td>Whether to allow bus conflicts (run a conflict check) or not. </td></tr>
   </table>
   </dd>
@@ -433,13 +433,13 @@ Public Member Functions</h2></td></tr>
 
 <p>Prints a detailed memory map of the bus. </p>
 <p>This method will print the memory map of the bus, showing the start and end addresses of each card, along with the card's type (name) and additional details.</p>
-<p>The output is formatted as follows: </p><div class="fragment"><div class="line">slot: start-address-hex/address-range: <a class="code" href="classcard.html">card</a>-type, <a class="code" href="classcard.html">card</a>-details</div>
+<p>The output is formatted as follows: </p><div class="fragment"><div class="line">slot: [type] start-address-hex/address-range: <a class="code" href="classcard.html">card</a>-type, <a class="code" href="classcard.html">card</a>-details</div>
 <div class="ttc" id="aclasscard_html"><div class="ttname"><a href="classcard.html">card</a></div><div class="ttdoc">Base class for all cards.</div><div class="ttdef"><b>Definition:</b> card.hpp:37</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
-<a id="ac0d63d27fb997063625aff06b25fd47b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac0d63d27fb997063625aff06b25fd47b">&#9670;&nbsp;</a></span>read()</h2>
+<a id="a646ce34496749cf727065ad8afc133ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a646ce34496749cf727065ad8afc133ad">&#9670;&nbsp;</a></span>read()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -451,8 +451,18 @@ Public Member Functions</h2></td></tr>
           <td class="memname">u8 bus::read </td>
           <td>(</td>
           <td class="paramtype">u16&#160;</td>
-          <td class="paramname"><em>adr</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramname"><em>adr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>iorq</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
         </tr>
       </table>
   </td>
@@ -466,12 +476,13 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">adr</td><td>The address to read from. </td></tr>
+    <tr><td class="paramname">iorq</td><td>Whether the IORQ signal is set or not. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The byte read from the first valid card on the bus. </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>This method will return only the first valid card slot that is in range of the address. You may want to place MMIO that overlaps with memory cards in earlier slots... </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Handle this warning. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Handle this warning. </dd></dl>
 
 </div>
 </div>
@@ -572,8 +583,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a05d0d594ca803a6f713e3078dcdaf22a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05d0d594ca803a6f713e3078dcdaf22a">&#9670;&nbsp;</a></span>write()</h2>
+<a id="a5b4588f782550a9bdc62541dcc0a5fe7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b4588f782550a9bdc62541dcc0a5fe7">&#9670;&nbsp;</a></span>write()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -591,7 +602,13 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">u8&#160;</td>
-          <td class="paramname"><em>byte</em>&#160;</td>
+          <td class="paramname"><em>byte</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>iorq</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -611,6 +628,7 @@ Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">adr</td><td>The address to write to. </td></tr>
     <tr><td class="paramname">byte</td><td>The byte to write. </td></tr>
+    <tr><td class="paramname">iorq</td><td>Whether the IORQ signal is set or not. </td></tr>
   </table>
   </dd>
 </dl>
@@ -618,8 +636,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a91190b9b4cffd45516d7f6571d4f4889"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a91190b9b4cffd45516d7f6571d4f4889">&#9670;&nbsp;</a></span>write_force()</h2>
+<a id="a519566c1f9e18ebc947b4afa3d7c6795"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a519566c1f9e18ebc947b4afa3d7c6795">&#9670;&nbsp;</a></span>write_force()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -637,7 +655,13 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">u8&#160;</td>
-          <td class="paramname"><em>byte</em>&#160;</td>
+          <td class="paramname"><em>byte</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>iorq</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -657,6 +681,7 @@ Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">adr</td><td>The address to write to. </td></tr>
     <tr><td class="paramname">byte</td><td>The byte to write. </td></tr>
+    <tr><td class="paramname">iorq</td><td>Whether the IORQ signal is set or not. </td></tr>
   </table>
   </dd>
 </dl>
