@@ -114,6 +114,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a05d0d594ca803a6f713e3078dcdaf22a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#a05d0d594ca803a6f713e3078dcdaf22a">write</a> (u16 adr, u8 byte)</td></tr>
 <tr class="memdesc:a05d0d594ca803a6f713e3078dcdaf22a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a byte to the bus.  <a href="classbus.html#a05d0d594ca803a6f713e3078dcdaf22a">More...</a><br /></td></tr>
 <tr class="separator:a05d0d594ca803a6f713e3078dcdaf22a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91190b9b4cffd45516d7f6571d4f4889"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#a91190b9b4cffd45516d7f6571d4f4889">write_force</a> (u16 adr, u8 byte)</td></tr>
+<tr class="memdesc:a91190b9b4cffd45516d7f6571d4f4889"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a byte to the bus, without considering write lock.  <a href="classbus.html#a91190b9b4cffd45516d7f6571d4f4889">More...</a><br /></td></tr>
+<tr class="separator:a91190b9b4cffd45516d7f6571d4f4889"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a823fe0fdf5aad85763fdeb840a3c4df2"><td class="memItemLeft" align="right" valign="top">bus_index_iface&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbus.html#a823fe0fdf5aad85763fdeb840a3c4df2">operator[]</a> (u16 adr)</td></tr>
 <tr class="memdesc:a823fe0fdf5aad85763fdeb840a3c4df2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexes the bus.  <a href="classbus.html#a823fe0fdf5aad85763fdeb840a3c4df2">More...</a><br /></td></tr>
 <tr class="separator:a823fe0fdf5aad85763fdeb840a3c4df2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -604,6 +607,52 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Writes a byte to the bus. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">adr</td><td>The address to write to. </td></tr>
+    <tr><td class="paramname">byte</td><td>The byte to write. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This method will write to all cards in range of the address. </dd></dl>
+
+</div>
+</div>
+<a id="a91190b9b4cffd45516d7f6571d4f4889"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91190b9b4cffd45516d7f6571d4f4889">&#9670;&nbsp;</a></span>write_force()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bus::write_force </td>
+          <td>(</td>
+          <td class="paramtype">u16&#160;</td>
+          <td class="paramname"><em>adr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8&#160;</td>
+          <td class="paramname"><em>byte</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Writes a byte to the bus, without considering write lock. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">adr</td><td>The address to write to. </td></tr>

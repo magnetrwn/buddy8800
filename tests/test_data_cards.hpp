@@ -63,7 +63,7 @@ TEST_CASE("Check bus with RAM and ROM cards", "[bus]") {
         REQUIRE(cardbus.read(0x44ff) == 0x5A);
     }
 
-    SECTION("Checking r/w while identifying memory areas") {
+    SECTION("Checking r/w (both forced and not) while identifying memory areas") {
         for (usize i = 0; i < 0x4500; ++i) {
             u8 slot = cardbus.get_slot_by_adr(i);
 
@@ -76,6 +76,10 @@ TEST_CASE("Check bus with RAM and ROM cards", "[bus]") {
                 REQUIRE(cardbus.read(i) == 0x5A);
             else
                 REQUIRE(cardbus.read(i) == 0x77);
+
+            cardbus.write_force(i, 0xAA);
+
+            REQUIRE(cardbus.read(i) == 0xAA);
         }
     }
 }

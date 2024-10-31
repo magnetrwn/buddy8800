@@ -154,6 +154,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:ae4b1863113c0e72b7de13f3774776fdb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#ae4b1863113c0e72b7de13f3774776fdb">write</a> (u16 adr, u8 byte)=0</td></tr>
 <tr class="memdesc:ae4b1863113c0e72b7de13f3774776fdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a byte to the card.  <a href="classcard.html#ae4b1863113c0e72b7de13f3774776fdb">More...</a><br /></td></tr>
 <tr class="separator:ae4b1863113c0e72b7de13f3774776fdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4db633403be8c709db66fafa54c43989"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#a4db633403be8c709db66fafa54c43989">write_force</a> (u16 adr, u8 byte)=0</td></tr>
+<tr class="memdesc:a4db633403be8c709db66fafa54c43989"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a byte to the card regardless of write lock.  <a href="classcard.html#a4db633403be8c709db66fafa54c43989">More...</a><br /></td></tr>
+<tr class="separator:a4db633403be8c709db66fafa54c43989"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae39a92dd99c80e0756cc1d8ea28ca6c4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#ae39a92dd99c80e0756cc1d8ea28ca6c4">refresh</a> ()=0</td></tr>
 <tr class="memdesc:ae39a92dd99c80e0756cc1d8ea28ca6c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refresh the card to allow periodic I/O, timer or sync operation.  <a href="classcard.html#ae39a92dd99c80e0756cc1d8ea28ca6c4">More...</a><br /></td></tr>
 <tr class="separator:ae39a92dd99c80e0756cc1d8ea28ca6c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -510,6 +513,53 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 </dl>
 
 <p>Implemented in <a class="el" href="classserial__card.html#a87b17dad886b8847836ebd214c3c14ad">serial_card</a>, and <a class="el" href="classdata__card.html#a838d64e1c4e8ba9450812e406ac2ba3c">data_card&lt; construct_then_write_lock &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a4db633403be8c709db66fafa54c43989"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4db633403be8c709db66fafa54c43989">&#9670;&nbsp;</a></span>write_force()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void card::write_force </td>
+          <td>(</td>
+          <td class="paramtype">u16&#160;</td>
+          <td class="paramname"><em>adr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8&#160;</td>
+          <td class="paramname"><em>byte</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write a byte to the card regardless of write lock. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">adr</td><td>The address to write to. </td></tr>
+    <tr><td class="paramname">byte</td><td>The byte to write. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classserial__card.html#a692446f7540c8ae4601737bdf2833ebf">serial_card</a>, and <a class="el" href="classdata__card.html#af5458172552b57ac4a7e5de2a31aa0c9">data_card&lt; construct_then_write_lock &gt;</a>.</p>
 
 </div>
 </div>

@@ -321,7 +321,8 @@ template&lt;typename T , T_ITERATOR_SFINAE &gt; </div>
   </table>
   </dd>
 </dl>
-<p>This method can be useful to load programs, libraries, or data into the emulator's cardbus. It will copy the data at the specified offset, check if it will fit, and if auto_reset_vector is true, it will set the zero page (the first 3 bytes of cardbus, specifically a jump instruction and a 2 byte argument) to point to the start of the loaded data. </p>
+<p>This method can be useful to load programs, libraries, or data into the emulator's cardbus. It will copy the data at the specified offset, check if it will fit, and if auto_reset_vector is true, it will set the zero page (the first 3 bytes of cardbus, specifically a jump instruction and a 2 byte argument) to point to the start of the loaded data.</p>
+<dl class="section note"><dt>Note</dt><dd>This method calls <code>write_force()</code> on the cards when using a bus, so it can also write to locked ROM to setup the system roms. </dd></dl>
 
 </div>
 </div>

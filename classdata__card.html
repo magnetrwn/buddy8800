@@ -129,12 +129,17 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 u8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#ae4cc3d8e3c84ca0e19bb788f7941267f">read</a> (u16 adr) const override</td></tr>
 <tr class="memdesc:ae4cc3d8e3c84ca0e19bb788f7941267f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a byte from the data card. <br /></td></tr>
 <tr class="separator:ae4cc3d8e3c84ca0e19bb788f7941267f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a838d64e1c4e8ba9450812e406ac2ba3c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#a838d64e1c4e8ba9450812e406ac2ba3c">write</a> (u16 adr, u8 byte) override</td></tr>
-<tr class="memdesc:a838d64e1c4e8ba9450812e406ac2ba3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a byte to the card.  <a href="classdata__card.html#a838d64e1c4e8ba9450812e406ac2ba3c">More...</a><br /></td></tr>
+<tr class="memitem:a838d64e1c4e8ba9450812e406ac2ba3c"><td class="memItemLeft" align="right" valign="top"><a id="a838d64e1c4e8ba9450812e406ac2ba3c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#a838d64e1c4e8ba9450812e406ac2ba3c">write</a> (u16 adr, u8 byte) override</td></tr>
+<tr class="memdesc:a838d64e1c4e8ba9450812e406ac2ba3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a byte to the data card. <br /></td></tr>
 <tr class="separator:a838d64e1c4e8ba9450812e406ac2ba3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5458172552b57ac4a7e5de2a31aa0c9"><td class="memItemLeft" align="right" valign="top"><a id="af5458172552b57ac4a7e5de2a31aa0c9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#af5458172552b57ac4a7e5de2a31aa0c9">write_force</a> (u16 adr, u8 byte) override</td></tr>
+<tr class="memdesc:af5458172552b57ac4a7e5de2a31aa0c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a byte to the data card regardless of write lock. <br /></td></tr>
+<tr class="separator:af5458172552b57ac4a7e5de2a31aa0c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac53bf5238948b7a8299f456e047d3157"><td class="memItemLeft" align="right" valign="top"><a id="ac53bf5238948b7a8299f456e047d3157"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#ac53bf5238948b7a8299f456e047d3157">clear</a> () override</td></tr>
-<tr class="memdesc:ac53bf5238948b7a8299f456e047d3157"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the card data or configuration. <br /></td></tr>
+<tr class="memdesc:ac53bf5238948b7a8299f456e047d3157"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the data card. <br /></td></tr>
 <tr class="separator:ac53bf5238948b7a8299f456e047d3157"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:a54a52cf3e47f0d1dbf3ad4c1be66c440"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#a54a52cf3e47f0d1dbf3ad4c1be66c440">refresh</a> () override</td></tr>
@@ -260,55 +265,6 @@ template&lt;bool construct_then_write_lock&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Unused methods. </dd></dl>
 
 <p>Implements <a class="el" href="classcard.html#ae39a92dd99c80e0756cc1d8ea28ca6c4">card</a>.</p>
-
-</div>
-</div>
-<a id="a838d64e1c4e8ba9450812e406ac2ba3c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a838d64e1c4e8ba9450812e406ac2ba3c">&#9670;&nbsp;</a></span>write()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;bool construct_then_write_lock&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classdata__card.html">data_card</a>&lt; construct_then_write_lock &gt;::write </td>
-          <td>(</td>
-          <td class="paramtype">u16&#160;</td>
-          <td class="paramname"><em>adr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">u8&#160;</td>
-          <td class="paramname"><em>byte</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Write a byte to the card. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">adr</td><td>The address to write to. </td></tr>
-    <tr><td class="paramname">byte</td><td>The byte to write. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implements <a class="el" href="classcard.html#ae4b1863113c0e72b7de13f3774776fdb">card</a>.</p>
 
 </div>
 </div>

@@ -133,7 +133,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:a3a35e093e5dc372cc98d17bf3b167c1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the serial card state and configuration. <br /></td></tr>
 <tr class="separator:a3a35e093e5dc372cc98d17bf3b167c1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
+<tr class="memitem:a692446f7540c8ae4601737bdf2833ebf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#a692446f7540c8ae4601737bdf2833ebf">write_force</a> (u16 adr, u8 byte) override</td></tr>
+<tr class="separator:a692446f7540c8ae4601737bdf2833ebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a310898ff8b156d8553f9b759eea38420"><td class="memItemLeft" align="right" valign="top">std::array&lt; u8, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#a310898ff8b156d8553f9b759eea38420">get_irq</a> () override</td></tr>
+<tr class="memdesc:a310898ff8b156d8553f9b759eea38420"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the IRQ instruction (and possible operands).  <a href="classserial__card.html#a310898ff8b156d8553f9b759eea38420">More...</a><br /></td></tr>
 <tr class="separator:a310898ff8b156d8553f9b759eea38420"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classcard"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classcard')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classcard.html">card</a></td></tr>
 <tr class="memitem:aa9962ee86c02b544e158cd94388df9bd inherit pub_methods_classcard"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#aa9962ee86c02b544e158cd94388df9bd">set_bit</a> (u16 adr, u8 bitmask)</td></tr>
@@ -211,7 +214,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section note"><dt>Note</dt><dd>Unused methods. </dd></dl>
+
+<p>Get the IRQ instruction (and possible operands). </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classbus.html#a1673002793a022d9e89aacfbeeeb71fc" title="Gets the IRQ instruction (and possible operands).">bus::get_irq()</a> </dd></dl>
 
 <p>Implements <a class="el" href="classcard.html#a4ef348c61f7138914f015c57d2f6a0be">card</a>.</p>
 
@@ -354,6 +359,45 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 <p>STATUS is read-only</p>
 
 <p>Implements <a class="el" href="classcard.html#ae4b1863113c0e72b7de13f3774776fdb">card</a>.</p>
+
+</div>
+</div>
+<a id="a692446f7540c8ae4601737bdf2833ebf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a692446f7540c8ae4601737bdf2833ebf">&#9670;&nbsp;</a></span>write_force()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void serial_card::write_force </td>
+          <td>(</td>
+          <td class="paramtype">u16&#160;</td>
+          <td class="paramname"><em>adr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8&#160;</td>
+          <td class="paramname"><em>byte</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section note"><dt>Note</dt><dd>Unused methods. </dd></dl>
+
+<p>Implements <a class="el" href="classcard.html#a4db633403be8c709db66fafa54c43989">card</a>.</p>
 
 </div>
 </div>

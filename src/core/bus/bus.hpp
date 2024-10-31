@@ -187,6 +187,18 @@ public:
     }
 
     /**
+     * @brief Writes a byte to the bus, without considering write lock.
+     * @param adr The address to write to.
+     * @param byte The byte to write.
+     * @note This method will write to all cards in range of the address.
+     */
+    inline void write_force(u16 adr, u8 byte) {
+        for (card* card : cards)
+            if (card != NO_CARD and card->in_range(adr))
+                card->write_force(adr, byte);
+    }
+
+    /**
      * @brief Indexes the bus.
      * @param adr The address to index.
      * @return A proxy object to index the bus.

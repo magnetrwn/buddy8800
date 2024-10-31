@@ -16,6 +16,7 @@ var classcard =
     [ "w_lock", "classcard.html#a08987729c7f53ba0fd3462e2d5ca8eae", null ],
     [ "w_unlock", "classcard.html#aeb5526b21831ac5fe40ade8de19c9ed3", null ],
     [ "write", "classcard.html#ae4b1863113c0e72b7de13f3774776fdb", null ],
+    [ "write_force", "classcard.html#a4db633403be8c709db66fafa54c43989", null ],
     [ "irq_raised", "classcard.html#a787e564e151cf8bf2a5550690d4b9677", null ],
     [ "write_locked", "classcard.html#add4575c38bf4776502a8d93b80145271", null ]
 ];

@@ -13,5 +13,6 @@ var classbus =
     [ "refresh", "classbus.html#ac158680334e36add350e716e6a0ec69b", null ],
     [ "remove", "classbus.html#ac452a5305b4fcb30b6e40172d63fba4a", null ],
     [ "size", "classbus.html#a40eeeeb2ba939e469bdff3d35c3f5f67", null ],
-    [ "write", "classbus.html#a05d0d594ca803a6f713e3078dcdaf22a", null ]
+    [ "write", "classbus.html#a05d0d594ca803a6f713e3078dcdaf22a", null ],
+    [ "write_force", "classbus.html#a91190b9b4cffd45516d7f6571d4f4889", null ]
 ];

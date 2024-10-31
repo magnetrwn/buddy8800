@@ -8,5 +8,6 @@ var classdata__card =
     [ "in_range", "classdata__card.html#af921f54ef18d2f7c799e7335fd82e68e", null ],
     [ "read", "classdata__card.html#ae4cc3d8e3c84ca0e19bb788f7941267f", null ],
     [ "refresh", "classdata__card.html#a54a52cf3e47f0d1dbf3ad4c1be66c440", null ],
-    [ "write", "classdata__card.html#a838d64e1c4e8ba9450812e406ac2ba3c", null ]
+    [ "write", "classdata__card.html#a838d64e1c4e8ba9450812e406ac2ba3c", null ],
+    [ "write_force", "classdata__card.html#af5458172552b57ac4a7e5de2a31aa0c9", null ]
 ];
