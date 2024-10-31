@@ -815,6 +815,9 @@ public:
      * This method can be useful to load programs, libraries, or data into the emulator's cardbus. It will copy the data
      * at the specified offset, check if it will fit, and if auto_reset_vector is true, it will set the zero page (the first
      * 3 bytes of cardbus, specifically a jump instruction and a 2 byte argument) to point to the start of the loaded data.
+     *
+     * @note This method calls `write_force()` on the cards when using a bus, so it can also write to locked ROM
+     * to setup the system roms.
      */
     template <typename T, T_ITERATOR_SFINAE>
     void load(T begin, T end, usize offset = 0, bool auto_reset_vector = false) {
@@ -823,9 +826,12 @@ public:
         if (dist > cardbus.size() - offset)
             throw std::out_of_range("Not enough space in emulated cardbus.");
 
-        //std::copy(begin, end, cardbus.begin() + offset);
-        for (usize i = 0; i < dist; ++i)
-            cardbus[offset + i] = *(begin + i);
+        if constexpr (std::is_same_v<bus_iface, bus&>)
+            for (usize i = 0; i < dist; ++i)
+                cardbus.write_force(offset + i, *(begin + i));
+        else
+            for (usize i = 0; i < dist; ++i)
+                cardbus[offset + i] = *(begin + i);
 
         if (auto_reset_vector) {
             if (offset <= 2)

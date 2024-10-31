@@ -107,6 +107,13 @@ public:
      */
     virtual void write(u16 adr, u8 byte) = 0;
 
+    /**
+     * @brief Write a byte to the card regardless of write lock.
+     * @param adr The address to write to.
+     * @param byte The byte to write.
+     */
+    virtual void write_force(u16 adr, u8 byte) = 0;
+
     /// @brief Refresh the card to allow periodic I/O, timer or sync operation.
     /// @see bus::refresh()
     virtual void refresh() = 0;
@@ -174,11 +181,18 @@ public:
         return data[adr - start_adr];
     }
 
+    /// @brief Write a byte to the data card.
     inline void write(u16 adr, u8 byte) override {
         if (!this->write_locked)
             data[adr - start_adr] = byte;
     }
 
+    /// @brief Write a byte to the data card regardless of write lock.
+    inline void write_force(u16 adr, u8 byte) override {
+        data[adr - start_adr] = byte;
+    }
+
+    /// @brief Clear the data card.
     inline void clear() override {
         if (!this->write_locked)
             data.clear();
@@ -381,6 +395,7 @@ public:
     /// @note Unused methods.
     /// \{
 
+    inline void write_force(u16 adr, u8 byte) override { write(adr, byte); }
     inline std::array<u8, 3> get_irq() override { return { BAD_U8, BAD_U8, BAD_U8 }; }
 
     /// \}
