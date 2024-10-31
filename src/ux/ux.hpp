@@ -4,65 +4,41 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <cerrno>
+#include <stdexcept>
 
 #include "cpu.hpp"
 #include "bus.hpp"
 #include "card.hpp"
-
-namespace errors {
-    enum class errno_enum {
-        SUCCESS = 0,
-        FILE_NOT_FOUND = ENOENT,
-        INVALID_ARGS = EINVAL
-    };
-
-    static bool is_error(errno_enum err) { return err != errno_enum::SUCCESS; }
-    static int error_to_int(errno_enum err) { return static_cast<int>(err); }
-    static const char* error_to_str(errno_enum err) { return strerror(error_to_int(err)); }
-    
-    static int pretty_error_then_ret_int(errno_enum err) { 
-        std::cerr << "\x1B[31;01merror: " << error_to_str(err) << "\x1B[0m" << std::endl; 
-        return error_to_int(err);
-    }
-};
-
-using namespace errors;
+#include "sysconf.hpp"
 
 class emulator {
 private:
-    bus cardbus;
+    system_config hw;
+    bus& cardbus;
     cpu<bus&> processor;
-    ram_card* ram_64k;
     std::vector<u8> load_rom_vec;
-    bool cards_initialized;
 
 public:
-    errno_enum setup(int argc, char** argv) {
-        if (argc != 2) 
-            return errno_enum::INVALID_ARGS;
+    void setup(int argc, char** argv) {
+        if (argc < 3 or !(argc & 1)) 
+            throw std::invalid_argument("Invalid number of arguments. Provide pairs of ROM/data files and integer load addresses.");
 
-        std::ifstream load_rom(argv[1], std::ios::binary);
-
-        if (!load_rom)
-            return errno_enum::FILE_NOT_FOUND;
-
-        /// @todo: Add a way to input the size of the rom, or reserve the max memory size (temporary fix for now), to avoid reallocations.
-        load_rom_vec.reserve(cardbus.size());
-        load_rom_vec = std::vector<u8>(std::istreambuf_iterator<char>(load_rom), {});
-
-        ram_64k = new ram_card(0x0000, 65536);
-
-        cardbus.insert(ram_64k, 4);
-        //cardbus.insert(new serial_card(0x0010), 0, true);
         cardbus.print_mmap();
+        processor.do_pseudo_bdos(hw.get_do_pseudo_bdos());
+        load_rom_vec.reserve(cardbus.size());
 
-        processor.load(load_rom_vec.begin(), load_rom_vec.end(), 0x100, true);
-        processor.do_pseudo_bdos(true);
+        // The arguments come in pairs of filename and location to load the ROM at.
+        for (int i = 1; i < argc; i += 2) {
+            std::ifstream load_rom(argv[i], std::ios::binary);
 
-        cards_initialized = true;
+            if (!load_rom)
+                throw std::runtime_error("Could not open file: " + std::string(argv[i]));
 
-        return errno_enum::SUCCESS;
+            load_rom_vec.assign(std::istreambuf_iterator<char>(load_rom), {});
+
+            // The first ROM is the one that will have the reset vector jump to.
+            processor.load(load_rom_vec.begin(), load_rom_vec.end(), std::stoul(argv[i + 1], nullptr, 0), i == 1);
+        }
     }
 
     void run() {
@@ -72,16 +48,7 @@ public:
         }
     }
 
-    void stop() {
-        processor.clear();
-        cardbus.clear();
-        if (cards_initialized)
-            delete ram_64k;
-        cards_initialized = false;
-    }
-
-    emulator() : processor(cardbus), cards_initialized(false) {}
-    ~emulator() { if (cards_initialized) stop(); }
+    emulator(const char* config_filename) : hw(config_filename), cardbus(hw.get_bus()), processor(cardbus) {}
 };
 
 struct terminal_ux {
@@ -90,9 +57,7 @@ struct terminal_ux {
     int main(int argc, char** argv) {
         std::cout << "\x1B[33;01m-:-:-:-:- emulator setup -:-:-:-:-\x1B[0m" << std::endl;
 
-        errno_enum err = emu.setup(argc, argv);
-        if (is_error(err))
-            return pretty_error_then_ret_int(err);
+        emu.setup(argc, argv);
 
         std::cout << "\x1B[33;01m-:-:-:-:- emulator run -:-:-:-:-\x1B[0m" << std::endl;
 
@@ -102,6 +67,8 @@ struct terminal_ux {
         
         return 0;
     }
+
+    terminal_ux(const char* config_filename) : emu(config_filename) {}
 };
 
 #endif

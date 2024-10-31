@@ -69,6 +69,20 @@ public:
         ~print_helper() { if (file_redirect.is_open()) reset(); }
     };
 
+    /// @brief Get the absolute path of the main executable as a std::string.
+    static std::string get_absolute_dir() {
+        static constexpr usize MAX_BUF = 512;
+        char buffer[MAX_BUF];
+        ssize_t pathLength = readlink("/proc/self/exe", buffer, MAX_BUF - 1);
+
+        if (pathLength == -1)
+            throw std::runtime_error("failed to get_absolute_dir()");
+
+        std::string path(buffer, pathLength);
+
+        return path.substr(0, path.rfind('/') + 1);
+    }
+
     /// @brief Get the parity of an integer type value.
     /// @note This is an alternative if __builtin_parity is not available.
     template <typename T>

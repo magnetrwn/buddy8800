@@ -1,0 +1,27 @@
+# Configuration file for the emulator.
+# This file is loaded by the emulator to understand how to configure the system.
+
+[emulator]
+pseudo_bdos_enabled = true      # Redirect and handle calls that match addresses of BDOS calls.
+
+# List of cards here, make sure to append cards you wish to add. Available parameters are:
+# - slot: Slot number of the card [0, 18], which also determines IRQ priority (lower is higher priority).
+# - type: Type of the card. Available types are: "ram", "rom", "serial".
+#   - (in the future: "disk", "printer", "timer", "kbd", "display", "network").
+# - at: Address of the card in the memory space.
+# - range: Size or address range (like I/O register count) of the card in bytes.
+# - let_collide: Allow the card to have overlapping address range with other cards.
+#
+# Note: there is (usually) a limit of 18 cards in the system.
+
+[[card]]
+slot        = 3
+type        = "serial"
+at          = 0x0010
+let_collide = true
+
+[[card]]
+slot        = 4
+type        = "ram"
+at          = 0x0000
+range       = 65536
