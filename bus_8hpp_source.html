@@ -235,41 +235,51 @@ $(document).ready(function(){initNavTree('bus_8hpp_source.html',''); initResizab
 <div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    }</div>
 <div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; </div>
 <div class="line"><a name="l00284"></a><span class="lineno"><a class="line" href="classbus.html#a70d78c8af1a0e52c760801dea2b54de2">  284</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classbus.html#a70d78c8af1a0e52c760801dea2b54de2">print_mmap</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        <span class="keywordflow">for</span> (usize i = 0; i &lt; MAX_BUS_CARDS; ++i)</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;            <span class="keywordflow">if</span> (cards[i] != NO_CARD) {</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;                <a class="code" href="structcard__identify.html">card_identify</a> ident = cards[i]-&gt;identify();</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                std::cout </div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                    &lt;&lt; <span class="stringliteral">&quot;Slot &quot;</span> &lt;&lt; i &lt;&lt; <span class="stringliteral">&quot;: &quot;</span> &lt;&lt; <span class="stringliteral">&quot;[&quot;</span> &lt;&lt; (cards[i]-&gt;is_io() ? <span class="stringliteral">&quot;I/O&quot;</span> : <span class="stringliteral">&quot;MEM&quot;</span>) &lt;&lt; <span class="stringliteral">&quot;] &quot;</span></div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                    &lt;&lt; <a class="code" href="classutil.html#ae1f4a14430dd6b38f33b5c6116714fc9">util::to_hex_s</a>(ident.start_adr, cards[i]-&gt;is_io() ? 2 : 4) &lt;&lt; <span class="stringliteral">&quot;/&quot;</span> &lt;&lt; ident.adr_range &lt;&lt; <span class="stringliteral">&quot;: &quot;</span> </div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;                    &lt;&lt; ident.name &lt;&lt; (*ident.detail ? <span class="stringliteral">&quot;, &quot;</span> : <span class="stringliteral">&quot;&quot;</span>) &lt;&lt; (*ident.detail ? ident.detail : <span class="stringliteral">&quot;&quot;</span>)</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                    &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;            }</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    }</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
-<div class="line"><a name="l00300"></a><span class="lineno"><a class="line" href="classbus.html#a1600c50ee9b9e2aeb648a6529b234cf8">  300</a></span>&#160;    <span class="keyword">inline</span> u8 <a class="code" href="classbus.html#a1600c50ee9b9e2aeb648a6529b234cf8">get_slot_by_adr</a>(u16 adr)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        <span class="keywordflow">for</span> (usize i = 0; i &lt; MAX_BUS_CARDS; ++i)</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;            <span class="keywordflow">if</span> (cards[i] != NO_CARD and cards[i]-&gt;in_range(adr))</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;                <span class="keywordflow">return</span> i;</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;        <span class="keywordflow">return</span> 255;</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    }</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; </div>
-<div class="line"><a name="l00314"></a><span class="lineno"><a class="line" href="classbus.html#a653c79df108c47ff654d18cc601d4d67">  314</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classbus.html#a653c79df108c47ff654d18cc601d4d67">clear</a>() {</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        <span class="keywordflow">for</span> (<a class="code" href="classcard.html">card</a>* <a class="code" href="classcard.html">card</a> : cards)</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="classcard.html">card</a> != NO_CARD)</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;                <a class="code" href="classcard.html">card</a>-&gt;<a class="code" href="classcard.html#a1c2e9d54296d2c7dc1c89295575b1eb4">clear</a>();</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    }</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; </div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    <a class="code" href="classbus.html">bus</a>() : cards({ NO_CARD }), ignore_conflicts({ <span class="keyword">false</span> }) {}</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;};</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; </div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        <span class="keyword">static</span> constexpr usize PAD_ADR_RANGE_SLEN = 12;</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160; </div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        <span class="keywordflow">for</span> (usize i = 0; i &lt; MAX_BUS_CARDS; ++i)</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;            <span class="keywordflow">if</span> (cards[i] != NO_CARD) {</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                <a class="code" href="structcard__identify.html">card_identify</a> ident = cards[i]-&gt;identify();</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                std::string adr_range_verbose = (</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;                    <a class="code" href="classutil.html#ae1f4a14430dd6b38f33b5c6116714fc9">util::to_hex_s</a>(ident.start_adr, cards[i]-&gt;is_io() ? 2 : 4) + <span class="stringliteral">&quot;/&quot;</span> + std::to_string(ident.adr_range)</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                );</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160; </div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                <span class="keywordflow">if</span> (adr_range_verbose.size() &lt; PAD_ADR_RANGE_SLEN)</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;                    adr_range_verbose.resize(PAD_ADR_RANGE_SLEN, <span class="charliteral">&#39; &#39;</span>);</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; </div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;                std::cout </div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;                    &lt;&lt; <span class="stringliteral">&quot;Slot &quot;</span> &lt;&lt; std::setw(2) &lt;&lt; i &lt;&lt; <span class="stringliteral">&quot;: &quot;</span> </div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                    &lt;&lt; (cards[i]-&gt;is_io() ? <span class="stringliteral">&quot;\x1B[45;01mI/O&quot;</span> : <span class="stringliteral">&quot;\x1B[47;01mMEM&quot;</span>) &lt;&lt; <span class="stringliteral">&quot;\x1B[0m &quot;</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                    &lt;&lt; adr_range_verbose &lt;&lt; <span class="stringliteral">&quot;: &quot;</span> </div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                    &lt;&lt; <span class="stringliteral">&quot;\x1B[01m&quot;</span> &lt;&lt; ident.name &lt;&lt; <span class="stringliteral">&quot;\x1B[0m&quot;</span> &lt;&lt; (*ident.detail ? <span class="stringliteral">&quot;, &quot;</span> : <span class="stringliteral">&quot;&quot;</span>) &lt;&lt; (*ident.detail ? ident.detail : <span class="stringliteral">&quot;&quot;</span>)</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                    &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;            }</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    }</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
+<div class="line"><a name="l00310"></a><span class="lineno"><a class="line" href="classbus.html#a1600c50ee9b9e2aeb648a6529b234cf8">  310</a></span>&#160;    <span class="keyword">inline</span> u8 <a class="code" href="classbus.html#a1600c50ee9b9e2aeb648a6529b234cf8">get_slot_by_adr</a>(u16 adr)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        <span class="keywordflow">for</span> (usize i = 0; i &lt; MAX_BUS_CARDS; ++i)</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;            <span class="keywordflow">if</span> (cards[i] != NO_CARD and cards[i]-&gt;in_range(adr))</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;                <span class="keywordflow">return</span> i;</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        <span class="keywordflow">return</span> 255;</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    }</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; </div>
+<div class="line"><a name="l00324"></a><span class="lineno"><a class="line" href="classbus.html#a653c79df108c47ff654d18cc601d4d67">  324</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classbus.html#a653c79df108c47ff654d18cc601d4d67">clear</a>() {</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        <span class="keywordflow">for</span> (<a class="code" href="classcard.html">card</a>* <a class="code" href="classcard.html">card</a> : cards)</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="classcard.html">card</a> != NO_CARD)</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;                <a class="code" href="classcard.html">card</a>-&gt;<a class="code" href="classcard.html#a1c2e9d54296d2c7dc1c89295575b1eb4">clear</a>();</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    }</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160; </div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    <a class="code" href="classbus.html">bus</a>() : cards({ NO_CARD }), ignore_conflicts({ <span class="keyword">false</span> }) {}</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;};</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160; </div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassbus_html"><div class="ttname"><a href="classbus.html">bus</a></div><div class="ttdoc">Represents the S-100 bus of the emulator.</div><div class="ttdef"><b>Definition:</b> bus.hpp:33</div></div>
-<div class="ttc" id="aclassbus_html_a1600c50ee9b9e2aeb648a6529b234cf8"><div class="ttname"><a href="classbus.html#a1600c50ee9b9e2aeb648a6529b234cf8">bus::get_slot_by_adr</a></div><div class="ttdeci">u8 get_slot_by_adr(u16 adr) const</div><div class="ttdoc">Get in which slot a card is according to an address.</div><div class="ttdef"><b>Definition:</b> bus.hpp:300</div></div>
+<div class="ttc" id="aclassbus_html_a1600c50ee9b9e2aeb648a6529b234cf8"><div class="ttname"><a href="classbus.html#a1600c50ee9b9e2aeb648a6529b234cf8">bus::get_slot_by_adr</a></div><div class="ttdeci">u8 get_slot_by_adr(u16 adr) const</div><div class="ttdoc">Get in which slot a card is according to an address.</div><div class="ttdef"><b>Definition:</b> bus.hpp:310</div></div>
 <div class="ttc" id="aclassbus_html_a1673002793a022d9e89aacfbeeeb71fc"><div class="ttname"><a href="classbus.html#a1673002793a022d9e89aacfbeeeb71fc">bus::get_irq</a></div><div class="ttdeci">std::array&lt; u8, 3 &gt; get_irq()</div><div class="ttdoc">Gets the IRQ instruction (and possible operands).</div><div class="ttdef"><b>Definition:</b> bus.hpp:265</div></div>
 <div class="ttc" id="aclassbus_html_a40eeeeb2ba939e469bdff3d35c3f5f67"><div class="ttname"><a href="classbus.html#a40eeeeb2ba939e469bdff3d35c3f5f67">bus::size</a></div><div class="ttdeci">constexpr usize size() const</div><div class="ttdoc">Returns the maximum number of addressable locations on the bus.</div><div class="ttdef"><b>Definition:</b> bus.hpp:163</div></div>
 <div class="ttc" id="aclassbus_html_a5ca080170524f30333bee7fe0b857871"><div class="ttname"><a href="classbus.html#a5ca080170524f30333bee7fe0b857871">bus::read</a></div><div class="ttdeci">u8 read(u16 adr, bool ior=false) const</div><div class="ttdoc">Reads a byte from the bus.</div><div class="ttdef"><b>Definition:</b> bus.hpp:174</div></div>
-<div class="ttc" id="aclassbus_html_a653c79df108c47ff654d18cc601d4d67"><div class="ttname"><a href="classbus.html#a653c79df108c47ff654d18cc601d4d67">bus::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdoc">Clears all cards on the bus.</div><div class="ttdef"><b>Definition:</b> bus.hpp:314</div></div>
+<div class="ttc" id="aclassbus_html_a653c79df108c47ff654d18cc601d4d67"><div class="ttname"><a href="classbus.html#a653c79df108c47ff654d18cc601d4d67">bus::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdoc">Clears all cards on the bus.</div><div class="ttdef"><b>Definition:</b> bus.hpp:324</div></div>
 <div class="ttc" id="aclassbus_html_a70d78c8af1a0e52c760801dea2b54de2"><div class="ttname"><a href="classbus.html#a70d78c8af1a0e52c760801dea2b54de2">bus::print_mmap</a></div><div class="ttdeci">void print_mmap() const</div><div class="ttdoc">Prints a detailed memory map of the bus.</div><div class="ttdef"><b>Definition:</b> bus.hpp:284</div></div>
 <div class="ttc" id="aclassbus_html_a823fe0fdf5aad85763fdeb840a3c4df2"><div class="ttname"><a href="classbus.html#a823fe0fdf5aad85763fdeb840a3c4df2">bus::operator[]</a></div><div class="ttdeci">bus_index_iface operator[](u16 adr)</div><div class="ttdoc">Indexes the bus.</div><div class="ttdef"><b>Definition:</b> bus.hpp:213</div></div>
 <div class="ttc" id="aclassbus_html_ac158680334e36add350e716e6a0ec69b"><div class="ttname"><a href="classbus.html#ac158680334e36add350e716e6a0ec69b">bus::refresh</a></div><div class="ttdeci">void refresh()</div><div class="ttdoc">Refreshes all cards on the bus.</div><div class="ttdef"><b>Definition:</b> bus.hpp:228</div></div>
