@@ -244,6 +244,10 @@ constexpr static usize SERIAL_BASE_CLOCK = 19200;
  *
  * @note The `refresh()` method is fundamental here, as it will poll the pseudo-terminal for new data and send data to it regularly.
  * Not periodically refreshing the bus, and by consequence the card, will make the card unable to send or receive data.
+ * @par
+ * @note To mimic the partial address decode behavior, while the IN and OUT instructions of the 8080 duplicate the argument byte on
+ * the address bus, the decoder only looks at the lower 8 bits, effectively creating 255 mirrors of the card in the address space.
+ * This is expected behavior.
  * @warning Out of range addresses are not checked, they should be checked by the bus instead, to avoid calling in_range() twice.
  */
 class serial_card : public card {
@@ -301,7 +305,7 @@ public:
         : start_adr(start_adr), base_clock(base_clock) { serial.open(); reset(); }
 
     /// @brief Check if an address on the bus is in the card's range.
-    inline bool in_range(u16 adr) const override { return adr >= start_adr and adr < (start_adr + SERIAL_IO_ADDRESSES); }
+    inline bool in_range(u16 adr) const override { return (adr & 0xFF) >= start_adr and (adr & 0xFF) < (start_adr + SERIAL_IO_ADDRESSES); }
 
     /// @brief Get information about the serial card.
     /// @note The detail contains the base clock, control register (hex) and the pseudo-terminal name.
