@@ -379,9 +379,21 @@ private:
 
     inline void CALL() { u16 adr = fetch2(); PUSH(cpu_registers16::PC); state.PC(adr); }
 
-    inline void OUT() { throw std::runtime_error("OUT not implemented."); }
+    inline void OUT() { 
+        if constexpr (!std::is_same_v<bus_iface, bus&>)
+            throw std::runtime_error("OUT instruction can only be used with a bus interface.");
+        else {
+            u16 port = fetch(); port |= (port << 8); cardbus.write(port, state.A(), true);
+        }
+    }
 
-    inline void IN() { throw std::runtime_error("IN not implemented."); }
+    inline void IN() {
+        if constexpr (!std::is_same_v<bus_iface, bus&>)
+            throw std::runtime_error("IN instruction can only be used with a bus interface.");
+        else {
+            u16 port = fetch(); port |= (port << 8); state.A(cardbus.read(port, true));
+        }
+    }
 
     inline void XTHL() {
         u16 stackmem_lo = cardbus[state.SP()];

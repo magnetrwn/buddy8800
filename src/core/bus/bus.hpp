@@ -21,8 +21,8 @@
  * cast and assignment operators.
  *
  * @note Conflicting address ranges are allowed but must be explicitly toggled by an `insert()`. Make sure you actually want
- * a conflict, since cards have an IORQ signal that can be used to determine if the cards belong to memory or I/O addressable
- * ranges, which can overlap but be separated by the IORQ signal being set or not.
+ * a conflict, since cards have an IOR/IOW signal that can be used to determine if the cards belong to memory or I/O addressable
+ * ranges, which can overlap but be separated by the IOR/IOW signal being set or not.
  * @par
  * @note The CPU, while in reality is placed on a card, it's not here. The bus acts as glue between the plentitude
  * of cards and the CPU itself.
@@ -165,15 +165,15 @@ public:
     /**
      * @brief Reads a byte from the bus.
      * @param adr The address to read from.
-     * @param iorq Whether the IORQ signal is set or not.
+     * @param ior Whether the IOR signal is set or not.
      * @return The byte read from the first valid card on the bus.
      * @warning This method will return only the first valid card slot that is in range of the address.
      * You may want to place MMIO that overlaps with memory cards in earlier slots...
      * @todo Handle this warning.
      */
-    inline u8 read(u16 adr, bool iorq = false) const {
+    inline u8 read(u16 adr, bool ior = false) const {
         for (card* card : cards)
-            if (card != NO_CARD and card->in_range(adr) and iorq == card->is_io())
+            if (card != NO_CARD and card->in_range(adr) and ior == card->is_io())
                 return card->read(adr);
 
         return BAD_U8;
@@ -183,12 +183,12 @@ public:
      * @brief Writes a byte to the bus.
      * @param adr The address to write to.
      * @param byte The byte to write.
-     * @param iorq Whether the IORQ signal is set or not.
+     * @param iow Whether the IOW signal is set or not.
      * @note This method will write to all cards in range of the address.
      */
-    inline void write(u16 adr, u8 byte, bool iorq = false) {
+    inline void write(u16 adr, u8 byte, bool iow = false) {
         for (card* card : cards)
-            if (card != NO_CARD and card->in_range(adr) and iorq == card->is_io())
+            if (card != NO_CARD and card->in_range(adr) and iow == card->is_io())
                 card->write(adr, byte);
     }
 
@@ -196,12 +196,12 @@ public:
      * @brief Writes a byte to the bus, without considering write lock.
      * @param adr The address to write to.
      * @param byte The byte to write.
-     * @param iorq Whether the IORQ signal is set or not.
+     * @param iow Whether the IOW signal is set or not.
      * @note This method will write to all cards in range of the address.
      */
-    inline void write_force(u16 adr, u8 byte, bool iorq = false) {
+    inline void write_force(u16 adr, u8 byte, bool iow = false) {
         for (card* card : cards)
-            if (card != NO_CARD and card->in_range(adr) and iorq == card->is_io())
+            if (card != NO_CARD and card->in_range(adr) and iow == card->is_io())
                 card->write_force(adr, byte);
     }
 

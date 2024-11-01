@@ -98,6 +98,7 @@ h2.groupheader {
     background-color: var(--mem-title-bg);
     color: var(--mem-title-font);
     font-size: 200%;
+    border-left: 4px solid var(--mem-subtitle-bg);
     border-bottom: none;
 }
 
