@@ -287,7 +287,7 @@ public:
                 card_identify ident = cards[i]->identify();
                 std::cout 
                     << "Slot " << i << ": " << "[" << (cards[i]->is_io() ? "I/O" : "MEM") << "] "
-                    << util::to_hex_s(ident.start_adr) << "/" << ident.adr_range << ": " 
+                    << util::to_hex_s(ident.start_adr, cards[i]->is_io() ? 2 : 4) << "/" << ident.adr_range << ": " 
                     << ident.name << (*ident.detail ? ", " : "") << (*ident.detail ? ident.detail : "")
                     << std::endl;
             }
