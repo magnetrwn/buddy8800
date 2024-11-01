@@ -278,17 +278,27 @@ public:
      *
      * The output is formatted as follows:
      * ```
-     * slot: [type] start-address-hex/address-range: card-type, card-details
+     * slot: [is-i/o] start-address-hex/address-range: card-type, card-details
      * ```
      */
     inline void print_mmap() const {
+        static constexpr usize PAD_ADR_RANGE_SLEN = 12;
+
         for (usize i = 0; i < MAX_BUS_CARDS; ++i)
             if (cards[i] != NO_CARD) {
                 card_identify ident = cards[i]->identify();
+                std::string adr_range_verbose = (
+                    util::to_hex_s(ident.start_adr, cards[i]->is_io() ? 2 : 4) + "/" + std::to_string(ident.adr_range)
+                );
+
+                if (adr_range_verbose.size() < PAD_ADR_RANGE_SLEN)
+                    adr_range_verbose.resize(PAD_ADR_RANGE_SLEN, ' ');
+
                 std::cout 
-                    << "Slot " << i << ": " << "[" << (cards[i]->is_io() ? "I/O" : "MEM") << "] "
-                    << util::to_hex_s(ident.start_adr, cards[i]->is_io() ? 2 : 4) << "/" << ident.adr_range << ": " 
-                    << ident.name << (*ident.detail ? ", " : "") << (*ident.detail ? ident.detail : "")
+                    << "Slot " << std::setw(2) << i << ": " 
+                    << (cards[i]->is_io() ? "\x1B[45;01mI/O" : "\x1B[47;01mMEM") << "\x1B[0m "
+                    << adr_range_verbose << ": " 
+                    << "\x1B[01m" << ident.name << "\x1B[0m" << (*ident.detail ? ", " : "") << (*ident.detail ? ident.detail : "")
                     << std::endl;
             }
     }
