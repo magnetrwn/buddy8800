@@ -2,6 +2,8 @@
 #define BUS_HPP_
 
 #include <array>
+#include <sstream>
+#include <iomanip>
 #include <stdexcept>
 
 #include "typedef.hpp"
@@ -26,6 +28,9 @@
  * @par
  * @note The CPU, while in reality is placed on a card, it's not here. The bus acts as glue between the plentitude
  * of cards and the CPU itself.
+ * @warning This class does not own the cards, and it's up to other parts of the emulator to manage the card memory, such as
+ * `system_config`.
+ * @par
  * @warning The `size()` method returns the maximum number of addressable locations on the bus (65536), not the number of cards.
  * While this might look misleading, it's actually an attempt at keeping the same interface as there would be if the instanced bus
  * were to be replaced by a normal `std::array<u8, 65536>`.
@@ -271,22 +276,26 @@ public:
     }
 
     /**
-     * @brief Prints a detailed memory map of the bus.
+     * @brief Returns a detailed map of the bus.
+     * @return A std::string with details about the bus devices.
      *
-     * This method will print the memory map of the bus, showing the start and end addresses of each card, along with
-     * the card's type (name) and additional details.
+     * This method will return a very long std::string containing the address map of the bus, showing the start 
+     * and end addresses of each card, along with the card's type (name) and additional details.
      *
-     * The output is formatted as follows:
+     * @note The output for each device is formatted as follows:
      * ```
      * slot: [is-i/o] start-address-hex/address-range: card-type, card-details
      * ```
      */
-    inline void print_mmap() const {
+    inline std::string bus_map_s() const {
         static constexpr usize PAD_ADR_RANGE_SLEN = 12;
+
+        std::stringstream ss;
 
         for (usize i = 0; i < MAX_BUS_CARDS; ++i)
             if (cards[i] != NO_CARD) {
-                card_identify ident = cards[i]->identify();
+                const card_identify ident = cards[i]->identify();
+
                 std::string adr_range_verbose = (
                     util::to_hex_s(ident.start_adr, cards[i]->is_io() ? 2 : 4) + "/" + std::to_string(ident.adr_range)
                 );
@@ -294,13 +303,14 @@ public:
                 if (adr_range_verbose.size() < PAD_ADR_RANGE_SLEN)
                     adr_range_verbose.resize(PAD_ADR_RANGE_SLEN, ' ');
 
-                std::cout 
-                    << "Slot " << std::setw(2) << i << ": " 
-                    << (cards[i]->is_io() ? "\x1B[45;01mI/O" : "\x1B[47;01mMEM") << "\x1B[0m "
-                    << adr_range_verbose << ": " 
-                    << "\x1B[01m" << ident.name << "\x1B[0m" << (*ident.detail ? ", " : "") << (*ident.detail ? ident.detail : "")
-                    << std::endl;
+                ss << "Slot " << std::setw(2) << i << ": " 
+                   << (cards[i]->is_io() ? "\x1B[45;01mI/O" : "\x1B[47;01mMEM") << "\x1B[0m "
+                   << adr_range_verbose << ": " 
+                   << "\x1B[01m" << ident.name << "\x1B[0m" << (*ident.detail ? ", " : "") << (*ident.detail ? ident.detail : "")
+                   << std::endl;
             }
+
+        return ss.str();
     }
 
     /**

@@ -39,8 +39,46 @@ private:
     
     util::print_helper printer;
 
-    inline u8 fetch() { return cardbus[state.get_then_inc_register16(cpu_registers16::PC)]; }
-    inline u16 fetch2() { u16 lo = fetch(); u16 hi = fetch(); return (hi << 8) | lo; }
+    /* ~~~~~~~~~~~~~~~ vvv ~~~~~~~~~~~~~~ fetch ~~~~~~~~~~~~~~ vvv ~~~~~~~~~~~~~~~ */
+
+    u8 fetch_default() { return cardbus[state.get_then_inc_register16(cpu_registers16::PC)]; }
+    u16 fetch2_default()  { u16 lo = fetch_default(); u16 hi = fetch_default(); return (hi << 8) | lo; }
+
+    u8 ext_op[2];
+    bool ext_op_idx;
+    u8 fetch_ext() { bool idx = ext_op_idx; ext_op_idx = !ext_op_idx; return ext_op[idx]; }
+    u16 fetch2_ext() { u16 lo = fetch_ext(); u16 hi = fetch_ext(); return (hi << 8) | lo; }
+
+    u8 (cpu::*fetch_ptr)() = &cpu::fetch_default;
+    u16 (cpu::*fetch2_ptr)() = &cpu::fetch2_default;
+
+    inline void set_fetch_ext(bool use_ext) {
+        if constexpr (!std::is_same_v<bus_iface, bus&>) {
+            if (use_ext)
+                throw std::runtime_error("Cannot use external fetch with non-bus interface.");
+            else
+                return;
+        } else {        
+            fetch_ptr = use_ext ? &cpu::fetch_ext : &cpu::fetch_default;
+            fetch2_ptr = use_ext ? &cpu::fetch2_ext : &cpu::fetch2_default;
+        }
+    }
+
+    inline u8 fetch() {
+        if constexpr (!std::is_same_v<bus_iface, bus&>)
+            return fetch_default();
+        else
+            return (this->*fetch_ptr)();
+    }
+
+    inline u16 fetch2() { 
+        if constexpr (!std::is_same_v<bus_iface, bus&>)
+            return fetch2_default();
+        else
+            return (this->*fetch2_ptr)();
+    }
+
+    /* ~~~~~~~~~~~~~~~ ^^^ ~~~~~~~~~~~~~~ fetch ~~~~~~~~~~~~~~ ^^^ ~~~~~~~~~~~~~~~ */
 
     template <usize ops>
     constexpr void _trace([[maybe_unused]] u8 opc) {
@@ -443,14 +481,32 @@ public:
     }
 
     /**
+     * @brief Executes a single opcode with one or two operands.
+     * @param opcode The opcode to execute.
+     * @param operand1 The first operand to the opcode.
+     * @param operand2 The second operand to the opcode.
+     *
+     * This is an overload that manipulates the way the fetch cycles interact in the CPU logic: it will use
+     * the operands retrieved by this method (usually to be placed by a device on the bus that called an IRQ)
+     * instead of fetching them from the bus cards. In fact, this is used by the interrupt method as well.
+     */
+    void execute(u8 opcode, u8 operand1, u8 operand2 = 0) {
+        ext_op[0] = operand1;
+        ext_op[1] = operand2;
+        set_fetch_ext(true);
+        execute(opcode);
+        set_fetch_ext(false);
+    }
+
+    /**
      * @brief Executes a single opcode.
      * @param opcode The opcode to execute.
      *
      * This method is a comprehensive jump table for all the opcodes the 8080 CPU can execute. It effectively groups the
      * decode and execute phases of the CPU into a single method, and is used by the step method to execute instructions.
      *
-     * @todo Currently, this method is useless for instructions with operands, since their implementation always fetches from
-     * the address bus the CPU is aware of.
+     * @note To allow multiple operand instructions, there is an overload of this method that takes one or two extra
+     * argument bytes and temporarily redirects `fetch()` and `fetch2()` to them during the instruction cycle!
      */
     void execute(u8 opcode) {
         cpu_registers16 pair_sel = static_cast<cpu_registers16>((((opcode & 0b00110000) >> 4) & 0b11) + 1);
@@ -903,9 +959,25 @@ public:
     void reset_pseudo_bdos_redirect() { printer.reset(); }
 
     /// \}
+    /// @name Interrupt related methods.
+    /// \{
+
+    /// @brief Call an interrupt, then disable interrupts.
+    /// @param inst The interrupt instruction (with optional operands) to execute out of place.
+    /// @todo This allows any instruction and any retrieval of arguments, but I'm not sure if that happens other than on `CALL`.
+    void interrupt(std::array<u8, 3> inst) {
+        if (!interrupts_enabled)
+            return;
+
+        interrupts_enabled = false;
+        PUSH(cpu_registers16::PC);
+        execute(inst[0], inst[1], inst[2]);
+    }
+
+    /// \}
 
     cpu(bus_iface init_adr_space) : state(), cardbus(init_adr_space), just_booted(true), halted(false), do_handle_bdos(false), 
-            interrupts_enabled(true), printer(std::cout) {}
+            interrupts_enabled(true), printer(std::cout), ext_op_idx(false) {}
 };
 
 #endif
