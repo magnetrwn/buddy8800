@@ -1,0 +1,10 @@
+digraph "cpu::set_pseudo_bdos_redirect"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="cpu::set_pseudo_bdos\l_redirect",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Redirect pseudo BDOS print routines to a file."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="util::print_helper::set",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classutil_1_1print__helper.html#a08912c4069c431b6080355b8a7c18c15",tooltip="Set a redirection to file."];
+}

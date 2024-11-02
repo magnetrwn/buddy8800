@@ -105,6 +105,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acd0b563c6831d88a883f3bcd7d2257b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#acd0b563c6831d88a883f3bcd7d2257b4">step</a> ()</td></tr>
 <tr class="memdesc:acd0b563c6831d88a883f3bcd7d2257b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Steps the CPU by one instruction (and its operands).  <a href="classcpu.html#acd0b563c6831d88a883f3bcd7d2257b4">More...</a><br /></td></tr>
 <tr class="separator:acd0b563c6831d88a883f3bcd7d2257b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3e1736be271fe78087dee008490199b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#ab3e1736be271fe78087dee008490199b">execute</a> (u8 opcode, u8 operand1, u8 operand2=0)</td></tr>
+<tr class="memdesc:ab3e1736be271fe78087dee008490199b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a single opcode with one or two operands.  <a href="classcpu.html#ab3e1736be271fe78087dee008490199b">More...</a><br /></td></tr>
+<tr class="separator:ab3e1736be271fe78087dee008490199b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d70c847732b6891a759352d27e896ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a9d70c847732b6891a759352d27e896ee">execute</a> (u8 opcode)</td></tr>
 <tr class="memdesc:a9d70c847732b6891a759352d27e896ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a single opcode.  <a href="classcpu.html#a9d70c847732b6891a759352d27e896ee">More...</a><br /></td></tr>
 <tr class="separator:a9d70c847732b6891a759352d27e896ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -136,13 +139,17 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a850125d4d67383c10cbb1ba594d1db18">reset_pseudo_bdos_redirect</a> ()</td></tr>
 <tr class="memdesc:a850125d4d67383c10cbb1ba594d1db18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Redirect pseudo BDOS print routines back to stdout. <br /></td></tr>
 <tr class="separator:a850125d4d67383c10cbb1ba594d1db18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Interrupt related methods.</div></td></tr>
+<tr class="memitem:a4228c63bc0f368cf39bfe37909f73f45"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a4228c63bc0f368cf39bfe37909f73f45">interrupt</a> (std::array&lt; u8, 3 &gt; inst)</td></tr>
+<tr class="memdesc:a4228c63bc0f368cf39bfe37909f73f45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call an interrupt, then disable interrupts.  <a href="classcpu.html#a4228c63bc0f368cf39bfe37909f73f45">More...</a><br /></td></tr>
+<tr class="separator:a4228c63bc0f368cf39bfe37909f73f45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class bus_iface = bus&amp;&gt;<br />
 class cpu&lt; bus_iface &gt;</h3>
 
 <p>Represents the CPU of the emulator. </p>
-<p>This is the 8080 CPU emulator and interpreter. It abstracts the CPU functionality into straightforward methods and presents a way to step and interact with state. Being an interpreter, each opcode starting from the program counter address in cardbus is fetched and executed according to what it represents and including further fetches to opcode operands. The API also provides public access to <a class="el" href="classcpu.html#a9d70c847732b6891a759352d27e896ee" title="Executes a single opcode.">execute()</a>, should the user want to manually ask for instructions.</p>
+<p>This is the 8080 CPU emulator and interpreter. It abstracts the CPU functionality into straightforward methods and presents a way to step and interact with state. Being an interpreter, each opcode starting from the program counter address in cardbus is fetched and executed according to what it represents and including further fetches to opcode operands. The API also provides public access to <a class="el" href="classcpu.html#ab3e1736be271fe78087dee008490199b" title="Executes a single opcode with one or two operands.">execute()</a>, should the user want to manually ask for instructions.</p>
 <dl class="section note"><dt>Note</dt><dd>The class is completely defined in this header to allow templating the class to determine what bus interface <code>bus_iface</code> to use. For example, you can:<ul>
 <li><code>cpu&lt;bus&amp;&gt; <a class="el" href="classcpu.html" title="Represents the CPU of the emulator.">cpu(cardbus)</a>;</code> or <code>cpu&lt;&gt; <a class="el" href="classcpu.html" title="Represents the CPU of the emulator.">cpu(cardbus)</a>;</code> to create a standard CPU that interacts with a bus, or</li>
 <li><code>cpu&lt;std::array&lt;u8, 65536&gt;&gt; cpu;</code> to instead have an empty array as a bus, for max performance! </li>
@@ -187,7 +194,7 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
 </div>
 </div>
 <a id="a9d70c847732b6891a759352d27e896ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d70c847732b6891a759352d27e896ee">&#9670;&nbsp;</a></span>execute()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d70c847732b6891a759352d27e896ee">&#9670;&nbsp;</a></span>execute() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -220,7 +227,117 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
   </dd>
 </dl>
 <p>This method is a comprehensive jump table for all the opcodes the 8080 CPU can execute. It effectively groups the decode and execute phases of the CPU into a single method, and is used by the step method to execute instructions.</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>Currently, this method is useless for instructions with operands, since their implementation always fetches from the address bus the CPU is aware of. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>To allow multiple operand instructions, there is an overload of this method that takes one or two extra argument bytes and temporarily redirects <code>fetch()</code> and <code>fetch2()</code> to them during the instruction cycle! </dd></dl>
+
+</div>
+</div>
+<a id="ab3e1736be271fe78087dee008490199b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3e1736be271fe78087dee008490199b">&#9670;&nbsp;</a></span>execute() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class bus_iface  = bus&amp;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classcpu.html">cpu</a>&lt; bus_iface &gt;::execute </td>
+          <td>(</td>
+          <td class="paramtype">u8&#160;</td>
+          <td class="paramname"><em>opcode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8&#160;</td>
+          <td class="paramname"><em>operand1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8&#160;</td>
+          <td class="paramname"><em>operand2</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Executes a single opcode with one or two operands. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">opcode</td><td>The opcode to execute. </td></tr>
+    <tr><td class="paramname">operand1</td><td>The first operand to the opcode. </td></tr>
+    <tr><td class="paramname">operand2</td><td>The second operand to the opcode.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This is an overload that manipulates the way the fetch cycles interact in the CPU logic: it will use the operands retrieved by this method (usually to be placed by a device on the bus that called an IRQ) instead of fetching them from the bus cards. In fact, this is used by the interrupt method as well. </p>
+
+<p class="reference">Referenced by <a class="el" href="classcpu.html#a4228c63bc0f368cf39bfe37909f73f45">cpu&lt; bus_iface &gt;::interrupt()</a>, and <a class="el" href="classcpu.html#acd0b563c6831d88a883f3bcd7d2257b4">cpu&lt; bus_iface &gt;::step()</a>.</p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classcpu_ab3e1736be271fe78087dee008490199b_icgraph.png" border="0" usemap="#aclasscpu_ab3e1736be271fe78087dee008490199b_icgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="a4228c63bc0f368cf39bfe37909f73f45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4228c63bc0f368cf39bfe37909f73f45">&#9670;&nbsp;</a></span>interrupt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class bus_iface  = bus&amp;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classcpu.html">cpu</a>&lt; bus_iface &gt;::interrupt </td>
+          <td>(</td>
+          <td class="paramtype">std::array&lt; u8, 3 &gt;&#160;</td>
+          <td class="paramname"><em>inst</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Call an interrupt, then disable interrupts. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">inst</td><td>The interrupt instruction (with optional operands) to execute out of place. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>This allows any instruction and any retrieval of arguments, but I'm not sure if that happens other than on <code>CALL</code>. </dd></dl>
+
+<p class="reference">References <a class="el" href="classcpu.html#ab3e1736be271fe78087dee008490199b">cpu&lt; bus_iface &gt;::execute()</a>.</p>
+<div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classcpu_a4228c63bc0f368cf39bfe37909f73f45_cgraph.png" border="0" usemap="#aclasscpu_a4228c63bc0f368cf39bfe37909f73f45_cgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -428,6 +545,15 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
   </dd>
 </dl>
 
+<p class="reference">References <a class="el" href="classutil_1_1print__helper.html#a08912c4069c431b6080355b8a7c18c15">util::print_helper::set()</a>.</p>
+<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classcpu_abbf017b99cf39776da5a4bf517fb9226_cgraph.png" border="0" usemap="#aclasscpu_abbf017b99cf39776da5a4bf517fb9226_cgraph" alt=""/></div>
+</div>
+
 </div>
 </div>
 <a id="acd0b563c6831d88a883f3bcd7d2257b4"></a>
@@ -461,6 +587,15 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>If the CPU is halted, this method will return immediately. </dd></dl>
 <dl class="section user"><dt></dt><dd></dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Internally, this method is calling <code>execute(fetch())</code>. </dd></dl>
+
+<p class="reference">References <a class="el" href="classcpu.html#ab3e1736be271fe78087dee008490199b">cpu&lt; bus_iface &gt;::execute()</a>.</p>
+<div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classcpu_acd0b563c6831d88a883f3bcd7d2257b4_cgraph.png" border="0" usemap="#aclasscpu_acd0b563c6831d88a883f3bcd7d2257b4_cgraph" alt=""/></div>
+</div>
 
 </div>
 </div>

@@ -169,6 +169,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>This method reads a single byte/char from the PTY interface master side. It uses the <code>read()</code> system call to read the byte from the master file descriptor, sent by the slave side.</p>
 <dl class="section warning"><dt>Warning</dt><dd>This method will block until a byte is read. </dd></dl>
 
+<p class="reference">Referenced by <a class="el" href="classpty.html#a22e150200a8581e9da66e309f9ee2ec6">recv()</a>, and <a class="el" href="classserial__card.html#a2d9f292d7be1f9deebf49fa5d748c039">serial_card::refresh()</a>.</p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpty_af46ce3f92e8dc2077afec7a54c6b85b0_icgraph.png" border="0" usemap="#aclasspty_af46ce3f92e8dc2077afec7a54c6b85b0_icgraph" alt=""/></div>
+</div>
+
 </div>
 </div>
 <a id="aaee682964bcc6906eab0cadbde4bc6fe"></a>
@@ -189,6 +198,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>Retrieve the name of the slave device. </p>
 <dl class="section return"><dt>Returns</dt><dd>A C-like string containing the name of the slave device.</dd></dl>
 <p>This method returns the name of the slave device, such as <code>/dev/pts/3</code>. This name identifies the slave side PTY interface, to which a user or process can interface with. For example, you could run <code>screen /dev/pts/3</code> on your terminal to connect to the PTY slave side. </p>
+
+<p class="reference">Referenced by <a class="el" href="classserial__card.html#a1f29b0bb8ad083bf74af151628b7acf3">serial_card::identify()</a>.</p>
+<div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpty_aaee682964bcc6906eab0cadbde4bc6fe_icgraph.png" border="0" usemap="#aclasspty_aaee682964bcc6906eab0cadbde4bc6fe_icgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -217,6 +235,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>Use this method when first starting the PTY interface. It will open the master file descriptor and setup various configuration flags for a bit more realism in emulating an Altair 8800 serial interface.</p>
 <dl class="section note"><dt>Note</dt><dd>The default setup configuration is 300 baud, 8 data bits, no parity and 1 stop bit. <code>B300-8N1</code> </dd></dl>
 
+<p class="reference">References <a class="el" href="classpty.html#a757f8fc7156ea5215922e9646b65daaa">set_baud_rate()</a>, and <a class="el" href="classpty.html#acacb920c29edf75bc85388b4e347aa4e">setup()</a>.</p>
+<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpty_a50aec75ef08fc8368e6a3668821309cb_cgraph.png" border="0" usemap="#aclasspty_a50aec75ef08fc8368e6a3668821309cb_cgraph" alt=""/></div>
+</div>
+
 </div>
 </div>
 <a id="a9ad90a7e8c2e8a1b273b4f5859cae35c"></a>
@@ -243,6 +270,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </dd>
 </dl>
 <p>This method polls the PTY interface master side to check if there is data available to be read. It uses the <code><a class="el" href="classpty.html#a9ad90a7e8c2e8a1b273b4f5859cae35c" title="Check if there is data available to be read from the PTY interface master side.">poll()</a></code> system call to check if there is data available to be read from the master file descriptor. This allows a blocking <code><a class="el" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0" title="Get a single byte from the PTY interface master side.">getch()</a></code> operation to be non-blocking by employing a call to this method before reading. </p>
+
+<p class="reference">Referenced by <a class="el" href="classserial__card.html#a2d9f292d7be1f9deebf49fa5d748c039">serial_card::refresh()</a>.</p>
+<div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpty_a9ad90a7e8c2e8a1b273b4f5859cae35c_icgraph.png" border="0" usemap="#aclasspty_a9ad90a7e8c2e8a1b273b4f5859cae35c_icgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -277,6 +313,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </dl>
 <p>This method sends a single byte/char to the PTY interface master side. It uses the <code>write()</code> system call.</p>
 <dl class="section warning"><dt>Warning</dt><dd>This method will block until the byte is sent. </dd></dl>
+
+<p class="reference">Referenced by <a class="el" href="classserial__card.html#a2d9f292d7be1f9deebf49fa5d748c039">serial_card::refresh()</a>.</p>
+<div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpty_ac9e7847a4ade52e8bea78e13f49c4c76_icgraph.png" border="0" usemap="#aclasspty_ac9e7847a4ade52e8bea78e13f49c4c76_icgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -332,6 +377,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <dl class="section note"><dt>Note</dt><dd>If <code>max</code> is 1, the method is a wrapper to <code><a class="el" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0" title="Get a single byte from the PTY interface master side.">getch()</a></code> and will not null-terminate the buffer. </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>This method will block until <code>max - 1</code> bytes are read or the terminator character is found. </dd></dl>
 
+<p class="reference">References <a class="el" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0">getch()</a>, and <a class="el" href="classpty.html#a42411f2b12218401f748cbc94fe12062">send()</a>.</p>
+<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpty_a22e150200a8581e9da66e309f9ee2ec6_cgraph.png" border="0" usemap="#aclasspty_a22e150200a8581e9da66e309f9ee2ec6_cgraph" alt=""/></div>
+</div>
+
 </div>
 </div>
 <a id="a42411f2b12218401f748cbc94fe12062"></a>
@@ -365,6 +419,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </dl>
 <p>This method is a wrapper around the <code>send(const char* data, usize size)</code> method, where size simply is provided by the length of the passed string using <code>std::strlen()</code>.</p>
 <dl class="section warning"><dt>Warning</dt><dd>This method will block until all bytes of data are sent. </dd></dl>
+
+<p class="reference">Referenced by <a class="el" href="classpty.html#a22e150200a8581e9da66e309f9ee2ec6">recv()</a>.</p>
+<div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-6-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpty_a42411f2b12218401f748cbc94fe12062_icgraph.png" border="0" usemap="#aclasspty_a42411f2b12218401f748cbc94fe12062_icgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -471,6 +534,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </dl>
 <p>This method sets the baud rate of the PTY interface. It uses the <code>cfsetospeed()</code> and <code>cfsetispeed()</code> functions from <code>termios.h</code> to set the baud rate of the PTY interface. </p>
 
+<p class="reference">Referenced by <a class="el" href="classpty.html#a50aec75ef08fc8368e6a3668821309cb">open()</a>, and <a class="el" href="classserial__card.html#a87b17dad886b8847836ebd214c3c14ad">serial_card::write()</a>.</p>
+<div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-7-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpty_a757f8fc7156ea5215922e9646b65daaa_icgraph.png" border="0" usemap="#aclasspty_a757f8fc7156ea5215922e9646b65daaa_icgraph" alt=""/></div>
+</div>
+
 </div>
 </div>
 <a id="a361a2ef0fc27c6c1f2aac8e05aa0f89c"></a>
@@ -548,6 +620,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </dd>
 </dl>
 <p>This method sets up the PTY interface with custom configuration. Internally, this makes extensive use of <code>termios.h</code> functionality and its functions to configure the PTY interface. </p>
+
+<p class="reference">Referenced by <a class="el" href="classpty.html#a50aec75ef08fc8368e6a3668821309cb">open()</a>, and <a class="el" href="classserial__card.html#a87b17dad886b8847836ebd214c3c14ad">serial_card::write()</a>.</p>
+<div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-8-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpty_acacb920c29edf75bc85388b4e347aa4e_icgraph.png" border="0" usemap="#aclasspty_acacb920c29edf75bc85388b4e347aa4e_icgraph" alt=""/></div>
+</div>
 
 </div>
 </div>

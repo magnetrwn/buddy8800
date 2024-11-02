@@ -1,0 +1,14 @@
+digraph "bus::read"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="bus::read",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Reads a byte from the bus."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="card::in_range",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classcard.html#ab32f79943888d74e0a506e78b2d7406c",tooltip="Check if an address on the bus is in the card's range."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="card::is_io",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classcard.html#af41da29e90a5b92e6df323da37822060",tooltip="Check if the card is an I/O card."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="card::read",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classcard.html#a0ea76feb6cf75cf51ba3362f4ab50190",tooltip="Read a byte from the card."];
+}

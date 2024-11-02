@@ -112,69 +112,71 @@ $(document).ready(function(){initNavTree('ux_8hpp_source.html',''); initResizabl
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keywordflow">if</span> (argc &lt; 3 or !(argc &amp; 1)) </div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Invalid number of arguments. Provide pairs of ROM/data files and integer load addresses.&quot;</span>);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        cardbus.<a class="code" href="classbus.html#a70d78c8af1a0e52c760801dea2b54de2">print_mmap</a>();</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        processor.<a class="code" href="classcpu.html#ad684d25913e8aaf0139fa3dc47ce9e40">do_pseudo_bdos</a>(conf.<a class="code" href="classsystem__config.html#a001df8adb82385fc64f91a5c34b7dbfd">get_do_pseudo_bdos</a>());</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        load_rom_vec.reserve(cardbus.<a class="code" href="classbus.html#a40eeeeb2ba939e469bdff3d35c3f5f67">size</a>());</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="comment">// The arguments come in pairs of filename and location to load the ROM at.</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; argc; i += 2) {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            std::ifstream load_rom(argv[i], std::ios::binary);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="keywordflow">if</span> (!load_rom)</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Could not open file: &quot;</span> + std::string(argv[i]));</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            load_rom_vec.assign(std::istreambuf_iterator&lt;char&gt;(load_rom), {});</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="comment">// The first ROM is the one that will have the reset vector jump to.</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            processor.<a class="code" href="classcpu.html#a0d839c16cc808245a4f0c38a430a342a">load</a>(load_rom_vec.begin(), load_rom_vec.end(), std::stoul(argv[i + 1], <span class="keyword">nullptr</span>, 0), i == 1);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        }</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">void</span> run() {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordflow">while</span> (!processor.<a class="code" href="classcpu.html#a010e335fc9f1797e72bfc5585e9238f6">is_halted</a>()) {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            processor.<a class="code" href="classcpu.html#acd0b563c6831d88a883f3bcd7d2257b4">step</a>();</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            cardbus.<a class="code" href="classbus.html#ac158680334e36add350e716e6a0ec69b">refresh</a>();</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        }</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    }</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="classemulator.html">emulator</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* config_filename) : conf(config_filename), cardbus(conf.<a class="code" href="classsystem__config.html#a1039248aa8a87d74c32bd64108d669b0">get_bus</a>()), processor(cardbus) {}</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;};</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="structterminal__ux.html">   54</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structterminal__ux.html">terminal_ux</a> {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="classemulator.html">emulator</a> emu;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv) {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        std::cout &lt;&lt; <span class="stringliteral">&quot;\x1B[33;01m-:-:-:-:- emulator setup -:-:-:-:-\x1B[0m&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        emu.setup(argc, argv);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        std::cout &lt;&lt; <span class="stringliteral">&quot;\x1B[33;01m-:-:-:-:- emulator run -:-:-:-:-\x1B[0m&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        processor.<a class="code" href="classcpu.html#ad684d25913e8aaf0139fa3dc47ce9e40">do_pseudo_bdos</a>(conf.<a class="code" href="classsystem__config.html#a001df8adb82385fc64f91a5c34b7dbfd">get_do_pseudo_bdos</a>());</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        load_rom_vec.reserve(cardbus.<a class="code" href="classbus.html#a40eeeeb2ba939e469bdff3d35c3f5f67">size</a>());</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="comment">// The arguments come in pairs of filename and location to load the ROM at.</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; argc; i += 2) {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            std::ifstream load_rom(argv[i], std::ios::binary);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keywordflow">if</span> (!load_rom)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Could not open file: &quot;</span> + std::string(argv[i]));</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            load_rom_vec.assign(std::istreambuf_iterator&lt;char&gt;(load_rom), {});</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="comment">// The first ROM is the one that will have the reset vector jump to.</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            processor.<a class="code" href="classcpu.html#a0d839c16cc808245a4f0c38a430a342a">load</a>(load_rom_vec.begin(), load_rom_vec.end(), std::stoul(argv[i + 1], <span class="keyword">nullptr</span>, 0), i == 1);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        }</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> run() {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">while</span> (!processor.<a class="code" href="classcpu.html#a010e335fc9f1797e72bfc5585e9238f6">is_halted</a>()) {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            processor.<a class="code" href="classcpu.html#acd0b563c6831d88a883f3bcd7d2257b4">step</a>();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            cardbus.<a class="code" href="classbus.html#ac158680334e36add350e716e6a0ec69b">refresh</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        }</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    }</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    std::string get_bus_map_s()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> cardbus.<a class="code" href="classbus.html#a616875dde214c117fcc36c0bbcc80f9e">bus_map_s</a>(); }</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="classemulator.html">emulator</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* config_filename) : conf(config_filename), cardbus(conf.<a class="code" href="classsystem__config.html#a1039248aa8a87d74c32bd64108d669b0">get_bus</a>()), processor(cardbus) {}</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;};</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="structterminal__ux.html">   55</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structterminal__ux.html">terminal_ux</a> {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="classemulator.html">emulator</a> emu;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv) {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        std::cout &lt;&lt; <span class="stringliteral">&quot;\x1B[33;01m-:-:-:-:- emulator setup -:-:-:-:-\x1B[0m&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        std::cout &lt;&lt; emu.get_bus_map_s();</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        emu.setup(argc, argv);</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        emu.run();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        std::cout &lt;&lt; <span class="stringliteral">&quot;\x1B[33;01m-:-:-:-:- emulator run -:-:-:-:-\x1B[0m&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        std::cout &lt;&lt; <span class="stringliteral">&quot;\x1B[33;01m\n-:-:-:-:- emulator end -:-:-:-:-\x1B[0m&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    }</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="structterminal__ux.html">terminal_ux</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* config_filename) : emu(config_filename) {}</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;};</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclassbus_html"><div class="ttname"><a href="classbus.html">bus</a></div><div class="ttdoc">Represents the S-100 bus of the emulator.</div><div class="ttdef"><b>Definition:</b> bus.hpp:33</div></div>
-<div class="ttc" id="aclassbus_html_a40eeeeb2ba939e469bdff3d35c3f5f67"><div class="ttname"><a href="classbus.html#a40eeeeb2ba939e469bdff3d35c3f5f67">bus::size</a></div><div class="ttdeci">constexpr usize size() const</div><div class="ttdoc">Returns the maximum number of addressable locations on the bus.</div><div class="ttdef"><b>Definition:</b> bus.hpp:163</div></div>
-<div class="ttc" id="aclassbus_html_a70d78c8af1a0e52c760801dea2b54de2"><div class="ttname"><a href="classbus.html#a70d78c8af1a0e52c760801dea2b54de2">bus::print_mmap</a></div><div class="ttdeci">void print_mmap() const</div><div class="ttdoc">Prints a detailed memory map of the bus.</div><div class="ttdef"><b>Definition:</b> bus.hpp:284</div></div>
-<div class="ttc" id="aclassbus_html_ac158680334e36add350e716e6a0ec69b"><div class="ttname"><a href="classbus.html#ac158680334e36add350e716e6a0ec69b">bus::refresh</a></div><div class="ttdeci">void refresh()</div><div class="ttdoc">Refreshes all cards on the bus.</div><div class="ttdef"><b>Definition:</b> bus.hpp:228</div></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        emu.run();</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        std::cout &lt;&lt; <span class="stringliteral">&quot;\x1B[33;01m\n-:-:-:-:- emulator end -:-:-:-:-\x1B[0m&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <a class="code" href="structterminal__ux.html">terminal_ux</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* config_filename) : emu(config_filename) {}</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;};</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassbus_html"><div class="ttname"><a href="classbus.html">bus</a></div><div class="ttdoc">Represents the S-100 bus of the emulator.</div><div class="ttdef"><b>Definition:</b> bus.hpp:38</div></div>
+<div class="ttc" id="aclassbus_html_a40eeeeb2ba939e469bdff3d35c3f5f67"><div class="ttname"><a href="classbus.html#a40eeeeb2ba939e469bdff3d35c3f5f67">bus::size</a></div><div class="ttdeci">constexpr usize size() const</div><div class="ttdoc">Returns the maximum number of addressable locations on the bus.</div><div class="ttdef"><b>Definition:</b> bus.hpp:168</div></div>
+<div class="ttc" id="aclassbus_html_a616875dde214c117fcc36c0bbcc80f9e"><div class="ttname"><a href="classbus.html#a616875dde214c117fcc36c0bbcc80f9e">bus::bus_map_s</a></div><div class="ttdeci">std::string bus_map_s() const</div><div class="ttdoc">Returns a detailed map of the bus.</div><div class="ttdef"><b>Definition:</b> bus.hpp:290</div></div>
+<div class="ttc" id="aclassbus_html_ac158680334e36add350e716e6a0ec69b"><div class="ttname"><a href="classbus.html#ac158680334e36add350e716e6a0ec69b">bus::refresh</a></div><div class="ttdeci">void refresh()</div><div class="ttdoc">Refreshes all cards on the bus.</div><div class="ttdef"><b>Definition:</b> bus.hpp:233</div></div>
 <div class="ttc" id="aclasscpu_html"><div class="ttname"><a href="classcpu.html">cpu&lt; bus &amp; &gt;</a></div></div>
-<div class="ttc" id="aclasscpu_html_a010e335fc9f1797e72bfc5585e9238f6"><div class="ttname"><a href="classcpu.html#a010e335fc9f1797e72bfc5585e9238f6">cpu::is_halted</a></div><div class="ttdeci">bool is_halted() const</div><div class="ttdoc">Check if the CPU is halted.</div><div class="ttdef"><b>Definition:</b> cpu.hpp:876</div></div>
-<div class="ttc" id="aclasscpu_html_a0d839c16cc808245a4f0c38a430a342a"><div class="ttname"><a href="classcpu.html#a0d839c16cc808245a4f0c38a430a342a">cpu::load</a></div><div class="ttdeci">void load(T begin, T end, usize offset=0, bool auto_reset_vector=false)</div><div class="ttdoc">Loads data into cardbus.</div><div class="ttdef"><b>Definition:</b> cpu.hpp:835</div></div>
-<div class="ttc" id="aclasscpu_html_acd0b563c6831d88a883f3bcd7d2257b4"><div class="ttname"><a href="classcpu.html#acd0b563c6831d88a883f3bcd7d2257b4">cpu::step</a></div><div class="ttdeci">void step()</div><div class="ttdoc">Steps the CPU by one instruction (and its operands).</div><div class="ttdef"><b>Definition:</b> cpu.hpp:437</div></div>
-<div class="ttc" id="aclasscpu_html_ad684d25913e8aaf0139fa3dc47ce9e40"><div class="ttname"><a href="classcpu.html#ad684d25913e8aaf0139fa3dc47ce9e40">cpu::do_pseudo_bdos</a></div><div class="ttdeci">void do_pseudo_bdos(bool should)</div><div class="ttdoc">Set the CPU to resolve calls to BDOS internally.</div><div class="ttdef"><b>Definition:</b> cpu.hpp:896</div></div>
+<div class="ttc" id="aclasscpu_html_a010e335fc9f1797e72bfc5585e9238f6"><div class="ttname"><a href="classcpu.html#a010e335fc9f1797e72bfc5585e9238f6">cpu::is_halted</a></div><div class="ttdeci">bool is_halted() const</div><div class="ttdoc">Check if the CPU is halted.</div><div class="ttdef"><b>Definition:</b> cpu.hpp:932</div></div>
+<div class="ttc" id="aclasscpu_html_a0d839c16cc808245a4f0c38a430a342a"><div class="ttname"><a href="classcpu.html#a0d839c16cc808245a4f0c38a430a342a">cpu::load</a></div><div class="ttdeci">void load(T begin, T end, usize offset=0, bool auto_reset_vector=false)</div><div class="ttdoc">Loads data into cardbus.</div><div class="ttdef"><b>Definition:</b> cpu.hpp:891</div></div>
+<div class="ttc" id="aclasscpu_html_acd0b563c6831d88a883f3bcd7d2257b4"><div class="ttname"><a href="classcpu.html#acd0b563c6831d88a883f3bcd7d2257b4">cpu::step</a></div><div class="ttdeci">void step()</div><div class="ttdoc">Steps the CPU by one instruction (and its operands).</div><div class="ttdef"><b>Definition:</b> cpu.hpp:475</div></div>
+<div class="ttc" id="aclasscpu_html_ad684d25913e8aaf0139fa3dc47ce9e40"><div class="ttname"><a href="classcpu.html#ad684d25913e8aaf0139fa3dc47ce9e40">cpu::do_pseudo_bdos</a></div><div class="ttdeci">void do_pseudo_bdos(bool should)</div><div class="ttdoc">Set the CPU to resolve calls to BDOS internally.</div><div class="ttdef"><b>Definition:</b> cpu.hpp:952</div></div>
 <div class="ttc" id="aclassemulator_html"><div class="ttname"><a href="classemulator.html">emulator</a></div><div class="ttdef"><b>Definition:</b> ux.hpp:14</div></div>
 <div class="ttc" id="aclasssystem__config_html"><div class="ttname"><a href="classsystem__config.html">system_config</a></div><div class="ttdoc">A class to manage objects that should be setup by reading a TOML configuration file.</div><div class="ttdef"><b>Definition:</b> sysconf.hpp:23</div></div>
 <div class="ttc" id="aclasssystem__config_html_a001df8adb82385fc64f91a5c34b7dbfd"><div class="ttname"><a href="classsystem__config.html#a001df8adb82385fc64f91a5c34b7dbfd">system_config::get_do_pseudo_bdos</a></div><div class="ttdeci">bool get_do_pseudo_bdos() const</div><div class="ttdoc">Get whether pseudo BDOS is enabled.</div><div class="ttdef"><b>Definition:</b> sysconf.hpp:78</div></div>
 <div class="ttc" id="aclasssystem__config_html_a1039248aa8a87d74c32bd64108d669b0"><div class="ttname"><a href="classsystem__config.html#a1039248aa8a87d74c32bd64108d669b0">system_config::get_bus</a></div><div class="ttdeci">bus &amp; get_bus()</div><div class="ttdoc">Get a reference to the bus object.</div><div class="ttdef"><b>Definition:</b> sysconf.hpp:75</div></div>
-<div class="ttc" id="astructterminal__ux_html"><div class="ttname"><a href="structterminal__ux.html">terminal_ux</a></div><div class="ttdef"><b>Definition:</b> ux.hpp:54</div></div>
+<div class="ttc" id="astructterminal__ux_html"><div class="ttname"><a href="structterminal__ux.html">terminal_ux</a></div><div class="ttdef"><b>Definition:</b> ux.hpp:55</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

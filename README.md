@@ -8,6 +8,7 @@
 
 + **[Doxygen Documentation](https://magnetrwn.github.io/buddy8800)**
 + [Building](#building)
++ [Implementation Map](#implementation-map)
 + [Resources and Documentation](#resources-and-documentation)
 + [Screenshots](#screenshots)
 
@@ -39,6 +40,10 @@ By default, the build script will output a release build that has no tracing and
 Development builds are usually compiled with `./build.sh -d -T`.
 
 **Note:** Make sure you have `config.toml` placed in the same directory as the final executable. This file contains the configuration for the emulator, such as what cards to place and where.
+
+### Implementation Map
+
+**Work in progress.**
 
 ### Resources and Documentation
 

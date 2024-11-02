@@ -1,0 +1,14 @@
+digraph "pty::setup"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="pty::setup",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Setup the PTY interface with custom configuration."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pty::open",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpty.html#a50aec75ef08fc8368e6a3668821309cb",tooltip="Open the PTY interface."];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="serial_card::write",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classserial__card.html#a87b17dad886b8847836ebd214c3c14ad",tooltip="Write a byte to the serial registers."];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="serial_card::write\l_force",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classserial__card.html#a692446f7540c8ae4601737bdf2833ebf",tooltip="Write a byte to the card regardless of write lock."];
+}

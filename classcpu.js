@@ -4,6 +4,8 @@ var classcpu =
     [ "clear", "classcpu.html#a2431272df1fa9db7b37770dd95702807", null ],
     [ "do_pseudo_bdos", "classcpu.html#ad684d25913e8aaf0139fa3dc47ce9e40", null ],
     [ "execute", "classcpu.html#a9d70c847732b6891a759352d27e896ee", null ],
+    [ "execute", "classcpu.html#ab3e1736be271fe78087dee008490199b", null ],
+    [ "interrupt", "classcpu.html#a4228c63bc0f368cf39bfe37909f73f45", null ],
     [ "is_halted", "classcpu.html#a010e335fc9f1797e72bfc5585e9238f6", null ],
     [ "load", "classcpu.html#a0d839c16cc808245a4f0c38a430a342a", null ],
     [ "load_state", "classcpu.html#a6c72852ac69a7814d8e0faa836d3abf3", null ],

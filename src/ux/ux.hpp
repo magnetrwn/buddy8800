@@ -23,7 +23,6 @@ public:
         if (argc < 3 or !(argc & 1)) 
             throw std::invalid_argument("Invalid number of arguments. Provide pairs of ROM/data files and integer load addresses.");
 
-        cardbus.print_mmap();
         processor.do_pseudo_bdos(conf.get_do_pseudo_bdos());
         load_rom_vec.reserve(cardbus.size());
 
@@ -48,6 +47,8 @@ public:
         }
     }
 
+    std::string get_bus_map_s() const { return cardbus.bus_map_s(); }
+
     emulator(const char* config_filename) : conf(config_filename), cardbus(conf.get_bus()), processor(cardbus) {}
 };
 
@@ -57,6 +58,7 @@ struct terminal_ux {
     int main(int argc, char** argv) {
         std::cout << "\x1B[33;01m-:-:-:-:- emulator setup -:-:-:-:-\x1B[0m" << std::endl;
 
+        std::cout << emu.get_bus_map_s();
         emu.setup(argc, argv);
 
         std::cout << "\x1B[33;01m-:-:-:-:- emulator run -:-:-:-:-\x1B[0m" << std::endl;

@@ -3,8 +3,9 @@ var namespaces_dup =
     [ "Getting Started", "index.html#autotoc_md1", null ],
     [ "Doxygen Documentation", "index.html#autotoc_md2", null ],
     [ "Building", "index.html#autotoc_md3", null ],
-    [ "Resources and Documentation", "index.html#autotoc_md4", null ],
-    [ "Screenshots", "index.html#autotoc_md5", null ],
+    [ "Implementation Map", "index.html#autotoc_md4", null ],
+    [ "Resources and Documentation", "index.html#autotoc_md5", null ],
+    [ "Screenshots", "index.html#autotoc_md6", null ],
     [ "type_definitions", "namespacetype__definitions.html", [
       [ "f32", "namespacetype__definitions.html#a26101d1810f9ae3b1a09b78fe15879fc", null ],
       [ "f64", "namespacetype__definitions.html#a4c5c0cdc6976b7d81b42537c2434ced2", null ],

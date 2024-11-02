@@ -1,0 +1,10 @@
+digraph "bus::read"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="bus::read",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Reads a byte from the bus."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="bus::operator[]",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbus.html#aff023ba4699c0456c3e1ed045b3678ed",tooltip="A shortcut to read the bus using an index directly without a proxy object."];
+}
