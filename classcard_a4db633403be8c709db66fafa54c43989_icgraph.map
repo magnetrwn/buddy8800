@@ -1,0 +1,4 @@
+<map id="card::write_force" name="card::write_force">
+<area shape="rect" id="node1" title="Write a byte to the card regardless of write lock." alt="" coords="180,5,311,32"/>
+<area shape="rect" id="node2" href="$classbus.html#addf9c4c65e0374e6016e1a278f51a0ed" title="Writes a byte to the bus, without considering write lock." alt="" coords="5,5,132,32"/>
+</map>

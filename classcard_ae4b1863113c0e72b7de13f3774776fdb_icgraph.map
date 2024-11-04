@@ -1,0 +1,7 @@
+<map id="card::write" name="card::write">
+<area shape="rect" id="node1" title="Write a byte to the card." alt="" coords="339,56,429,83"/>
+<area shape="rect" id="node2" href="$classcard.html#aa9962ee86c02b544e158cd94388df9bd" title="Set a bit in a byte on the bus." alt="" coords="180,5,283,32"/>
+<area shape="rect" id="node4" href="$classcard.html#aecb2677fb4c62b9a1a08e5890ea4743b" title="Unset a bit in a byte on the bus." alt="" coords="172,56,291,83"/>
+<area shape="rect" id="node5" href="$classbus.html#aea7690c041bc175652f213f9a8860c73" title="Writes a byte to the bus." alt="" coords="188,107,275,133"/>
+<area shape="rect" id="node3" href="$classcard.html#ab210eb529f3a153ab99822cda9492b3c" title="Un/set a bit in a byte on the bus by condition." alt="" coords="5,31,124,57"/>
+</map>

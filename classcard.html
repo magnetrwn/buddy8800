@@ -101,6 +101,11 @@ $(document).ready(function(){initNavTree('classcard.html',''); initResizable(); 
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classcard__inherit__graph.png" border="0" usemap="#acard_inherit__map" alt="Inheritance graph"/></div>
+<map name="acard_inherit__map" id="acard_inherit__map">
+<area shape="rect" title="Base class for all cards." alt="" coords="137,5,187,32"/>
+<area shape="rect" href="classdata__card.html" title="A card that holds a fixed amount of data." alt="" coords="5,80,167,121"/>
+<area shape="rect" href="classserial__card.html" title="A card that emulates a 6850 ACIA." alt="" coords="191,87,285,114"/>
+</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -128,9 +133,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#aeb5526b21831ac5fe40ade8de19c9ed3">w_unlock</a> ()</td></tr>
 <tr class="memdesc:aeb5526b21831ac5fe40ade8de19c9ed3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unlock the card for writing. <br /></td></tr>
 <tr class="separator:aeb5526b21831ac5fe40ade8de19c9ed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5aca5465f1771a8fa77cd0deb33ed996"><td class="memItemLeft" align="right" valign="top"><a id="a5aca5465f1771a8fa77cd0deb33ed996"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#a5aca5465f1771a8fa77cd0deb33ed996">is_irq</a> () const</td></tr>
-<tr class="memdesc:a5aca5465f1771a8fa77cd0deb33ed996"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the card has an IRQ raised. <br /></td></tr>
+<tr class="memitem:a5aca5465f1771a8fa77cd0deb33ed996"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#a5aca5465f1771a8fa77cd0deb33ed996">is_irq</a> () const</td></tr>
+<tr class="memdesc:a5aca5465f1771a8fa77cd0deb33ed996"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the card has an IRQ raised.  <a href="classcard.html#a5aca5465f1771a8fa77cd0deb33ed996">More...</a><br /></td></tr>
 <tr class="separator:a5aca5465f1771a8fa77cd0deb33ed996"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4841b21668816977ff2266d6667593e"><td class="memItemLeft" align="right" valign="top"><a id="ab4841b21668816977ff2266d6667593e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#ab4841b21668816977ff2266d6667593e">raise_irq</a> (bool value)</td></tr>
@@ -214,6 +218,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classcard_a4ef348c61f7138914f015c57d2f6a0be_icgraph.png" border="0" usemap="#aclasscard_a4ef348c61f7138914f015c57d2f6a0be_icgraph" alt=""/></div>
+<map name="aclasscard_a4ef348c61f7138914f015c57d2f6a0be_icgraph" id="aclasscard_a4ef348c61f7138914f015c57d2f6a0be_icgraph">
+<area shape="rect" title="Get the IRQ instruction (and possible operands)." alt="" coords="152,5,255,32"/>
+<area shape="rect" href="classbus.html#a1673002793a022d9e89aacfbeeeb71fc" title="Gets the IRQ instruction (and possible operands)." alt="" coords="5,5,104,32"/>
+</map>
 </div>
 
 </div>
@@ -291,6 +299,13 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 </div>
 <div id="dynsection-2-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classcard_ab32f79943888d74e0a506e78b2d7406c_icgraph.png" border="0" usemap="#aclasscard_ab32f79943888d74e0a506e78b2d7406c_icgraph" alt=""/></div>
+<map name="aclasscard_ab32f79943888d74e0a506e78b2d7406c_icgraph" id="aclasscard_ab32f79943888d74e0a506e78b2d7406c_icgraph">
+<area shape="rect" title="Check if an address on the bus is in the card&#39;s range." alt="" coords="347,56,461,83"/>
+<area shape="rect" href="classbus.html#a5ca080170524f30333bee7fe0b857871" title="Reads a byte from the bus." alt="" coords="194,5,277,32"/>
+<area shape="rect" href="classbus.html#aea7690c041bc175652f213f9a8860c73" title="Writes a byte to the bus." alt="" coords="192,56,279,83"/>
+<area shape="rect" href="classbus.html#addf9c4c65e0374e6016e1a278f51a0ed" title="Writes a byte to the bus, without considering write lock." alt="" coords="172,107,299,133"/>
+<area shape="rect" href="classbus.html#aff023ba4699c0456c3e1ed045b3678ed" title="A shortcut to read the bus using an index directly without a proxy object." alt="" coords="5,5,124,32"/>
+</map>
 </div>
 
 </div>
@@ -330,6 +345,55 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 </div>
 <div id="dynsection-3-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classcard_af41da29e90a5b92e6df323da37822060_icgraph.png" border="0" usemap="#aclasscard_af41da29e90a5b92e6df323da37822060_icgraph" alt=""/></div>
+<map name="aclasscard_af41da29e90a5b92e6df323da37822060_icgraph" id="aclasscard_af41da29e90a5b92e6df323da37822060_icgraph">
+<area shape="rect" title="Check if the card is an I/O card." alt="" coords="347,56,435,83"/>
+<area shape="rect" href="classbus.html#a5ca080170524f30333bee7fe0b857871" title="Reads a byte from the bus." alt="" coords="194,5,277,32"/>
+<area shape="rect" href="classbus.html#aea7690c041bc175652f213f9a8860c73" title="Writes a byte to the bus." alt="" coords="192,56,279,83"/>
+<area shape="rect" href="classbus.html#addf9c4c65e0374e6016e1a278f51a0ed" title="Writes a byte to the bus, without considering write lock." alt="" coords="172,107,299,133"/>
+<area shape="rect" href="classbus.html#aff023ba4699c0456c3e1ed045b3678ed" title="A shortcut to read the bus using an index directly without a proxy object." alt="" coords="5,5,124,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a5aca5465f1771a8fa77cd0deb33ed996"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5aca5465f1771a8fa77cd0deb33ed996">&#9670;&nbsp;</a></span>is_irq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool card::is_irq </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if the card has an IRQ raised. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Always use this before calling <code><a class="el" href="classcard.html#a4ef348c61f7138914f015c57d2f6a0be" title="Get the IRQ instruction (and possible operands).">get_irq()</a></code>. </dd></dl>
+
+<p class="reference">Referenced by <a class="el" href="classbus.html#a1673002793a022d9e89aacfbeeeb71fc">bus::get_irq()</a>, and <a class="el" href="classbus.html#ae35dadd5a5ae3a060bd18facb8bb4f31">bus::is_irq()</a>.</p>
+<div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classcard_a5aca5465f1771a8fa77cd0deb33ed996_icgraph.png" border="0" usemap="#aclasscard_a5aca5465f1771a8fa77cd0deb33ed996_icgraph" alt=""/></div>
+<map name="aclasscard_a5aca5465f1771a8fa77cd0deb33ed996_icgraph" id="aclasscard_a5aca5465f1771a8fa77cd0deb33ed996_icgraph">
+<area shape="rect" title="Check if the card has an IRQ raised." alt="" coords="152,31,245,57"/>
+<area shape="rect" href="classbus.html#a1673002793a022d9e89aacfbeeeb71fc" title="Gets the IRQ instruction (and possible operands)." alt="" coords="5,5,104,32"/>
+<area shape="rect" href="classbus.html#ae35dadd5a5ae3a060bd18facb8bb4f31" title="Checks if an IRQ is raised." alt="" coords="11,56,99,83"/>
+</map>
 </div>
 
 </div>
@@ -370,12 +434,20 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 <p>Implemented in <a class="el" href="classserial__card.html#a70a58b548817e1590efb55652d772e67">serial_card</a>, and <a class="el" href="classdata__card.html#ae4cc3d8e3c84ca0e19bb788f7941267f">data_card&lt; construct_then_write_lock &gt;</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="classbus.html#a5ca080170524f30333bee7fe0b857871">bus::read()</a>, <a class="el" href="classcard.html#aa9962ee86c02b544e158cd94388df9bd">set_bit()</a>, and <a class="el" href="classcard.html#aecb2677fb4c62b9a1a08e5890ea4743b">unset_bit()</a>.</p>
-<div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classcard_a0ea76feb6cf75cf51ba3362f4ab50190_icgraph.png" border="0" usemap="#aclasscard_a0ea76feb6cf75cf51ba3362f4ab50190_icgraph" alt=""/></div>
+<map name="aclasscard_a0ea76feb6cf75cf51ba3362f4ab50190_icgraph" id="aclasscard_a0ea76feb6cf75cf51ba3362f4ab50190_icgraph">
+<area shape="rect" title="Read a byte from the card." alt="" coords="339,56,425,83"/>
+<area shape="rect" href="classbus.html#a5ca080170524f30333bee7fe0b857871" title="Reads a byte from the bus." alt="" coords="190,5,273,32"/>
+<area shape="rect" href="classcard.html#aa9962ee86c02b544e158cd94388df9bd" title="Set a bit in a byte on the bus." alt="" coords="180,56,283,83"/>
+<area shape="rect" href="classcard.html#aecb2677fb4c62b9a1a08e5890ea4743b" title="Unset a bit in a byte on the bus." alt="" coords="172,107,291,133"/>
+<area shape="rect" href="classbus.html#aff023ba4699c0456c3e1ed045b3678ed" title="A shortcut to read the bus using an index directly without a proxy object." alt="" coords="5,5,124,32"/>
+<area shape="rect" href="classcard.html#ab210eb529f3a153ab99822cda9492b3c" title="Un/set a bit in a byte on the bus by condition." alt="" coords="5,81,124,108"/>
+</map>
 </div>
 
 </div>
@@ -409,12 +481,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 <p>Implemented in <a class="el" href="classserial__card.html#a2d9f292d7be1f9deebf49fa5d748c039">serial_card</a>, and <a class="el" href="classdata__card.html#a54a52cf3e47f0d1dbf3ad4c1be66c440">data_card&lt; construct_then_write_lock &gt;</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="classbus.html#ac158680334e36add350e716e6a0ec69b">bus::refresh()</a>.</p>
-<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div id="dynsection-6-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classcard_ae39a92dd99c80e0756cc1d8ea28ca6c4_icgraph.png" border="0" usemap="#aclasscard_ae39a92dd99c80e0756cc1d8ea28ca6c4_icgraph" alt=""/></div>
+<map name="aclasscard_ae39a92dd99c80e0756cc1d8ea28ca6c4_icgraph" id="aclasscard_ae39a92dd99c80e0756cc1d8ea28ca6c4_icgraph">
+<area shape="rect" title="Refresh the card to allow periodic I/O, timer or sync operation." alt="" coords="152,5,256,32"/>
+<area shape="rect" href="classbus.html#ac158680334e36add350e716e6a0ec69b" title="Refreshes all cards on the bus." alt="" coords="5,5,104,32"/>
+</map>
 </div>
 
 </div>
@@ -459,19 +535,28 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 <p class="reference">References <a class="el" href="classcard.html#a0ea76feb6cf75cf51ba3362f4ab50190">read()</a>, and <a class="el" href="classcard.html#ae4b1863113c0e72b7de13f3774776fdb">write()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="classcard.html#ab210eb529f3a153ab99822cda9492b3c">set_if_bit()</a>.</p>
-<div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-6-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classcard_aa9962ee86c02b544e158cd94388df9bd_cgraph.png" border="0" usemap="#aclasscard_aa9962ee86c02b544e158cd94388df9bd_cgraph" alt=""/></div>
-</div>
 <div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-7-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classcard_aa9962ee86c02b544e158cd94388df9bd_cgraph.png" border="0" usemap="#aclasscard_aa9962ee86c02b544e158cd94388df9bd_cgraph" alt=""/></div>
+<map name="aclasscard_aa9962ee86c02b544e158cd94388df9bd_cgraph" id="aclasscard_aa9962ee86c02b544e158cd94388df9bd_cgraph">
+<area shape="rect" title="Set a bit in a byte on the bus." alt="" coords="5,31,108,57"/>
+<area shape="rect" href="classcard.html#a0ea76feb6cf75cf51ba3362f4ab50190" title="Read a byte from the card." alt="" coords="158,5,245,32"/>
+<area shape="rect" href="classcard.html#ae4b1863113c0e72b7de13f3774776fdb" title="Write a byte to the card." alt="" coords="156,56,247,83"/>
+</map>
+</div>
+<div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-8-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classcard_aa9962ee86c02b544e158cd94388df9bd_icgraph.png" border="0" usemap="#aclasscard_aa9962ee86c02b544e158cd94388df9bd_icgraph" alt=""/></div>
+<map name="aclasscard_aa9962ee86c02b544e158cd94388df9bd_icgraph" id="aclasscard_aa9962ee86c02b544e158cd94388df9bd_icgraph">
+<area shape="rect" title="Set a bit in a byte on the bus." alt="" coords="172,5,275,32"/>
+<area shape="rect" href="classcard.html#ab210eb529f3a153ab99822cda9492b3c" title="Un/set a bit in a byte on the bus by condition." alt="" coords="5,5,124,32"/>
+</map>
 </div>
 
 </div>
@@ -520,12 +605,19 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 <dl class="section warning"><dt>Warning</dt><dd>This method does not check if the address is in the card's range. </dd></dl>
 
 <p class="reference">References <a class="el" href="classcard.html#aa9962ee86c02b544e158cd94388df9bd">set_bit()</a>, and <a class="el" href="classcard.html#aecb2677fb4c62b9a1a08e5890ea4743b">unset_bit()</a>.</p>
-<div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-8-content" class="dyncontent" style="display:none;">
+<div id="dynsection-9-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classcard_ab210eb529f3a153ab99822cda9492b3c_cgraph.png" border="0" usemap="#aclasscard_ab210eb529f3a153ab99822cda9492b3c_cgraph" alt=""/></div>
+<map name="aclasscard_ab210eb529f3a153ab99822cda9492b3c_cgraph" id="aclasscard_ab210eb529f3a153ab99822cda9492b3c_cgraph">
+<area shape="rect" title="Un/set a bit in a byte on the bus by condition." alt="" coords="5,31,124,57"/>
+<area shape="rect" href="classcard.html#aa9962ee86c02b544e158cd94388df9bd" title="Set a bit in a byte on the bus." alt="" coords="180,5,283,32"/>
+<area shape="rect" href="classcard.html#aecb2677fb4c62b9a1a08e5890ea4743b" title="Unset a bit in a byte on the bus." alt="" coords="172,56,291,83"/>
+<area shape="rect" href="classcard.html#a0ea76feb6cf75cf51ba3362f4ab50190" title="Read a byte from the card." alt="" coords="341,5,427,32"/>
+<area shape="rect" href="classcard.html#ae4b1863113c0e72b7de13f3774776fdb" title="Write a byte to the card." alt="" coords="339,56,429,83"/>
+</map>
 </div>
 
 </div>
@@ -570,19 +662,28 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 <p class="reference">References <a class="el" href="classcard.html#a0ea76feb6cf75cf51ba3362f4ab50190">read()</a>, and <a class="el" href="classcard.html#ae4b1863113c0e72b7de13f3774776fdb">write()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="classcard.html#ab210eb529f3a153ab99822cda9492b3c">set_if_bit()</a>.</p>
-<div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-9-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classcard_aecb2677fb4c62b9a1a08e5890ea4743b_cgraph.png" border="0" usemap="#aclasscard_aecb2677fb4c62b9a1a08e5890ea4743b_cgraph" alt=""/></div>
-</div>
 <div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-10-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+  <img id="dynsection-10-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-10-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-10-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classcard_aecb2677fb4c62b9a1a08e5890ea4743b_cgraph.png" border="0" usemap="#aclasscard_aecb2677fb4c62b9a1a08e5890ea4743b_cgraph" alt=""/></div>
+<map name="aclasscard_aecb2677fb4c62b9a1a08e5890ea4743b_cgraph" id="aclasscard_aecb2677fb4c62b9a1a08e5890ea4743b_cgraph">
+<area shape="rect" title="Unset a bit in a byte on the bus." alt="" coords="5,31,124,57"/>
+<area shape="rect" href="classcard.html#a0ea76feb6cf75cf51ba3362f4ab50190" title="Read a byte from the card." alt="" coords="174,5,261,32"/>
+<area shape="rect" href="classcard.html#ae4b1863113c0e72b7de13f3774776fdb" title="Write a byte to the card." alt="" coords="172,56,263,83"/>
+</map>
+</div>
+<div id="dynsection-11" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-11-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-11-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classcard_aecb2677fb4c62b9a1a08e5890ea4743b_icgraph.png" border="0" usemap="#aclasscard_aecb2677fb4c62b9a1a08e5890ea4743b_icgraph" alt=""/></div>
+<map name="aclasscard_aecb2677fb4c62b9a1a08e5890ea4743b_icgraph" id="aclasscard_aecb2677fb4c62b9a1a08e5890ea4743b_icgraph">
+<area shape="rect" title="Unset a bit in a byte on the bus." alt="" coords="172,5,291,32"/>
+<area shape="rect" href="classcard.html#ab210eb529f3a153ab99822cda9492b3c" title="Un/set a bit in a byte on the bus by condition." alt="" coords="5,5,124,32"/>
+</map>
 </div>
 
 </div>
@@ -633,12 +734,19 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 <p>Implemented in <a class="el" href="classserial__card.html#a87b17dad886b8847836ebd214c3c14ad">serial_card</a>, and <a class="el" href="classdata__card.html#a838d64e1c4e8ba9450812e406ac2ba3c">data_card&lt; construct_then_write_lock &gt;</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="classcard.html#aa9962ee86c02b544e158cd94388df9bd">set_bit()</a>, <a class="el" href="classcard.html#aecb2677fb4c62b9a1a08e5890ea4743b">unset_bit()</a>, and <a class="el" href="classbus.html#aea7690c041bc175652f213f9a8860c73">bus::write()</a>.</p>
-<div id="dynsection-11" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-11-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-12" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-12-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-11-content" class="dyncontent" style="display:none;">
+<div id="dynsection-12-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classcard_ae4b1863113c0e72b7de13f3774776fdb_icgraph.png" border="0" usemap="#aclasscard_ae4b1863113c0e72b7de13f3774776fdb_icgraph" alt=""/></div>
+<map name="aclasscard_ae4b1863113c0e72b7de13f3774776fdb_icgraph" id="aclasscard_ae4b1863113c0e72b7de13f3774776fdb_icgraph">
+<area shape="rect" title="Write a byte to the card." alt="" coords="339,56,429,83"/>
+<area shape="rect" href="classcard.html#aa9962ee86c02b544e158cd94388df9bd" title="Set a bit in a byte on the bus." alt="" coords="180,5,283,32"/>
+<area shape="rect" href="classcard.html#aecb2677fb4c62b9a1a08e5890ea4743b" title="Unset a bit in a byte on the bus." alt="" coords="172,56,291,83"/>
+<area shape="rect" href="classbus.html#aea7690c041bc175652f213f9a8860c73" title="Writes a byte to the bus." alt="" coords="188,107,275,133"/>
+<area shape="rect" href="classcard.html#ab210eb529f3a153ab99822cda9492b3c" title="Un/set a bit in a byte on the bus by condition." alt="" coords="5,31,124,57"/>
+</map>
 </div>
 
 </div>
@@ -689,12 +797,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 <p>Implemented in <a class="el" href="classserial__card.html#a692446f7540c8ae4601737bdf2833ebf">serial_card</a>, and <a class="el" href="classdata__card.html#af5458172552b57ac4a7e5de2a31aa0c9">data_card&lt; construct_then_write_lock &gt;</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="classbus.html#addf9c4c65e0374e6016e1a278f51a0ed">bus::write_force()</a>.</p>
-<div id="dynsection-12" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-12-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-13" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-13-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-12-content" class="dyncontent" style="display:none;">
+<div id="dynsection-13-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classcard_a4db633403be8c709db66fafa54c43989_icgraph.png" border="0" usemap="#aclasscard_a4db633403be8c709db66fafa54c43989_icgraph" alt=""/></div>
+<map name="aclasscard_a4db633403be8c709db66fafa54c43989_icgraph" id="aclasscard_a4db633403be8c709db66fafa54c43989_icgraph">
+<area shape="rect" title="Write a byte to the card regardless of write lock." alt="" coords="180,5,311,32"/>
+<area shape="rect" href="classbus.html#addf9c4c65e0374e6016e1a278f51a0ed" title="Writes a byte to the bus, without considering write lock." alt="" coords="5,5,132,32"/>
+</map>
 </div>
 
 </div>

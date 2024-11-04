@@ -1,0 +1,8 @@
+<map id="card::read" name="card::read">
+<area shape="rect" id="node1" title="Read a byte from the card." alt="" coords="339,56,425,83"/>
+<area shape="rect" id="node2" href="$classbus.html#a5ca080170524f30333bee7fe0b857871" title="Reads a byte from the bus." alt="" coords="190,5,273,32"/>
+<area shape="rect" id="node4" href="$classcard.html#aa9962ee86c02b544e158cd94388df9bd" title="Set a bit in a byte on the bus." alt="" coords="180,56,283,83"/>
+<area shape="rect" id="node6" href="$classcard.html#aecb2677fb4c62b9a1a08e5890ea4743b" title="Unset a bit in a byte on the bus." alt="" coords="172,107,291,133"/>
+<area shape="rect" id="node3" href="$classbus.html#aff023ba4699c0456c3e1ed045b3678ed" title="A shortcut to read the bus using an index directly without a proxy object." alt="" coords="5,5,124,32"/>
+<area shape="rect" id="node5" href="$classcard.html#ab210eb529f3a153ab99822cda9492b3c" title="Un/set a bit in a byte on the bus by condition." alt="" coords="5,81,124,108"/>
+</map>

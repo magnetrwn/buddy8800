@@ -1,0 +1,4 @@
+<map id="serial_card" name="serial_card">
+<area shape="rect" id="node1" title="A card that emulates a 6850 ACIA." alt="" coords="5,80,99,107"/>
+<area shape="rect" id="node2" href="$classcard.html" title="Base class for all cards." alt="" coords="27,5,77,32"/>
+</map>

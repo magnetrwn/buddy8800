@@ -11,6 +11,17 @@ void pty::open() {
     if (ptsname_r(master_fd, slave_device_name, MAX_SLAVE_DEVICE_NAME) < 0)
         throw std::runtime_error("ptsname_r() failed");
 
+    epoll_fd = epoll_create(1);
+    if (epoll_fd == -1)
+        throw std::runtime_error("epoll_create() failed");
+
+    epoll_event ev;
+    ev.events = EPOLLIN;
+    ev.data.fd = master_fd;
+
+    if (epoll_ctl(epoll_fd, EPOLL_CTL_ADD, master_fd, &ev) == -1)
+        throw std::runtime_error("epoll_ctl() failed");
+
     set_baud_rate(DEFAULT_BAUD_RATE);
     setup(DEFAULT_DATA_BITS, DEFAULT_PARITY, DEFAULT_STOP_BITS);
 }
@@ -45,6 +56,8 @@ char pty::getch() const {
     isize recv_amount = read(master_fd, &c, 1);
     if (recv_amount != 1)
         throw std::runtime_error("read() failed");
+    if (echo_received_back)
+        putch(c);
     return c;
 }
 
@@ -54,14 +67,13 @@ void pty::putch(char c) const {
 }
 
 bool pty::poll() const {
-    struct pollfd poll_ds;
-    poll_ds.fd = master_fd;
-    poll_ds.events = POLLIN;
+    epoll_event event;
+    int is_event = static_cast<bool>(epoll_wait(epoll_fd, &event, 1, 0));
 
-    if (::poll(&poll_ds, 1, 0) < 0 and errno != EINTR)
-        throw std::runtime_error("poll() failed");
+    if (is_event < 0)
+        throw std::runtime_error("epoll_wait() failed");
 
-    return poll_ds.revents & POLLIN;
+    return is_event > 0;
 }
 
 void pty::recv(char* data, usize max, char terminator) const {
@@ -149,7 +161,13 @@ void pty::set_echo_received_back(bool should) {
 }
 
 void pty::close() {
-    if (master_fd >= 0)
+    if (master_fd != -1) {
         ::close(master_fd);
-    master_fd = -1;
+        master_fd = -1;
+    }
+
+    if (epoll_fd != -1) {
+        ::close(epoll_fd);
+        epoll_fd = -1;
+    }
 }

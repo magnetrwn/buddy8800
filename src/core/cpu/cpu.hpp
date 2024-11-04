@@ -460,6 +460,7 @@ public:
 
     /**
      * @brief Steps the CPU by one instruction (and its operands).
+     * @param steps The number of steps to forward the CPU by.
      *
      * Calling the step method will fetch the next instruction opcode from cardbus and execute it. Internally, on every
      * fetch the PC is incremented, and each instruction is also responsible for fetching its operands, so a step is
@@ -472,12 +473,14 @@ public:
      * @par
      * @note Internally, this method is calling `execute(fetch())`.
      */
-    void step() {
-        if (halted)
-            return;
-        if (do_handle_bdos)
-            handle_bdos();
-        execute(fetch()); 
+    void step(usize steps = 1) {
+        for (usize i = 0; i < steps; ++i) {
+            if (halted)
+                return;
+            if (do_handle_bdos)
+                handle_bdos();
+            execute(fetch());
+        }
     }
 
     /**
@@ -962,7 +965,7 @@ public:
     /// @name Interrupt related methods.
     /// \{
 
-    /// @brief Call an interrupt, then disable interrupts.
+    /// @brief Call an interrupt and push PC, then disable interrupts.
     /// @param inst The interrupt instruction (with optional operands) to execute out of place.
     /// @todo This allows any instruction and any retrieval of arguments, but I'm not sure if that happens other than on `CALL`.
     void interrupt(std::array<u8, 3> inst) {

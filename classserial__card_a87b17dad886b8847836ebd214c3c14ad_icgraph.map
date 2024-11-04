@@ -1,0 +1,4 @@
+<map id="serial_card::write" name="serial_card::write">
+<area shape="rect" id="node1" title="Write a byte to the serial registers." alt="" coords="188,13,323,39"/>
+<area shape="rect" id="node2" href="$classserial__card.html#a692446f7540c8ae4601737bdf2833ebf" title="Write a byte to the card regardless of write lock." alt="" coords="5,5,140,47"/>
+</map>

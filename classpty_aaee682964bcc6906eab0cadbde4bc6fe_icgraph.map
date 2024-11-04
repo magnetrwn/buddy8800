@@ -1,0 +1,4 @@
+<map id="pty::name" name="pty::name">
+<area shape="rect" id="node1" title="Retrieve the name of the slave device." alt="" coords="204,5,291,32"/>
+<area shape="rect" id="node2" href="$classserial__card.html#a1f29b0bb8ad083bf74af151628b7acf3" title="Get information about the serial card." alt="" coords="5,5,156,32"/>
+</map>

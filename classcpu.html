@@ -102,9 +102,9 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>cpu</b> (bus_iface init_adr_space)</td></tr>
 <tr class="separator:a3370e515b29f14c07755eb9990d9aa31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">CPU API methods.</div></td></tr>
-<tr class="memitem:acd0b563c6831d88a883f3bcd7d2257b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#acd0b563c6831d88a883f3bcd7d2257b4">step</a> ()</td></tr>
-<tr class="memdesc:acd0b563c6831d88a883f3bcd7d2257b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Steps the CPU by one instruction (and its operands).  <a href="classcpu.html#acd0b563c6831d88a883f3bcd7d2257b4">More...</a><br /></td></tr>
-<tr class="separator:acd0b563c6831d88a883f3bcd7d2257b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a01c8c57ae52af3126b88042cd1aa63"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a7a01c8c57ae52af3126b88042cd1aa63">step</a> (usize steps=1)</td></tr>
+<tr class="memdesc:a7a01c8c57ae52af3126b88042cd1aa63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Steps the CPU by one instruction (and its operands).  <a href="classcpu.html#a7a01c8c57ae52af3126b88042cd1aa63">More...</a><br /></td></tr>
+<tr class="separator:a7a01c8c57ae52af3126b88042cd1aa63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3e1736be271fe78087dee008490199b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#ab3e1736be271fe78087dee008490199b">execute</a> (u8 opcode, u8 operand1, u8 operand2=0)</td></tr>
 <tr class="memdesc:ab3e1736be271fe78087dee008490199b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a single opcode with one or two operands.  <a href="classcpu.html#ab3e1736be271fe78087dee008490199b">More...</a><br /></td></tr>
 <tr class="separator:ab3e1736be271fe78087dee008490199b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,7 +141,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:a850125d4d67383c10cbb1ba594d1db18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Interrupt related methods.</div></td></tr>
 <tr class="memitem:a4228c63bc0f368cf39bfe37909f73f45"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a4228c63bc0f368cf39bfe37909f73f45">interrupt</a> (std::array&lt; u8, 3 &gt; inst)</td></tr>
-<tr class="memdesc:a4228c63bc0f368cf39bfe37909f73f45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call an interrupt, then disable interrupts.  <a href="classcpu.html#a4228c63bc0f368cf39bfe37909f73f45">More...</a><br /></td></tr>
+<tr class="memdesc:a4228c63bc0f368cf39bfe37909f73f45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call an interrupt and push PC, then disable interrupts.  <a href="classcpu.html#a4228c63bc0f368cf39bfe37909f73f45">More...</a><br /></td></tr>
 <tr class="separator:a4228c63bc0f368cf39bfe37909f73f45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -284,13 +284,18 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
 </dl>
 <p>This is an overload that manipulates the way the fetch cycles interact in the CPU logic: it will use the operands retrieved by this method (usually to be placed by a device on the bus that called an IRQ) instead of fetching them from the bus cards. In fact, this is used by the interrupt method as well. </p>
 
-<p class="reference">Referenced by <a class="el" href="classcpu.html#a4228c63bc0f368cf39bfe37909f73f45">cpu&lt; bus_iface &gt;::interrupt()</a>, and <a class="el" href="classcpu.html#acd0b563c6831d88a883f3bcd7d2257b4">cpu&lt; bus_iface &gt;::step()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="classcpu.html#a4228c63bc0f368cf39bfe37909f73f45">cpu&lt; bus_iface &gt;::interrupt()</a>, and <a class="el" href="classcpu.html#a7a01c8c57ae52af3126b88042cd1aa63">cpu&lt; bus_iface &gt;::step()</a>.</p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classcpu_ab3e1736be271fe78087dee008490199b_icgraph.png" border="0" usemap="#aclasscpu_ab3e1736be271fe78087dee008490199b_icgraph" alt=""/></div>
+<map name="aclasscpu_ab3e1736be271fe78087dee008490199b_icgraph" id="aclasscpu_ab3e1736be271fe78087dee008490199b_icgraph">
+<area shape="rect" title="Executes a single opcode with one or two operands." alt="" coords="163,31,267,57"/>
+<area shape="rect" href="classcpu.html#a4228c63bc0f368cf39bfe37909f73f45" title="Call an interrupt and push PC, then disable interrupts." alt="" coords="5,5,115,32"/>
+<area shape="rect" href="classcpu.html#a7a01c8c57ae52af3126b88042cd1aa63" title="Steps the CPU by one instruction (and its operands)." alt="" coords="19,56,101,83"/>
+</map>
 </div>
 
 </div>
@@ -321,7 +326,7 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Call an interrupt, then disable interrupts. </p>
+<p>Call an interrupt and push PC, then disable interrupts. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">inst</td><td>The interrupt instruction (with optional operands) to execute out of place. </td></tr>
@@ -337,6 +342,10 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classcpu_a4228c63bc0f368cf39bfe37909f73f45_cgraph.png" border="0" usemap="#aclasscpu_a4228c63bc0f368cf39bfe37909f73f45_cgraph" alt=""/></div>
+<map name="aclasscpu_a4228c63bc0f368cf39bfe37909f73f45_cgraph" id="aclasscpu_a4228c63bc0f368cf39bfe37909f73f45_cgraph">
+<area shape="rect" title="Call an interrupt and push PC, then disable interrupts." alt="" coords="5,5,115,32"/>
+<area shape="rect" href="classcpu.html#ab3e1736be271fe78087dee008490199b" title="Executes a single opcode with one or two operands." alt="" coords="163,5,267,32"/>
+</map>
 </div>
 
 </div>
@@ -552,12 +561,16 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
 </div>
 <div id="dynsection-2-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classcpu_abbf017b99cf39776da5a4bf517fb9226_cgraph.png" border="0" usemap="#aclasscpu_abbf017b99cf39776da5a4bf517fb9226_cgraph" alt=""/></div>
+<map name="aclasscpu_abbf017b99cf39776da5a4bf517fb9226_cgraph" id="aclasscpu_abbf017b99cf39776da5a4bf517fb9226_cgraph">
+<area shape="rect" title="Redirect pseudo BDOS print routines to a file." alt="" coords="5,5,171,47"/>
+<area shape="rect" href="classutil_1_1print__helper.html#a08912c4069c431b6080355b8a7c18c15" title="Set a redirection to file." alt="" coords="219,13,376,39"/>
+</map>
 </div>
 
 </div>
 </div>
-<a id="acd0b563c6831d88a883f3bcd7d2257b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acd0b563c6831d88a883f3bcd7d2257b4">&#9670;&nbsp;</a></span>step()</h2>
+<a id="a7a01c8c57ae52af3126b88042cd1aa63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a01c8c57ae52af3126b88042cd1aa63">&#9670;&nbsp;</a></span>step()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -570,7 +583,8 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classcpu.html">cpu</a>&lt; bus_iface &gt;::step </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">usize&#160;</td>
+          <td class="paramname"><em>steps</em> = <code>1</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -582,6 +596,12 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
 </div><div class="memdoc">
 
 <p>Steps the CPU by one instruction (and its operands). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">steps</td><td>The number of steps to forward the CPU by.</td></tr>
+  </table>
+  </dd>
+</dl>
 <p>Calling the step method will fetch the next instruction opcode from cardbus and execute it. Internally, on every fetch the PC is incremented, and each instruction is also responsible for fetching its operands, so a step is effectively a full instruction step.</p>
 <p>If the CPU is set to handle BDOS calls, it will provide some pseudo BDOS functionality, currently only for printing characters and strings to wherever the printer is set to, stdout by default.</p>
 <dl class="section note"><dt>Note</dt><dd>If the CPU is halted, this method will return immediately. </dd></dl>
@@ -594,7 +614,11 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classcpu_acd0b563c6831d88a883f3bcd7d2257b4_cgraph.png" border="0" usemap="#aclasscpu_acd0b563c6831d88a883f3bcd7d2257b4_cgraph" alt=""/></div>
+<div class="center"><img src="classcpu_a7a01c8c57ae52af3126b88042cd1aa63_cgraph.png" border="0" usemap="#aclasscpu_a7a01c8c57ae52af3126b88042cd1aa63_cgraph" alt=""/></div>
+<map name="aclasscpu_a7a01c8c57ae52af3126b88042cd1aa63_cgraph" id="aclasscpu_a7a01c8c57ae52af3126b88042cd1aa63_cgraph">
+<area shape="rect" title="Steps the CPU by one instruction (and its operands)." alt="" coords="5,5,87,32"/>
+<area shape="rect" href="classcpu.html#ab3e1736be271fe78087dee008490199b" title="Executes a single opcode with one or two operands." alt="" coords="135,5,239,32"/>
+</map>
 </div>
 
 </div>

@@ -1,0 +1,4 @@
+<map id="bus::bus_map_s" name="bus::bus_map_s">
+<area shape="rect" id="node1" title="Returns a detailed map of the bus." alt="" coords="5,5,132,32"/>
+<area shape="rect" id="node2" href="$classutil.html#ae1f4a14430dd6b38f33b5c6116714fc9" title="Make an integer into an hexadecimal std::string." alt="" coords="180,5,289,32"/>
+</map>

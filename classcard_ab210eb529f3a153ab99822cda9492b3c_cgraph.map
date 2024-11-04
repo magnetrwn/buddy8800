@@ -1,0 +1,7 @@
+<map id="card::set_if_bit" name="card::set_if_bit">
+<area shape="rect" id="node1" title="Un/set a bit in a byte on the bus by condition." alt="" coords="5,31,124,57"/>
+<area shape="rect" id="node2" href="$classcard.html#aa9962ee86c02b544e158cd94388df9bd" title="Set a bit in a byte on the bus." alt="" coords="180,5,283,32"/>
+<area shape="rect" id="node5" href="$classcard.html#aecb2677fb4c62b9a1a08e5890ea4743b" title="Unset a bit in a byte on the bus." alt="" coords="172,56,291,83"/>
+<area shape="rect" id="node3" href="$classcard.html#a0ea76feb6cf75cf51ba3362f4ab50190" title="Read a byte from the card." alt="" coords="341,5,427,32"/>
+<area shape="rect" id="node4" href="$classcard.html#ae4b1863113c0e72b7de13f3774776fdb" title="Write a byte to the card." alt="" coords="339,56,429,83"/>
+</map>

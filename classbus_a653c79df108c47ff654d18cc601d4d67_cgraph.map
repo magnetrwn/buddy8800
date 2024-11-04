@@ -1,0 +1,4 @@
+<map id="bus::clear" name="bus::clear">
+<area shape="rect" id="node1" title="Clears all cards on the bus." alt="" coords="5,5,91,32"/>
+<area shape="rect" id="node2" href="$classcard.html#a1c2e9d54296d2c7dc1c89295575b1eb4" title="Clears the card data or configuration." alt="" coords="139,5,229,32"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="serial_card::identify" name="serial_card::identify">
+<area shape="rect" id="node1" title="Get information about the serial card." alt="" coords="5,31,156,57"/>
+<area shape="rect" id="node2" href="$classpty.html#aaee682964bcc6906eab0cadbde4bc6fe" title="Retrieve the name of the slave device." alt="" coords="215,5,302,32"/>
+<area shape="rect" id="node3" href="$classutil.html#ae1f4a14430dd6b38f33b5c6116714fc9" title="Make an integer into an hexadecimal std::string." alt="" coords="204,56,313,83"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="cpu_state" name="cpu_state">
+<area shape="rect" id="node1" title="Represents the state of the CPU." alt="" coords="40,95,125,121"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,160,32"/>
+</map>

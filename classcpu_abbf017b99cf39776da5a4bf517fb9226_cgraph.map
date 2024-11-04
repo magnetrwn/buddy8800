@@ -1,0 +1,4 @@
+<map id="cpu::set_pseudo_bdos_redirect" name="cpu::set_pseudo_bdos_redirect">
+<area shape="rect" id="node1" title="Redirect pseudo BDOS print routines to a file." alt="" coords="5,5,171,47"/>
+<area shape="rect" id="node2" href="$classutil_1_1print__helper.html#a08912c4069c431b6080355b8a7c18c15" title="Set a redirection to file." alt="" coords="219,13,376,39"/>
+</map>

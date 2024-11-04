@@ -1,0 +1,4 @@
+<map id="pty::send" name="pty::send">
+<area shape="rect" id="node1" title="Send data to the PTY interface master side." alt="" coords="132,5,213,32"/>
+<area shape="rect" id="node2" href="$classpty.html#a22e150200a8581e9da66e309f9ee2ec6" title="Receive data from the PTY interface master side." alt="" coords="5,5,84,32"/>
+</map>

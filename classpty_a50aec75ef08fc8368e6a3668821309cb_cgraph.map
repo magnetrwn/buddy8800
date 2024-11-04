@@ -1,0 +1,5 @@
+<map id="pty::open" name="pty::open">
+<area shape="rect" id="node1" title="Open the PTY interface." alt="" coords="5,31,88,57"/>
+<area shape="rect" id="node2" href="$classpty.html#a757f8fc7156ea5215922e9646b65daaa" title="Set the baud rate of the PTY interface." alt="" coords="136,5,279,32"/>
+<area shape="rect" id="node3" href="$classpty.html#acacb920c29edf75bc85388b4e347aa4e" title="Setup the PTY interface with custom configuration." alt="" coords="164,56,251,83"/>
+</map>

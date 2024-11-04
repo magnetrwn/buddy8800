@@ -1,0 +1,4 @@
+<map id="bus::read" name="bus::read">
+<area shape="rect" id="node1" title="Reads a byte from the bus." alt="" coords="172,5,255,32"/>
+<area shape="rect" id="node2" href="$classbus.html#aff023ba4699c0456c3e1ed045b3678ed" title="A shortcut to read the bus using an index directly without a proxy object." alt="" coords="5,5,124,32"/>
+</map>

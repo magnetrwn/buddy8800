@@ -45,34 +45,35 @@ public:
 
     /// @brief Set a bit in a byte on the bus.
     /// @warning This method does not check if the address is in the card's range.
-    inline void set_bit(u16 adr, u8 bitmask) { write(adr, read(adr) | bitmask); }
+    void set_bit(u16 adr, u8 bitmask) { write(adr, read(adr) | bitmask); }
 
     /// @brief Unset a bit in a byte on the bus.
     /// @warning This method does not check if the address is in the card's range.
-    inline void unset_bit(u16 adr, u8 bitmask) { write(adr, read(adr) & ~bitmask); }
+    void unset_bit(u16 adr, u8 bitmask) { write(adr, read(adr) & ~bitmask); }
 
     /// @brief Un/set a bit in a byte on the bus by condition.
     /// @warning This method does not check if the address is in the card's range.
-    inline void set_if_bit(u16 adr, u8 bitmask, bool value) { value ? set_bit(adr, bitmask) : unset_bit(adr, bitmask); }
+    void set_if_bit(u16 adr, u8 bitmask, bool value) { value ? set_bit(adr, bitmask) : unset_bit(adr, bitmask); }
 
     /// \}
     /// @name Commonly used methods.
     /// \{
 
     /// @brief Check if the card is write-locked.
-    inline bool is_w_locked() const { return write_locked; }
+    bool is_w_locked() const { return write_locked; }
 
     /// @brief Lock the card for writing.
-    inline void w_lock() { write_locked = true; }
+    void w_lock() { write_locked = true; }
 
     /// @brief Unlock the card for writing.
-    inline void w_unlock() { write_locked = false; }
+    void w_unlock() { write_locked = false; }
 
     /// @brief Check if the card has an IRQ raised.
-    inline bool is_irq() const { return irq_raised; }
+    /// @warning Always use this before calling `get_irq()`.
+    bool is_irq() const { return irq_raised; }
 
     /// @brief Raise or clear the IRQ trigger.
-    inline void raise_irq(bool value) { irq_raised = value; }
+    void raise_irq(bool value) { irq_raised = value; }
 
     /// \}
     /// @name Abstract methods.
@@ -175,28 +176,28 @@ public:
     }
 
     /// @brief Check if an address on the bus is in the card's range.
-    inline bool in_range(u16 adr) const override { return adr >= start_adr and adr < (start_adr + capacity); }
+    bool in_range(u16 adr) const override { return adr >= start_adr and adr < (start_adr + capacity); }
 
     /// @brief Get information about the data card.
-    inline card_identify identify() override { return { start_adr, capacity, (this->write_locked ? "rom area" : "ram area") }; }
+    card_identify identify() override { return { start_adr, capacity, (this->write_locked ? "rom area" : "ram area") }; }
 
     /// @brief Read a byte from the data card.
-    inline u8 read(u16 adr) const override { return data[adr - start_adr]; }
+    u8 read(u16 adr) const override { return data[adr - start_adr]; }
 
     /// @brief Write a byte to the data card.
-    inline void write(u16 adr, u8 byte) override {
+    void write(u16 adr, u8 byte) override {
         if (!this->write_locked)
             data[adr - start_adr] = byte;
     }
 
     /// @brief Write a byte to the data card regardless of write lock.
-    inline void write_force(u16 adr, u8 byte) override { data[adr - start_adr] = byte; }
+    void write_force(u16 adr, u8 byte) override { data[adr - start_adr] = byte; }
 
     /// @brief Check if the card is an I/O card.
-    inline bool is_io() const override { return false; }
+    bool is_io() const override { return false; }
 
     /// @brief Clear the data card.
-    inline void clear() override {
+    void clear() override {
         if (!this->write_locked)
             data.clear();
     }
@@ -204,8 +205,8 @@ public:
     /// @name Unused methods.
     /// \{
 
-    inline void refresh() override {}
-    inline std::array<u8, 3> get_irq() override { return { BAD_U8, BAD_U8, BAD_U8 }; }
+    void refresh() override {}
+    std::array<u8, 3> get_irq() override { return { BAD_U8, BAD_U8, BAD_U8 }; }
 
     /// \}
 };
@@ -305,11 +306,11 @@ public:
         : start_adr(start_adr), base_clock(base_clock) { serial.open(); reset(); }
 
     /// @brief Check if an address on the bus is in the card's range.
-    inline bool in_range(u16 adr) const override { return (adr & 0xFF) >= start_adr and (adr & 0xFF) < (start_adr + SERIAL_IO_ADDRESSES); }
+    bool in_range(u16 adr) const override { return (adr & 0xFF) >= start_adr and (adr & 0xFF) < (start_adr + SERIAL_IO_ADDRESSES); }
 
     /// @brief Get information about the serial card.
     /// @note The detail contains the base clock, control register (hex) and the pseudo-terminal name.
-    inline card_identify identify() override {
+    card_identify identify() override {
         std::snprintf(
             detail, sizeof(detail), 
             "base: %lu, ctrl: %s, pty: '%s'", 
@@ -320,11 +321,12 @@ public:
     }
 
     /// @brief Refresh the UART for data I/O.
-    inline void refresh() override {
-        if (/*!RDRF() and*/ serial.poll()) { // Looks like correct behavior is to allow fast incoming data to overwrite.
-            RX_DATA(serial.getch());
-            RDRF(true);
-        }
+    void refresh() override {
+        if (!RDRF()) // Check if the correct behavior is to allow or prevent overwriting the RX register...
+            if (serial.poll()) {
+                RX_DATA(serial.getch());
+                RDRF(true);
+            }
 
         if (!TDRE()) {
             serial.putch(TX_DATA());
@@ -334,11 +336,11 @@ public:
 
     /// @brief Read a byte from the serial registers.
     /// @returns The byte read from the serial registers, or BAD_U8 if the address is invalid.
-    inline u8 read(u16 adr) const override {
+    u8 read(u16 adr) const override {
         switch (adr) {
-            case 0x00: return BAD_U8; /// TX_DATA is write-only
+            case 0x00: return BAD_U8; // TX_DATA is write-only
             case 0x01: return RX_DATA();
-            case 0x02: return BAD_U8; /// CONTROL is write-only
+            case 0x02: return BAD_U8; // CONTROL is write-only
             case 0x03: return STATUS();
         }
 
@@ -347,14 +349,14 @@ public:
 
     /// @brief Write a byte to the serial registers.
     /// @note This method will also handle the UART configuration by writing to the CONTROL register.
-    inline void write(u16 adr, u8 byte) override {
+    void write(u16 adr, u8 byte) override {
         switch (adr) {
             case 0x00: TX_DATA(byte); TDRE(false); break;
 
-            case 0x01: break; /// RX_DATA is read-only
+            case 0x01: break; // RX_DATA is read-only
 
             case 0x02:
-                /// Counter Divide select bits
+                // Counter Divide select bits
                 switch (byte & 0b00000011) {
                     //     ......DD
                     case 0b00000000: serial.set_baud_rate(base_clock); break;
@@ -362,7 +364,7 @@ public:
                     case 0b00000010: serial.set_baud_rate(base_clock >> 6); break;
                     case 0b00000011: reset(); break;
                 }
-                /// Word Select bits
+                // Word Select bits
                 switch (byte & 0b00011100) {
                     //     ...WWW..
                     case 0b00000000: serial.setup(7, pty_parity::EVEN, 2); break;
@@ -374,7 +376,7 @@ public:
                     case 0b00011000: serial.setup(8, pty_parity::EVEN, 1); break;
                     case 0b00011100: serial.setup(8, pty_parity::ODD, 1); break;
                 }
-                /// Transmit Control bits (TODO: missing interrupt controls)
+                // Transmit Control bits (TODO: missing interrupt controls)
                 switch (byte & 0b01100000) {
                     //     .CC.....
                     case 0b00000000: RTS(true); break;
@@ -382,7 +384,7 @@ public:
                     case 0b01000000: RTS(false); break;
                     case 0b01100000: RTS(true); serial.send_break(); break;
                 }
-                /// Interrupt Enable bit (TODO: probably wrong behavior)
+                // Interrupt Enable bit (TODO: probably wrong behavior)
                 switch (byte & 0b10000000) {
                     //     I.......
                     case 0b00000000: IRQ(false); break;
@@ -392,21 +394,21 @@ public:
                 CONTROL(byte);
                 break;
 
-            case 0x03: break; /// STATUS is read-only
+            case 0x03: break; // STATUS is read-only
         }
     }
 
     /// @brief Check if the card is an I/O card.
-    inline bool is_io() const override { return true; }
+    bool is_io() const override { return true; }
 
     /// @brief Clear the serial card state and configuration.
-    inline void clear() override { reset(); }
+    void clear() override { reset(); }
 
     /// @name Unused methods.
     /// \{
 
-    inline void write_force(u16 adr, u8 byte) override { write(adr, byte); }
-    inline std::array<u8, 3> get_irq() override { return { BAD_U8, BAD_U8, BAD_U8 }; }
+    void write_force(u16 adr, u8 byte) override { write(adr, byte); }
+    std::array<u8, 3> get_irq() override { return { BAD_U8, BAD_U8, BAD_U8 }; }
 
     /// \}
 };

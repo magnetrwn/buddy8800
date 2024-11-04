@@ -66,12 +66,12 @@ then
 else
   if [ "$RUN_PERF_STAT" = "ON" ]
   then
-    perf stat --repeat=5 --table --detailed bin/buddy8800 tests/res/diag2.com
+    perf stat --repeat=5 --table --detailed bin/buddy8800 tests/res/diag2.com 0x100
   fi
 
   if [ "$RUN_PERF_RECORD" = "ON" ]
   then
-    perf record -F 8000 -g -- bin/buddy8800 tests/res/diag2.com
+    perf record -F 8000 -g -- bin/buddy8800 tests/res/diag2.com 0x100
     perf report
     rm perf.data
   fi

@@ -1,0 +1,5 @@
+<map id="bus::get_irq" name="bus::get_irq">
+<area shape="rect" id="node1" title="Gets the IRQ instruction (and possible operands)." alt="" coords="5,31,104,57"/>
+<area shape="rect" id="node2" href="$classcard.html#a4ef348c61f7138914f015c57d2f6a0be" title="Get the IRQ instruction (and possible operands)." alt="" coords="152,5,255,32"/>
+<area shape="rect" id="node3" href="$classcard.html#a5aca5465f1771a8fa77cd0deb33ed996" title="Check if the card has an IRQ raised." alt="" coords="157,56,250,83"/>
+</map>

@@ -141,7 +141,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a pseudo-terminal interface. </p>
-<p>This class handles a PTY interface and provides some convenience when interacting with it. After construction and by calling <a class="el" href="classpty.html#a50aec75ef08fc8368e6a3668821309cb" title="Open the PTY interface.">open()</a>, the PTY interface is opened and public methods from this class can be used to handle the master file descriptor side of the PTY. The slave side is supposed to be provided to the user or a process to interact with, thus the <a class="el" href="classpty.html#aaee682964bcc6906eab0cadbde4bc6fe" title="Retrieve the name of the slave device.">name()</a> method is available to retrieve the slave device name, but no further handling is done by this class. </p>
+<p>This class handles a PTY interface and provides some convenience when interacting with it. After construction and by calling <a class="el" href="classpty.html#a50aec75ef08fc8368e6a3668821309cb" title="Open the PTY interface.">open()</a>, the PTY interface is opened and public methods from this class can be used to handle the master file descriptor side of the PTY. The slave side is supposed to be provided to the user or a process to interact with, thus the <a class="el" href="classpty.html#aaee682964bcc6906eab0cadbde4bc6fe" title="Retrieve the name of the slave device.">name()</a> method is available to retrieve the slave device name, but no further handling is done by this class.</p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd>On breaking the application while running, if anything is connected to the slave fd, the PTY is never closed. </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="af46ce3f92e8dc2077afec7a54c6b85b0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af46ce3f92e8dc2077afec7a54c6b85b0">&#9670;&nbsp;</a></span>getch()</h2>
@@ -169,13 +170,31 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>This method reads a single byte/char from the PTY interface master side. It uses the <code>read()</code> system call to read the byte from the master file descriptor, sent by the slave side.</p>
 <dl class="section warning"><dt>Warning</dt><dd>This method will block until a byte is read. </dd></dl>
 
+<p class="reference">References <a class="el" href="classpty.html#ac9e7847a4ade52e8bea78e13f49c4c76">putch()</a>.</p>
+
 <p class="reference">Referenced by <a class="el" href="classpty.html#a22e150200a8581e9da66e309f9ee2ec6">recv()</a>, and <a class="el" href="classserial__card.html#a2d9f292d7be1f9deebf49fa5d748c039">serial_card::refresh()</a>.</p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpty_af46ce3f92e8dc2077afec7a54c6b85b0_cgraph.png" border="0" usemap="#aclasspty_af46ce3f92e8dc2077afec7a54c6b85b0_cgraph" alt=""/></div>
+<map name="aclasspty_af46ce3f92e8dc2077afec7a54c6b85b0_cgraph" id="aclasspty_af46ce3f92e8dc2077afec7a54c6b85b0_cgraph">
+<area shape="rect" title="Get a single byte from the PTY interface master side." alt="" coords="5,5,92,32"/>
+<area shape="rect" href="classpty.html#ac9e7847a4ade52e8bea78e13f49c4c76" title="Send a single byte to the PTY interface master side." alt="" coords="140,5,227,32"/>
+</map>
+</div>
+<div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpty_af46ce3f92e8dc2077afec7a54c6b85b0_icgraph.png" border="0" usemap="#aclasspty_af46ce3f92e8dc2077afec7a54c6b85b0_icgraph" alt=""/></div>
+<map name="aclasspty_af46ce3f92e8dc2077afec7a54c6b85b0_icgraph" id="aclasspty_af46ce3f92e8dc2077afec7a54c6b85b0_icgraph">
+<area shape="rect" title="Get a single byte from the PTY interface master side." alt="" coords="200,31,287,57"/>
+<area shape="rect" href="classpty.html#a22e150200a8581e9da66e309f9ee2ec6" title="Receive data from the PTY interface master side." alt="" coords="39,5,118,32"/>
+<area shape="rect" href="classserial__card.html#a2d9f292d7be1f9deebf49fa5d748c039" title="Refresh the UART for data I/O." alt="" coords="5,56,152,83"/>
+</map>
 </div>
 
 </div>
@@ -200,12 +219,16 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>This method returns the name of the slave device, such as <code>/dev/pts/3</code>. This name identifies the slave side PTY interface, to which a user or process can interface with. For example, you could run <code>screen /dev/pts/3</code> on your terminal to connect to the PTY slave side. </p>
 
 <p class="reference">Referenced by <a class="el" href="classserial__card.html#a1f29b0bb8ad083bf74af151628b7acf3">serial_card::identify()</a>.</p>
-<div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpty_aaee682964bcc6906eab0cadbde4bc6fe_icgraph.png" border="0" usemap="#aclasspty_aaee682964bcc6906eab0cadbde4bc6fe_icgraph" alt=""/></div>
+<map name="aclasspty_aaee682964bcc6906eab0cadbde4bc6fe_icgraph" id="aclasspty_aaee682964bcc6906eab0cadbde4bc6fe_icgraph">
+<area shape="rect" title="Retrieve the name of the slave device." alt="" coords="204,5,291,32"/>
+<area shape="rect" href="classserial__card.html#a1f29b0bb8ad083bf74af151628b7acf3" title="Get information about the serial card." alt="" coords="5,5,156,32"/>
+</map>
 </div>
 
 </div>
@@ -236,12 +259,17 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <dl class="section note"><dt>Note</dt><dd>The default setup configuration is 300 baud, 8 data bits, no parity and 1 stop bit. <code>B300-8N1</code> </dd></dl>
 
 <p class="reference">References <a class="el" href="classpty.html#a757f8fc7156ea5215922e9646b65daaa">set_baud_rate()</a>, and <a class="el" href="classpty.html#acacb920c29edf75bc85388b4e347aa4e">setup()</a>.</p>
-<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpty_a50aec75ef08fc8368e6a3668821309cb_cgraph.png" border="0" usemap="#aclasspty_a50aec75ef08fc8368e6a3668821309cb_cgraph" alt=""/></div>
+<map name="aclasspty_a50aec75ef08fc8368e6a3668821309cb_cgraph" id="aclasspty_a50aec75ef08fc8368e6a3668821309cb_cgraph">
+<area shape="rect" title="Open the PTY interface." alt="" coords="5,31,88,57"/>
+<area shape="rect" href="classpty.html#a757f8fc7156ea5215922e9646b65daaa" title="Set the baud rate of the PTY interface." alt="" coords="136,5,279,32"/>
+<area shape="rect" href="classpty.html#acacb920c29edf75bc85388b4e347aa4e" title="Setup the PTY interface with custom configuration." alt="" coords="164,56,251,83"/>
+</map>
 </div>
 
 </div>
@@ -262,22 +290,26 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div><div class="memdoc">
 
 <p>Check if there is data available to be read from the PTY interface master side. </p>
-<dl class="section return"><dt>Returns</dt><dd>Whether there is data available to read. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether there is data available to be read. </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">&lt;tt&gt;std::runtime_error&lt;/tt&gt;</td><td>if the PTY interface had an error.</td></tr>
   </table>
   </dd>
 </dl>
-<p>This method polls the PTY interface master side to check if there is data available to be read. It uses the <code><a class="el" href="classpty.html#a9ad90a7e8c2e8a1b273b4f5859cae35c" title="Check if there is data available to be read from the PTY interface master side.">poll()</a></code> system call to check if there is data available to be read from the master file descriptor. This allows a blocking <code><a class="el" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0" title="Get a single byte from the PTY interface master side.">getch()</a></code> operation to be non-blocking by employing a call to this method before reading. </p>
+<p>This method polls the PTY interface master side to check if there is data available to be read. It's handling the master PTY fd internally using <code>epoll</code>. </p>
 
 <p class="reference">Referenced by <a class="el" href="classserial__card.html#a2d9f292d7be1f9deebf49fa5d748c039">serial_card::refresh()</a>.</p>
-<div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpty_a9ad90a7e8c2e8a1b273b4f5859cae35c_icgraph.png" border="0" usemap="#aclasspty_a9ad90a7e8c2e8a1b273b4f5859cae35c_icgraph" alt=""/></div>
+<map name="aclasspty_a9ad90a7e8c2e8a1b273b4f5859cae35c_icgraph" id="aclasspty_a9ad90a7e8c2e8a1b273b4f5859cae35c_icgraph">
+<area shape="rect" title="Check if there is data available to be read from the PTY interface master side." alt="" coords="200,5,275,32"/>
+<area shape="rect" href="classserial__card.html#a2d9f292d7be1f9deebf49fa5d748c039" title="Refresh the UART for data I/O." alt="" coords="5,5,152,32"/>
+</map>
 </div>
 
 </div>
@@ -314,13 +346,19 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>This method sends a single byte/char to the PTY interface master side. It uses the <code>write()</code> system call.</p>
 <dl class="section warning"><dt>Warning</dt><dd>This method will block until the byte is sent. </dd></dl>
 
-<p class="reference">Referenced by <a class="el" href="classserial__card.html#a2d9f292d7be1f9deebf49fa5d748c039">serial_card::refresh()</a>.</p>
-<div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0">getch()</a>, and <a class="el" href="classserial__card.html#a2d9f292d7be1f9deebf49fa5d748c039">serial_card::refresh()</a>.</p>
+<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpty_ac9e7847a4ade52e8bea78e13f49c4c76_icgraph.png" border="0" usemap="#aclasspty_ac9e7847a4ade52e8bea78e13f49c4c76_icgraph" alt=""/></div>
+<map name="aclasspty_ac9e7847a4ade52e8bea78e13f49c4c76_icgraph" id="aclasspty_ac9e7847a4ade52e8bea78e13f49c4c76_icgraph">
+<area shape="rect" title="Send a single byte to the PTY interface master side." alt="" coords="335,31,421,57"/>
+<area shape="rect" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0" title="Get a single byte from the PTY interface master side." alt="" coords="200,5,287,32"/>
+<area shape="rect" href="classserial__card.html#a2d9f292d7be1f9deebf49fa5d748c039" title="Refresh the UART for data I/O." alt="" coords="5,56,152,83"/>
+<area shape="rect" href="classpty.html#a22e150200a8581e9da66e309f9ee2ec6" title="Receive data from the PTY interface master side." alt="" coords="39,5,118,32"/>
+</map>
 </div>
 
 </div>
@@ -378,12 +416,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <dl class="section warning"><dt>Warning</dt><dd>This method will block until <code>max - 1</code> bytes are read or the terminator character is found. </dd></dl>
 
 <p class="reference">References <a class="el" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0">getch()</a>, and <a class="el" href="classpty.html#a42411f2b12218401f748cbc94fe12062">send()</a>.</p>
-<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div id="dynsection-6-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpty_a22e150200a8581e9da66e309f9ee2ec6_cgraph.png" border="0" usemap="#aclasspty_a22e150200a8581e9da66e309f9ee2ec6_cgraph" alt=""/></div>
+<map name="aclasspty_a22e150200a8581e9da66e309f9ee2ec6_cgraph" id="aclasspty_a22e150200a8581e9da66e309f9ee2ec6_cgraph">
+<area shape="rect" title="Receive data from the PTY interface master side." alt="" coords="5,31,84,57"/>
+<area shape="rect" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0" title="Get a single byte from the PTY interface master side." alt="" coords="132,5,219,32"/>
+<area shape="rect" href="classpty.html#a42411f2b12218401f748cbc94fe12062" title="Send data to the PTY interface master side." alt="" coords="135,56,216,83"/>
+<area shape="rect" href="classpty.html#ac9e7847a4ade52e8bea78e13f49c4c76" title="Send a single byte to the PTY interface master side." alt="" coords="267,5,353,32"/>
+</map>
 </div>
 
 </div>
@@ -421,12 +465,16 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <dl class="section warning"><dt>Warning</dt><dd>This method will block until all bytes of data are sent. </dd></dl>
 
 <p class="reference">Referenced by <a class="el" href="classpty.html#a22e150200a8581e9da66e309f9ee2ec6">recv()</a>.</p>
-<div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-6-content" class="dyncontent" style="display:none;">
+<div id="dynsection-7-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpty_a42411f2b12218401f748cbc94fe12062_icgraph.png" border="0" usemap="#aclasspty_a42411f2b12218401f748cbc94fe12062_icgraph" alt=""/></div>
+<map name="aclasspty_a42411f2b12218401f748cbc94fe12062_icgraph" id="aclasspty_a42411f2b12218401f748cbc94fe12062_icgraph">
+<area shape="rect" title="Send data to the PTY interface master side." alt="" coords="132,5,213,32"/>
+<area shape="rect" href="classpty.html#a22e150200a8581e9da66e309f9ee2ec6" title="Receive data from the PTY interface master side." alt="" coords="5,5,84,32"/>
+</map>
 </div>
 
 </div>
@@ -535,12 +583,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>This method sets the baud rate of the PTY interface. It uses the <code>cfsetospeed()</code> and <code>cfsetispeed()</code> functions from <code>termios.h</code> to set the baud rate of the PTY interface. </p>
 
 <p class="reference">Referenced by <a class="el" href="classpty.html#a50aec75ef08fc8368e6a3668821309cb">open()</a>, and <a class="el" href="classserial__card.html#a87b17dad886b8847836ebd214c3c14ad">serial_card::write()</a>.</p>
-<div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-7-content" class="dyncontent" style="display:none;">
+<div id="dynsection-8-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpty_a757f8fc7156ea5215922e9646b65daaa_icgraph.png" border="0" usemap="#aclasspty_a757f8fc7156ea5215922e9646b65daaa_icgraph" alt=""/></div>
+<map name="aclasspty_a757f8fc7156ea5215922e9646b65daaa_icgraph" id="aclasspty_a757f8fc7156ea5215922e9646b65daaa_icgraph">
+<area shape="rect" title="Set the baud rate of the PTY interface." alt="" coords="371,31,513,57"/>
+<area shape="rect" href="classpty.html#a50aec75ef08fc8368e6a3668821309cb" title="Open the PTY interface." alt="" coords="214,5,297,32"/>
+<area shape="rect" href="classserial__card.html#a87b17dad886b8847836ebd214c3c14ad" title="Write a byte to the serial registers." alt="" coords="188,56,323,83"/>
+<area shape="rect" href="classserial__card.html#a692446f7540c8ae4601737bdf2833ebf" title="Write a byte to the card regardless of write lock." alt="" coords="5,49,140,90"/>
+</map>
 </div>
 
 </div>
@@ -622,12 +676,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>This method sets up the PTY interface with custom configuration. Internally, this makes extensive use of <code>termios.h</code> functionality and its functions to configure the PTY interface. </p>
 
 <p class="reference">Referenced by <a class="el" href="classpty.html#a50aec75ef08fc8368e6a3668821309cb">open()</a>, and <a class="el" href="classserial__card.html#a87b17dad886b8847836ebd214c3c14ad">serial_card::write()</a>.</p>
-<div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-8-content" class="dyncontent" style="display:none;">
+<div id="dynsection-9-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpty_acacb920c29edf75bc85388b4e347aa4e_icgraph.png" border="0" usemap="#aclasspty_acacb920c29edf75bc85388b4e347aa4e_icgraph" alt=""/></div>
+<map name="aclasspty_acacb920c29edf75bc85388b4e347aa4e_icgraph" id="aclasspty_acacb920c29edf75bc85388b4e347aa4e_icgraph">
+<area shape="rect" title="Setup the PTY interface with custom configuration." alt="" coords="371,31,457,57"/>
+<area shape="rect" href="classpty.html#a50aec75ef08fc8368e6a3668821309cb" title="Open the PTY interface." alt="" coords="214,5,297,32"/>
+<area shape="rect" href="classserial__card.html#a87b17dad886b8847836ebd214c3c14ad" title="Write a byte to the serial registers." alt="" coords="188,56,323,83"/>
+<area shape="rect" href="classserial__card.html#a692446f7540c8ae4601737bdf2833ebf" title="Write a byte to the card regardless of write lock." alt="" coords="5,49,140,90"/>
+</map>
 </div>
 
 </div>

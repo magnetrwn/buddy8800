@@ -1,0 +1,6 @@
+<map id="serial_card::write_force" name="serial_card::write_force">
+<area shape="rect" id="node1" title="Write a byte to the card regardless of write lock." alt="" coords="5,23,140,65"/>
+<area shape="rect" id="node2" href="$classserial__card.html#a87b17dad886b8847836ebd214c3c14ad" title="Write a byte to the serial registers." alt="" coords="188,31,323,57"/>
+<area shape="rect" id="node3" href="$classpty.html#a757f8fc7156ea5215922e9646b65daaa" title="Set the baud rate of the PTY interface." alt="" coords="371,5,513,32"/>
+<area shape="rect" id="node4" href="$classpty.html#acacb920c29edf75bc85388b4e347aa4e" title="Setup the PTY interface with custom configuration." alt="" coords="399,56,485,83"/>
+</map>

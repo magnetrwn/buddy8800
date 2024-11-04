@@ -1,0 +1,5 @@
+<map id="serial_card::write" name="serial_card::write">
+<area shape="rect" id="node1" title="Write a byte to the serial registers." alt="" coords="5,31,140,57"/>
+<area shape="rect" id="node2" href="$classpty.html#a757f8fc7156ea5215922e9646b65daaa" title="Set the baud rate of the PTY interface." alt="" coords="188,5,331,32"/>
+<area shape="rect" id="node3" href="$classpty.html#acacb920c29edf75bc85388b4e347aa4e" title="Setup the PTY interface with custom configuration." alt="" coords="216,56,303,83"/>
+</map>
