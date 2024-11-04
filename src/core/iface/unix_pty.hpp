@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <termios.h>
 #include <cstring>
-#include <poll.h>
+#include <sys/epoll.h>
 
 #include "typedef.hpp"
 
@@ -23,6 +23,8 @@ enum class pty_parity : u32 {
  * this class can be used to handle the master file descriptor side of the PTY. The slave side
  * is supposed to be provided to the user or a process to interact with, thus the name() method
  * is available to retrieve the slave device name, but no further handling is done by this class.
+ *
+ * @todo On breaking the application while running, if anything is connected to the slave fd, the PTY is never closed.
  */
 class pty {
 private:
@@ -36,6 +38,7 @@ private:
     static constexpr u32 DEFAULT_BREAK_DURATION  = 0; /// Will default to the termios.h default value
 
     fd master_fd;
+    fd epoll_fd;
     char slave_device_name[MAX_SLAVE_DEVICE_NAME];
 
     bool echo_received_back;
@@ -125,12 +128,11 @@ public:
 
     /**
      * @brief Check if there is data available to be read from the PTY interface master side.
-     * @return Whether there is data available to read.
+     * @return Whether there is data available to be read.
      * @throw `std::runtime_error` if the PTY interface had an error.
      *
-     * This method polls the PTY interface master side to check if there is data available to be read. It
-     * uses the `poll()` system call to check if there is data available to be read from the master file descriptor.
-     * This allows a blocking `getch()` operation to be non-blocking by employing a call to this method before reading.
+     * This method polls the PTY interface master side to check if there is data available to be read.
+     * It's handling the master PTY fd internally using `epoll`.
      */
     bool poll() const;
 
@@ -185,7 +187,7 @@ public:
     /// @brief Close the PTY interface and free the PTY master file descriptor.
     void close();
 
-    pty() : master_fd(-1), echo_received_back(false) {};
+    pty() : master_fd(-1), epoll_fd(-1), echo_received_back(false) {};
     ~pty() { close(); }
 };
 

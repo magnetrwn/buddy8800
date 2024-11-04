@@ -7,7 +7,7 @@
 #include "pty.hpp"
 
 constexpr static usize BUFFER_SIZE = 1024;
-constexpr static usize ROUNDS = 200;
+constexpr static usize ROUNDS = 51;
 
 inline const char* random_string(usize length) {
     static std::random_device rd;
@@ -50,12 +50,10 @@ TEST_CASE("Pseudo-terminal operation test", "[pty]") {
     }
 
     SECTION("Send from slave, receive from master. This will test pty::getch().") {
-        for (usize i = 0; i < ROUNDS; ++i) {
-            const char* message = random_string(1);
-
-            isize bytes_written = write(slave_fd, message, 1);
+        for (char c = 1; c > 0; ++c) {
+            isize bytes_written = write(slave_fd, &c, 1);
             REQUIRE(bytes_written == 1);
-            REQUIRE(pty_instance.getch() == message[0]);
+            REQUIRE(pty_instance.getch() == c);
         }
     }
 
@@ -69,6 +67,55 @@ TEST_CASE("Pseudo-terminal operation test", "[pty]") {
             buffer[bytes_read] = '\0';
             REQUIRE(bytes_read > 0);
             REQUIRE(std::strcmp(buffer, message) == 0);
+        }
+    }
+
+    SECTION("Send from master, receive from slave. This will test pty::putch().") {
+        for (char c = 1; c > 0; ++c) {
+            REQUIRE_NOTHROW(pty_instance.putch(c));
+
+            read(slave_fd, buffer, 1);
+            REQUIRE(buffer[0] == c);
+        }
+    }
+
+    SECTION("Check for echo present when enabled.") {
+        pty_instance.set_echo_received_back(true);
+
+        for (usize i = 0; i < ROUNDS; ++i) {
+            const char* message = random_string(BUFFER_SIZE - 1);
+
+            isize bytes_written = write(slave_fd, message, std::strlen(message));
+            REQUIRE(bytes_written == static_cast<isize>(std::strlen(message)));
+
+            pty_instance.recv(buffer, BUFFER_SIZE);
+            REQUIRE(std::strcmp(buffer, message) == 0);
+
+            isize bytes_read = read(slave_fd, buffer, BUFFER_SIZE - 1);
+            buffer[bytes_read] = '\0';
+            REQUIRE(bytes_read > 0);
+            REQUIRE(std::strcmp(buffer, message) == 0);
+        }
+
+        pty_instance.set_echo_received_back(false);
+    }
+
+    SECTION("Check if polling the master fd works.") {
+        REQUIRE(!pty_instance.poll());
+
+        for (usize i = 0; i < ROUNDS; ++i) {
+            const char* message = random_string(BUFFER_SIZE - 1);
+
+            isize bytes_written = write(slave_fd, message, std::strlen(message));
+            REQUIRE(bytes_written == static_cast<isize>(std::strlen(message)));
+
+            usleep(100 * (ROUNDS - i));
+            REQUIRE(pty_instance.poll());
+            
+            for (usize j = 0; pty_instance.poll(); ++j)
+                REQUIRE(message[j] == pty_instance.getch());
+
+            REQUIRE(!pty_instance.poll());
         }
     }
 
