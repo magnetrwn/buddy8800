@@ -131,7 +131,7 @@ $(document).ready(function(){initNavTree('ux_8hpp_source.html',''); initResizabl
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> run() {</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">while</span> (!processor.<a class="code" href="classcpu.html#a010e335fc9f1797e72bfc5585e9238f6">is_halted</a>()) {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            processor.<a class="code" href="classcpu.html#a7a01c8c57ae52af3126b88042cd1aa63">step</a>(4);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            processor.<a class="code" href="classcpu.html#a7a01c8c57ae52af3126b88042cd1aa63">step</a>();</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            cardbus.<a class="code" href="classbus.html#ac158680334e36add350e716e6a0ec69b">refresh</a>();</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keywordflow">while</span> (cardbus.<a class="code" href="classbus.html#ae35dadd5a5ae3a060bd18facb8bb4f31">is_irq</a>())</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                processor.<a class="code" href="classcpu.html#a4228c63bc0f368cf39bfe37909f73f45">interrupt</a>(cardbus.<a class="code" href="classbus.html#a1673002793a022d9e89aacfbeeeb71fc">get_irq</a>());</div>

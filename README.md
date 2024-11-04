@@ -94,7 +94,7 @@ Here are some of the resources I used to figure out various aspects of this proj
 + [beriddle/i8080](https://github.com/beriddle/i8080), some demos for the Orion-128 Russian 8080 clone machine, but includes an interesting [16 bit floating point library](https://github.com/beriddle/i8080/tree/master/FP16).
 + [skx/cpmulator](https://github.com/skx/cpmulator/tree/master/ccp), useful CCP sources and binaries.
 
-And most of all, thank you to the **Emulator Development** and **Lazy Developers** Discord servers for all the help and support!
+And thank you to the **Emulator Development** and **Lazy Developers** Discord servers for general help and support!
 
 ### Screenshots
 

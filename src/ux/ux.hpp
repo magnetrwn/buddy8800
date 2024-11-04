@@ -42,7 +42,7 @@ public:
 
     void run() {
         while (!processor.is_halted()) {
-            processor.step(4);
+            processor.step();
             cardbus.refresh();
             while (cardbus.is_irq())
                 processor.interrupt(cardbus.get_irq());
