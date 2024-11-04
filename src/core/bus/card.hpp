@@ -228,10 +228,13 @@ enum class serial_status_flags {
 };
 
 /// @brief The number of I/O addresses of the MC6850 ACIA (UART).
-constexpr static u16 SERIAL_IO_ADDRESSES = 4;
+constexpr static u16 SERIAL_IO_ADDRESSES = 2;
 
 /// @brief The base clock speed of the MC6850 ACIA (UART).
 constexpr static usize SERIAL_BASE_CLOCK = 19200;
+
+/// @brief The assumed frequency of cycles per second of the CPU, to be compared to the UART baud rate to limit polling.
+constexpr static usize ASSUMED_CPU_FREQ_HZ = 2000000;
 
 /**
  * @brief A card that emulates a 6850 ACIA.
@@ -245,6 +248,8 @@ constexpr static usize SERIAL_BASE_CLOCK = 19200;
  *
  * @note The `refresh()` method is fundamental here, as it will poll the pseudo-terminal for new data and send data to it regularly.
  * Not periodically refreshing the bus, and by consequence the card, will make the card unable to send or receive data.
+ * This method should be called at every CPU step, and will internally keep track on after how many cycles to poll the PTY, according
+ * to the base clock.
  * @par
  * @note To mimic the partial address decode behavior, while the IN and OUT instructions of the 8080 duplicate the argument byte on
  * the address bus, the decoder only looks at the lower 8 bits, effectively creating 255 mirrors of the card in the address space.
@@ -260,6 +265,8 @@ private:
 
     pty serial;
     std::array<u8, 4> registers;
+    usize divide_by;
+    usize non_refresh_cycles;
     char detail[MAX_SERIAL_DETAIL_LENGTH];
     bool rts;
 
@@ -295,7 +302,9 @@ private:
 
     void reset() {
         registers.fill(0x00);
-        serial.set_baud_rate(base_clock >> 4);
+        divide_by = 4;
+        non_refresh_cycles = 0;
+        serial.set_baud_rate(base_clock >> divide_by);
         CONTROL(0b10010101);
         TDRE(true);
         RTS(true);
@@ -313,36 +322,39 @@ public:
     card_identify identify() override {
         std::snprintf(
             detail, sizeof(detail), 
-            "base: %lu, ctrl: %s, pty: '%s'", 
-            base_clock, util::to_hex_s(static_cast<usize>(CONTROL()), 2).c_str(), serial.name()
+            "baud: %lu, ctrl: %s, pty: '%s'", 
+            base_clock >> divide_by, util::to_hex_s(static_cast<usize>(CONTROL()), 2).c_str(), serial.name()
         );
 
         return { start_adr, SERIAL_IO_ADDRESSES, "serial uart", detail };
     }
 
-    /// @brief Refresh the UART for data I/O.
+    /// @brief Refresh the UART for data I/O. Run this after every CPU step.
     void refresh() override {
-        if (!RDRF()) // Check if the correct behavior is to allow or prevent overwriting the RX register...
-            if (serial.poll()) {
-                RX_DATA(serial.getch());
-                RDRF(true);
-            }
+        // Only run refresh after N cycles according to the base clock to CPU clock ratio
+        if (++non_refresh_cycles < ASSUMED_CPU_FREQ_HZ * (1 << divide_by) / base_clock)
+            return;
+
+        non_refresh_cycles = 0;
+
+        if (!RDRF() and serial.poll()) {
+            RX_DATA(serial.getch());
+            RDRF(true);
+        }
 
         if (!TDRE()) {
-            serial.putch(TX_DATA());
+            serial.putch(TX_DATA()); // This seems to lock until the slave fd is connected, or maybe not?
             TDRE(true);
         }
     }
 
     /// @brief Read a byte from the serial registers.
-    /// @returns The byte read from the serial registers, or BAD_U8 if the address is invalid.
+    /// @returns The byte read from the serial registers, or BAD_U8 if the address is invalid (which should be prevented by `in_range()`).
     u8 read(u16 adr) const override {
-        switch (adr) {
-            case 0x00: return BAD_U8; // TX_DATA is write-only
-            case 0x01: return RX_DATA();
-            case 0x02: return BAD_U8; // CONTROL is write-only
-            case 0x03: return STATUS();
-        }
+        if ((adr & 0xFF) == start_adr)
+            return STATUS();
+        else if ((adr & 0xFF) == start_adr + 1)
+            return RX_DATA();
 
         return BAD_U8;
     }
@@ -350,51 +362,48 @@ public:
     /// @brief Write a byte to the serial registers.
     /// @note This method will also handle the UART configuration by writing to the CONTROL register.
     void write(u16 adr, u8 byte) override {
-        switch (adr) {
-            case 0x00: TX_DATA(byte); TDRE(false); break;
+        if ((adr & 0xFF) == start_adr) {
+            // Counter Divide select bits
+            switch (byte & 0b00000011) {
+                //     ......DD
+                case 0b00000000: divide_by = 1; serial.set_baud_rate(base_clock >> divide_by); break;
+                case 0b00000001: divide_by = 4; serial.set_baud_rate(base_clock >> divide_by); break;
+                case 0b00000010: divide_by = 6; serial.set_baud_rate(base_clock >> divide_by); break;
+                case 0b00000011: reset(); break;
+            }
+            // Word Select bits
+            switch (byte & 0b00011100) {
+                //     ...WWW..
+                case 0b00000000: serial.setup(7, pty_parity::EVEN, 2); break;
+                case 0b00000100: serial.setup(7, pty_parity::ODD, 2); break;
+                case 0b00001000: serial.setup(7, pty_parity::EVEN, 1); break;
+                case 0b00001100: serial.setup(7, pty_parity::ODD, 1); break;
+                case 0b00010000: serial.setup(8, pty_parity::NONE, 2); break;
+                case 0b00010100: serial.setup(8, pty_parity::NONE, 1); break;
+                case 0b00011000: serial.setup(8, pty_parity::EVEN, 1); break;
+                case 0b00011100: serial.setup(8, pty_parity::ODD, 1); break;
+            }
+            // Transmit Control bits (TODO: missing interrupt controls)
+            switch (byte & 0b01100000) {
+                //     .CC.....
+                case 0b00000000: RTS(true); break;
+                case 0b00100000: RTS(true); break;
+                case 0b01000000: RTS(false); break;
+                case 0b01100000: RTS(true); serial.send_break(); break;
+            }
+            // Interrupt Enable bit (TODO: probably wrong behavior)
+            switch (byte & 0b10000000) {
+                //     I.......
+                case 0b00000000: IRQ(false); break;
+                case 0b10000000: IRQ(true); break;
+            }
 
-            case 0x01: break; // RX_DATA is read-only
+            CONTROL(byte);
+        }
 
-            case 0x02:
-                // Counter Divide select bits
-                switch (byte & 0b00000011) {
-                    //     ......DD
-                    case 0b00000000: serial.set_baud_rate(base_clock); break;
-                    case 0b00000001: serial.set_baud_rate(base_clock >> 4); break;
-                    case 0b00000010: serial.set_baud_rate(base_clock >> 6); break;
-                    case 0b00000011: reset(); break;
-                }
-                // Word Select bits
-                switch (byte & 0b00011100) {
-                    //     ...WWW..
-                    case 0b00000000: serial.setup(7, pty_parity::EVEN, 2); break;
-                    case 0b00000100: serial.setup(7, pty_parity::ODD, 2); break;
-                    case 0b00001000: serial.setup(7, pty_parity::EVEN, 1); break;
-                    case 0b00001100: serial.setup(7, pty_parity::ODD, 1); break;
-                    case 0b00010000: serial.setup(8, pty_parity::NONE, 2); break;
-                    case 0b00010100: serial.setup(8, pty_parity::NONE, 1); break;
-                    case 0b00011000: serial.setup(8, pty_parity::EVEN, 1); break;
-                    case 0b00011100: serial.setup(8, pty_parity::ODD, 1); break;
-                }
-                // Transmit Control bits (TODO: missing interrupt controls)
-                switch (byte & 0b01100000) {
-                    //     .CC.....
-                    case 0b00000000: RTS(true); break;
-                    case 0b00100000: RTS(true); break;
-                    case 0b01000000: RTS(false); break;
-                    case 0b01100000: RTS(true); serial.send_break(); break;
-                }
-                // Interrupt Enable bit (TODO: probably wrong behavior)
-                switch (byte & 0b10000000) {
-                    //     I.......
-                    case 0b00000000: IRQ(false); break;
-                    case 0b10000000: IRQ(true); break;
-                }
-
-                CONTROL(byte);
-                break;
-
-            case 0x03: break; // STATUS is read-only
+        else if ((adr & 0xFF) == start_adr + 1) {
+            TX_DATA(byte); 
+            TDRE(false);
         }
     }
 
