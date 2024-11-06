@@ -24,17 +24,45 @@ class system_config {
 private:
     bus cardbus;
     std::vector<card*> cards;
+    u16 start_pc;
     bool do_pseudo_bdos;
 
-    inline card* create_card(const std::string& type, u16 at, usize range) {
+    inline card* create_card(const std::string& type, u16 at, usize range, const std::string& load) {
+        card* cardptr = nullptr;
+        std::ifstream load_file;
+        std::vector<u8> load_file_vec;
+
+        if (load.empty() and range == 0 and (type == "ram" or type == "rom"))
+            throw std::runtime_error("Config has data card with no range or load. You need at least one of the two.");
+
+        if (!load.empty()) {
+            load_file = std::ifstream(load, std::ios::binary);
+
+            if (!load_file)
+                throw std::runtime_error("Could not open file: " + std::string(load));
+
+            load_file_vec.assign(std::istreambuf_iterator<char>(load_file), {});
+
+            if (load_file_vec.empty())
+                throw std::runtime_error("File is empty or could not be read: " + std::string(load));
+        }
+
         if (type == "ram")
-            return new ram_card(at, range);
+            if (load.empty())
+                cardptr = new ram_card(at, range);
+            else
+                cardptr = new ram_card(at, load_file_vec.begin(), load_file_vec.end());
         else if (type == "rom")
-            return new rom_card(at, range);
+            if (load.empty())
+                cardptr = new rom_card(at, range);
+            else
+                cardptr = new rom_card(at, load_file_vec.begin(), load_file_vec.end());
         else if (type == "serial")
-            return new serial_card(at);
+            cardptr = new serial_card(at);
         else
-            throw std::runtime_error("config has unknown card type: " + type);
+            throw std::runtime_error("Config has unknown card type: " + type);
+
+        return cardptr;
     }
 
     inline void insert_card(card* card, usize slot, bool let_collide) {
@@ -55,13 +83,15 @@ public:
                 create_card(
                     toml::find<std::string>(card, "type"),
                     toml::find<u16>(card, "at"),
-                    toml::find_or<usize>(card, "range", 0 /* unused */)
+                    toml::find_or<usize>(card, "range", 0),
+                    toml::find_or<std::string>(card, "load", "")
                 ),
                 toml::find<usize>(card, "slot"),
                 toml::find_or<bool>(card, "let_collide", false)
             );
         }
 
+        start_pc = toml::find_or<u16>(emulator, "start_with_pc_at", 0);
         do_pseudo_bdos = toml::find_or<bool>(emulator, "pseudo_bdos_enabled", false);
     }
 
@@ -76,6 +106,9 @@ public:
 
     /// @brief Get whether pseudo BDOS is enabled.
     inline bool get_do_pseudo_bdos() const { return do_pseudo_bdos; }
+
+    /// @brief Get the starting value of PC.
+    inline u16 get_start_pc() const { return start_pc; }
 };
 
 #endif

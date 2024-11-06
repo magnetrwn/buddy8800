@@ -229,6 +229,10 @@ public:
      *
      * This method will call each card's possibly distinct way to refresh, which is important for example to
      * let a serial card be able to poll or send new data.
+     *
+     * @note It is very important that cards implement ways to not make this method slow down the emulation,
+     * since it's highly likely that many devices would operate at rates much slower than the CPU clock step,
+     * thus it's beneficial to add a cycle counter to the method implementation on the card.
      */
     inline void refresh() {
         for (card* card : cards)

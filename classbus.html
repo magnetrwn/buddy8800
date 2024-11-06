@@ -611,7 +611,8 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Refreshes all cards on the bus. </p>
-<p>This method will call each card's possibly distinct way to refresh, which is important for example to let a serial card be able to poll or send new data. </p>
+<p>This method will call each card's possibly distinct way to refresh, which is important for example to let a serial card be able to poll or send new data.</p>
+<dl class="section note"><dt>Note</dt><dd>It is very important that cards implement ways to not make this method slow down the emulation, since it's highly likely that many devices would operate at rates much slower than the CPU clock step, thus it's beneficial to add a cycle counter to the method implementation on the card. </dd></dl>
 
 <p class="reference">References <a class="el" href="classcard.html#ae39a92dd99c80e0756cc1d8ea28ca6c4">card::refresh()</a>.</p>
 <div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">

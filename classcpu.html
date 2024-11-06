@@ -98,9 +98,9 @@ $(document).ready(function(){initNavTree('classcpu.html',''); initResizable(); }
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3370e515b29f14c07755eb9990d9aa31"><td class="memItemLeft" align="right" valign="top"><a id="a3370e515b29f14c07755eb9990d9aa31"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>cpu</b> (bus_iface init_adr_space)</td></tr>
-<tr class="separator:a3370e515b29f14c07755eb9990d9aa31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e36f074244b069de9f0e9a9d1c9cc9f"><td class="memItemLeft" align="right" valign="top"><a id="a4e36f074244b069de9f0e9a9d1c9cc9f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>cpu</b> (bus_iface init_adr_space, bool allow_reset_twice=true)</td></tr>
+<tr class="separator:a4e36f074244b069de9f0e9a9d1c9cc9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">CPU API methods.</div></td></tr>
 <tr class="memitem:a7a01c8c57ae52af3126b88042cd1aa63"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a7a01c8c57ae52af3126b88042cd1aa63">step</a> (usize steps=1)</td></tr>
 <tr class="memdesc:a7a01c8c57ae52af3126b88042cd1aa63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Steps the CPU by one instruction (and its operands).  <a href="classcpu.html#a7a01c8c57ae52af3126b88042cd1aa63">More...</a><br /></td></tr>
@@ -121,6 +121,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae6100df727ce03c23512fee8d2698fc5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcpu__state.html">cpu_state</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#ae6100df727ce03c23512fee8d2698fc5">save_state</a> () const</td></tr>
 <tr class="memdesc:ae6100df727ce03c23512fee8d2698fc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save CPU state.  <a href="classcpu.html#ae6100df727ce03c23512fee8d2698fc5">More...</a><br /></td></tr>
 <tr class="separator:ae6100df727ce03c23512fee8d2698fc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dd1651ec43836cea38fa1a8af972b55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a0dd1651ec43836cea38fa1a8af972b55">set_pc</a> (u16 pc)</td></tr>
+<tr class="memdesc:a0dd1651ec43836cea38fa1a8af972b55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the PC of the CPU.  <a href="classcpu.html#a0dd1651ec43836cea38fa1a8af972b55">More...</a><br /></td></tr>
+<tr class="separator:a0dd1651ec43836cea38fa1a8af972b55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a010e335fc9f1797e72bfc5585e9238f6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a010e335fc9f1797e72bfc5585e9238f6">is_halted</a> () const</td></tr>
 <tr class="memdesc:a010e335fc9f1797e72bfc5585e9238f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the CPU is halted.  <a href="classcpu.html#a010e335fc9f1797e72bfc5585e9238f6">More...</a><br /></td></tr>
 <tr class="separator:a010e335fc9f1797e72bfc5585e9238f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -517,6 +520,42 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
 <p>Save CPU state. </p>
 <dl class="section return"><dt>Returns</dt><dd>The current state of the CPU.</dd></dl>
 <p>This method will return the current state of the CPU, including all registers and flags of it. </p>
+
+</div>
+</div>
+<a id="a0dd1651ec43836cea38fa1a8af972b55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0dd1651ec43836cea38fa1a8af972b55">&#9670;&nbsp;</a></span>set_pc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class bus_iface  = bus&amp;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classcpu.html">cpu</a>&lt; bus_iface &gt;::set_pc </td>
+          <td>(</td>
+          <td class="paramtype">u16&#160;</td>
+          <td class="paramname"><em>pc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the PC of the CPU. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pc</td><td>The new PC value. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

@@ -145,6 +145,9 @@ public:
  * card immediately after construction, and can be write-locked after construction if needed. Write locking 
  * can also be toggled at any time.
  *
+ * When setting up the card by copying data to it, the capacity of it will be determined by the size of the
+ * provided data. This might be a bit unrealistic in address range.
+ *
  * @note For convenience, use the aliases `ram_card` and `rom_card` instead of this class.
  * @warning Out of range addresses are not checked, they should be checked by the bus instead, to avoid 
  * calling in_range() twice.
@@ -156,6 +159,13 @@ private:
     const u16 start_adr;
     const usize capacity;
     std::vector<u8> data;
+
+    /*static constexpr usize next_pow2_to_v(usize v) {
+        usize pw = 1;
+        while (pw < v)
+            pw <<= 1;
+        return pw;
+    }*/
 
 public:
     data_card(u16 start_adr, usize capacity, u8 fill = 0x00, bool lock = construct_then_write_lock) 
@@ -169,6 +179,9 @@ public:
     template <typename T, T_ITERATOR_SFINAE>
     data_card(u16 start_adr, T begin, T end, bool lock = construct_then_write_lock) 
         : start_adr(start_adr), capacity(std::distance(begin, end)) {
+
+        static_assert(std::is_same_v<typename std::iterator_traits<T>::value_type, u8>, 
+              "Iterator value type must be u8.");
 
         data.reserve(capacity);
         std::copy(begin, end, data.begin());
@@ -343,7 +356,7 @@ public:
         }
 
         if (!TDRE()) {
-            serial.putch(TX_DATA()); // This seems to lock until the slave fd is connected, or maybe not?
+            serial.putch(TX_DATA());
             TDRE(true);
         }
     }
