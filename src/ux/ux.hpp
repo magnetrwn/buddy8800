@@ -20,7 +20,7 @@ private:
 
 public:
     void setup(int argc, char** argv) {
-        if (argc < 3 or !(argc & 1)) 
+        if (argc < 1 or !(argc & 1)) 
             throw std::invalid_argument("Invalid number of arguments. Provide pairs of ROM/data files and integer load addresses.");
 
         processor.do_pseudo_bdos(conf.get_do_pseudo_bdos());
@@ -38,6 +38,8 @@ public:
             // The first ROM is the one that will have the reset vector jump to.
             processor.load(load_rom_vec.begin(), load_rom_vec.end(), std::stoul(argv[i + 1], nullptr, 0), i == 1);
         }
+
+        processor.set_pc(conf.get_start_pc());
     }
 
     void run() {
@@ -51,7 +53,10 @@ public:
 
     std::string get_bus_map_s() const { return cardbus.bus_map_s(); }
 
-    emulator(const char* config_filename) : conf(config_filename), cardbus(conf.get_bus()), processor(cardbus) {}
+    emulator(const char* config_filename) 
+        : conf(config_filename), 
+          cardbus(conf.get_bus()), 
+          processor(cardbus, conf.get_start_pc() == 0x0000) {}
 };
 
 struct terminal_ux {

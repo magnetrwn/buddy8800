@@ -3,28 +3,38 @@
 
 [emulator]
 pseudo_bdos_enabled = true      # Redirect and handle calls that match addresses of BDOS calls.
+start_with_pc_at    = 0x0100    # Start the program counter at this address. Note that this bypasses the reset vector. 0 to disable.
 
 # List of cards here, make sure to append cards you wish to add. Available parameters are:
 # - slot: Slot number of the card [0, 18], which also determines IRQ priority (lower is higher priority).
 # - type: Type of the card. Available types are: "ram", "rom", "serial".
-#   - (in the future: "disk", "printer", "timer", "kbd", "display", "network").
+# - load: Path to the file to load into the card. Only for "ram" or "rom" type. 
+#    (you can omit this if using range, as it will automatically set the closest bigger power of 2 size)
 # - at: Address of the card in the memory space.
 # - range: Size or address range (like I/O register count) of the card in bytes.
+#    (you can omit this if using load)
 # - let_collide: Allow the card to have overlapping address range with other cards.
 #
 # IMPORTANT: cards can be de/activated by the IORQ signal according to them being memory or I/O, so
 #            you might not need to enable overlapping, as overlap of I/O and memory is expected.
 #            Only use this in case of overlap of the same type of card (e.g. two RAM cards).
 #
-# Note: there is (usually) a limit of 18 cards in the system.
+# Note: there is (usually) a limit of 18 cards in the system. Lower slot number means higher IRQ priority.
 
-[[card]]
+[[card]] # 88-SIO serial interface
 slot        = 10
 type        = "serial"
-at          = 0x0010
+at          = 0x10
 
-[[card]]
+[[card]] # Diagnostics II expects to be loaded in RAM
+slot        = 3
+type        = "ram"
+at          = 0x0100
+load        = "tests/res/diag2.com"
+
+[[card]] # Cover all memory space with RAM just in case
 slot        = 4
 type        = "ram"
 at          = 0x0000
 range       = 65536
+let_collide = true

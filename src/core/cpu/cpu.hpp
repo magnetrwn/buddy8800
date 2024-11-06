@@ -32,7 +32,7 @@ class cpu {
 private:
     cpu_state state;
     bus_iface cardbus;
-    bool just_booted;
+    bool allow_reset_twice;
     bool halted;
     bool do_handle_bdos;
     bool interrupts_enabled;
@@ -182,13 +182,13 @@ private:
 
     void handle_bdos() {
         if (state.PC() == 0x0000) {
-            if (just_booted) {
+            if (allow_reset_twice) {
 
                 #ifdef ENABLE_TRACE
                 puts("\x1B[47;01mBDOS 0x0000: Reset vector!       \x1B[0m");
                 #endif
 
-                just_booted = false;
+                allow_reset_twice = false;
                 return;
             }
 
@@ -930,6 +930,10 @@ public:
      */
     cpu_state save_state() const { return state; }
 
+    /// @brief Set the PC of the CPU.
+    /// @param pc The new PC value.
+    void set_pc(u16 pc) { state.PC(pc); }
+
     /// @brief Check if the CPU is halted.
     /// @return True if the CPU is halted, false otherwise.
     bool is_halted() const { return halted; }
@@ -937,7 +941,7 @@ public:
     /// @brief Reset the CPU.
     void clear() {
         state = cpu_state();
-        just_booted = true;
+        allow_reset_twice = true;
         halted = false;
     }
 
@@ -979,8 +983,15 @@ public:
 
     /// \}
 
-    cpu(bus_iface init_adr_space) : state(), cardbus(init_adr_space), just_booted(true), halted(false), do_handle_bdos(false), 
-            interrupts_enabled(true), printer(std::cout), ext_op_idx(false) {}
+    cpu(bus_iface init_adr_space, bool allow_reset_twice = true) 
+        : state(), 
+          cardbus(init_adr_space), 
+          allow_reset_twice(allow_reset_twice), 
+          halted(false), 
+          do_handle_bdos(false), 
+          interrupts_enabled(true), 
+          printer(std::cout), 
+          ext_op_idx(false) {}
 };
 
 #endif

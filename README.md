@@ -8,7 +8,8 @@
 
 + **[Doxygen Documentation](https://magnetrwn.github.io/buddy8800)**
 + [Building](#building)
-+ [Implementation Map](#implementation-map)
++ [Running from CLI](#running-from-cli)
++ [Configuration File](#configuration-file)
 + [Resources and Documentation](#resources-and-documentation)
 + [Screenshots](#screenshots)
 
@@ -41,9 +42,80 @@ Development builds are usually compiled with `./build.sh -d -T`.
 
 **Note:** Make sure you have `config.toml` placed in the same directory as the final executable. This file contains the configuration for the emulator, such as what cards to place and where.
 
-### Implementation Map
+### Running from CLI
 
-**Work in progress.**
+You can either call the emulator from CLI passing pairs of file locations for ROMs and their load addresses, or set these loads directly in the configuration file for a more permanent solution. While you can load from the CLI, the config file will still need to contain information about what cards the system is setup with, in fact you could load these ROMs' data into address ranges belonging to any memory device in the system (not I/O since it belongs to a separate address space where an I/O request signal is detected).
+
+```shell
+bin/buddy8800 your/path/to/rom100.bin 0x100 your/path/to/rom7F00.bin 0x7F00 ...
+```
+
+Is equivalent (see **Note**) to:
+
+```toml
+[emulator]
+...
+start_with_pc_at    = 0x0100
+...
+
+[[card]]
+slot        = 3
+type        = "rom"
+at          = 0x0100
+load        = "your/path/to/rom100.bin"
+
+[[card]]
+slot        = 4
+type        = "rom"
+at          = 0x7F00
+load        = "your/path/to/rom7F00.bin"
+```
+
+**Note:** The first pair of ROM and address provided by the CLI will generate a few reset vector instruction in the zero page to jump to the first loaded ROM. The config file allows you to specify the starting address for the program counter, which is **not the same as the reset vector** as it directly sets PC to the specified address, skipping the reset vector. Because of this, be wary of having a value in the config file when trying to load a ROM from the CLI, as the emulator will give priority to the config file provided PC value.
+
+For loading from CLI, the size (`range`) of the data cards must be determined in the config file, while if using the `load` field in the config file, the size will be determined by the size of the binary to load. Here is an example of specifying `range` and not `load`, while using the CLI to load the data:
+
+```toml
+[[card]]
+slot        = 10
+type        = "rom"
+at          = 0x0100
+range       = 2048
+```
+
+```shell
+bin/buddy8800 your/path/to/rom100.bin 0x100
+```
+
+Note that this will not check if the binary file is too large for the specified range, and in which case will just continue writing to other cards in the system, which is expected behavior. The CLI loading utility allows you to load data in any range of memory as it serves exactly that purpose, even after having loaded a file already from a config file.
+
+Much of this information is also immediately reported upon running the emulator during setup phase, allowing you to quickly see if the loaded configuration is correct.
+
+### Configuration File
+
+Please check the highly descriptive [config.toml](static/config.toml) file for a full list of options and their descriptions. The configuration file is used to specify the system's setup, such as what cards are placed in the system and where, as well as the initial state of the emulator.
+
+For reference, here is a simple test machine setup (only the cards portion of the config file):
+
+```toml
+[[card]] # 88-SIO serial interface
+slot        = 10
+type        = "serial"
+at          = 0x10
+
+[[card]] # Diagnostics II expects to be loaded in RAM
+slot        = 3
+type        = "ram"
+at          = 0x0100
+load        = "tests/res/diag2.com"
+
+[[card]] # Cover all memory space with RAM just in case
+slot        = 4
+type        = "ram"
+at          = 0x0000
+range       = 65536
+let_collide = true
+```
 
 ### Resources and Documentation
 
