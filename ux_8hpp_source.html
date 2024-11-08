@@ -140,7 +140,7 @@ $(document).ready(function(){initNavTree('ux_8hpp_source.html',''); initResizabl
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        }</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    }</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    std::string get_bus_map_s()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> cardbus.<a class="code" href="classbus.html#a616875dde214c117fcc36c0bbcc80f9e">bus_map_s</a>(); }</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    std::string info()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> cardbus.<a class="code" href="classbus.html#a616875dde214c117fcc36c0bbcc80f9e">bus_map_s</a>(); }</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="classemulator.html">emulator</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* config_filename) </div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        : conf(config_filename), </div>
@@ -154,7 +154,7 @@ $(document).ready(function(){initNavTree('ux_8hpp_source.html',''); initResizabl
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv) {</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        std::cout &lt;&lt; <span class="stringliteral">&quot;\x1B[33;01m-:-:-:-:- emulator setup -:-:-:-:-\x1B[0m&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        std::cout &lt;&lt; emu.get_bus_map_s();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        std::cout &lt;&lt; emu.info();</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        emu.setup(argc, argv);</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        std::cout &lt;&lt; <span class="stringliteral">&quot;\x1B[33;01m-:-:-:-:- emulator run -:-:-:-:-\x1B[0m&quot;</span> &lt;&lt; std::endl;</div>

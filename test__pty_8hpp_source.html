@@ -96,120 +96,131 @@ $(document).ready(function(){initNavTree('test__pty_8hpp_source.html',''); initR
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;pty.hpp&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;constexpr <span class="keyword">static</span> usize BUFFER_SIZE = 1024;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;constexpr <span class="keyword">static</span> usize ROUNDS = 51;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">inline</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* random_string(usize length) {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keyword">static</span> std::random_device rd;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">static</span> std::mt19937 generator(rd());</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">static</span> std::uniform_int_distribution&lt;&gt; distribution(1, 127);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">static</span> std::string str;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordflow">if</span> (str.capacity() &lt; length)</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        str.reserve(length);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    str.clear();</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordflow">for</span> (std::size_t i = 0; i &lt; length; ++i)</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        str += <span class="keyword">static_cast&lt;</span><span class="keywordtype">char</span><span class="keyword">&gt;</span>(distribution(generator));</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordflow">return</span> str.c_str();</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;}</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;constexpr <span class="keyword">static</span> usize ROUNDS = 384;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;constexpr <span class="keyword">static</span> usize USEC_DELAY_SERIAL_PTY = 110;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">inline</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* random_string(usize length) {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">static</span> std::random_device rd;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">static</span> std::mt19937 generator(rd());</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">static</span> std::uniform_int_distribution&lt;&gt; distribution(1, 127);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">static</span> std::string str;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordflow">if</span> (str.capacity() &lt; length)</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        str.reserve(length);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    str.clear();</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordflow">for</span> (std::size_t i = 0; i &lt; length; ++i)</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        str += <span class="keyword">static_cast&lt;</span><span class="keywordtype">char</span><span class="keyword">&gt;</span>(distribution(generator));</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordflow">return</span> str.c_str();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;}</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;TEST_CASE(<span class="stringliteral">&quot;Pseudo-terminal operation test&quot;</span>, <span class="stringliteral">&quot;[pty]&quot;</span>) {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="classpty.html">pty</a> pty_instance;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">char</span> buffer[BUFFER_SIZE];</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    REQUIRE_NOTHROW(pty_instance.<a class="code" href="classpty.html#a50aec75ef08fc8368e6a3668821309cb">open</a>());</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    fd slave_fd = open(pty_instance.<a class="code" href="classpty.html#aaee682964bcc6906eab0cadbde4bc6fe">name</a>(), O_RDWR | O_NOCTTY);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    REQUIRE(slave_fd &gt;= 0);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    alarm(3);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    SECTION(<span class="stringliteral">&quot;Send from slave, receive from master. This will test pty::recv().&quot;</span>) {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordflow">for</span> (usize i = 0; i &lt; ROUNDS; ++i) {</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span>* message = random_string(BUFFER_SIZE - 1);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            isize bytes_written = write(slave_fd, message, std::strlen(message));</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            REQUIRE(bytes_written == <span class="keyword">static_cast&lt;</span>isize<span class="keyword">&gt;</span>(std::strlen(message)));</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            pty_instance.<a class="code" href="classpty.html#a22e150200a8581e9da66e309f9ee2ec6">recv</a>(buffer, BUFFER_SIZE);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            REQUIRE(std::strcmp(buffer, message) == 0);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        }</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    }</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    SECTION(<span class="stringliteral">&quot;Send from slave, receive from master. This will test pty::getch().&quot;</span>) {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">char</span> c = 1; c &gt; 0; ++c) {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            isize bytes_written = write(slave_fd, &amp;c, 1);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            REQUIRE(bytes_written == 1);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            REQUIRE(pty_instance.<a class="code" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0">getch</a>() == c);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        }</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    SECTION(<span class="stringliteral">&quot;Send from master, receive from slave. This will test pty::send().&quot;</span>) {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordflow">for</span> (usize i = 0; i &lt; ROUNDS; ++i) {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span>* message = random_string(BUFFER_SIZE - 1);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            REQUIRE_NOTHROW(pty_instance.<a class="code" href="classpty.html#a42411f2b12218401f748cbc94fe12062">send</a>(message));</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            isize bytes_read = read(slave_fd, buffer, BUFFER_SIZE - 1);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            buffer[bytes_read] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            REQUIRE(bytes_read &gt; 0);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            REQUIRE(std::strcmp(buffer, message) == 0);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        }</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    SECTION(<span class="stringliteral">&quot;Send from master, receive from slave. This will test pty::putch().&quot;</span>) {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">char</span> c = 1; c &gt; 0; ++c) {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            REQUIRE_NOTHROW(pty_instance.<a class="code" href="classpty.html#ac9e7847a4ade52e8bea78e13f49c4c76">putch</a>(c));</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            read(slave_fd, buffer, 1);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            REQUIRE(buffer[0] == c);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    SECTION(<span class="stringliteral">&quot;Check for echo present when enabled.&quot;</span>) {</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        pty_instance.<a class="code" href="classpty.html#a361a2ef0fc27c6c1f2aac8e05aa0f89c">set_echo_received_back</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordflow">for</span> (usize i = 0; i &lt; ROUNDS; ++i) {</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span>* message = random_string(BUFFER_SIZE - 1);</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            isize bytes_written = write(slave_fd, message, std::strlen(message));</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            REQUIRE(bytes_written == <span class="keyword">static_cast&lt;</span>isize<span class="keyword">&gt;</span>(std::strlen(message)));</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            pty_instance.<a class="code" href="classpty.html#a22e150200a8581e9da66e309f9ee2ec6">recv</a>(buffer, BUFFER_SIZE);</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            REQUIRE(std::strcmp(buffer, message) == 0);</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            isize bytes_read = read(slave_fd, buffer, BUFFER_SIZE - 1);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            buffer[bytes_read] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            REQUIRE(bytes_read &gt; 0);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            REQUIRE(std::strcmp(buffer, message) == 0);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        }</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        pty_instance.<a class="code" href="classpty.html#a361a2ef0fc27c6c1f2aac8e05aa0f89c">set_echo_received_back</a>(<span class="keyword">false</span>);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    }</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    SECTION(<span class="stringliteral">&quot;Check if polling the master fd works.&quot;</span>) {</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        REQUIRE(!pty_instance.<a class="code" href="classpty.html#a9ad90a7e8c2e8a1b273b4f5859cae35c">poll</a>());</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="keywordflow">for</span> (usize i = 0; i &lt; ROUNDS; ++i) {</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span>* message = random_string(BUFFER_SIZE - 1);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            isize bytes_written = write(slave_fd, message, std::strlen(message));</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            REQUIRE(bytes_written == <span class="keyword">static_cast&lt;</span>isize<span class="keyword">&gt;</span>(std::strlen(message)));</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            usleep(100 * (ROUNDS - i));</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            REQUIRE(pty_instance.<a class="code" href="classpty.html#a9ad90a7e8c2e8a1b273b4f5859cae35c">poll</a>());</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <span class="keywordflow">for</span> (usize j = 0; pty_instance.<a class="code" href="classpty.html#a9ad90a7e8c2e8a1b273b4f5859cae35c">poll</a>(); ++j)</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                REQUIRE(message[j] == pty_instance.<a class="code" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0">getch</a>());</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            REQUIRE(!pty_instance.<a class="code" href="classpty.html#a9ad90a7e8c2e8a1b273b4f5859cae35c">poll</a>());</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        }</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    }</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;TEST_CASE(<span class="stringliteral">&quot;Pseudo-terminal operation test&quot;</span>, <span class="stringliteral">&quot;[pty]&quot;</span>) {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="classpty.html">pty</a> pty_instance;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">char</span> buffer[BUFFER_SIZE];</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    REQUIRE_NOTHROW(pty_instance.<a class="code" href="classpty.html#a50aec75ef08fc8368e6a3668821309cb">open</a>());</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    fd slave_fd = open(pty_instance.<a class="code" href="classpty.html#aaee682964bcc6906eab0cadbde4bc6fe">name</a>(), O_RDWR | O_NOCTTY);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    REQUIRE(slave_fd &gt;= 0);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    alarm(3);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    SECTION(<span class="stringliteral">&quot;Send from slave, receive from master. This will test pty::recv().&quot;</span>) {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordflow">for</span> (usize i = 0; i &lt; ROUNDS; ++i) {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span>* message = random_string(BUFFER_SIZE - 1);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            isize bytes_written = write(slave_fd, message, std::strlen(message));</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            REQUIRE(bytes_written == <span class="keyword">static_cast&lt;</span>isize<span class="keyword">&gt;</span>(std::strlen(message)));</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            pty_instance.<a class="code" href="classpty.html#a22e150200a8581e9da66e309f9ee2ec6">recv</a>(buffer, BUFFER_SIZE);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            REQUIRE(std::strcmp(buffer, message) == 0);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        }</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    SECTION(<span class="stringliteral">&quot;Send from slave, receive from master. This will test pty::getch().&quot;</span>) {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">char</span> c = 1; c &gt; 0; ++c) {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            isize bytes_written = write(slave_fd, &amp;c, 1);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            REQUIRE(bytes_written == 1);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            REQUIRE(pty_instance.<a class="code" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0">getch</a>() == c);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    }</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    SECTION(<span class="stringliteral">&quot;Send from master, receive from slave. This will test pty::send().&quot;</span>) {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordflow">for</span> (usize i = 0; i &lt; ROUNDS; ++i) {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span>* message = random_string(BUFFER_SIZE - 1);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            REQUIRE_NOTHROW(pty_instance.<a class="code" href="classpty.html#a42411f2b12218401f748cbc94fe12062">send</a>(message));</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            isize bytes_read = read(slave_fd, buffer, BUFFER_SIZE - 1);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            buffer[bytes_read] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            REQUIRE(bytes_read &gt; 0);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            REQUIRE(std::strcmp(buffer, message) == 0);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        }</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    }</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    SECTION(<span class="stringliteral">&quot;Send from master, receive from slave. This will test pty::putch().&quot;</span>) {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">char</span> c = 1; c &gt; 0; ++c) {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            REQUIRE_NOTHROW(pty_instance.<a class="code" href="classpty.html#ac9e7847a4ade52e8bea78e13f49c4c76">putch</a>(c));</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            read(slave_fd, buffer, 1);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            REQUIRE(buffer[0] == c);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    SECTION(<span class="stringliteral">&quot;Check for echo present when enabled.&quot;</span>) {</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        pty_instance.<a class="code" href="classpty.html#a361a2ef0fc27c6c1f2aac8e05aa0f89c">set_echo_received_back</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordflow">for</span> (usize i = 0; i &lt; ROUNDS; ++i) {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span>* message = random_string(BUFFER_SIZE - 1);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            isize bytes_written = write(slave_fd, message, std::strlen(message));</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            REQUIRE(bytes_written == <span class="keyword">static_cast&lt;</span>isize<span class="keyword">&gt;</span>(std::strlen(message)));</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            pty_instance.<a class="code" href="classpty.html#a22e150200a8581e9da66e309f9ee2ec6">recv</a>(buffer, BUFFER_SIZE);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            REQUIRE(std::strcmp(buffer, message) == 0);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            isize bytes_read = read(slave_fd, buffer, BUFFER_SIZE - 1);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            buffer[bytes_read] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            REQUIRE(bytes_read &gt; 0);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            REQUIRE(std::strcmp(buffer, message) == 0);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        }</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        pty_instance.<a class="code" href="classpty.html#a361a2ef0fc27c6c1f2aac8e05aa0f89c">set_echo_received_back</a>(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    SECTION(<span class="stringliteral">&quot;Check if polling the master fd works.&quot;</span>) {</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        REQUIRE(!pty_instance.<a class="code" href="classpty.html#a9ad90a7e8c2e8a1b273b4f5859cae35c">poll</a>());</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordflow">for</span> (usize i = 0; i &lt; ROUNDS; ++i) {</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span>* message = random_string(BUFFER_SIZE - 1);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            isize bytes_written = write(slave_fd, message, std::strlen(message));</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            REQUIRE(bytes_written == <span class="keyword">static_cast&lt;</span>isize<span class="keyword">&gt;</span>(std::strlen(message)));</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            usleep(USEC_DELAY_SERIAL_PTY);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            REQUIRE(pty_instance.<a class="code" href="classpty.html#a9ad90a7e8c2e8a1b273b4f5859cae35c">poll</a>());</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            <span class="keywordflow">for</span> (usize j = 0; pty_instance.<a class="code" href="classpty.html#a9ad90a7e8c2e8a1b273b4f5859cae35c">poll</a>(); ++j)</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                REQUIRE(message[j] == pty_instance.<a class="code" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0">getch</a>());</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            REQUIRE(!pty_instance.<a class="code" href="classpty.html#a9ad90a7e8c2e8a1b273b4f5859cae35c">poll</a>());</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        }</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    close(slave_fd);</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;}</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">char</span> c = 1; c &gt; 0; ++c) {</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            isize bytes_written = write(slave_fd, &amp;c, 1);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            REQUIRE(bytes_written == 1);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            usleep(USEC_DELAY_SERIAL_PTY);</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            REQUIRE(pty_instance.<a class="code" href="classpty.html#a9ad90a7e8c2e8a1b273b4f5859cae35c">poll</a>());</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            REQUIRE(pty_instance.<a class="code" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0">getch</a>() == c);</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;            REQUIRE(!pty_instance.<a class="code" href="classpty.html#a9ad90a7e8c2e8a1b273b4f5859cae35c">poll</a>());</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        }</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    }</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    close(slave_fd);</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;}</div>
 <div class="ttc" id="aclasspty_html"><div class="ttname"><a href="classpty.html">pty</a></div><div class="ttdoc">Represents a pseudo-terminal interface.</div><div class="ttdef"><b>Definition:</b> unix_pty.hpp:29</div></div>
 <div class="ttc" id="aclasspty_html_a22e150200a8581e9da66e309f9ee2ec6"><div class="ttname"><a href="classpty.html#a22e150200a8581e9da66e309f9ee2ec6">pty::recv</a></div><div class="ttdeci">void recv(char *data, usize max, char terminator='\r') const</div><div class="ttdoc">Receive data from the PTY interface master side.</div><div class="ttdef"><b>Definition:</b> unix_pty.cpp:79</div></div>
 <div class="ttc" id="aclasspty_html_a361a2ef0fc27c6c1f2aac8e05aa0f89c"><div class="ttname"><a href="classpty.html#a361a2ef0fc27c6c1f2aac8e05aa0f89c">pty::set_echo_received_back</a></div><div class="ttdeci">void set_echo_received_back(bool should)</div><div class="ttdoc">Set whether received data should be printed back to the PTY slave side.</div><div class="ttdef"><b>Definition:</b> unix_pty.cpp:159</div></div>

@@ -180,8 +180,7 @@ public:
     data_card(u16 start_adr, T begin, T end, bool lock = construct_then_write_lock) 
         : start_adr(start_adr), capacity(std::distance(begin, end)) {
 
-        static_assert(std::is_same_v<typename std::iterator_traits<T>::value_type, u8>, 
-              "Iterator value type must be u8.");
+        static_assert(std::is_same_v<typename std::iterator_traits<T>::value_type, u8>, "Iterator value type must be u8.");
 
         data.reserve(capacity);
         std::copy(begin, end, data.begin());

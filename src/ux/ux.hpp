@@ -51,7 +51,7 @@ public:
         }
     }
 
-    std::string get_bus_map_s() const { return cardbus.bus_map_s(); }
+    std::string info() const { return cardbus.bus_map_s(); }
 
     emulator(const char* config_filename) 
         : conf(config_filename), 
@@ -65,7 +65,7 @@ struct terminal_ux {
     int main(int argc, char** argv) {
         std::cout << "\x1B[33;01m-:-:-:-:- emulator setup -:-:-:-:-\x1B[0m" << std::endl;
 
-        std::cout << emu.get_bus_map_s();
+        std::cout << emu.info();
         emu.setup(argc, argv);
 
         std::cout << "\x1B[33;01m-:-:-:-:- emulator run -:-:-:-:-\x1B[0m" << std::endl;
