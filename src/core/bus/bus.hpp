@@ -136,7 +136,7 @@ public:
     inline void insert(card* card, usize slot, bool allow_conflict = false) {
         if (!card)
             throw std::invalid_argument("cannot insert nullptr");
-        if (slot >= MAX_BUS_CARDS)
+        if (slot > MAX_BUS_CARDS)
             throw std::out_of_range("slot out of range");
         if (cards[slot] != NO_CARD)
             throw std::invalid_argument("slot already occupied");
