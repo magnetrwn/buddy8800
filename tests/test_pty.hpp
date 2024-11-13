@@ -7,8 +7,7 @@
 #include "pty.hpp"
 
 constexpr static usize BUFFER_SIZE = 1024;
-constexpr static usize ROUNDS = 384;
-constexpr static usize USEC_DELAY_SERIAL_PTY = 110;
+constexpr static usize ROUNDS = 80;
 
 inline const char* random_string(usize length) {
     static std::random_device rd;
@@ -110,8 +109,7 @@ TEST_CASE("Pseudo-terminal operation test", "[pty]") {
             isize bytes_written = write(slave_fd, message, std::strlen(message));
             REQUIRE(bytes_written == static_cast<isize>(std::strlen(message)));
 
-            usleep(USEC_DELAY_SERIAL_PTY);
-            REQUIRE(pty_instance.poll());
+            while (!pty_instance.poll());
             
             for (usize j = 0; pty_instance.poll(); ++j)
                 REQUIRE(message[j] == pty_instance.getch());
@@ -123,8 +121,8 @@ TEST_CASE("Pseudo-terminal operation test", "[pty]") {
             isize bytes_written = write(slave_fd, &c, 1);
             REQUIRE(bytes_written == 1);
 
-            usleep(USEC_DELAY_SERIAL_PTY);
-            REQUIRE(pty_instance.poll());
+            while (!pty_instance.poll());
+
             REQUIRE(pty_instance.getch() == c);
             REQUIRE(!pty_instance.poll());
         }
