@@ -20,11 +20,14 @@ start_with_pc_at    = 0x0100    # Start the program counter at this address. Not
 #    (you can omit this if using load)                                                                     #
 # - let_collide: Allow the card to have overlapping address range with other cards.                        #
 #                                                                                                          #
-# IMPORTANT: cards can be de/activated by the IORQ signal according to them being memory or I/O, so        #
+# IMPORTANT: cards can be de/activated by the IOR/IOW signal according to them being memory or I/O, so     #
 #            you might not need to enable overlapping, as overlap of I/O and memory is expected.           #
 #            Only use this in case of overlap of the same type of card (e.g. two RAM cards).               #
 #                                                                                                          #
 # Note: there is (usually) a limit of 18 cards in the system. Lower slot number means higher IRQ priority. #
+#                                                                                                          #
+# Note: you can use load, range or both to load a rom and fill unused extra with zeros, at least one of    #
+#       them must be present.                                                                              #
 ############################################################################################################
 
 # -------------------------------------------- CP/M ROM CARDS -------------------------------------------- #
