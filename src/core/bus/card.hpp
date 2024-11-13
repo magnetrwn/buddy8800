@@ -168,14 +168,28 @@ private:
     }*/
 
 public:
-    data_card(u16 start_adr, usize capacity, u8 fill = 0x00, bool lock = construct_then_write_lock) 
+    /**
+     * @brief Construct a card with a fixed capacity and simple one byte fill.
+     * @param start_adr The starting address of the card.
+     * @param capacity The size in bytes of the card starting from the start address.
+     * @param fill The byte to fill the card with, default is BAD_U8.
+     * @param lock Whether the card should be write-locked after construction.
+     */
+    data_card(u16 start_adr, usize capacity, u8 fill = BAD_U8, bool lock = construct_then_write_lock) 
         : start_adr(start_adr), capacity(capacity) { 
 
         data.resize(capacity, fill);
         this->write_locked = lock;
     }
-
-    /// @brief Construct a card and copy data from an iterator pair immediately.
+    
+    /**
+     * @brief Construct a card and copy data from an iterator pair immediately.
+     * @param start_adr The starting address of the card.
+     * @param begin The iterator to the beginning of the data. It must be a container of u8 type.
+     * @param end The iterator to the end of the data. It must be a container of u8 type.
+     * @param capacity The size in bytes of the card starting from the start address. Zero (or default) to autodetect from container size.
+     * @param lock Whether the card should be write-locked after construction.
+     */
     template <typename T, T_ITERATOR_SFINAE>
     data_card(u16 start_adr, T begin, T end, usize capacity = 0, bool lock = construct_then_write_lock) 
         : start_adr(start_adr), 
@@ -190,7 +204,7 @@ public:
         if (static_cast<usize>(std::distance(begin, end)) > this->capacity)
             throw std::out_of_range("Binary data exceeds card capacity.");
 
-        data.resize(this->capacity, 0xFF);
+        data.resize(this->capacity, BAD_U8);
         std::copy(begin, end, data.begin());
         this->write_locked = lock;
     }
