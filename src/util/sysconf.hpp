@@ -51,14 +51,17 @@ private:
             if (load.empty())
                 cardptr = new ram_card(at, range);
             else
-                cardptr = new ram_card(at, load_file_vec.begin(), load_file_vec.end());
+                cardptr = new ram_card(at, load_file_vec.begin(), load_file_vec.end(), range);
+
         else if (type == "rom")
             if (load.empty())
                 cardptr = new rom_card(at, range);
             else
-                cardptr = new rom_card(at, load_file_vec.begin(), load_file_vec.end());
+                cardptr = new rom_card(at, load_file_vec.begin(), load_file_vec.end(), range);
+
         else if (type == "serial")
             cardptr = new serial_card(at);
+
         else
             throw std::runtime_error("Config has unknown card type: " + type);
 

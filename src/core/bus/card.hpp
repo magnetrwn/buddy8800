@@ -177,12 +177,20 @@ public:
 
     /// @brief Construct a card and copy data from an iterator pair immediately.
     template <typename T, T_ITERATOR_SFINAE>
-    data_card(u16 start_adr, T begin, T end, bool lock = construct_then_write_lock) 
-        : start_adr(start_adr), capacity(std::distance(begin, end)) {
+    data_card(u16 start_adr, T begin, T end, usize capacity = 0, bool lock = construct_then_write_lock) 
+        : start_adr(start_adr), 
+          capacity(
+            (capacity == 0)
+                ? static_cast<usize>(std::distance(begin, end))
+                : capacity
+            ) {
 
         static_assert(std::is_same_v<typename std::iterator_traits<T>::value_type, u8>, "Iterator value type must be u8.");
 
-        data.reserve(capacity);
+        if (static_cast<usize>(std::distance(begin, end)) > this->capacity)
+            throw std::out_of_range("Binary data exceeds card capacity.");
+
+        data.resize(this->capacity, 0xFF);
         std::copy(begin, end, data.begin());
         this->write_locked = lock;
     }

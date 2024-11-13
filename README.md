@@ -73,7 +73,7 @@ load        = "your/path/to/rom7F00.bin"
 
 **Note:** The first pair of ROM and address provided by the CLI will generate a few reset vector instruction in the zero page to jump to the first loaded ROM. The config file allows you to specify the starting address for the program counter, which is **not the same as the reset vector** as it directly sets PC to the specified address, skipping the reset vector. Because of this, be wary of having a value in the config file when trying to load a ROM from the CLI, as the emulator will give priority to the config file provided PC value.
 
-For loading from CLI, the size (`range`) of the data cards must be determined in the config file, while if using the `load` field in the config file, the size will be determined by the size of the binary to load. Here is an example of specifying `range` and not `load`, while using the CLI to load the data:
+For loading from CLI, the size (`range`) of the data cards must be determined in the config file, while if using the `load` field in the config file, the size will be determined by the size of the binary to load. **You can also use them both at the same time, filling the extra with** `0xFF` **bytes, but using a range value smaller than the binary size will cause an exception.** Here is an example of specifying `range`, while using the CLI to load the data:
 
 ```toml
 [[card]]
@@ -87,7 +87,7 @@ range       = 2048
 bin/buddy8800 your/path/to/rom100.bin 0x100
 ```
 
-Note that this will not check if the binary file is too large for the specified range, and in which case will just continue writing to other cards in the system, which is expected behavior. The CLI loading utility allows you to load data in any range of memory as it serves exactly that purpose, even after having loaded a file already from a config file.
+Note that this will not check if the binary file is too large (more than 2048 bytes) for the specified range, and in which case will just continue writing to other cards in the system, which is expected behavior. The CLI loading utility allows you to load data in any range of memory as it serves exactly that purpose, even after having loaded a file already from a config file.
 
 Much of this information is also immediately reported upon running the emulator during setup phase, allowing you to quickly see if the loaded configuration is correct.
 
