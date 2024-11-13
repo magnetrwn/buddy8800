@@ -1,6 +1,6 @@
 var classdata__card =
 [
-    [ "data_card", "classdata__card.html#a141f8e9addf3f0a699dfcd8388f0eb55", null ],
+    [ "data_card", "classdata__card.html#a1f4339ce0ffbeafe215f45d0f6b3e65d", null ],
     [ "data_card", "classdata__card.html#aa37ae16414bdfd89a16e2283bce6c043", null ],
     [ "clear", "classdata__card.html#ac53bf5238948b7a8299f456e047d3157", null ],
     [ "get_irq", "classdata__card.html#a4bf6bce79c1a37be037ccdb01d475146", null ],

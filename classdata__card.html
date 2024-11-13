@@ -120,13 +120,12 @@ $(document).ready(function(){initNavTree('classdata__card.html',''); initResizab
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a141f8e9addf3f0a699dfcd8388f0eb55"><td class="memItemLeft" align="right" valign="top"><a id="a141f8e9addf3f0a699dfcd8388f0eb55"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>data_card</b> (u16 start_adr, usize capacity, u8 fill=0x00, bool lock=construct_then_write_lock)</td></tr>
-<tr class="separator:a141f8e9addf3f0a699dfcd8388f0eb55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa37ae16414bdfd89a16e2283bce6c043"><td class="memTemplParams" colspan="2"><a id="aa37ae16414bdfd89a16e2283bce6c043"></a>
-template&lt;typename T , T_ITERATOR_SFINAE &gt; </td></tr>
+<tr class="memitem:a1f4339ce0ffbeafe215f45d0f6b3e65d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#a1f4339ce0ffbeafe215f45d0f6b3e65d">data_card</a> (u16 start_adr, usize capacity, u8 fill=BAD_U8, bool lock=construct_then_write_lock)</td></tr>
+<tr class="memdesc:a1f4339ce0ffbeafe215f45d0f6b3e65d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a card with a fixed capacity and simple one byte fill.  <a href="classdata__card.html#a1f4339ce0ffbeafe215f45d0f6b3e65d">More...</a><br /></td></tr>
+<tr class="separator:a1f4339ce0ffbeafe215f45d0f6b3e65d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa37ae16414bdfd89a16e2283bce6c043"><td class="memTemplParams" colspan="2">template&lt;typename T , T_ITERATOR_SFINAE &gt; </td></tr>
 <tr class="memitem:aa37ae16414bdfd89a16e2283bce6c043"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classdata__card.html#aa37ae16414bdfd89a16e2283bce6c043">data_card</a> (u16 start_adr, T begin, T end, usize capacity=0, bool lock=construct_then_write_lock)</td></tr>
-<tr class="memdesc:aa37ae16414bdfd89a16e2283bce6c043"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a card and copy data from an iterator pair immediately. <br /></td></tr>
+<tr class="memdesc:aa37ae16414bdfd89a16e2283bce6c043"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a card and copy data from an iterator pair immediately.  <a href="classdata__card.html#aa37ae16414bdfd89a16e2283bce6c043">More...</a><br /></td></tr>
 <tr class="separator:aa37ae16414bdfd89a16e2283bce6c043"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af921f54ef18d2f7c799e7335fd82e68e"><td class="memItemLeft" align="right" valign="top"><a id="af921f54ef18d2f7c799e7335fd82e68e"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#af921f54ef18d2f7c799e7335fd82e68e">in_range</a> (u16 adr) const override</td></tr>
@@ -221,7 +220,139 @@ class data_card&lt; construct_then_write_lock &gt;</h3>
 <dl class="section note"><dt>Note</dt><dd>For convenience, use the aliases <code>ram_card</code> and <code>rom_card</code> instead of this class. </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Out of range addresses are not checked, they should be checked by the bus instead, to avoid calling <a class="el" href="classdata__card.html#af921f54ef18d2f7c799e7335fd82e68e" title="Check if an address on the bus is in the card&#39;s range.">in_range()</a> twice. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd>ram_card, rom_card </dd></dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a1f4339ce0ffbeafe215f45d0f6b3e65d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f4339ce0ffbeafe215f45d0f6b3e65d">&#9670;&nbsp;</a></span>data_card() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;bool construct_then_write_lock&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classdata__card.html">data_card</a>&lt; construct_then_write_lock &gt;::<a class="el" href="classdata__card.html">data_card</a> </td>
+          <td>(</td>
+          <td class="paramtype">u16&#160;</td>
+          <td class="paramname"><em>start_adr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">usize&#160;</td>
+          <td class="paramname"><em>capacity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8&#160;</td>
+          <td class="paramname"><em>fill</em> = <code>BAD_U8</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>lock</em> = <code>construct_then_write_lock</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a card with a fixed capacity and simple one byte fill. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">start_adr</td><td>The starting address of the card. </td></tr>
+    <tr><td class="paramname">capacity</td><td>The size in bytes of the card starting from the start address. </td></tr>
+    <tr><td class="paramname">fill</td><td>The byte to fill the card with, default is BAD_U8. </td></tr>
+    <tr><td class="paramname">lock</td><td>Whether the card should be write-locked after construction. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa37ae16414bdfd89a16e2283bce6c043"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa37ae16414bdfd89a16e2283bce6c043">&#9670;&nbsp;</a></span>data_card() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;bool construct_then_write_lock&gt; </div>
+<div class="memtemplate">
+template&lt;typename T , T_ITERATOR_SFINAE &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classdata__card.html">data_card</a>&lt; construct_then_write_lock &gt;::<a class="el" href="classdata__card.html">data_card</a> </td>
+          <td>(</td>
+          <td class="paramtype">u16&#160;</td>
+          <td class="paramname"><em>start_adr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>begin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">usize&#160;</td>
+          <td class="paramname"><em>capacity</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>lock</em> = <code>construct_then_write_lock</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a card and copy data from an iterator pair immediately. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">start_adr</td><td>The starting address of the card. </td></tr>
+    <tr><td class="paramname">begin</td><td>The iterator to the beginning of the data. It must be a container of u8 type. </td></tr>
+    <tr><td class="paramname">end</td><td>The iterator to the end of the data. It must be a container of u8 type. </td></tr>
+    <tr><td class="paramname">capacity</td><td>The size in bytes of the card starting from the start address. Zero (or default) to autodetect from container size. </td></tr>
+    <tr><td class="paramname">lock</td><td>Whether the card should be write-locked after construction. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a4bf6bce79c1a37be037ccdb01d475146"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4bf6bce79c1a37be037ccdb01d475146">&#9670;&nbsp;</a></span>get_irq()</h2>
 
