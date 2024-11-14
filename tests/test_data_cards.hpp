@@ -17,20 +17,20 @@ TEST_CASE("Check bus with RAM and ROM cards", "[bus]") {
 
     // Memory map:
     // 0x0000 to 0x03ff: r, filled with 0x5A
-    // 0x0400 to 0x13ff: rw, zeroed
+    // 0x0400 to 0x13ff: rw, bad (filled with BAD_U8)
     // 0x1400 to 0x3fff: r, filled with 0x5A
-    // 0x4000 to 0x43ff: rw, zeroed
-    // 0x4100 to 0x44ff: r, zeroed (overlapping the previous area, but in slot 0, resulting in writing to both but only reading
-    //                              back from this ROM card!)
+    // 0x4000 to 0x43ff: rw, bad (filled with BAD_U8)
+    // 0x4100 to 0x44ff: r, bad (overlapping the previous area, but in slot 0, resulting in writing to both but only reading
+    //                           back from this ROM card!)
 
     SECTION("Untouched read test") {
         REQUIRE(cardbus.read(0x0000) == 0x5A);
         REQUIRE(cardbus.read(0x03fe) == 0x5A);
-        REQUIRE(cardbus.read(0x0400) == 0x00);
-        REQUIRE(cardbus.read(0x13ff) == 0x00);
+        REQUIRE(cardbus.read(0x0400) == BAD_U8);
+        REQUIRE(cardbus.read(0x13ff) == BAD_U8);
         REQUIRE(cardbus.read(0x1400) == 0x5A);
         REQUIRE(cardbus.read(0x3fff) == 0x5A);
-        REQUIRE(cardbus.read(0x4000) == 0x00);
+        REQUIRE(cardbus.read(0x4000) == BAD_U8);
         REQUIRE(cardbus.read(0x43ff) == 0x5A);
         REQUIRE(cardbus.read(0x4100) == 0x5A);
         REQUIRE(cardbus.read(0x44ff) == 0x5A);
