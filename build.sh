@@ -44,8 +44,8 @@ cmake .. \
 
 make -j8
 mv compile_commands.json .. || true
-cp ../static/config.toml ../bin/
-cp ../static/config.toml ../build/
+cp ../static/* ../bin/
+cp ../static/* ../build/
 
 if [ "$ENABLE_TESTING" = "ON" ]
 then

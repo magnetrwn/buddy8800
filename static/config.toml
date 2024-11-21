@@ -6,8 +6,8 @@
 # -------------------------------------------- GENERAL SETUP --------------------------------------------- # 
 
 [emulator]
-pseudo_bdos_enabled = true      # Redirect and handle calls that match addresses of BDOS calls.
-start_with_pc_at    = 0x0100    # Start the program counter at this address. Note that this bypasses the reset vector. 0 or comment to disable.
+pseudo_bdos_enabled = false     # Redirect and handle calls that match addresses of BDOS calls.
+start_with_pc_at    = 0xF800    # Start the program counter at this address. Note that this bypasses the reset vector. 0 or comment to disable.
 
 ############################################################################################################
 # List of cards here, make sure to append cards you wish to add. Available parameters are:                 #
@@ -32,18 +32,24 @@ start_with_pc_at    = 0x0100    # Start the program counter at this address. Not
 
 # -------------------------------------------- CP/M ROM CARDS -------------------------------------------- #
 
+[[card]] # ALTMON 1K ROM Monitor
+slot        = 0
+type        = "ram"
+at          = 0xF800
+load        = "static/f800mon.bin"
+
 # [[card]] # CP/M 2.2 BIOS
 # slot        = 0
 # type        = "rom"
 # at          = 0x0000
 # load        = "static/bios22.bin"
-# 
+
 # [[card]] # CP/M 2.2 BDOS
 # slot        = 1
 # type        = "rom"
 # at          = 0x8000
 # load        = "static/bdos22.bin"
-# 
+
 # [[card]] # CP/M 2.2 CCP
 # slot        = 2
 # type        = "rom"
@@ -59,15 +65,15 @@ at          = 0x10
 
 # -------------------------------------------- SOFTWARE CARDS -------------------------------------------- #
 
-[[card]] # Diagnostics II expects to be loaded in RAM
-slot        = 3
-type        = "ram"
-at          = 0x0100
-load        = "tests/res/diag2.com"
+# [[card]] # Diagnostics II expects to be loaded in RAM
+# slot        = 3
+# type        = "ram"
+# at          = 0x0100
+# load        = "tests/res/diag2.com"
 
-[[card]] # Cover all memory space with RAM just in case
-slot        = 17
-type        = "ram"
-at          = 0x0000
-range       = 65536
-let_collide = true
+# [[card]] # Cover all memory space with RAM just in case
+# slot        = 17
+# type        = "ram"
+# at          = 0x0000
+# range       = 65536
+# let_collide = true

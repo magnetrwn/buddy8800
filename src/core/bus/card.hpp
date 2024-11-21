@@ -364,12 +364,12 @@ public:
     }
 
     /// @brief Refresh the UART for data I/O. Run this after every CPU step.
+    /// @note This will only run refresh after N cycles according to the base clock to CPU clock ratio
     void refresh() override {
-        // Only run refresh after N cycles according to the base clock to CPU clock ratio
-        if (++non_refresh_cycles < ASSUMED_CPU_FREQ_HZ * (1 << divide_by) / base_clock)
-            return;
+        //if (++non_refresh_cycles < ASSUMED_CPU_FREQ_HZ * (1 << divide_by) / base_clock)
+        //    return;
 
-        non_refresh_cycles = 0;
+        //non_refresh_cycles = 0;
 
         if (!RDRF() and serial.poll()) {
             RX_DATA(serial.getch());

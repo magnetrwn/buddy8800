@@ -34,6 +34,7 @@ TEST_CASE("Check bus with RAM and ROM cards", "[bus]") {
         REQUIRE(cardbus.read(0x43ff) == 0x5A);
         REQUIRE(cardbus.read(0x4100) == 0x5A);
         REQUIRE(cardbus.read(0x44ff) == 0x5A);
+        REQUIRE(cardbus.read(0x4500) == BAD_U8);
     }
 
     SECTION("Write locking and slot priority test") {
