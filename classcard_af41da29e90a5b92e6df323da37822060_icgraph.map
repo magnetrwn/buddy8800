@@ -1,7 +1,6 @@
 <map id="card::is_io" name="card::is_io">
-<area shape="rect" id="node1" title="Check if the card is an I/O card." alt="" coords="347,56,435,83"/>
-<area shape="rect" id="node2" href="$classbus.html#a5ca080170524f30333bee7fe0b857871" title="Reads a byte from the bus." alt="" coords="194,5,277,32"/>
-<area shape="rect" id="node4" href="$classbus.html#aea7690c041bc175652f213f9a8860c73" title="Writes a byte to the bus." alt="" coords="192,56,279,83"/>
-<area shape="rect" id="node5" href="$classbus.html#addf9c4c65e0374e6016e1a278f51a0ed" title="Writes a byte to the bus, without considering write lock." alt="" coords="172,107,299,133"/>
-<area shape="rect" id="node3" href="$classbus.html#aff023ba4699c0456c3e1ed045b3678ed" title="A shortcut to read the bus using an index directly without a proxy object." alt="" coords="5,5,124,32"/>
+<area shape="rect" id="node1" title="Check if the card is an I/O card." alt="" coords="180,56,268,83"/>
+<area shape="rect" id="node2" href="$classbus.html#a593732187325b7ae685b075eadf9fc6a" title="Reads a byte from the bus." alt="" coords="27,5,110,32"/>
+<area shape="rect" id="node3" href="$classbus.html#aea7690c041bc175652f213f9a8860c73" title="Writes a byte to the bus." alt="" coords="25,56,112,83"/>
+<area shape="rect" id="node4" href="$classbus.html#addf9c4c65e0374e6016e1a278f51a0ed" title="Writes a byte to the bus, without considering write lock." alt="" coords="5,107,132,133"/>
 </map>

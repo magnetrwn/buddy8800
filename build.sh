@@ -49,7 +49,9 @@ cp ../static/* ../build/
 
 if [ "$ENABLE_TESTING" = "ON" ]
 then
-  ctest --output-on-failure || true
+  cd tests
+  ctest --output-on-failure
+  cd ..
 fi
 
 cd ..

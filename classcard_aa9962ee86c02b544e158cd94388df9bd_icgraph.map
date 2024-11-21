@@ -1,4 +1,0 @@
-<map id="card::set_bit" name="card::set_bit">
-<area shape="rect" id="node1" title="Set a bit in a byte on the bus." alt="" coords="172,5,275,32"/>
-<area shape="rect" id="node2" href="$classcard.html#ab210eb529f3a153ab99822cda9492b3c" title="Un/set a bit in a byte on the bus by condition." alt="" coords="5,5,124,32"/>
-</map>

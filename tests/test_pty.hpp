@@ -129,4 +129,5 @@ TEST_CASE("Pseudo-terminal operation test", "[pty]") {
     }
 
     close(slave_fd);
+    alarm(0);
 }

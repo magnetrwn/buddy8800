@@ -1,5 +1,0 @@
-<map id="card::set_bit" name="card::set_bit">
-<area shape="rect" id="node1" title="Set a bit in a byte on the bus." alt="" coords="5,31,108,57"/>
-<area shape="rect" id="node2" href="$classcard.html#a0ea76feb6cf75cf51ba3362f4ab50190" title="Read a byte from the card." alt="" coords="158,5,245,32"/>
-<area shape="rect" id="node3" href="$classcard.html#ae4b1863113c0e72b7de13f3774776fdb" title="Write a byte to the card." alt="" coords="156,56,247,83"/>
-</map>

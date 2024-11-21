@@ -34,10 +34,6 @@
  * @warning The `size()` method returns the maximum number of addressable locations on the bus (65536), not the number of cards.
  * While this might look misleading, it's actually an attempt at keeping the same interface as there would be if the instanced bus
  * were to be replaced by a normal `std::array<u8, 65536>`.
- * @todo The design iterating over all of the cards array and calling methods and dereferencing pointers is inefficient, instead
- * it could be faster to hold vectors to different types of cards and iterate over them separately only on the related bus methods.
- * For example, data cards don't need to be refreshed. Or consider a faster way to implement the refresh method, since right now
- * it is called at every CPU step...
  */
 class bus {
 private:
@@ -178,7 +174,7 @@ public:
      * @return The byte read from the first valid card on the bus.
      * @warning This method will return only the first valid card slot that is in range of the address. Be mindful of allowed collision ranges.
      */
-    inline u8 read(u16 adr, bool ior = false) const {
+    inline u8 read(u16 adr, bool ior = false) {
         for (card* card : cards)
             if (card != NO_CARD and card->in_range(adr) and ior == card->is_io())
                 return card->read(adr);
@@ -224,23 +220,7 @@ public:
      * @param adr The address to index.
      * @return The byte read from the bus.
      */
-    inline u8 operator[](u16 adr) const { return this->read(adr); }
-
-    /**
-     * @brief Refreshes all cards on the bus.
-     *
-     * This method will call each card's possibly distinct way to refresh, which is important for example to
-     * let a serial card be able to poll or send new data.
-     *
-     * @note It is very important that cards implement ways to not make this method slow down the emulation,
-     * since it's highly likely that many devices would operate at rates much slower than the CPU clock step,
-     * thus it's beneficial to add a cycle counter to the method implementation on the card.
-     */
-    inline void refresh() {
-        for (card* card : cards)
-            if (card != NO_CARD)
-                card->refresh();
-    }
+    //inline u8 operator[](u16 adr) const { return this->read(adr); }
 
     /**
      * @brief Checks if an IRQ is raised.

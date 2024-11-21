@@ -6,8 +6,7 @@ var classserial__card =
     [ "identify", "classserial__card.html#a1f29b0bb8ad083bf74af151628b7acf3", null ],
     [ "in_range", "classserial__card.html#afec24d99079048e6555c21b3eaf3be66", null ],
     [ "is_io", "classserial__card.html#a63b70caf2fd303c6d8246a28bd50dc68", null ],
-    [ "read", "classserial__card.html#a70a58b548817e1590efb55652d772e67", null ],
-    [ "refresh", "classserial__card.html#a2d9f292d7be1f9deebf49fa5d748c039", null ],
+    [ "read", "classserial__card.html#a449b4374d2b57d9328f91c48ea56e451", null ],
     [ "write", "classserial__card.html#a87b17dad886b8847836ebd214c3c14ad", null ],
     [ "write_force", "classserial__card.html#a692446f7540c8ae4601737bdf2833ebf", null ]
 ];

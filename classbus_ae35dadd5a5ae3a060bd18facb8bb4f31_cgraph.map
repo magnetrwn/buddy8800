@@ -1,4 +1,4 @@
 <map id="bus::is_irq" name="bus::is_irq">
-<area shape="rect" id="node1" title="Checks if an IRQ is raised." alt="" coords="5,5,93,32"/>
+<area shape="rect" id="node1" title="A shortcut to read the bus using an index directly without a proxy object." alt="" coords="5,5,93,32"/>
 <area shape="rect" id="node2" href="$classcard.html#a5aca5465f1771a8fa77cd0deb33ed996" title="Check if the card has an IRQ raised." alt="" coords="141,5,235,32"/>
 </map>

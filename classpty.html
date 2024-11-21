@@ -142,7 +142,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a pseudo-terminal interface. </p>
 <p>This class handles a PTY interface and provides some convenience when interacting with it. After construction and by calling <a class="el" href="classpty.html#a50aec75ef08fc8368e6a3668821309cb" title="Open the PTY interface.">open()</a>, the PTY interface is opened and public methods from this class can be used to handle the master file descriptor side of the PTY. The slave side is supposed to be provided to the user or a process to interact with, thus the <a class="el" href="classpty.html#aaee682964bcc6906eab0cadbde4bc6fe" title="Retrieve the name of the slave device.">name()</a> method is available to retrieve the slave device name, but no further handling is done by this class.</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd>On breaking the application while running, if anything is connected to the slave fd, the PTY is never closed. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>On breaking the application while running, if anything is connected to the slave fd, the PTY is never closed. </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="af46ce3f92e8dc2077afec7a54c6b85b0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af46ce3f92e8dc2077afec7a54c6b85b0">&#9670;&nbsp;</a></span>getch()</h2>
@@ -172,7 +172,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 <p class="reference">References <a class="el" href="classpty.html#ac9e7847a4ade52e8bea78e13f49c4c76">putch()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="classpty.html#a22e150200a8581e9da66e309f9ee2ec6">recv()</a>, and <a class="el" href="classserial__card.html#a2d9f292d7be1f9deebf49fa5d748c039">serial_card::refresh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="classserial__card.html#a449b4374d2b57d9328f91c48ea56e451">serial_card::read()</a>, and <a class="el" href="classpty.html#a22e150200a8581e9da66e309f9ee2ec6">recv()</a>.</p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -191,9 +191,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpty_af46ce3f92e8dc2077afec7a54c6b85b0_icgraph.png" border="0" usemap="#aclasspty_af46ce3f92e8dc2077afec7a54c6b85b0_icgraph" alt=""/></div>
 <map name="aclasspty_af46ce3f92e8dc2077afec7a54c6b85b0_icgraph" id="aclasspty_af46ce3f92e8dc2077afec7a54c6b85b0_icgraph">
-<area shape="rect" title="Get a single byte from the PTY interface master side." alt="" coords="200,31,287,57"/>
-<area shape="rect" href="classpty.html#a22e150200a8581e9da66e309f9ee2ec6" title="Receive data from the PTY interface master side." alt="" coords="39,5,118,32"/>
-<area shape="rect" href="classserial__card.html#a2d9f292d7be1f9deebf49fa5d748c039" title="Refresh the UART for data I/O. Run this after every CPU step." alt="" coords="5,56,152,83"/>
+<area shape="rect" title="Get a single byte from the PTY interface master side." alt="" coords="184,31,271,57"/>
+<area shape="rect" href="classserial__card.html#a449b4374d2b57d9328f91c48ea56e451" title="Read a byte from the serial registers." alt="" coords="5,5,136,32"/>
+<area shape="rect" href="classpty.html#a22e150200a8581e9da66e309f9ee2ec6" title="Receive data from the PTY interface master side." alt="" coords="31,56,110,83"/>
 </map>
 </div>
 
@@ -299,7 +299,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </dl>
 <p>This method polls the PTY interface master side to check if there is data available to be read. It's handling the master PTY fd internally using <code>epoll</code>. </p>
 
-<p class="reference">Referenced by <a class="el" href="classserial__card.html#a2d9f292d7be1f9deebf49fa5d748c039">serial_card::refresh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="classserial__card.html#a449b4374d2b57d9328f91c48ea56e451">serial_card::read()</a>.</p>
 <div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
@@ -307,8 +307,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <div id="dynsection-4-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpty_a9ad90a7e8c2e8a1b273b4f5859cae35c_icgraph.png" border="0" usemap="#aclasspty_a9ad90a7e8c2e8a1b273b4f5859cae35c_icgraph" alt=""/></div>
 <map name="aclasspty_a9ad90a7e8c2e8a1b273b4f5859cae35c_icgraph" id="aclasspty_a9ad90a7e8c2e8a1b273b4f5859cae35c_icgraph">
-<area shape="rect" title="Check if there is data available to be read from the PTY interface master side." alt="" coords="200,5,275,32"/>
-<area shape="rect" href="classserial__card.html#a2d9f292d7be1f9deebf49fa5d748c039" title="Refresh the UART for data I/O. Run this after every CPU step." alt="" coords="5,5,152,32"/>
+<area shape="rect" title="Check if there is data available to be read from the PTY interface master side." alt="" coords="184,5,259,32"/>
+<area shape="rect" href="classserial__card.html#a449b4374d2b57d9328f91c48ea56e451" title="Read a byte from the serial registers." alt="" coords="5,5,136,32"/>
 </map>
 </div>
 
@@ -346,7 +346,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>This method sends a single byte/char to the PTY interface master side. It uses the <code>write()</code> system call.</p>
 <dl class="section warning"><dt>Warning</dt><dd>This method will block until the byte is sent. </dd></dl>
 
-<p class="reference">Referenced by <a class="el" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0">getch()</a>, and <a class="el" href="classserial__card.html#a2d9f292d7be1f9deebf49fa5d748c039">serial_card::refresh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0">getch()</a>.</p>
 <div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-5-summary" class="dynsummary" style="display:block;">
@@ -354,10 +354,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <div id="dynsection-5-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpty_ac9e7847a4ade52e8bea78e13f49c4c76_icgraph.png" border="0" usemap="#aclasspty_ac9e7847a4ade52e8bea78e13f49c4c76_icgraph" alt=""/></div>
 <map name="aclasspty_ac9e7847a4ade52e8bea78e13f49c4c76_icgraph" id="aclasspty_ac9e7847a4ade52e8bea78e13f49c4c76_icgraph">
-<area shape="rect" title="Send a single byte to the PTY interface master side." alt="" coords="335,31,421,57"/>
-<area shape="rect" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0" title="Get a single byte from the PTY interface master side." alt="" coords="200,5,287,32"/>
-<area shape="rect" href="classserial__card.html#a2d9f292d7be1f9deebf49fa5d748c039" title="Refresh the UART for data I/O. Run this after every CPU step." alt="" coords="5,56,152,83"/>
-<area shape="rect" href="classpty.html#a22e150200a8581e9da66e309f9ee2ec6" title="Receive data from the PTY interface master side." alt="" coords="39,5,118,32"/>
+<area shape="rect" title="Send a single byte to the PTY interface master side." alt="" coords="319,31,405,57"/>
+<area shape="rect" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0" title="Get a single byte from the PTY interface master side." alt="" coords="184,31,271,57"/>
+<area shape="rect" href="classserial__card.html#a449b4374d2b57d9328f91c48ea56e451" title="Read a byte from the serial registers." alt="" coords="5,5,136,32"/>
+<area shape="rect" href="classpty.html#a22e150200a8581e9da66e309f9ee2ec6" title="Receive data from the PTY interface master side." alt="" coords="31,56,110,83"/>
 </map>
 </div>
 

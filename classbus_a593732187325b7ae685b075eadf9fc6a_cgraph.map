@@ -2,5 +2,5 @@
 <area shape="rect" id="node1" title="Reads a byte from the bus." alt="" coords="5,56,88,83"/>
 <area shape="rect" id="node2" href="$classcard.html#ab32f79943888d74e0a506e78b2d7406c" title="Check if an address on the bus is in the card&#39;s range." alt="" coords="136,5,251,32"/>
 <area shape="rect" id="node3" href="$classcard.html#af41da29e90a5b92e6df323da37822060" title="Check if the card is an I/O card." alt="" coords="149,56,237,83"/>
-<area shape="rect" id="node4" href="$classcard.html#a0ea76feb6cf75cf51ba3362f4ab50190" title="Read a byte from the card." alt="" coords="150,107,237,133"/>
+<area shape="rect" id="node4" href="$classcard.html#a5ed2b72cca9db35d23873352a4af90a5" title="Read a byte from the card." alt="" coords="150,107,237,133"/>
 </map>

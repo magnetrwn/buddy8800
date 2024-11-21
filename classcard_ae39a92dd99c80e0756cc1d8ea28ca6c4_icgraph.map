@@ -1,4 +1,0 @@
-<map id="card::refresh" name="card::refresh">
-<area shape="rect" id="node1" title="Refresh the card to allow periodic I/O, timer or sync operation." alt="" coords="152,5,256,32"/>
-<area shape="rect" id="node2" href="$classbus.html#ac158680334e36add350e716e6a0ec69b" title="Refreshes all cards on the bus." alt="" coords="5,5,104,32"/>
-</map>

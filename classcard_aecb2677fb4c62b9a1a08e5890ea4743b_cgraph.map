@@ -1,5 +1,0 @@
-<map id="card::unset_bit" name="card::unset_bit">
-<area shape="rect" id="node1" title="Unset a bit in a byte on the bus." alt="" coords="5,31,124,57"/>
-<area shape="rect" id="node2" href="$classcard.html#a0ea76feb6cf75cf51ba3362f4ab50190" title="Read a byte from the card." alt="" coords="174,5,261,32"/>
-<area shape="rect" id="node3" href="$classcard.html#ae4b1863113c0e72b7de13f3774776fdb" title="Write a byte to the card." alt="" coords="172,56,263,83"/>
-</map>

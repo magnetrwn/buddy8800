@@ -32,7 +32,7 @@ start_with_pc_at    = 0xF800    # Start the program counter at this address. Not
 
 # -------------------------------------------- CP/M ROM CARDS -------------------------------------------- #
 
-[[card]] # ALTMON 1K ROM Monitor
+[[card]] # ALTMON 1K ROM Monitor (it's still a bit over 1024 bytes)
 slot        = 0
 type        = "ram"
 at          = 0xF800
@@ -65,15 +65,15 @@ at          = 0x10
 
 # -------------------------------------------- SOFTWARE CARDS -------------------------------------------- #
 
-# [[card]] # Diagnostics II expects to be loaded in RAM
-# slot        = 3
-# type        = "ram"
-# at          = 0x0100
-# load        = "tests/res/diag2.com"
+[[card]] # Diagnostics II expects to be loaded in RAM
+slot        = 3
+type        = "ram"
+at          = 0x0100
+load        = "tests/res/diag2.com"
 
-# [[card]] # Cover all memory space with RAM just in case
-# slot        = 17
-# type        = "ram"
-# at          = 0x0000
-# range       = 65536
-# let_collide = true
+[[card]] # Cover all memory space with RAM just in case
+slot        = 17
+type        = "ram"
+at          = 0x0000
+range       = 65536
+let_collide = true

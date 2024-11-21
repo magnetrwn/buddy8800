@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['emulator_96',['emulator',['../classemulator.html',1,'']]]
+  ['emulator_92',['emulator',['../classemulator.html',1,'']]]
 ];

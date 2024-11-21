@@ -1,0 +1,6 @@
+<map id="serial_card::read" name="serial_card::read">
+<area shape="rect" id="node1" title="Read a byte from the serial registers." alt="" coords="5,31,136,57"/>
+<area shape="rect" id="node2" href="$classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0" title="Get a single byte from the PTY interface master side." alt="" coords="184,5,271,32"/>
+<area shape="rect" id="node4" href="$classpty.html#a9ad90a7e8c2e8a1b273b4f5859cae35c" title="Check if there is data available to be read from the PTY interface master side." alt="" coords="190,56,265,83"/>
+<area shape="rect" id="node3" href="$classpty.html#ac9e7847a4ade52e8bea78e13f49c4c76" title="Send a single byte to the PTY interface master side." alt="" coords="319,5,405,32"/>
+</map>
