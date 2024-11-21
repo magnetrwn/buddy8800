@@ -28,6 +28,8 @@ add_subdirectory(src)
 add_subdirectory(extern/toml11)
 
 if(ENABLE_TESTING)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/build/tests)
     add_subdirectory(extern/Catch2)
     add_subdirectory(tests)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 endif()

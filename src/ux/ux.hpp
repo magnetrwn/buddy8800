@@ -45,10 +45,8 @@ public:
     void run() {
         while (!processor.is_halted()) {
             processor.step();
-            cardbus.refresh();
             while (cardbus.is_irq())
                 processor.interrupt(cardbus.get_irq());
-            usleep(100000);
         }
     }
 

@@ -40,22 +40,6 @@ protected:
     bool irq_raised = false;
 
 public:
-    /// @name Bit utilities.
-    /// \{
-
-    /// @brief Set a bit in a byte on the bus.
-    /// @warning This method does not check if the address is in the card's range.
-    void set_bit(u16 adr, u8 bitmask) { write(adr, read(adr) | bitmask); }
-
-    /// @brief Unset a bit in a byte on the bus.
-    /// @warning This method does not check if the address is in the card's range.
-    void unset_bit(u16 adr, u8 bitmask) { write(adr, read(adr) & ~bitmask); }
-
-    /// @brief Un/set a bit in a byte on the bus by condition.
-    /// @warning This method does not check if the address is in the card's range.
-    void set_if_bit(u16 adr, u8 bitmask, bool value) { value ? set_bit(adr, bitmask) : unset_bit(adr, bitmask); }
-
-    /// \}
     /// @name Commonly used methods.
     /// \{
 
@@ -99,7 +83,7 @@ public:
      * @param adr The address to read from.
      * @returns The byte read from the card.
      */
-    virtual u8 read(u16 adr) const = 0;
+    virtual u8 read(u16 adr) = 0;
 
     /**
      * @brief Write a byte to the card.
@@ -118,10 +102,6 @@ public:
     /// @brief Check if the card is an I/O card.
     /// @returns False on a memory card, true on an I/O card.
     virtual bool is_io() const = 0;
-
-    /// @brief Refresh the card to allow periodic I/O, timer or sync operation.
-    /// @see bus::refresh()
-    virtual void refresh() = 0;
 
     /// @brief Get the IRQ instruction (and possible operands).
     /// @see bus::get_irq()
@@ -216,7 +196,7 @@ public:
     card_identify identify() override { return { start_adr, capacity, (this->write_locked ? "rom area" : "ram area") }; }
 
     /// @brief Read a byte from the data card.
-    u8 read(u16 adr) const override { return data[adr - start_adr]; }
+    u8 read(u16 adr) override { return data[adr - start_adr]; }
 
     /// @brief Write a byte to the data card.
     void write(u16 adr, u8 byte) override {
@@ -239,7 +219,6 @@ public:
     /// @name Unused methods.
     /// \{
 
-    void refresh() override {}
     std::array<u8, 3> get_irq() override { return { BAD_U8, BAD_U8, BAD_U8 }; }
 
     /// \}
@@ -267,9 +246,6 @@ constexpr static u16 SERIAL_IO_ADDRESSES = 2;
 /// @brief The base clock speed of the MC6850 ACIA (UART).
 constexpr static usize SERIAL_BASE_CLOCK = 19200;
 
-/// @brief The assumed frequency of cycles per second of the CPU, to be compared to the UART baud rate to limit polling.
-constexpr static usize ASSUMED_CPU_FREQ_HZ = 2000000;
-
 /**
  * @brief A card that emulates a 6850 ACIA.
  * @param start_adr The starting address of the card.
@@ -280,10 +256,7 @@ constexpr static usize ASSUMED_CPU_FREQ_HZ = 2000000;
  * correspond to the TX_DATA (write-only), RX_DATA (read-only), CONTROL (write-only) and STATUS (read-only) registers of the
  * UART. The card is also able to trigger IRQ according to different conditions.
  *
- * @note The `refresh()` method is fundamental here, as it will poll the pseudo-terminal for new data and send data to it regularly.
- * Not periodically refreshing the bus, and by consequence the card, will make the card unable to send or receive data.
- * This method should be called at every CPU step, and will internally keep track on after how many cycles to poll the PTY, according
- * to the base clock.
+ * @note The state of I/O devices is updated upon each read or write operation, instead of running a refresh cycle as previously done.
  * @par
  * @note To mimic the partial address decode behavior, while the IN and OUT instructions of the 8080 duplicate the argument byte on
  * the address bus, the decoder only looks at the lower 8 bits, effectively creating 255 mirrors of the card in the address space.
@@ -300,7 +273,6 @@ private:
     pty serial;
     std::array<u8, 4> registers;
     usize divide_by;
-    usize non_refresh_cycles;
     char detail[MAX_SERIAL_DETAIL_LENGTH];
     bool rts;
 
@@ -308,6 +280,7 @@ private:
     constexpr u8 RX_DATA() const { return registers[static_cast<usize>(serial_register::RX_DATA)]; }
     constexpr u8 CONTROL() const { return registers[static_cast<usize>(serial_register::CONTROL)]; }
     constexpr u8 STATUS() const { return registers[static_cast<usize>(serial_register::STATUS)]; }
+    
     constexpr void TX_DATA(u8 value) { registers[static_cast<usize>(serial_register::TX_DATA)] = value; }
     constexpr void RX_DATA(u8 value) { registers[static_cast<usize>(serial_register::RX_DATA)] = value; }
     constexpr void CONTROL(u8 value) { registers[static_cast<usize>(serial_register::CONTROL)] = value; }
@@ -315,21 +288,21 @@ private:
 
     constexpr bool RDRF() const { return STATUS() & static_cast<u8>(serial_status_flags::RDRF); }
     constexpr bool TDRE() const { return STATUS() & static_cast<u8>(serial_status_flags::TDRE); }
-    //constexpr bool DCD() const { return STATUS() & static_cast<u8>(serial_status_flags::DCD); }
-    //constexpr bool CTS() const { return STATUS() & static_cast<u8>(serial_status_flags::CTS); }
-    //constexpr bool FE() const { return STATUS() & static_cast<u8>(serial_status_flags::FE); }
-    //constexpr bool OVRN() const { return STATUS() & static_cast<u8>(serial_status_flags::OVRN); }
-    //constexpr bool PE() const { return STATUS() & static_cast<u8>(serial_status_flags::PE); }
+    constexpr bool DCD() const { return STATUS() & static_cast<u8>(serial_status_flags::DCD); }
+    constexpr bool CTS() const { return STATUS() & static_cast<u8>(serial_status_flags::CTS); }
+    constexpr bool FE() const { return STATUS() & static_cast<u8>(serial_status_flags::FE); }
+    constexpr bool OVRN() const { return STATUS() & static_cast<u8>(serial_status_flags::OVRN); }
+    constexpr bool PE() const { return STATUS() & static_cast<u8>(serial_status_flags::PE); }
     constexpr bool IRQ() const { return STATUS() & static_cast<u8>(serial_status_flags::IRQ); }
 
-    void RDRF(bool value) { this->set_if_bit(start_adr + static_cast<usize>(serial_register::STATUS), static_cast<u8>(serial_status_flags::RDRF), value); }
-    void TDRE(bool value) { this->set_if_bit(start_adr + static_cast<usize>(serial_register::STATUS), static_cast<u8>(serial_status_flags::TDRE), value); }
-    //void DCD(bool value) { this->set_if_bit(start_adr + static_cast<usize>(serial_register::STATUS), static_cast<u8>(serial_status_flags::DCD), value); }
-    //void CTS(bool value) { this->set_if_bit(start_adr + static_cast<usize>(serial_register::STATUS), static_cast<u8>(serial_status_flags::CTS), value); }
-    //void FE(bool value) { this->set_if_bit(start_adr + static_cast<usize>(serial_register::STATUS), static_cast<u8>(serial_status_flags::FE), value); }
-    //void OVRN(bool value) { this->set_if_bit(start_adr + static_cast<usize>(serial_register::STATUS), static_cast<u8>(serial_status_flags::OVRN), value); }
-    //void PE(bool value) { this->set_if_bit(start_adr + static_cast<usize>(serial_register::STATUS), static_cast<u8>(serial_status_flags::PE), value); }
-    void IRQ(bool value) { this->set_if_bit(start_adr + static_cast<usize>(serial_register::STATUS), static_cast<u8>(serial_status_flags::IRQ), value); }
+    constexpr void RDRF(bool value) { value ? STATUS(STATUS() | static_cast<u8>(serial_status_flags::RDRF)) : STATUS(STATUS() & ~static_cast<u8>(serial_status_flags::RDRF)); }
+    constexpr void TDRE(bool value) { value ? STATUS(STATUS() | static_cast<u8>(serial_status_flags::TDRE)) : STATUS(STATUS() & ~static_cast<u8>(serial_status_flags::TDRE)); }
+    constexpr void DCD(bool value) { value ? STATUS(STATUS() | static_cast<u8>(serial_status_flags::DCD)) : STATUS(STATUS() & ~static_cast<u8>(serial_status_flags::DCD)); }
+    constexpr void CTS(bool value) { value ? STATUS(STATUS() | static_cast<u8>(serial_status_flags::CTS)) : STATUS(STATUS() & ~static_cast<u8>(serial_status_flags::CTS)); }
+    constexpr void FE(bool value) { value ? STATUS(STATUS() | static_cast<u8>(serial_status_flags::FE)) : STATUS(STATUS() & ~static_cast<u8>(serial_status_flags::FE)); }
+    constexpr void OVRN(bool value) { value ? STATUS(STATUS() | static_cast<u8>(serial_status_flags::OVRN)) : STATUS(STATUS() & ~static_cast<u8>(serial_status_flags::OVRN)); }
+    constexpr void PE(bool value) { value ? STATUS(STATUS() | static_cast<u8>(serial_status_flags::PE)) : STATUS(STATUS() & ~static_cast<u8>(serial_status_flags::PE)); }
+    constexpr void IRQ(bool value) { value ? STATUS(STATUS() | static_cast<u8>(serial_status_flags::IRQ)) : STATUS(STATUS() & ~static_cast<u8>(serial_status_flags::IRQ)); }
 
     constexpr bool RTS() const { return rts; }
     constexpr void RTS(bool value) { rts = value; }
@@ -337,7 +310,6 @@ private:
     void reset() {
         registers.fill(0x00);
         divide_by = 4;
-        non_refresh_cycles = 0;
         serial.set_baud_rate(base_clock >> divide_by);
         CONTROL(0b10010101);
         TDRE(true);
@@ -363,28 +335,14 @@ public:
         return { start_adr, SERIAL_IO_ADDRESSES, "serial uart", detail };
     }
 
-    /// @brief Refresh the UART for data I/O. Run this after every CPU step.
-    /// @note This will only run refresh after N cycles according to the base clock to CPU clock ratio
-    void refresh() override {
-        //if (++non_refresh_cycles < ASSUMED_CPU_FREQ_HZ * (1 << divide_by) / base_clock)
-        //    return;
-
-        //non_refresh_cycles = 0;
-
+    /// @brief Read a byte from the serial registers.
+    /// @returns The byte read from the serial registers, or BAD_U8 if the address is invalid (which should be prevented by `in_range()`).
+    u8 read(u16 adr) override {
         if (!RDRF() and serial.poll()) {
             RX_DATA(serial.getch());
             RDRF(true);
         }
 
-        if (!TDRE()) {
-            serial.putch(TX_DATA());
-            TDRE(true);
-        }
-    }
-
-    /// @brief Read a byte from the serial registers.
-    /// @returns The byte read from the serial registers, or BAD_U8 if the address is invalid (which should be prevented by `in_range()`).
-    u8 read(u16 adr) const override {
         if ((adr & 0xFF) == start_adr)
             return STATUS();
         else if ((adr & 0xFF) == start_adr + 1)
@@ -438,6 +396,11 @@ public:
         else if ((adr & 0xFF) == start_adr + 1) {
             TX_DATA(byte); 
             TDRE(false);
+        }
+
+        if (!TDRE()) {
+            serial.putch(TX_DATA());
+            TDRE(true);
         }
     }
 
