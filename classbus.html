@@ -152,6 +152,7 @@ Public Member Functions</h2></td></tr>
 <dl class="section warning"><dt>Warning</dt><dd>This class does not own the cards, and it's up to other parts of the emulator to manage the card memory, such as <code><a class="el" href="classsystem__config.html" title="A class to manage objects that should be setup by reading a TOML configuration file.">system_config</a></code>. </dd></dl>
 <dl class="section user"><dt></dt><dd></dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>The <code><a class="el" href="classbus.html#a40eeeeb2ba939e469bdff3d35c3f5f67" title="Returns the maximum number of addressable locations on the bus.">size()</a></code> method returns the maximum number of addressable locations on the bus (65536), not the number of cards. While this might look misleading, it's actually an attempt at keeping the same interface as there would be if the instanced bus were to be replaced by a normal <code>std::array&lt;u8, 65536&gt;</code>. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>The design iterating over all of the cards array and calling methods and dereferencing pointers is inefficient, instead it could be faster to hold vectors to different types of cards and iterate over them separately only on the related bus methods. For example, data cards don't need to be refreshed. Or consider a faster way to implement the refresh method, since right now it is called at every CPU step... </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a616875dde214c117fcc36c0bbcc80f9e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a616875dde214c117fcc36c0bbcc80f9e">&#9670;&nbsp;</a></span>bus_map_s()</h2>
@@ -554,8 +555,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The byte read from the first valid card on the bus. </dd></dl>
-<dl class="section warning"><dt>Warning</dt><dd>This method will return only the first valid card slot that is in range of the address. You may want to place MMIO that overlaps with memory cards in earlier slots... </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Handle this warning. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>This method will return only the first valid card slot that is in range of the address. Be mindful of allowed collision ranges. </dd></dl>
 
 <p class="reference">References <a class="el" href="classcard.html#ab32f79943888d74e0a506e78b2d7406c">card::in_range()</a>, <a class="el" href="classcard.html#af41da29e90a5b92e6df323da37822060">card::is_io()</a>, and <a class="el" href="classcard.html#a0ea76feb6cf75cf51ba3362f4ab50190">card::read()</a>.</p>
 
@@ -747,7 +747,7 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>This method will write to all cards in range of the address. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This method will write to all cards in range of the address. Be mindful of allowed collision ranges. </dd></dl>
 
 <p class="reference">References <a class="el" href="classcard.html#ab32f79943888d74e0a506e78b2d7406c">card::in_range()</a>, <a class="el" href="classcard.html#af41da29e90a5b92e6df323da37822060">card::is_io()</a>, and <a class="el" href="classcard.html#ae4b1863113c0e72b7de13f3774776fdb">card::write()</a>.</p>
 <div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">

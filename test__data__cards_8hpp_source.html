@@ -123,61 +123,62 @@ $(document).ready(function(){initNavTree('test__data__cards_8hpp_source.html',''
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(0x43ff) == 0x5A);</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(0x4100) == 0x5A);</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(0x44ff) == 0x5A);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    SECTION(<span class="stringliteral">&quot;Write locking and slot priority test&quot;</span>) {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        cardbus.<a class="code" href="classbus.html#aea7690c041bc175652f213f9a8860c73">write</a>(0x0000, 0x99);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        cardbus.<a class="code" href="classbus.html#aea7690c041bc175652f213f9a8860c73">write</a>(0x03ff, 0x99);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(0x0000) == 0x5A);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(0x03ff) == 0x5A);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        cardbus.<a class="code" href="classbus.html#aea7690c041bc175652f213f9a8860c73">write</a>(0x0400, 0x88);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        cardbus.<a class="code" href="classbus.html#aea7690c041bc175652f213f9a8860c73">write</a>(0x13ff, 0x88);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(0x0400) == 0x88);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(0x13ff) == 0x88);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        cardbus.<a class="code" href="classbus.html#aea7690c041bc175652f213f9a8860c73">write</a>(0x1400, 0x77);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        cardbus.<a class="code" href="classbus.html#aea7690c041bc175652f213f9a8860c73">write</a>(0x3fff, 0x77);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(0x1400) == 0x5A);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(0x3fff) == 0x5A);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        cardbus.<a class="code" href="classbus.html#aea7690c041bc175652f213f9a8860c73">write</a>(0x4000, 0x66);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        cardbus.<a class="code" href="classbus.html#aea7690c041bc175652f213f9a8860c73">write</a>(0x43ff, 0x66);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(0x4000) == 0x66);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(0x43ff) == 0x5A);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        cardbus.<a class="code" href="classbus.html#aea7690c041bc175652f213f9a8860c73">write</a>(0x4100, 0x55);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        cardbus.<a class="code" href="classbus.html#aea7690c041bc175652f213f9a8860c73">write</a>(0x44ff, 0x55);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(0x4100) == 0x5A);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(0x44ff) == 0x5A);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    SECTION(<span class="stringliteral">&quot;Checking r/w (both forced and not) while identifying memory areas&quot;</span>) {</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordflow">for</span> (usize i = 0; i &lt; 0x4500; ++i) {</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            u8 slot = cardbus.<a class="code" href="classbus.html#a1600c50ee9b9e2aeb648a6529b234cf8">get_slot_by_adr</a>(i);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            <span class="keywordflow">if</span> (slot == 255)</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            cardbus.<a class="code" href="classbus.html#aea7690c041bc175652f213f9a8860c73">write</a>(i, 0x77);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <span class="keywordflow">if</span> (slot == 4 or slot == 2 or slot == 0)</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(i) == 0x5A);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(i) == 0x77);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            cardbus.<a class="code" href="classbus.html#addf9c4c65e0374e6016e1a278f51a0ed">write_force</a>(i, 0xAA);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(i) == 0xAA);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        }</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
-<div class="ttc" id="aclassbus_html"><div class="ttname"><a href="classbus.html">bus</a></div><div class="ttdoc">Represents the S-100 bus of the emulator.</div><div class="ttdef"><b>Definition:</b> bus.hpp:38</div></div>
-<div class="ttc" id="aclassbus_html_a1600c50ee9b9e2aeb648a6529b234cf8"><div class="ttname"><a href="classbus.html#a1600c50ee9b9e2aeb648a6529b234cf8">bus::get_slot_by_adr</a></div><div class="ttdeci">u8 get_slot_by_adr(u16 adr) const</div><div class="ttdoc">Get in which slot a card is according to an address.</div><div class="ttdef"><b>Definition:</b> bus.hpp:324</div></div>
-<div class="ttc" id="aclassbus_html_a5ca080170524f30333bee7fe0b857871"><div class="ttname"><a href="classbus.html#a5ca080170524f30333bee7fe0b857871">bus::read</a></div><div class="ttdeci">u8 read(u16 adr, bool ior=false) const</div><div class="ttdoc">Reads a byte from the bus.</div><div class="ttdef"><b>Definition:</b> bus.hpp:179</div></div>
-<div class="ttc" id="aclassbus_html_addf9c4c65e0374e6016e1a278f51a0ed"><div class="ttname"><a href="classbus.html#addf9c4c65e0374e6016e1a278f51a0ed">bus::write_force</a></div><div class="ttdeci">void write_force(u16 adr, u8 byte, bool iow=false)</div><div class="ttdoc">Writes a byte to the bus, without considering write lock.</div><div class="ttdef"><b>Definition:</b> bus.hpp:207</div></div>
-<div class="ttc" id="aclassbus_html_aea7690c041bc175652f213f9a8860c73"><div class="ttname"><a href="classbus.html#aea7690c041bc175652f213f9a8860c73">bus::write</a></div><div class="ttdeci">void write(u16 adr, u8 byte, bool iow=false)</div><div class="ttdoc">Writes a byte to the bus.</div><div class="ttdef"><b>Definition:</b> bus.hpp:194</div></div>
-<div class="ttc" id="aclassbus_html_aef6e4de3df548561b9545f0cb341e143"><div class="ttname"><a href="classbus.html#aef6e4de3df548561b9545f0cb341e143">bus::insert</a></div><div class="ttdeci">void insert(card *card, usize slot, bool allow_conflict=false)</div><div class="ttdoc">Inserts a card into a slot on the bus.</div><div class="ttdef"><b>Definition:</b> bus.hpp:136</div></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(0x4500) == BAD_U8);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    }</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    SECTION(<span class="stringliteral">&quot;Write locking and slot priority test&quot;</span>) {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        cardbus.<a class="code" href="classbus.html#aea7690c041bc175652f213f9a8860c73">write</a>(0x0000, 0x99);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        cardbus.<a class="code" href="classbus.html#aea7690c041bc175652f213f9a8860c73">write</a>(0x03ff, 0x99);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(0x0000) == 0x5A);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(0x03ff) == 0x5A);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        cardbus.<a class="code" href="classbus.html#aea7690c041bc175652f213f9a8860c73">write</a>(0x0400, 0x88);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        cardbus.<a class="code" href="classbus.html#aea7690c041bc175652f213f9a8860c73">write</a>(0x13ff, 0x88);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(0x0400) == 0x88);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(0x13ff) == 0x88);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        cardbus.<a class="code" href="classbus.html#aea7690c041bc175652f213f9a8860c73">write</a>(0x1400, 0x77);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        cardbus.<a class="code" href="classbus.html#aea7690c041bc175652f213f9a8860c73">write</a>(0x3fff, 0x77);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(0x1400) == 0x5A);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(0x3fff) == 0x5A);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        cardbus.<a class="code" href="classbus.html#aea7690c041bc175652f213f9a8860c73">write</a>(0x4000, 0x66);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        cardbus.<a class="code" href="classbus.html#aea7690c041bc175652f213f9a8860c73">write</a>(0x43ff, 0x66);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(0x4000) == 0x66);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(0x43ff) == 0x5A);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        cardbus.<a class="code" href="classbus.html#aea7690c041bc175652f213f9a8860c73">write</a>(0x4100, 0x55);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        cardbus.<a class="code" href="classbus.html#aea7690c041bc175652f213f9a8860c73">write</a>(0x44ff, 0x55);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(0x4100) == 0x5A);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(0x44ff) == 0x5A);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    }</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    SECTION(<span class="stringliteral">&quot;Checking r/w (both forced and not) while identifying memory areas&quot;</span>) {</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">for</span> (usize i = 0; i &lt; 0x4500; ++i) {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            u8 slot = cardbus.<a class="code" href="classbus.html#a1600c50ee9b9e2aeb648a6529b234cf8">get_slot_by_adr</a>(i);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keywordflow">if</span> (slot == 255)</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            cardbus.<a class="code" href="classbus.html#aea7690c041bc175652f213f9a8860c73">write</a>(i, 0x77);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <span class="keywordflow">if</span> (slot == 4 or slot == 2 or slot == 0)</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(i) == 0x5A);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(i) == 0x77);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            cardbus.<a class="code" href="classbus.html#addf9c4c65e0374e6016e1a278f51a0ed">write_force</a>(i, 0xAA);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            REQUIRE(cardbus.<a class="code" href="classbus.html#a5ca080170524f30333bee7fe0b857871">read</a>(i) == 0xAA);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
+<div class="ttc" id="aclassbus_html"><div class="ttname"><a href="classbus.html">bus</a></div><div class="ttdoc">Represents the S-100 bus of the emulator.</div><div class="ttdef"><b>Definition:</b> bus.hpp:42</div></div>
+<div class="ttc" id="aclassbus_html_a1600c50ee9b9e2aeb648a6529b234cf8"><div class="ttname"><a href="classbus.html#a1600c50ee9b9e2aeb648a6529b234cf8">bus::get_slot_by_adr</a></div><div class="ttdeci">u8 get_slot_by_adr(u16 adr) const</div><div class="ttdoc">Get in which slot a card is according to an address.</div><div class="ttdef"><b>Definition:</b> bus.hpp:326</div></div>
+<div class="ttc" id="aclassbus_html_a5ca080170524f30333bee7fe0b857871"><div class="ttname"><a href="classbus.html#a5ca080170524f30333bee7fe0b857871">bus::read</a></div><div class="ttdeci">u8 read(u16 adr, bool ior=false) const</div><div class="ttdoc">Reads a byte from the bus.</div><div class="ttdef"><b>Definition:</b> bus.hpp:181</div></div>
+<div class="ttc" id="aclassbus_html_addf9c4c65e0374e6016e1a278f51a0ed"><div class="ttname"><a href="classbus.html#addf9c4c65e0374e6016e1a278f51a0ed">bus::write_force</a></div><div class="ttdeci">void write_force(u16 adr, u8 byte, bool iow=false)</div><div class="ttdoc">Writes a byte to the bus, without considering write lock.</div><div class="ttdef"><b>Definition:</b> bus.hpp:209</div></div>
+<div class="ttc" id="aclassbus_html_aea7690c041bc175652f213f9a8860c73"><div class="ttname"><a href="classbus.html#aea7690c041bc175652f213f9a8860c73">bus::write</a></div><div class="ttdeci">void write(u16 adr, u8 byte, bool iow=false)</div><div class="ttdoc">Writes a byte to the bus.</div><div class="ttdef"><b>Definition:</b> bus.hpp:196</div></div>
+<div class="ttc" id="aclassbus_html_aef6e4de3df548561b9545f0cb341e143"><div class="ttname"><a href="classbus.html#aef6e4de3df548561b9545f0cb341e143">bus::insert</a></div><div class="ttdeci">void insert(card *card, usize slot, bool allow_conflict=false)</div><div class="ttdoc">Inserts a card into a slot on the bus.</div><div class="ttdef"><b>Definition:</b> bus.hpp:140</div></div>
 <div class="ttc" id="aclassdata__card_html"><div class="ttname"><a href="classdata__card.html">data_card</a></div><div class="ttdoc">A card that holds a fixed amount of data.</div><div class="ttdef"><b>Definition:</b> card.hpp:157</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

@@ -34,6 +34,10 @@
  * @warning The `size()` method returns the maximum number of addressable locations on the bus (65536), not the number of cards.
  * While this might look misleading, it's actually an attempt at keeping the same interface as there would be if the instanced bus
  * were to be replaced by a normal `std::array<u8, 65536>`.
+ * @todo The design iterating over all of the cards array and calling methods and dereferencing pointers is inefficient, instead
+ * it could be faster to hold vectors to different types of cards and iterate over them separately only on the related bus methods.
+ * For example, data cards don't need to be refreshed. Or consider a faster way to implement the refresh method, since right now
+ * it is called at every CPU step...
  */
 class bus {
 private:
@@ -172,9 +176,7 @@ public:
      * @param adr The address to read from.
      * @param ior Whether the IOR signal is set or not.
      * @return The byte read from the first valid card on the bus.
-     * @warning This method will return only the first valid card slot that is in range of the address.
-     * You may want to place MMIO that overlaps with memory cards in earlier slots...
-     * @todo Handle this warning.
+     * @warning This method will return only the first valid card slot that is in range of the address. Be mindful of allowed collision ranges.
      */
     inline u8 read(u16 adr, bool ior = false) const {
         for (card* card : cards)
@@ -189,7 +191,7 @@ public:
      * @param adr The address to write to.
      * @param byte The byte to write.
      * @param iow Whether the IOW signal is set or not.
-     * @note This method will write to all cards in range of the address.
+     * @note This method will write to all cards in range of the address. Be mindful of allowed collision ranges.
      */
     inline void write(u16 adr, u8 byte, bool iow = false) {
         for (card* card : cards)

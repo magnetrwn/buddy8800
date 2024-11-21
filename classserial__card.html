@@ -130,9 +130,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a1f29b0bb8ad083bf74af151628b7acf3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcard__identify.html">card_identify</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#a1f29b0bb8ad083bf74af151628b7acf3">identify</a> () override</td></tr>
 <tr class="memdesc:a1f29b0bb8ad083bf74af151628b7acf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get information about the serial card.  <a href="classserial__card.html#a1f29b0bb8ad083bf74af151628b7acf3">More...</a><br /></td></tr>
 <tr class="separator:a1f29b0bb8ad083bf74af151628b7acf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d9f292d7be1f9deebf49fa5d748c039"><td class="memItemLeft" align="right" valign="top"><a id="a2d9f292d7be1f9deebf49fa5d748c039"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#a2d9f292d7be1f9deebf49fa5d748c039">refresh</a> () override</td></tr>
-<tr class="memdesc:a2d9f292d7be1f9deebf49fa5d748c039"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refresh the UART for data I/O. Run this after every CPU step. <br /></td></tr>
+<tr class="memitem:a2d9f292d7be1f9deebf49fa5d748c039"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#a2d9f292d7be1f9deebf49fa5d748c039">refresh</a> () override</td></tr>
+<tr class="memdesc:a2d9f292d7be1f9deebf49fa5d748c039"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refresh the UART for data I/O. Run this after every CPU step.  <a href="classserial__card.html#a2d9f292d7be1f9deebf49fa5d748c039">More...</a><br /></td></tr>
 <tr class="separator:a2d9f292d7be1f9deebf49fa5d748c039"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70a58b548817e1590efb55652d772e67"><td class="memItemLeft" align="right" valign="top">u8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserial__card.html#a70a58b548817e1590efb55652d772e67">read</a> (u16 adr) const override</td></tr>
 <tr class="memdesc:a70a58b548817e1590efb55652d772e67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a byte from the serial registers.  <a href="classserial__card.html#a70a58b548817e1590efb55652d772e67">More...</a><br /></td></tr>
@@ -315,6 +314,51 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 
 </div>
 </div>
+<a id="a2d9f292d7be1f9deebf49fa5d748c039"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d9f292d7be1f9deebf49fa5d748c039">&#9670;&nbsp;</a></span>refresh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void serial_card::refresh </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Refresh the UART for data I/O. Run this after every CPU step. </p>
+<dl class="section note"><dt>Note</dt><dd>This will only run refresh after N cycles according to the base clock to CPU clock ratio </dd></dl>
+
+<p>Implements <a class="el" href="classcard.html#ae39a92dd99c80e0756cc1d8ea28ca6c4">card</a>.</p>
+
+<p class="reference">References <a class="el" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0">pty::getch()</a>, <a class="el" href="classpty.html#a9ad90a7e8c2e8a1b273b4f5859cae35c">pty::poll()</a>, and <a class="el" href="classpty.html#ac9e7847a4ade52e8bea78e13f49c4c76">pty::putch()</a>.</p>
+<div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classserial__card_a2d9f292d7be1f9deebf49fa5d748c039_cgraph.png" border="0" usemap="#aclassserial__card_a2d9f292d7be1f9deebf49fa5d748c039_cgraph" alt=""/></div>
+<map name="aclassserial__card_a2d9f292d7be1f9deebf49fa5d748c039_cgraph" id="aclassserial__card_a2d9f292d7be1f9deebf49fa5d748c039_cgraph">
+<area shape="rect" title="Refresh the UART for data I/O. Run this after every CPU step." alt="" coords="5,56,152,83"/>
+<area shape="rect" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0" title="Get a single byte from the PTY interface master side." alt="" coords="200,5,287,32"/>
+<area shape="rect" href="classpty.html#ac9e7847a4ade52e8bea78e13f49c4c76" title="Send a single byte to the PTY interface master side." alt="" coords="335,31,421,57"/>
+<area shape="rect" href="classpty.html#a9ad90a7e8c2e8a1b273b4f5859cae35c" title="Check if there is data available to be read from the PTY interface master side." alt="" coords="206,107,281,133"/>
+</map>
+</div>
+
+</div>
+</div>
 <a id="a87b17dad886b8847836ebd214c3c14ad"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a87b17dad886b8847836ebd214c3c14ad">&#9670;&nbsp;</a></span>write()</h2>
 
@@ -357,11 +401,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 <p class="reference">References <a class="el" href="classpty.html#a757f8fc7156ea5215922e9646b65daaa">pty::set_baud_rate()</a>, and <a class="el" href="classpty.html#acacb920c29edf75bc85388b4e347aa4e">pty::setup()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="classserial__card.html#a692446f7540c8ae4601737bdf2833ebf">write_force()</a>.</p>
-<div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classserial__card_a87b17dad886b8847836ebd214c3c14ad_cgraph.png" border="0" usemap="#aclassserial__card_a87b17dad886b8847836ebd214c3c14ad_cgraph" alt=""/></div>
 <map name="aclassserial__card_a87b17dad886b8847836ebd214c3c14ad_cgraph" id="aclassserial__card_a87b17dad886b8847836ebd214c3c14ad_cgraph">
 <area shape="rect" title="Write a byte to the serial registers." alt="" coords="5,31,140,57"/>
@@ -369,11 +413,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 <area shape="rect" href="classpty.html#acacb920c29edf75bc85388b4e347aa4e" title="Setup the PTY interface with custom configuration." alt="" coords="216,56,303,83"/>
 </map>
 </div>
-<div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classserial__card_a87b17dad886b8847836ebd214c3c14ad_icgraph.png" border="0" usemap="#aclassserial__card_a87b17dad886b8847836ebd214c3c14ad_icgraph" alt=""/></div>
 <map name="aclassserial__card_a87b17dad886b8847836ebd214c3c14ad_icgraph" id="aclassserial__card_a87b17dad886b8847836ebd214c3c14ad_icgraph">
 <area shape="rect" title="Write a byte to the serial registers." alt="" coords="188,13,323,39"/>
@@ -429,11 +473,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 <p>Implements <a class="el" href="classcard.html#a4db633403be8c709db66fafa54c43989">card</a>.</p>
 
 <p class="reference">References <a class="el" href="classserial__card.html#a87b17dad886b8847836ebd214c3c14ad">write()</a>.</p>
-<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div id="dynsection-6-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classserial__card_a692446f7540c8ae4601737bdf2833ebf_cgraph.png" border="0" usemap="#aclassserial__card_a692446f7540c8ae4601737bdf2833ebf_cgraph" alt=""/></div>
 <map name="aclassserial__card_a692446f7540c8ae4601737bdf2833ebf_cgraph" id="aclassserial__card_a692446f7540c8ae4601737bdf2833ebf_cgraph">
 <area shape="rect" title="Write a byte to the card regardless of write lock." alt="" coords="5,23,140,65"/>

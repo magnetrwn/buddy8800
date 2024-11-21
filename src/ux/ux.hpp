@@ -48,6 +48,7 @@ public:
             cardbus.refresh();
             while (cardbus.is_irq())
                 processor.interrupt(cardbus.get_irq());
+            usleep(100000);
         }
     }
 
@@ -63,10 +64,13 @@ struct terminal_ux {
     emulator emu;
 
     int main(int argc, char** argv) {
-        std::cout << "\x1B[33;01m-:-:-:-:- emulator setup -:-:-:-:-\x1B[0m" << std::endl;
+        std::cout << "\x1B[33;01m-:-:-:-:- emulator setup -:-:-:-:-\x1B[0m\n" << std::endl;
 
         std::cout << emu.info();
         emu.setup(argc, argv);
+
+        std::cout << "\nPress any key when ready to start the emulator." << std::endl;
+        std::cin.get();
 
         std::cout << "\x1B[33;01m-:-:-:-:- emulator run -:-:-:-:-\x1B[0m" << std::endl;
 

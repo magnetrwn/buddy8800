@@ -92,9 +92,9 @@ private:
         #endif
     }
 
-    constexpr void _trace_state() {
+    void _trace_state() {
         #ifdef ENABLE_TRACE
-        constexpr static const char* CHG = "\x1B[43;01m";
+        static const char* CHG = "\x1B[43;01m";
         static cpu_state last_state = state;
 
         printf("\x1B[44;01mA: %s%02hhX\x1B[44;01m BC: %s%04hX\x1B[44;01m DE: %s%04hX\x1B[44;01m HL: %s%04hX\x1B[44;01m \x1B[0m\n"

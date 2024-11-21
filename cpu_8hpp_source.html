@@ -167,9 +167,9 @@ $(document).ready(function(){initNavTree('cpu_8hpp_source.html',''); initResizab
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">        #endif</span></div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    }</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    constexpr <span class="keywordtype">void</span> _trace_state() {</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordtype">void</span> _trace_state() {</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">        #ifdef ENABLE_TRACE</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        constexpr <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* CHG = <span class="stringliteral">&quot;\x1B[43;01m&quot;</span>;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* CHG = <span class="stringliteral">&quot;\x1B[43;01m&quot;</span>;</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keyword">static</span> <a class="code" href="structcpu__state.html">cpu_state</a> last_state = state;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        printf(<span class="stringliteral">&quot;\x1B[44;01mA: %s%02hhX\x1B[44;01m BC: %s%04hX\x1B[44;01m DE: %s%04hX\x1B[44;01m HL: %s%04hX\x1B[44;01m \x1B[0m\n&quot;</span></div>
