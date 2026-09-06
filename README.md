@@ -11,7 +11,7 @@
 + [Running from CLI](#running-from-cli)
 + [Configuration File](#configuration-file)
 + [Resources and Documentation](#resources-and-documentation)
-+ [Screenshots](#screenshots)
++ [Additional Information](#additional-information)
 
 ### Doxygen Documentation
 
@@ -168,8 +168,48 @@ Here are some of the resources I used to figure out various aspects of this proj
 
 And thank you to the **Emulator Development** and **Lazy Developers** Discord servers for general help and support!
 
-### Screenshots
+### Additional Information
 
-**First Contact!**
+I decided to dig back this project from being abandoned to get GPT-6 Astra to fix a bug with the PTY I couldn't spend time to look for. The following are updates from the agent with my guidance.
 
-![The first time the 8080 diagnostics ran to the end!](media/cpu-is-operational.png)
+```
+The build requires a C++17 compiler and CMake; tests additionally require Python 3
+(standard library only). It uses `build-linux/` (`BUDDY8800_BUILD_DIR` can override
+it). Documentation is optional via `--docs`.
+You can also run `cmake -S . -B build-linux -DENABLE_TESTING=ON`,
+`cmake --build build-linux -j8`, and `ctest --test-dir build-linux --output-on-failure`.
+CMake prepares the config and monitor in `bin/`; the executable works from any
+working directory. Use `bin/buddy8800 --config /path/to/config.toml` for another machine.
+Paths in a config's `load` fields resolve relative to that config file;
+CLI binary paths resolve relative to the current working directory.
+
+Startup prints the serial card's `/dev/pts/N` path and runs immediately. Connect
+with `screen /dev/pts/N 19200` from another terminal. The PTY preserves startup
+output and permits disconnect/reconnect. Ctrl-C in the emulator's own terminal
+or SIGTERM stops it; Ctrl-C sent over the PTY belongs to the guest.
+
+ALTMON displays `ALTMON 1.3` and a `*` prompt. Try typing `K200020035A` to fill
+four RAM bytes, then `D20002003` to dump them. The monitor inserts spaces itself:
+do not type spaces or Return. ESC cancels a command. See the bundled
+[monitor manual](static/Altair%20Monitor%20Info.pdf) for other commands.
+
+The supplied `static/f800mon.bin` is 1,031 bytes, including real code beyond
+the first KiB. The default machine maps all of it as ROM at F800–FC06, with
+RAM underneath and one polled 2SIO channel at ports 10/11. Its command-table base
+byte is already repaired (offset 003B: 81 → C1); the build copies the checked-in
+image unchanged into `bin/` alongside the default config. FC00 is therefore not
+available for another ROM. See [the image notes](static/f800mon.md) for the repair.
+
+Monitor tests use their own [pinned config and ROM](tests/fixtures/altmon/README.md),
+passed explicitly through `--config`. They do not depend on `bin/config.toml` or
+the distributable ROM. This keeps ALTMON regression coverage stable as other boot
+configurations, such as BASIC 4K, are added. ALTMON remains the distributable default;
+the executable selects other machines through `--config`.
+
+Serial transport is raw and eight-bit clean, with one receive register and one
+pending transmit byte. Guests must poll readiness; transmit backpressure never
+blocks the CPU. Clock/framing controls are retained as guest state; baud timing,
+modem signals and UART interrupts are not emulated. Add another serial card at
+0x12 for a separate PTY if needed. This setup does not include the disk hardware
+or software needed to boot CP/M.
+```

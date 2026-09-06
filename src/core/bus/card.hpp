@@ -158,6 +158,8 @@ public:
     data_card(u16 start_adr, usize capacity, u8 fill = BAD_U8, bool lock = construct_then_write_lock) 
         : start_adr(start_adr), capacity(capacity) { 
 
+        if (capacity == 0 || capacity > 65536u - start_adr)
+            throw std::out_of_range("Memory card exceeds address space or is empty");
         data.resize(capacity, fill);
         this->write_locked = lock;
     }
@@ -181,6 +183,8 @@ public:
 
         static_assert(std::is_same_v<typename std::iterator_traits<T>::value_type, u8>, "Iterator value type must be u8.");
 
+        if (this->capacity == 0 || this->capacity > 65536u - start_adr)
+            throw std::out_of_range("Memory card exceeds address space or is empty");
         if (static_cast<usize>(std::distance(begin, end)) > this->capacity)
             throw std::out_of_range("Binary data exceeds card capacity.");
 
@@ -213,7 +217,7 @@ public:
     /// @brief Clear the data card.
     void clear() override {
         if (!this->write_locked)
-            data.clear();
+            std::fill(data.begin(), data.end(), BAD_U8);
     }
 
     /// @name Unused methods.
@@ -252,9 +256,9 @@ constexpr static usize SERIAL_BASE_CLOCK = 19200;
  * @param base_clock The base clock speed of the UART (it can be further divided), default is SERIAL_BASE_CLOCK.
  *
  * This card handles interaction with a pseudo-terminal connected to the card UART. Emulation follows the Motorola 6850 ACIA
- * (Asynchronous Communications Interface Adapter) specifications, but quite simplified. The card has 4 I/O addresses that
- * correspond to the TX_DATA (write-only), RX_DATA (read-only), CONTROL (write-only) and STATUS (read-only) registers of the
- * UART. The card is also able to trigger IRQ according to different conditions.
+ * (Asynchronous Communications Interface Adapter) specifications, but quite simplified. The card has two I/O addresses that
+ * select CONTROL/STATUS at the base port and TX_DATA/RX_DATA at base+1.
+ * This implementation supports polled I/O; interrupts and physical framing are not emulated.
  *
  * @note The state of I/O devices is updated upon each read or write operation, instead of running a refresh cycle as previously done.
  * @par
@@ -265,158 +269,77 @@ constexpr static usize SERIAL_BASE_CLOCK = 19200;
  */
 class serial_card : public card {
 private:
-    constexpr static usize MAX_SERIAL_DETAIL_LENGTH = 64;
-
     const u16 start_adr;
     const usize base_clock;
-
     pty serial;
-    std::array<u8, 4> registers;
-    usize divide_by;
-    char detail[MAX_SERIAL_DETAIL_LENGTH];
-    bool rts;
+    u8 control = 0;
+    u8 received = 0;
+    u8 transmitted = 0;
+    bool receive_full = false;
+    bool transmit_full = false;
+    std::string detail;
 
-    constexpr u8 TX_DATA() const { return registers[static_cast<usize>(serial_register::TX_DATA)]; }
-    constexpr u8 RX_DATA() const { return registers[static_cast<usize>(serial_register::RX_DATA)]; }
-    constexpr u8 CONTROL() const { return registers[static_cast<usize>(serial_register::CONTROL)]; }
-    constexpr u8 STATUS() const { return registers[static_cast<usize>(serial_register::STATUS)]; }
-    
-    constexpr void TX_DATA(u8 value) { registers[static_cast<usize>(serial_register::TX_DATA)] = value; }
-    constexpr void RX_DATA(u8 value) { registers[static_cast<usize>(serial_register::RX_DATA)] = value; }
-    constexpr void CONTROL(u8 value) { registers[static_cast<usize>(serial_register::CONTROL)] = value; }
-    constexpr void STATUS(u8 value) { registers[static_cast<usize>(serial_register::STATUS)] = value; }
-
-    constexpr bool RDRF() const { return STATUS() & static_cast<u8>(serial_status_flags::RDRF); }
-    constexpr bool TDRE() const { return STATUS() & static_cast<u8>(serial_status_flags::TDRE); }
-    constexpr bool DCD() const { return STATUS() & static_cast<u8>(serial_status_flags::DCD); }
-    constexpr bool CTS() const { return STATUS() & static_cast<u8>(serial_status_flags::CTS); }
-    constexpr bool FE() const { return STATUS() & static_cast<u8>(serial_status_flags::FE); }
-    constexpr bool OVRN() const { return STATUS() & static_cast<u8>(serial_status_flags::OVRN); }
-    constexpr bool PE() const { return STATUS() & static_cast<u8>(serial_status_flags::PE); }
-    constexpr bool IRQ() const { return STATUS() & static_cast<u8>(serial_status_flags::IRQ); }
-
-    constexpr void RDRF(bool value) { value ? STATUS(STATUS() | static_cast<u8>(serial_status_flags::RDRF)) : STATUS(STATUS() & ~static_cast<u8>(serial_status_flags::RDRF)); }
-    constexpr void TDRE(bool value) { value ? STATUS(STATUS() | static_cast<u8>(serial_status_flags::TDRE)) : STATUS(STATUS() & ~static_cast<u8>(serial_status_flags::TDRE)); }
-    constexpr void DCD(bool value) { value ? STATUS(STATUS() | static_cast<u8>(serial_status_flags::DCD)) : STATUS(STATUS() & ~static_cast<u8>(serial_status_flags::DCD)); }
-    constexpr void CTS(bool value) { value ? STATUS(STATUS() | static_cast<u8>(serial_status_flags::CTS)) : STATUS(STATUS() & ~static_cast<u8>(serial_status_flags::CTS)); }
-    constexpr void FE(bool value) { value ? STATUS(STATUS() | static_cast<u8>(serial_status_flags::FE)) : STATUS(STATUS() & ~static_cast<u8>(serial_status_flags::FE)); }
-    constexpr void OVRN(bool value) { value ? STATUS(STATUS() | static_cast<u8>(serial_status_flags::OVRN)) : STATUS(STATUS() & ~static_cast<u8>(serial_status_flags::OVRN)); }
-    constexpr void PE(bool value) { value ? STATUS(STATUS() | static_cast<u8>(serial_status_flags::PE)) : STATUS(STATUS() & ~static_cast<u8>(serial_status_flags::PE)); }
-    constexpr void IRQ(bool value) { value ? STATUS(STATUS() | static_cast<u8>(serial_status_flags::IRQ)) : STATUS(STATUS() & ~static_cast<u8>(serial_status_flags::IRQ)); }
-
-    constexpr bool RTS() const { return rts; }
-    constexpr void RTS(bool value) { rts = value; }
-
-    void reset() {
-        registers.fill(0x00);
-        divide_by = 4;
-        serial.set_baud_rate(base_clock >> divide_by);
-        CONTROL(0b10010101);
-        TDRE(true);
-        RTS(true);
+    void refresh() {
+        if (transmit_full && serial.try_putch(transmitted))
+            transmit_full = false;
+        if (!receive_full)
+            receive_full = serial.try_getch(received);
     }
 
 public:
-    serial_card(u16 start_adr, usize base_clock = SERIAL_BASE_CLOCK) 
-        : start_adr(start_adr), base_clock(base_clock) { serial.open(); reset(); }
-
-    /// @brief Check if an address on the bus is in the card's range.
-    bool in_range(u16 adr) const override { return (adr & 0xFF) >= start_adr and (adr & 0xFF) < (start_adr + SERIAL_IO_ADDRESSES); }
-
-    /// @brief Get information about the serial card.
-    /// @note The detail contains the base clock, control register (hex) and the pseudo-terminal name.
-    card_identify identify() override {
-        std::snprintf(
-            detail, sizeof(detail), 
-            "baud: %lu, ctrl: %s, pty: '%s'", 
-            base_clock >> divide_by, util::to_hex_s(static_cast<usize>(CONTROL()), 2).c_str(), serial.name()
-        );
-
-        return { start_adr, SERIAL_IO_ADDRESSES, "serial uart", detail };
+    serial_card(u16 start_adr, usize base_clock = SERIAL_BASE_CLOCK)
+        : start_adr(start_adr), base_clock(base_clock) {
+        if (start_adr > 0xFE)
+            throw std::out_of_range("Serial card requires two ports in 0..255");
+        serial.open();
     }
 
-    /// @brief Read a byte from the serial registers.
-    /// @returns The byte read from the serial registers, or BAD_U8 if the address is invalid (which should be prevented by `in_range()`).
+    const char* pty_name() const { return serial.name(); }
+    bool in_range(u16 adr) const override {
+        return (adr & 0xFF) >= start_adr && (adr & 0xFF) < start_adr + SERIAL_IO_ADDRESSES;
+    }
+    card_identify identify() override {
+        const usize divisor = (control & 3) == 1 ? 16 : (control & 3) == 2 ? 64 : 1;
+        detail = "baud: " + std::to_string(base_clock / divisor) +
+                 ", ctrl: " + util::to_hex_s(static_cast<unsigned>(control), 2) +
+                 ", pty: '" + serial.name() + "'";
+        return {start_adr, SERIAL_IO_ADDRESSES, "serial uart", detail.c_str()};
+    }
     u8 read(u16 adr) override {
-        if (!RDRF() and serial.poll()) {
-            RX_DATA(serial.getch());
-            RDRF(true);
+        refresh();
+        if ((adr & 0xFF) == start_adr) {
+            // Polled 2SIO subset: receive ready and transmit buffer empty.
+            return (receive_full ? 0x01 : 0) | (transmit_full ? 0 : 0x02);
         }
-
-        if ((adr & 0xFF) == start_adr)
-            return STATUS();
-        else if ((adr & 0xFF) == start_adr + 1)
-            return RX_DATA();
-
+        if ((adr & 0xFF) == start_adr + 1) {
+            const u8 byte = received;
+            receive_full = false;
+            return byte;
+        }
         return BAD_U8;
     }
-
-    /// @brief Write a byte to the serial registers.
-    /// @note This method will also handle the UART configuration by writing to the CONTROL register.
     void write(u16 adr, u8 byte) override {
+        refresh();
         if ((adr & 0xFF) == start_adr) {
-            // Counter Divide select bits
-            switch (byte & 0b00000011) {
-                //     ......DD
-                case 0b00000000: divide_by = 1; serial.set_baud_rate(base_clock >> divide_by); break;
-                case 0b00000001: divide_by = 4; serial.set_baud_rate(base_clock >> divide_by); break;
-                case 0b00000010: divide_by = 6; serial.set_baud_rate(base_clock >> divide_by); break;
-                case 0b00000011: reset(); break;
-            }
-            // Word Select bits
-            switch (byte & 0b00011100) {
-                //     ...WWW..
-                case 0b00000000: serial.setup(7, pty_parity::EVEN, 2); break;
-                case 0b00000100: serial.setup(7, pty_parity::ODD, 2); break;
-                case 0b00001000: serial.setup(7, pty_parity::EVEN, 1); break;
-                case 0b00001100: serial.setup(7, pty_parity::ODD, 1); break;
-                case 0b00010000: serial.setup(8, pty_parity::NONE, 2); break;
-                case 0b00010100: serial.setup(8, pty_parity::NONE, 1); break;
-                case 0b00011000: serial.setup(8, pty_parity::EVEN, 1); break;
-                case 0b00011100: serial.setup(8, pty_parity::ODD, 1); break;
-            }
-            // Transmit Control bits (TODO: missing interrupt controls)
-            switch (byte & 0b01100000) {
-                //     .CC.....
-                case 0b00000000: RTS(true); break;
-                case 0b00100000: RTS(true); break;
-                case 0b01000000: RTS(false); break;
-                case 0b01100000: RTS(true); serial.send_break(); break;
-            }
-            // Interrupt Enable bit (TODO: probably wrong behavior)
-            switch (byte & 0b10000000) {
-                //     I.......
-                case 0b00000000: IRQ(false); break;
-                case 0b10000000: IRQ(true); break;
-            }
-
-            CONTROL(byte);
-        }
-
-        else if ((adr & 0xFF) == start_adr + 1) {
-            TX_DATA(byte); 
-            TDRE(false);
-        }
-
-        if (!TDRE()) {
-            serial.putch(TX_DATA());
-            TDRE(true);
+            if ((byte & 3) == 3) { clear(); return; }
+            control = byte;
+            // Framing and clock selection are guest state. A PTY is a raw byte
+            // stream, and must not be reconfigured for every UART control write.
+        } else if ((adr & 0xFF) == start_adr + 1 && !transmit_full) {
+            transmitted = byte;
+            transmit_full = true;
+            refresh();
         }
     }
-
-    /// @brief Check if the card is an I/O card.
     bool is_io() const override { return true; }
-
-    /// @brief Clear the serial card state and configuration.
-    void clear() override { reset(); }
-
-    /// @name Unused methods.
-    /// \{
-
+    void clear() override {
+        control = received = transmitted = 0;
+        receive_full = transmit_full = false;
+        raise_irq(false);
+    }
     void write_force(u16 adr, u8 byte) override { write(adr, byte); }
-    std::array<u8, 3> get_irq() override { return { BAD_U8, BAD_U8, BAD_U8 }; }
-
-    /// \}
+    // Interrupt routing and physical modem/framing signals are not emulated.
+    std::array<u8, 3> get_irq() override { return {BAD_U8, BAD_U8, BAD_U8}; }
 };
 
 #endif

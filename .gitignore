@@ -1,5 +1,6 @@
 bin/
 build/
+build-*/
 .cache/
 Testing/
 compile_commands.json
