@@ -1,4 +1,5 @@
 <map id="data_card&lt; construct_then_write_lock &gt;" name="data_card&lt; construct_then_write_lock &gt;">
-<area shape="rect" id="node1" title="A card that holds a fixed amount of data." alt="" coords="5,80,167,121"/>
-<area shape="rect" id="node2" href="$classcard.html" title="Base class for all cards." alt="" coords="61,5,111,32"/>
+<area shape="rect" id="Node000001" title="A card that holds a fixed amount of data." alt="" coords="5,79,167,119"/>
+<area shape="rect" id="Node000002" href="$classcard.html" title="Base class for all cards." alt="" coords="61,5,111,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,44,89,79,83,79,83,44"/>
 </map>

@@ -1,4 +1,6 @@
 <map id="cpu::interrupt" name="cpu::interrupt">
-<area shape="rect" id="node1" title="Call an interrupt and push PC, then disable interrupts." alt="" coords="5,5,115,32"/>
-<area shape="rect" id="node2" href="$classcpu.html#ab3e1736be271fe78087dee008490199b" title="Executes a single opcode with one or two operands." alt="" coords="163,5,267,32"/>
+<area shape="rect" id="Node000001" title="Call an interrupt and push PC, then disable interrupts." alt="" coords="5,29,115,55"/>
+<area shape="rect" id="Node000002" href="$classcpu.html#ab3e1736be271fe78087dee008490199b" title="Executes a single opcode with one or two operands." alt="" coords="163,29,267,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,39,149,39,149,45,115,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="189,31,183,21,186,11,197,5,215,3,236,6,245,15,241,19,234,11,215,8,199,10,190,15,188,20,193,28"/>
 </map>

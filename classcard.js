@@ -1,8 +1,7 @@
 var classcard =
 [
-    [ "~card", "classcard.html#aeff0d58a3d3beec7b1bbbd8a08230b04", null ],
     [ "clear", "classcard.html#a1c2e9d54296d2c7dc1c89295575b1eb4", null ],
-    [ "get_irq", "classcard.html#a4ef348c61f7138914f015c57d2f6a0be", null ],
+    [ "get_irq", "classcard.html#aa2b195bb9c23eb11051577629cb1986e", null ],
     [ "identify", "classcard.html#aa242bc5baf3e6276c4c3ba5ddf7610a4", null ],
     [ "in_range", "classcard.html#ab32f79943888d74e0a506e78b2d7406c", null ],
     [ "is_io", "classcard.html#af41da29e90a5b92e6df323da37822060", null ],
@@ -13,7 +12,5 @@ var classcard =
     [ "w_lock", "classcard.html#a08987729c7f53ba0fd3462e2d5ca8eae", null ],
     [ "w_unlock", "classcard.html#aeb5526b21831ac5fe40ade8de19c9ed3", null ],
     [ "write", "classcard.html#ae4b1863113c0e72b7de13f3774776fdb", null ],
-    [ "write_force", "classcard.html#a4db633403be8c709db66fafa54c43989", null ],
-    [ "irq_raised", "classcard.html#a787e564e151cf8bf2a5550690d4b9677", null ],
-    [ "write_locked", "classcard.html#add4575c38bf4776502a8d93b80145271", null ]
+    [ "write_force", "classcard.html#a4db633403be8c709db66fafa54c43989", null ]
 ];

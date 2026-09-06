@@ -8,12 +8,17 @@ TEST_CASE("Check bus with RAM and ROM cards", "[bus]") {
     pattern_1k.fill(0x5A);
 
     bus cardbus;
-    REQUIRE_NOTHROW(cardbus.insert(new rom_card(0x0000, 1024, 0x5A), 4));
-    REQUIRE_NOTHROW(cardbus.insert(new ram_card(0x0400, 4096), 3));
-    REQUIRE_NOTHROW(cardbus.insert(new rom_card(0x1400, 11264, 0x5A), 2));
-    REQUIRE_NOTHROW(cardbus.insert(new ram_card(0x4000, 1024), 1));
-    REQUIRE_THROWS_AS(cardbus.insert(new rom_card(0x4100, 1024, 0x5A), 0), std::invalid_argument);
-    REQUIRE_NOTHROW(cardbus.insert(new rom_card(0x4100, pattern_1k.begin(), pattern_1k.end()), 0, true));
+    rom_card rom0(0x0000, 1024, 0x5A);
+    ram_card ram0(0x0400, 4096);
+    rom_card rom1(0x1400, 11264, 0x5A);
+    ram_card ram1(0x4000, 1024);
+    rom_card overlay(0x4100, pattern_1k.begin(), pattern_1k.end());
+    REQUIRE_NOTHROW(cardbus.insert(&rom0, 4));
+    REQUIRE_NOTHROW(cardbus.insert(&ram0, 3));
+    REQUIRE_NOTHROW(cardbus.insert(&rom1, 2));
+    REQUIRE_NOTHROW(cardbus.insert(&ram1, 1));
+    REQUIRE_THROWS_AS(cardbus.insert(&overlay, 0), std::invalid_argument);
+    REQUIRE_NOTHROW(cardbus.insert(&overlay, 0, true));
 
     // Memory map:
     // 0x0000 to 0x03ff: r, filled with 0x5A
@@ -83,4 +88,24 @@ TEST_CASE("Check bus with RAM and ROM cards", "[bus]") {
             REQUIRE(cardbus.read(i) == 0xAA);
         }
     }
+}
+
+TEST_CASE("Memory boundaries and clearing preserve card storage", "[bus]") {
+    bus cardbus;
+    ram_card ram(0, 65536, 0);
+    rom_card rom(0xF800, 1031, 0x5A);
+    REQUIRE_THROWS_AS(cardbus.insert(&ram, 18), std::out_of_range);
+    REQUIRE_THROWS_AS(cardbus.remove(18), std::out_of_range);
+    REQUIRE_THROWS_AS(ram_card(0xFFFF, 2), std::out_of_range);
+    REQUIRE_THROWS_AS(ram_card(0, 0), std::out_of_range);
+    REQUIRE_NOTHROW(cardbus.insert(&rom, 0));
+    REQUIRE_NOTHROW(cardbus.insert(&ram, 17, true));
+    REQUIRE(rom.in_range(0xFC06));
+    REQUIRE_FALSE(rom.in_range(0xFC07));
+    cardbus.write(0xFFFF, 0x11);
+    cardbus.clear();
+    REQUIRE(cardbus.read(0xFFFF) == BAD_U8);
+    REQUIRE(cardbus.read(0xF800) == 0x5A);
+    cardbus.write(0xFFFF, 0x22);
+    REQUIRE(cardbus.read(0xFFFF) == 0x22);
 }

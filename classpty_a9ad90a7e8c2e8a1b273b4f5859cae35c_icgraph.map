@@ -1,4 +1,4 @@
 <map id="pty::poll" name="pty::poll">
-<area shape="rect" id="node1" title="Check if there is data available to be read from the PTY interface master side." alt="" coords="184,5,259,32"/>
-<area shape="rect" id="node2" href="$classserial__card.html#a449b4374d2b57d9328f91c48ea56e451" title="Read a byte from the serial registers." alt="" coords="5,5,136,32"/>
+<area shape="rect" id="Node000001" title="Check if there is data available to be read from the PTY interface master side." alt="" coords="5,29,80,55"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="54,17,50,10,43,8,36,10,33,14,34,29,29,29,28,12,33,5,43,3,53,6,58,14"/>
 </map>

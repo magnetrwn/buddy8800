@@ -1,6 +1,9 @@
 <map id="pty::putch" name="pty::putch">
-<area shape="rect" id="node1" title="Send a single byte to the PTY interface master side." alt="" coords="319,31,405,57"/>
-<area shape="rect" id="node2" href="$classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0" title="Get a single byte from the PTY interface master side." alt="" coords="184,31,271,57"/>
-<area shape="rect" id="node3" href="$classserial__card.html#a449b4374d2b57d9328f91c48ea56e451" title="Read a byte from the serial registers." alt="" coords="5,5,136,32"/>
-<area shape="rect" id="node4" href="$classpty.html#a22e150200a8581e9da66e309f9ee2ec6" title="Receive data from the PTY interface master side." alt="" coords="31,56,110,83"/>
+<area shape="rect" id="Node000001" title="Send a single byte to the PTY interface master side." alt="" coords="267,31,353,56"/>
+<area shape="rect" id="Node000002" href="$classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0" title="Get a single byte from the PTY interface master side." alt="" coords="132,5,219,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="253,35,218,29,219,23,254,30"/>
+<area shape="rect" id="Node000004" href="$classpty.html#afde0990ca2d8300af613c1bf15836ac6" title="Send data to the PTY interface master side." alt="" coords="135,55,216,80"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="254,56,217,63,216,58,253,51"/>
+<area shape="rect" id="Node000003" href="$classpty.html#a22e150200a8581e9da66e309f9ee2ec6" title="Receive data from the PTY interface master side." alt="" coords="5,5,84,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="118,21,84,21,84,15,118,15"/>
 </map>

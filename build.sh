@@ -3,7 +3,7 @@
 # --- Defaults ---
 
 BUILD_TYPE="Release"
-BUILD_DOCS="ON"
+BUILD_DOCS="OFF"
 ENABLE_TESTING="OFF"
 ENABLE_TRACE="OFF"
 ENABLE_TRACE_ESSENTIAL="OFF"
@@ -23,6 +23,7 @@ do
     -T|--tests)           ENABLE_TESTING="ON";;
        --trace)           ENABLE_TRACE="ON";;
        --trace-essential) ENABLE_TRACE_ESSENTIAL="ON";;
+       --docs)            BUILD_DOCS="ON";;
     -P|--perf-stat)       RUN_PERF_STAT="ON";;
        --perf-record)     RUN_PERF_RECORD="ON";;
     -V|--memcheck)        RUN_MEMCHECK="ON";;
@@ -33,39 +34,30 @@ do
   esac
 done
 
-mkdir -p bin
-mkdir -p build
-cd build
-cmake .. \
+cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
+build_dir="${BUDDY8800_BUILD_DIR:-build-linux}"
+cmake -S . -B "$build_dir" \
   -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
   -DENABLE_TESTING=$ENABLE_TESTING \
   -DENABLE_TRACE=$ENABLE_TRACE \
   -DENABLE_TRACE_ESSENTIAL=$ENABLE_TRACE_ESSENTIAL
 
-make -j8
-mv compile_commands.json .. || true
-cp ../static/* ../bin/
-cp ../static/* ../build/
+cmake --build "$build_dir" -j8
+cp "$build_dir/compile_commands.json" compile_commands.json
 
 if [ "$ENABLE_TESTING" = "ON" ]
 then
-  cd tests
-  ctest --output-on-failure
-  cd ..
+  ctest --test-dir "$build_dir" --output-on-failure
 fi
-
-cd ..
 
 if [ "$BUILD_DOCS" = "ON" ]
 then
-  cp extern/doxygen_theme_flat_design/img/* .doxygen/html/
   doxygen Doxyfile
 fi
 
-if ! command -v perf &> /dev/null
+if [ "$RUN_PERF_STAT" = "ON" ] || [ "$RUN_PERF_RECORD" = "ON" ]
 then
-  echo "perf could not be found."
-else
+  command -v perf > /dev/null || { echo "perf could not be found."; exit 1; }
   if [ "$RUN_PERF_STAT" = "ON" ]
   then
     perf stat --repeat=5 --table --detailed bin/buddy8800 tests/res/diag2.com 0x100
@@ -79,13 +71,9 @@ else
   fi
 fi
 
-if ! command -v valgrind &> /dev/null
+if [ "$RUN_MEMCHECK" = "ON" ]
 then
-  echo "valgrind could not be found."
-else
-  if [ "$RUN_MEMCHECK" = "ON" ]
-  then
+    command -v valgrind > /dev/null || { echo "valgrind could not be found."; exit 1; }
     #valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes bin/buddy8800 tests/res/diag2.com
     valgrind --tool=memcheck bin/buddy8800 "tests/res/cpudiag.bin"
-  fi
 fi

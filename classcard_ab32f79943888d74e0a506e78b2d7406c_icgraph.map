@@ -1,6 +1,9 @@
 <map id="card::in_range" name="card::in_range">
-<area shape="rect" id="node1" title="Check if an address on the bus is in the card&#39;s range." alt="" coords="180,56,295,83"/>
-<area shape="rect" id="node2" href="$classbus.html#a593732187325b7ae685b075eadf9fc6a" title="Reads a byte from the bus." alt="" coords="27,5,110,32"/>
-<area shape="rect" id="node3" href="$classbus.html#aea7690c041bc175652f213f9a8860c73" title="Writes a byte to the bus." alt="" coords="25,56,112,83"/>
-<area shape="rect" id="node4" href="$classbus.html#addf9c4c65e0374e6016e1a278f51a0ed" title="Writes a byte to the bus, without considering write lock." alt="" coords="5,107,132,133"/>
+<area shape="rect" id="Node000001" title="Check if an address on the bus is in the card&#39;s range." alt="" coords="180,55,295,80"/>
+<area shape="rect" id="Node000002" href="$classbus.html#a593732187325b7ae685b075eadf9fc6a" title="Reads a byte from the bus." alt="" coords="27,5,110,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,53,110,33,111,27,181,48"/>
+<area shape="rect" id="Node000003" href="$classbus.html#aea7690c041bc175652f213f9a8860c73" title="Writes a byte to the bus." alt="" coords="25,55,112,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="166,70,112,70,112,65,166,65"/>
+<area shape="rect" id="Node000004" href="$classbus.html#addf9c4c65e0374e6016e1a278f51a0ed" title="Writes a byte to the bus, without considering write lock." alt="" coords="5,104,132,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="181,87,114,106,112,101,179,81"/>
 </map>

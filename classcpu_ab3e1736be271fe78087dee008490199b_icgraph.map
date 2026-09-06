@@ -1,5 +1,8 @@
 <map id="cpu::execute" name="cpu::execute">
-<area shape="rect" id="node1" title="Executes a single opcode with one or two operands." alt="" coords="163,31,267,57"/>
-<area shape="rect" id="node2" href="$classcpu.html#a4228c63bc0f368cf39bfe37909f73f45" title="Call an interrupt and push PC, then disable interrupts." alt="" coords="5,5,115,32"/>
-<area shape="rect" id="node3" href="$classcpu.html#a7a01c8c57ae52af3126b88042cd1aa63" title="Steps the CPU by one instruction (and its operands)." alt="" coords="19,56,101,83"/>
+<area shape="rect" id="Node000001" title="Executes a single opcode with one or two operands." alt="" coords="163,31,267,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="241,20,234,12,215,9,199,11,190,16,188,22,193,29,189,32,183,22,186,13,197,6,215,4,236,7,245,16"/>
+<area shape="rect" id="Node000002" href="$classcpu.html#a4228c63bc0f368cf39bfe37909f73f45" title="Call an interrupt and push PC, then disable interrupts." alt="" coords="5,5,115,31"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="148,35,115,30,116,24,149,30"/>
+<area shape="rect" id="Node000003" href="$classcpu.html#a7a01c8c57ae52af3126b88042cd1aa63" title="Steps the CPU by one instruction (and its operands)." alt="" coords="19,55,101,80"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="149,56,101,64,101,58,148,51"/>
 </map>

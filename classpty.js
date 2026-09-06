@@ -1,7 +1,5 @@
 var classpty =
 [
-    [ "pty", "classpty.html#a13fc67c4d8cc61f516b48316ed15ae4e", null ],
-    [ "~pty", "classpty.html#afc6d469feef0571f619a5990d962880b", null ],
     [ "close", "classpty.html#a0d795020dcb52657c7828f952306e687", null ],
     [ "getch", "classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0", null ],
     [ "name", "classpty.html#aaee682964bcc6906eab0cadbde4bc6fe", null ],

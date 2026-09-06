@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['_7esystem_5fconfig_84',['~system_config',['../classsystem__config.html#a4a507e6281cb0e60c714f7191b4e014b',1,'system_config']]]
+  ['unset_5fflag_0',['unset_flag',['../structcpu__state.html#ad2172487d40c164820b74a21b267af84',1,'cpu_state']]],
+  ['util_1',['util',['../classutil.html',1,'']]]
 ];

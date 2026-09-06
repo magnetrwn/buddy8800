@@ -1,5 +1,4 @@
-file(GLOB_RECURSE SOURCE_FILES *.cpp)
-add_library(buddylib ${SOURCE_FILES})
+add_library(buddylib core/iface/unix_pty.cpp)
 
 target_include_directories(buddylib PUBLIC 
     ${PROJECT_SOURCE_DIR}/src
@@ -13,3 +12,5 @@ target_include_directories(buddylib PUBLIC
 
 add_executable(buddy8800 main.cpp)
 target_link_libraries(buddy8800 PRIVATE buddylib toml11)
+configure_file(${PROJECT_SOURCE_DIR}/static/config.toml ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/config.toml COPYONLY)
+configure_file(${PROJECT_SOURCE_DIR}/static/f800mon.bin ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/f800mon.bin COPYONLY)

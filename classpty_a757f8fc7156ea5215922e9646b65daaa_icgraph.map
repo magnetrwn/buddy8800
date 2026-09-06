@@ -1,6 +1,6 @@
 <map id="pty::set_baud_rate" name="pty::set_baud_rate">
-<area shape="rect" id="node1" title="Set the baud rate of the PTY interface." alt="" coords="371,31,513,57"/>
-<area shape="rect" id="node2" href="$classpty.html#a50aec75ef08fc8368e6a3668821309cb" title="Open the PTY interface." alt="" coords="214,5,297,32"/>
-<area shape="rect" id="node3" href="$classserial__card.html#a87b17dad886b8847836ebd214c3c14ad" title="Write a byte to the serial registers." alt="" coords="188,56,323,83"/>
-<area shape="rect" id="node4" href="$classserial__card.html#a692446f7540c8ae4601737bdf2833ebf" title="Write a byte to the card regardless of write lock." alt="" coords="5,49,140,90"/>
+<area shape="rect" id="Node000001" title="Set the baud rate of the PTY interface." alt="" coords="136,29,279,55"/>
+<area shape="rect" id="Node000002" href="$classpty.html#a50aec75ef08fc8368e6a3668821309cb" title="Open the PTY interface." alt="" coords="5,29,88,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,45,88,45,88,39,122,39"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="75,19,66,11,47,8,30,10,21,15,19,20,24,28,20,31,14,21,17,11,28,5,47,3,69,6,78,15"/>
 </map>

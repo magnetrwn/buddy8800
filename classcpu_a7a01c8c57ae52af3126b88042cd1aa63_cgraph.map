@@ -1,4 +1,6 @@
 <map id="cpu::step" name="cpu::step">
-<area shape="rect" id="node1" title="Steps the CPU by one instruction (and its operands)." alt="" coords="5,5,87,32"/>
-<area shape="rect" id="node2" href="$classcpu.html#ab3e1736be271fe78087dee008490199b" title="Executes a single opcode with one or two operands." alt="" coords="135,5,239,32"/>
+<area shape="rect" id="Node000001" title="Steps the CPU by one instruction (and its operands)." alt="" coords="5,29,87,55"/>
+<area shape="rect" id="Node000002" href="$classcpu.html#ab3e1736be271fe78087dee008490199b" title="Executes a single opcode with one or two operands." alt="" coords="135,29,239,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,39,121,39,121,45,87,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="163,30,158,21,161,11,171,5,187,3,206,6,214,15,210,18,203,11,187,8,172,10,165,15,163,20,168,28"/>
 </map>

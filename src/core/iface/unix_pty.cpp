@@ -1,173 +1,120 @@
 #include "unix_pty.hpp"
+#include <cerrno>
+#include <poll.h>
+#include <system_error>
+
+namespace {
+void fail(const char* operation) {
+    throw std::system_error(errno, std::generic_category(), operation);
+}
+void wait_for(int descriptor, short events) {
+    pollfd event{descriptor, events, 0};
+    int result;
+    do { result = ::poll(&event, 1, -1); } while (result < 0 && errno == EINTR);
+    if (result < 0) fail("poll");
+    if (event.revents & (POLLERR | POLLHUP | POLLNVAL))
+        throw std::runtime_error("PTY closed while waiting for I/O");
+}
+}
 
 void pty::open() {
-    master_fd = posix_openpt(O_RDWR | O_NOCTTY);
-    if (master_fd < 0)
-        throw std::runtime_error("posix_openpt() failed");
-    if (grantpt(master_fd) < 0)
-        throw std::runtime_error("grantpt() failed");
-    if (unlockpt(master_fd) < 0)
-        throw std::runtime_error("unlockpt() failed");
-    if (ptsname_r(master_fd, slave_device_name, MAX_SLAVE_DEVICE_NAME) < 0)
-        throw std::runtime_error("ptsname_r() failed");
-
-    epoll_fd = epoll_create(1);
-    if (epoll_fd == -1)
-        throw std::runtime_error("epoll_create() failed");
-
-    epoll_event ev;
-    ev.events = EPOLLIN;
-    ev.data.fd = master_fd;
-
-    if (epoll_ctl(epoll_fd, EPOLL_CTL_ADD, master_fd, &ev) == -1)
-        throw std::runtime_error("epoll_ctl() failed");
-
-    set_baud_rate(DEFAULT_BAUD_RATE);
-    setup(DEFAULT_DATA_BITS, DEFAULT_PARITY, DEFAULT_STOP_BITS);
+    if (master_fd >= 0) throw std::logic_error("PTY already open");
+    try {
+        master_fd = posix_openpt(O_RDWR | O_NOCTTY | O_NONBLOCK | O_CLOEXEC);
+        if (master_fd < 0) fail("posix_openpt");
+        if (grantpt(master_fd) < 0) fail("grantpt");
+        if (unlockpt(master_fd) < 0) fail("unlockpt");
+        int error = ptsname_r(master_fd, slave_device_name, MAX_SLAVE_DEVICE_NAME);
+        if (error != 0) throw std::system_error(error, std::generic_category(), "ptsname_r");
+        // Preserve startup output and allow clients to disconnect and reconnect.
+        slave_fd = ::open(slave_device_name, O_RDWR | O_NOCTTY | O_NONBLOCK | O_CLOEXEC);
+        if (slave_fd < 0) fail("open PTY slave");
+        setup(DEFAULT_DATA_BITS, DEFAULT_PARITY, DEFAULT_STOP_BITS);
+        set_baud_rate(DEFAULT_BAUD_RATE);
+    } catch (...) { close(); throw; }
 }
-
-const char* pty::name() const {
-    if (master_fd < 0)
-        return "";
-    return slave_device_name;
+const char* pty::name() const { return master_fd < 0 ? "" : slave_device_name; }
+bool pty::try_getch(u8& byte) const {
+    ssize_t result;
+    do { result = ::read(master_fd, &byte, 1); } while (result < 0 && errno == EINTR);
+    if (result < 0 && (errno == EAGAIN || errno == EWOULDBLOCK)) return false;
+    if (result < 0) fail("read PTY");
+    return result == 1;
 }
-
-void pty::send(const char* data) const {
-    send(data, std::strlen(data));
+bool pty::try_putch(u8 byte) const {
+    ssize_t result;
+    do { result = ::write(master_fd, &byte, 1); } while (result < 0 && errno == EINTR);
+    if (result < 0 && (errno == EAGAIN || errno == EWOULDBLOCK)) return false;
+    if (result < 0) fail("write PTY");
+    return result == 1;
 }
-
-void pty::send(const char* data, usize size) const {
-    usize total_wr = 0;
-    while (total_wr < size) {
-        isize wr_amount = write(master_fd, data + total_wr, size - total_wr);
-        if (wr_amount < 0)
-            throw std::runtime_error("write() failed");
-        total_wr += wr_amount;
-    }
-}
-
-void pty::send_break() const {
-    if (tcsendbreak(master_fd, DEFAULT_BREAK_DURATION) < 0)
-        throw std::runtime_error("tcsendbreak() failed");
-}
-
 char pty::getch() const {
-    char c;
-    isize recv_amount = read(master_fd, &c, 1);
-    if (recv_amount != 1)
-        throw std::runtime_error("read() failed");
-    if (echo_received_back)
-        putch(c);
-    return c;
+    u8 byte;
+    while (!try_getch(byte)) wait_for(master_fd, POLLIN);
+    if (echo_received_back) putch(static_cast<char>(byte));
+    return static_cast<char>(byte);
 }
-
-void pty::putch(char c) const {
-    if (write(master_fd, &c, 1) < 0)
-        throw std::runtime_error("write() failed");
+void pty::putch(char byte) const {
+    while (!try_putch(static_cast<u8>(byte))) wait_for(master_fd, POLLOUT);
 }
-
+void pty::send(const char* data) const { send(data, std::strlen(data)); }
+void pty::send(const char* data, usize size) const {
+    for (usize i = 0; i < size; ++i) putch(data[i]);
+}
 bool pty::poll() const {
-    epoll_event event;
-    int is_event = static_cast<bool>(epoll_wait(epoll_fd, &event, 1, 0));
-
-    if (is_event < 0)
-        throw std::runtime_error("epoll_wait() failed");
-
-    return is_event > 0;
+    if (master_fd < 0) throw std::logic_error("PTY is closed");
+    pollfd event{master_fd, POLLIN, 0};
+    int result;
+    do { result = ::poll(&event, 1, 0); } while (result < 0 && errno == EINTR);
+    if (result < 0) fail("poll PTY");
+    return result > 0 && (event.revents & POLLIN);
 }
-
 void pty::recv(char* data, usize max, char terminator) const {
-    if (max == 0)
-        throw std::invalid_argument("recv() buffer max must be greater than 0");
-
-    if (max == 1) {
-        data[0] = getch();
-        return;
+    if (max == 0) throw std::invalid_argument("recv buffer must not be empty");
+    if (max == 1) { data[0] = getch(); return; }
+    usize count = 0;
+    while (count < max - 1) {
+        data[count++] = getch();
+        if (data[count - 1] == terminator) break;
     }
-
-    usize total_recv = 0;
-
-    while ((total_recv == 0 or data[total_recv - 1] != terminator) and total_recv < max - 1) {
-        isize recv_amount = read(master_fd, data + total_recv, max - total_recv - 1);
-
-        if (recv_amount < 0)
-            throw std::runtime_error("read() failed");
-        else if (recv_amount == 0) // On EOF
-            break;
-        
-        if (echo_received_back)
-            send(data + total_recv, recv_amount);
-
-        total_recv += recv_amount;
-    }
-    data[total_recv] = '\0';
+    data[count] = '\0';
 }
-
 void pty::setup(u32 data_bits, pty_parity parity, u32 stop_bits) {
-    struct termios tty;
-    if (tcgetattr(master_fd, &tty) != 0)
-        throw std::runtime_error("tcgetattr() failed");
-
+    if (data_bits < 5 || data_bits > 8 || (stop_bits != 1 && stop_bits != 2) ||
+        (parity != pty_parity::NONE && parity != pty_parity::EVEN && parity != pty_parity::ODD))
+        throw std::invalid_argument("Invalid serial framing");
+    // PTYs transport bytes, not UART frames. Keep Linux raw and eight-bit clean.
+    termios tty{};
+    if (tcgetattr(slave_fd, &tty) < 0) fail("tcgetattr");
     cfmakeraw(&tty);
-
-    tty.c_cflag &= ~CSIZE;
-    switch (data_bits) {
-        case 5: tty.c_cflag |= CS5; break;
-        case 6: tty.c_cflag |= CS6; break;
-        case 7: tty.c_cflag |= CS7; break;
-        case 8: tty.c_cflag |= CS8; break;
-        default: throw std::invalid_argument("Invalid data_bits value");
-    }
-
-    if (parity == pty_parity::NONE)
-        tty.c_cflag &= ~PARENB;
-    else if (parity == pty_parity::EVEN) {
-        tty.c_cflag |= PARENB;
-        tty.c_cflag &= ~PARODD;
-    } else if (parity == pty_parity::ODD) {
-        tty.c_cflag |= PARENB;
-        tty.c_cflag |= PARODD;
-    }
-
-    if (stop_bits == 1)
-        tty.c_cflag &= ~CSTOPB;
-    else if (stop_bits == 2)
-        tty.c_cflag |= CSTOPB;
-    else
-        throw std::invalid_argument("Invalid stop_bits value");
-
-    tty.c_cflag |= (CLOCAL | CREAD);
+    tty.c_cflag |= CLOCAL | CREAD;
     tty.c_cc[VMIN] = 1;
     tty.c_cc[VTIME] = 0;
-
-    if (tcsetattr(master_fd, TCSANOW, &tty) != 0)
-        throw std::runtime_error("tcsetattr() failed");
+    if (tcsetattr(slave_fd, TCSANOW, &tty) < 0) fail("tcsetattr");
 }
-
 void pty::set_baud_rate(u32 baud_rate) {
-    struct termios tty;
-    if (tcgetattr(master_fd, &tty) != 0)
-        throw std::runtime_error("tcgetattr() failed");
-
-    cfsetospeed(&tty, baud_rate);
-    cfsetispeed(&tty, baud_rate);
-
-    if (tcsetattr(master_fd, TCSANOW, &tty) != 0)
-        throw std::runtime_error("tcsetattr() failed");
+    speed_t speed;
+    switch (baud_rate) {
+        case 300: speed = B300; break;
+        case 1200: speed = B1200; break;
+        case 2400: speed = B2400; break;
+        case 4800: speed = B4800; break;
+        case 9600: speed = B9600; break;
+        case 19200: speed = B19200; break;
+        case 38400: speed = B38400; break;
+        case 115200: speed = B115200; break;
+        default: throw std::invalid_argument("Unsupported PTY baud rate");
+    }
+    termios tty{};
+    if (tcgetattr(slave_fd, &tty) < 0) fail("tcgetattr");
+    if (cfsetospeed(&tty, speed) < 0 || cfsetispeed(&tty, speed) < 0) fail("cfsetspeed");
+    if (tcsetattr(slave_fd, TCSANOW, &tty) < 0) fail("tcsetattr");
 }
-
-void pty::set_echo_received_back(bool should) {
-    echo_received_back = should;
+void pty::send_break() const {
+    if (tcsendbreak(master_fd, DEFAULT_BREAK_DURATION) < 0) fail("tcsendbreak");
 }
-
+void pty::set_echo_received_back(bool should) { echo_received_back = should; }
 void pty::close() {
-    if (master_fd != -1) {
-        ::close(master_fd);
-        master_fd = -1;
-    }
-
-    if (epoll_fd != -1) {
-        ::close(epoll_fd);
-        epoll_fd = -1;
-    }
+    if (slave_fd >= 0) { ::close(slave_fd); slave_fd = -1; }
+    if (master_fd >= 0) { ::close(master_fd); master_fd = -1; }
 }

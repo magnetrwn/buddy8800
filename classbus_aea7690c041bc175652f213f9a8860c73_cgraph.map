@@ -1,6 +1,9 @@
 <map id="bus::write" name="bus::write">
-<area shape="rect" id="node1" title="Writes a byte to the bus." alt="" coords="5,56,92,83"/>
-<area shape="rect" id="node2" href="$classcard.html#ab32f79943888d74e0a506e78b2d7406c" title="Check if an address on the bus is in the card&#39;s range." alt="" coords="140,5,255,32"/>
-<area shape="rect" id="node3" href="$classcard.html#af41da29e90a5b92e6df323da37822060" title="Check if the card is an I/O card." alt="" coords="153,56,241,83"/>
-<area shape="rect" id="node4" href="$classcard.html#ae4b1863113c0e72b7de13f3774776fdb" title="Write a byte to the card." alt="" coords="152,107,243,133"/>
+<area shape="rect" id="Node000001" title="Writes a byte to the bus." alt="" coords="5,55,92,80"/>
+<area shape="rect" id="Node000002" href="$classcard.html#ab32f79943888d74e0a506e78b2d7406c" title="Check if an address on the bus is in the card&#39;s range." alt="" coords="140,5,255,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,52,144,33,146,38,88,57"/>
+<area shape="rect" id="Node000003" href="$classcard.html#af41da29e90a5b92e6df323da37822060" title="Check if the card is an I/O card." alt="" coords="153,55,241,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="92,65,139,65,139,70,92,70"/>
+<area shape="rect" id="Node000004" href="$classcard.html#ae4b1863113c0e72b7de13f3774776fdb" title="Write a byte to the card." alt="" coords="152,104,243,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="88,78,146,97,144,102,87,83"/>
 </map>

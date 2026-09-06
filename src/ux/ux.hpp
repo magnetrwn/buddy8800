@@ -5,6 +5,7 @@
 #include <fstream>
 #include <vector>
 #include <stdexcept>
+#include <csignal>
 
 #include "cpu.hpp"
 #include "bus.hpp"
@@ -16,7 +17,6 @@ private:
     system_config conf;
     bus& cardbus;
     cpu<bus&> processor;
-    std::vector<u8> load_rom_vec;
 
 public:
     void setup(int argc, char** argv) {
@@ -24,7 +24,7 @@ public:
             throw std::invalid_argument("Invalid number of arguments. Provide pairs of ROM/data files and integer load addresses.");
 
         processor.do_pseudo_bdos(conf.get_do_pseudo_bdos());
-        load_rom_vec.reserve(cardbus.size());
+        std::vector<u8> load_rom_vec;
 
         // The arguments come in pairs of filename and location to load the ROM at.
         for (int i = 1; i < argc; i += 2) {
@@ -36,16 +36,23 @@ public:
             load_rom_vec.assign(std::istreambuf_iterator<char>(load_rom), {});
 
             // The first ROM is the one that will have the reset vector jump to.
-            processor.load(load_rom_vec.begin(), load_rom_vec.end(), std::stoul(argv[i + 1], nullptr, 0), i == 1);
+            const std::string address(argv[i + 1]);
+            usize consumed = 0;
+            const auto offset = std::stoul(address, &consumed, 0);
+            if (consumed != address.size() || offset > 65535 || address.front() == '-')
+                throw std::invalid_argument("Invalid load address: " + address);
+            if (load_rom.bad() || load_rom_vec.empty())
+                throw std::runtime_error("Empty or unreadable ROM file");
+            processor.load(load_rom_vec.begin(), load_rom_vec.end(), offset, i == 1 && offset > 2);
         }
 
         processor.set_pc(conf.get_start_pc());
     }
 
-    void run() {
-        while (!processor.is_halted()) {
+    void run(const volatile std::sig_atomic_t& stop) {
+        while (!stop && !processor.is_halted()) {
             processor.step();
-            while (cardbus.is_irq())
+            if (cardbus.is_irq())
                 processor.interrupt(cardbus.get_irq());
         }
     }
@@ -61,18 +68,15 @@ public:
 struct terminal_ux {
     emulator emu;
 
-    int main(int argc, char** argv) {
+    int main(int argc, char** argv, const volatile std::sig_atomic_t& stop) {
         std::cout << "\x1B[33;01m-:-:-:-:- emulator setup -:-:-:-:-\x1B[0m\n" << std::endl;
 
         std::cout << emu.info();
         emu.setup(argc, argv);
 
-        std::cout << "\nPress any key when ready to start the emulator." << std::endl;
-        std::cin.get();
-
         std::cout << "\x1B[33;01m-:-:-:-:- emulator run -:-:-:-:-\x1B[0m" << std::endl;
 
-        emu.run();
+        emu.run(stop);
 
         std::cout << "\x1B[33;01m\n-:-:-:-:- emulator end -:-:-:-:-\x1B[0m" << std::endl;
         

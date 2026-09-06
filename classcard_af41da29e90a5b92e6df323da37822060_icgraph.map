@@ -1,6 +1,9 @@
 <map id="card::is_io" name="card::is_io">
-<area shape="rect" id="node1" title="Check if the card is an I/O card." alt="" coords="180,56,268,83"/>
-<area shape="rect" id="node2" href="$classbus.html#a593732187325b7ae685b075eadf9fc6a" title="Reads a byte from the bus." alt="" coords="27,5,110,32"/>
-<area shape="rect" id="node3" href="$classbus.html#aea7690c041bc175652f213f9a8860c73" title="Writes a byte to the bus." alt="" coords="25,56,112,83"/>
-<area shape="rect" id="node4" href="$classbus.html#addf9c4c65e0374e6016e1a278f51a0ed" title="Writes a byte to the bus, without considering write lock." alt="" coords="5,107,132,133"/>
+<area shape="rect" id="Node000001" title="Check if the card is an I/O card." alt="" coords="180,55,268,80"/>
+<area shape="rect" id="Node000002" href="$classbus.html#a593732187325b7ae685b075eadf9fc6a" title="Reads a byte from the bus." alt="" coords="27,5,110,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,53,109,33,111,28,171,48"/>
+<area shape="rect" id="Node000003" href="$classbus.html#aea7690c041bc175652f213f9a8860c73" title="Writes a byte to the bus." alt="" coords="25,55,112,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="166,70,112,70,112,65,166,65"/>
+<area shape="rect" id="Node000004" href="$classbus.html#addf9c4c65e0374e6016e1a278f51a0ed" title="Writes a byte to the bus, without considering write lock." alt="" coords="5,104,132,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="171,87,111,106,109,101,169,82"/>
 </map>

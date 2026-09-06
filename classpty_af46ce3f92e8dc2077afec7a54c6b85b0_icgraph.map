@@ -1,5 +1,5 @@
 <map id="pty::getch" name="pty::getch">
-<area shape="rect" id="node1" title="Get a single byte from the PTY interface master side." alt="" coords="184,31,271,57"/>
-<area shape="rect" id="node2" href="$classserial__card.html#a449b4374d2b57d9328f91c48ea56e451" title="Read a byte from the serial registers." alt="" coords="5,5,136,32"/>
-<area shape="rect" id="node3" href="$classpty.html#a22e150200a8581e9da66e309f9ee2ec6" title="Receive data from the PTY interface master side." alt="" coords="31,56,110,83"/>
+<area shape="rect" id="Node000001" title="Get a single byte from the PTY interface master side." alt="" coords="132,5,219,31"/>
+<area shape="rect" id="Node000002" href="$classpty.html#a22e150200a8581e9da66e309f9ee2ec6" title="Receive data from the PTY interface master side." alt="" coords="5,5,84,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,21,84,21,84,15,118,15"/>
 </map>

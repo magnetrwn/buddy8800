@@ -6,7 +6,6 @@
 #include <unistd.h>
 #include <termios.h>
 #include <cstring>
-#include <sys/epoll.h>
 
 #include "typedef.hpp"
 
@@ -22,9 +21,8 @@ enum class pty_parity : u32 {
  * After construction and by calling open(), the PTY interface is opened and public methods from
  * this class can be used to handle the master file descriptor side of the PTY. The slave side
  * is supposed to be provided to the user or a process to interact with, thus the name() method
- * is available to retrieve the slave device name, but no further handling is done by this class.
- *
- * @todo On breaking the application while running, if anything is connected to the slave fd, the PTY is never closed.
+ * is available to retrieve the slave device name. An internal slave descriptor keeps startup
+ * output available and allows clients to reconnect. Both descriptors close on destruction.
  */
 class pty {
 private:
@@ -38,12 +36,16 @@ private:
     static constexpr u32 DEFAULT_BREAK_DURATION  = 0; /// Will default to the termios.h default value
 
     fd master_fd;
-    fd epoll_fd;
+    fd slave_fd;
     char slave_device_name[MAX_SLAVE_DEVICE_NAME];
 
     bool echo_received_back;
 
 public:
+    pty(const pty&) = delete;
+    pty& operator=(const pty&) = delete;
+    bool try_getch(u8& byte) const;
+    bool try_putch(u8 byte) const;
     /**
      * @brief Open the PTY interface.
      * @throw `std::runtime_error` if the PTY interface could not be opened.
@@ -52,7 +54,7 @@ public:
      * and setup various configuration flags for a bit more realism in emulating an Altair 8800 serial
      * interface.
      *
-     * @note The default setup configuration is 300 baud, 8 data bits, no parity and 1 stop bit. `B300-8N1`
+     * @note The host PTY defaults to 19200 baud, raw eight-bit transport.
      */
     void open();
 
@@ -132,7 +134,7 @@ public:
      * @throw `std::runtime_error` if the PTY interface had an error.
      *
      * This method polls the PTY interface master side to check if there is data available to be read.
-     * It's handling the master PTY fd internally using `epoll`.
+     * Only readable data counts; hangup and error events are not input bytes.
      */
     bool poll() const;
 
@@ -162,8 +164,8 @@ public:
      * @throw `std::runtime_error` if the PTY interface could not be configured.
      * @throw `std::invalid_argument` if an invalid setup was being configured.
      * 
-     * This method sets up the PTY interface with custom configuration. Internally, this makes extensive use
-     * of `termios.h` functionality and its functions to configure the PTY interface. 
+     * Validates framing values and configures raw eight-bit host transport. Physical
+     * parity and stop bits are not represented by a PTY.
      */
     void setup(u32 data_bits, pty_parity parity, u32 stop_bits);
 
@@ -187,7 +189,7 @@ public:
     /// @brief Close the PTY interface and free the PTY master file descriptor.
     void close();
 
-    pty() : master_fd(-1), epoll_fd(-1), echo_received_back(false) {};
+    pty() : master_fd(-1), slave_fd(-1), echo_received_back(false) {};
     ~pty() { close(); }
 };
 

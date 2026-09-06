@@ -25,7 +25,7 @@
 var NAVTREE =
 [
   [ "buddy8800", "index.html", [
-    [ "Buddy8800 – An Altair 8800 S-100 Emulator", "index.html", null ],
+    [ "Pinned ALTMON regression fixtures", "index.html", null ],
     [ "Todo List", "todo.html", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ]

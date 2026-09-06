@@ -1,6 +1,9 @@
 <map id="bus::read" name="bus::read">
-<area shape="rect" id="node1" title="Reads a byte from the bus." alt="" coords="5,56,88,83"/>
-<area shape="rect" id="node2" href="$classcard.html#ab32f79943888d74e0a506e78b2d7406c" title="Check if an address on the bus is in the card&#39;s range." alt="" coords="136,5,251,32"/>
-<area shape="rect" id="node3" href="$classcard.html#af41da29e90a5b92e6df323da37822060" title="Check if the card is an I/O card." alt="" coords="149,56,237,83"/>
-<area shape="rect" id="node4" href="$classcard.html#a5ed2b72cca9db35d23873352a4af90a5" title="Read a byte from the card." alt="" coords="150,107,237,133"/>
+<area shape="rect" id="Node000001" title="Reads a byte from the bus." alt="" coords="5,55,88,80"/>
+<area shape="rect" id="Node000002" href="$classcard.html#ab32f79943888d74e0a506e78b2d7406c" title="Check if an address on the bus is in the card&#39;s range." alt="" coords="136,5,251,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,52,141,33,142,38,86,57"/>
+<area shape="rect" id="Node000003" href="$classcard.html#af41da29e90a5b92e6df323da37822060" title="Check if the card is an I/O card." alt="" coords="149,55,237,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="88,65,136,65,136,70,88,70"/>
+<area shape="rect" id="Node000004" href="$classcard.html#a5ed2b72cca9db35d23873352a4af90a5" title="Read a byte from the card." alt="" coords="150,104,237,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="86,78,142,97,141,102,84,83"/>
 </map>
