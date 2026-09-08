@@ -25,14 +25,13 @@ You can view the [Doxygen documentation](https://magnetrwn.github.io/buddy8800),
 + Run `./build.sh` from the root directory. Some flags are listed next.
 + The final executable will be placed in the `bin/` directory.
 
-By default, the build script will output a release build that has no tracing and with high optimization. To customize this behavior, some flags are available:
+By default, the build script produces an optimized release build with the ncurses frontend. To customize this behavior, some flags are available:
 
 | Short&nbsp;Flag | Long&nbsp;Flag           | Action | Default |
 |------------|---------------------|--------|------------|
 | `-d`       | `--debug`           | Output a debug build, keeping symbol labels and disabling optimization |  |
 | `-r`       | `--release`         | Output a release build, enabling optimization | Enabled |
-|            | `--trace`           | Enable tracing, outputting information about the emulator's state after each instruction |  |
-|            | `--trace-essential` | Enable tracing only for the listing of executed instructions, not the full state |  |
+|            | `--disable-trace`   | Build the plain frontend without ncurses or instruction tracing |  |
 | `-T`       | `--tests`           | Build with tests enabled, compiling and running the Catch2 tests through CTest |  |
 | `-P`       | `--perf-stat`       | Run performance metrics at the end of the build, then show the results. |  |
 |            | `--perf-report`     | Run performance metrics and let the user browse detailed results. |  |
@@ -173,7 +172,7 @@ And thank you to the **Emulator Development** and **Lazy Developers** Discord se
 I decided to dig back this project from being abandoned to get GPT-6 Astra to fix a bug with the PTY I couldn't spend time to look for. The following are updates from the agent with my guidance.
 
 ```
-The build requires a C++17 compiler and CMake; tests additionally require Python 3
+The build requires a C++17 compiler, CMake, and the ncurses development library; tests additionally require Python 3
 (standard library only). It uses `build-linux/` (`BUDDY8800_BUILD_DIR` can override
 it). Documentation is optional via `--docs`.
 You can also run `cmake -S . -B build-linux -DENABLE_TESTING=ON`,
@@ -183,10 +182,40 @@ working directory. Use `bin/buddy8800 --config /path/to/config.toml` for another
 Paths in a config's `load` fields resolve relative to that config file;
 CLI binary paths resolve relative to the current working directory.
 
-Startup prints the serial card's `/dev/pts/N` path and runs immediately. Connect
-with `screen /dev/pts/N 19200` from another terminal. The PTY preserves startup
-output and permits disconnect/reconnect. Ctrl-C in the emulator's own terminal
-or SIGTERM stops it; Ctrl-C sent over the PTY belongs to the guest.
+In a terminal, startup opens three ncurses panels and pauses before the first
+instruction. The upper panel shows the machine and cards, including each serial
+card's `/dev/pts/N` path. The lower left panel scrolls executed instruction addresses,
+opcode bytes, operands and mnemonics; the lower right updates registers and flags
+in place, highlighting changes in bold. Connect with `screen /dev/pts/N 19200`
+from another terminal, then press Space in the emulator to run.
+
+Controls: Space runs/pauses, `s` steps one instruction and pauses, `x` toggles
+both lower panels, `q` quits,
+Page Up/Page Down browse instruction history (Page Up pauses), and Up/Down scroll
+the machine information. History retains the latest 2,048 lines. The display
+updates at about 30 Hz; execution is batched, so fast-running code scrolls past
+between frames. Pause or step to inspect individual instructions. HLT leaves
+the final state visible until you quit. With reporting disabled via `x`, both
+lower panels show only a disabled message. Execution uses a specialization with
+instruction trace code compiled out, without the traced frontend's instruction
+cap or sleep. The machine panel and controls remain responsive (about every
+33 ms). This toggles reporting only: a paused CPU stays paused, and a running
+CPU keeps running. Press `x` again to resume live reporting; old history is cleared
+so instructions skipped during fast execution are not presented as continuous.
+Pseudo-BDOS console capture is also suppressed while reporting is disabled;
+serial PTY traffic is unaffected. See [performance notes](tools/performance.md).
+Resizing below 76 columns by 18 rows
+pauses execution until you enlarge the terminal and resume.
+
+`./build.sh --disable-trace` or CMake's `-DDISABLE_TRACE=ON` builds the plain
+frontend, which prints card information and runs immediately without ncurses.
+`DISABLE_TRACE` defaults to OFF. Redirected stdin or stdout also selects the
+plain frontend automatically, preserving headless operation and test harnesses.
+The former two trace build options have been removed.
+
+The PTY preserves startup output and permits disconnect/reconnect. Ctrl-C in the
+emulator's own terminal or SIGTERM stops it and restores terminal settings;
+Ctrl-C sent over the PTY belongs to the guest.
 
 ALTMON displays `ALTMON 1.3` and a `*` prompt. Try typing `K200020035A` to fill
 four RAM bytes, then `D20002003` to dump them. The monitor inserts spaces itself:
@@ -208,7 +237,10 @@ the executable selects other machines through `--config`.
 
 Serial transport is raw and eight-bit clean, with one receive register and one
 pending transmit byte. Guests must poll readiness; transmit backpressure never
-blocks the CPU. Clock/framing controls are retained as guest state; baud timing,
+blocks the CPU. The card information shows the configured clock and divider
+(for example, `clock: 19200 Hz /16 (unpaced)` after ALTMON starts), rather than
+an active baud rate. Guest control writes do not change the host PTY's nominal
+speed or throttle transport. Clock/framing controls are retained as guest state; baud timing,
 modem signals and UART interrupts are not emulated. Add another serial card at
 0x12 for a separate PTY if needed. This setup does not include the disk hardware
 or software needed to boot CP/M.

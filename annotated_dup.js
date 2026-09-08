@@ -12,5 +12,6 @@ var annotated_dup =
     [ "slave_connection", "structslave__connection.html", null ],
     [ "system_config", "classsystem__config.html", null ],
     [ "terminal_ux", "structterminal__ux.html", null ],
+    [ "trace_history", "classtrace__history.html", null ],
     [ "util", "classutil.html", "classutil" ]
 ];

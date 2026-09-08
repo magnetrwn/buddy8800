@@ -300,7 +300,9 @@ public:
     }
     card_identify identify() override {
         const usize divisor = (control & 3) == 1 ? 16 : (control & 3) == 2 ? 64 : 1;
-        detail = "baud: " + std::to_string(base_clock / divisor) +
+        // Clock selection is guest configuration, not a transport speed:
+        // this polled UART does not emulate baud timing or reconfigure the PTY.
+        detail = "clock: " + std::to_string(base_clock) + " Hz /" + std::to_string(divisor) +
                  ", ctrl: " + util::to_hex_s(static_cast<unsigned>(control), 2) +
                  ", pty: '" + serial.name() + "'";
         return {start_adr, SERIAL_IO_ADDRESSES, "serial uart", detail.c_str()};

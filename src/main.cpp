@@ -11,7 +11,11 @@ int main(int argc, char** argv) {
         std::string config = util::get_absolute_dir() + "config.toml";
         if (argc > 1 && std::string(argv[1]) == "--help") {
             std::cout << "Usage: buddy8800 [--config FILE] [BINARY ADDRESS ...]\n"
-                         "Connect a terminal to the PTY printed at startup. Ctrl-C stops the emulator.\n";
+                         "Connect a terminal to the serial PTY shown at startup.\n"
+#ifndef DISABLE_TRACE
+                         "TUI: Space run/pause, s step, x trace on/off, q quit; starts paused.\n"
+#endif
+                         "Redirected I/O uses the plain frontend. Ctrl-C stops the emulator.\n";
             return 0;
         }
         if (argc > 1 && std::string(argv[1]) == "--config") {

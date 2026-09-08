@@ -8,6 +8,7 @@
 #include <stdexcept>
 
 #include "cpu_state.hpp"
+#include <functional>
 #include "typedef.hpp"
 #include "util.hpp"
 #include "bus.hpp"
@@ -80,90 +81,22 @@ private:
 
     /* ~~~~~~~~~~~~~~~ ^^^ ~~~~~~~~~~~~~~ fetch ~~~~~~~~~~~~~~ ^^^ ~~~~~~~~~~~~~~~ */
 
+    // An optional observer supplies instruction records to the frontend.
+    // No terminal output or ncurses dependencies belong in the interpreter.
+    std::function<void(u16, const std::array<u8, 3>&, usize)> trace_observer;
+
     template <usize ops>
-    constexpr void _trace([[maybe_unused]] u8 opc) {
-        #if defined ENABLE_TRACE or defined ENABLE_TRACE_ESSENTIAL
-        if constexpr (ops == 1)
-            std::printf("%04hX    %02hhX      \t %s\n", static_cast<unsigned>(state.PC() - 1), static_cast<unsigned>(opc), util::get_opcode_str(opc));
-        else if constexpr (ops == 2)
-            std::printf("%04hX    %02hhX %02hhX   \t %s\n", static_cast<unsigned>(state.PC() - 1), static_cast<unsigned>(opc), static_cast<unsigned>(cardbus[state.PC()]), util::get_opcode_str(opc));
-        else if constexpr (ops == 3)
-            std::printf("%04hX    %02hhX %02hhX %02hhX\t %s\n", static_cast<unsigned>(state.PC() - 1), static_cast<unsigned>(opc), static_cast<unsigned>(cardbus[state.PC()]), static_cast<unsigned>(cardbus[state.PC() + 1]), util::get_opcode_str(opc));
-        #endif
-    }
-
-    void _trace_state() {
-        #ifdef ENABLE_TRACE
-        static const char* CHG = "\x1B[43;01m";
-        static cpu_state last_state = state;
-
-        printf("\x1B[44;01mA: %s%02hhX\x1B[44;01m BC: %s%04hX\x1B[44;01m DE: %s%04hX\x1B[44;01m HL: %s%04hX\x1B[44;01m \x1B[0m\n"
-            "\x1B[44;01m SP: %s%04hX\x1B[44;01m PC: %s%04hX\x1B[44;01m F: %s%c\x1B[44;01m %s%c\x1B[44;01m %s%c\x1B[44;01m %s%c\x1B[44;01m %s%c\x1B[44;01m  \x1B[0m\n",
-            last_state.get_register8(cpu_registers8::A) == state.get_register8(cpu_registers8::A) ? "" : CHG,
-            state.get_register8(cpu_registers8::A),
-            last_state.get_register16(cpu_registers16::BC) == state.get_register16(cpu_registers16::BC) ? "" : CHG,
-            state.get_register16(cpu_registers16::BC),
-            last_state.get_register16(cpu_registers16::DE) == state.get_register16(cpu_registers16::DE) ? "" : CHG,
-            state.get_register16(cpu_registers16::DE),
-            last_state.get_register16(cpu_registers16::HL) == state.get_register16(cpu_registers16::HL) ? "" : CHG,
-            state.get_register16(cpu_registers16::HL),
-            last_state.get_register16(cpu_registers16::SP) == state.get_register16(cpu_registers16::SP) ? "" : CHG,
-            state.get_register16(cpu_registers16::SP),
-            last_state.get_register16(cpu_registers16::PC) == state.get_register16(cpu_registers16::PC) ? "" : CHG,
-            state.get_register16(cpu_registers16::PC),
-            last_state.get_flag(cpu_flags::S) == state.get_flag(cpu_flags::S) ? "" : CHG,
-            state.get_flag(cpu_flags::S) ? 'S' : '/',
-            last_state.get_flag(cpu_flags::Z) == state.get_flag(cpu_flags::Z) ? "" : CHG,
-            state.get_flag(cpu_flags::Z) ? 'Z' : '/',
-            last_state.get_flag(cpu_flags::AC) == state.get_flag(cpu_flags::AC) ? "" : CHG,
-            state.get_flag(cpu_flags::AC) ? 'A' : '/',
-            last_state.get_flag(cpu_flags::P) == state.get_flag(cpu_flags::P) ? "" : CHG,
-            state.get_flag(cpu_flags::P) ? 'P' : '/',
-            last_state.get_flag(cpu_flags::C) == state.get_flag(cpu_flags::C) ? "" : CHG,
-            state.get_flag(cpu_flags::C) ? 'C' : '/');
-
-        last_state = state;
-        #endif
-    }
-
-    constexpr void _trace_reg16_deref([[maybe_unused]] cpu_registers16 reg) {
-        #ifdef ENABLE_TRACE
-        printf("\x1B[42;01m(%s: %04hX): %02hhX                   \x1B[0m\n",
-            (reg == cpu_registers16::AF) ? "AF" : 
-                (reg == cpu_registers16::BC) ? "BC" : 
-                (reg == cpu_registers16::DE) ? "DE" : 
-                (reg == cpu_registers16::HL) ? "HL" : 
-                (reg == cpu_registers16::SP) ? "SP" : 
-                "PC",
-            state.get_register16(reg),
-            cardbus[state.get_register16(reg)]);
-        #endif
-    }
-
-    /*void _trace_memref16_deref() {
-        #ifdef ENABLE_TRACE
-        printf("\x1B[41;01m(%02hhX%02hhX): %02hhX                       \x1B[0m\n",
-            cardbus[state.PC() + 1],
-            cardbus[state.PC()],
-            cardbus[(cardbus[state.PC() + 1] << 8) | cardbus[state.PC()]]);
-        #endif
-    }*/
-
-    constexpr void _trace_stackptr16_deref() {
-        #ifdef ENABLE_TRACE
-        printf("\x1B[42;01m(%04hX): %02hhX (%04hX): %02hhX            \x1B[0m\n",
-            state.get_register16(cpu_registers16::SP),
-            cardbus[state.get_register16(cpu_registers16::SP)],
-            state.get_register16(cpu_registers16::SP) + 1,
-            cardbus[state.get_register16(cpu_registers16::SP) + 1]);
-        #endif
-    }
-
-    constexpr void _trace_error([[maybe_unused]] u8 opc) {
-        #ifdef ENABLE_TRACE
-        printf("%04hX    %02hhX      \t \x1B[31;01mUNKNOWN\x1B[0m\n", state.PC() - 1, opc);
-        throw std::runtime_error("Unknown opcode hit.");
-        #endif
+    void _trace(u8 opcode) {
+#ifndef DISABLE_TRACE
+        if (!trace_observer) return;
+        std::array<u8, 3> bytes{opcode, 0, 0};
+        for (usize i = 1; i < ops; ++i)
+            bytes[i] = fetch_ptr == &cpu::fetch_ext
+                ? ext_op[i - 1] : static_cast<u8>(cardbus[static_cast<u16>(state.PC() + i - 1)]);
+        trace_observer(static_cast<u16>(state.PC() - 1), bytes, ops);
+#else
+        (void)opcode;
+#endif
     }
 
     bool resolve_flag_cond(u8 cc) {
@@ -184,17 +117,11 @@ private:
         if (state.PC() == 0x0000) {
             if (allow_reset_twice) {
 
-                #ifdef ENABLE_TRACE
-                puts("\x1B[47;01mBDOS 0x0000: Reset vector!       \x1B[0m");
-                #endif
 
                 allow_reset_twice = false;
                 return;
             }
 
-            #ifdef ENABLE_TRACE
-            puts("\x1B[47;01mBDOS 0x0000: That's all folks!   \x1B[0m");
-            #endif
 
             cardbus[0] = 0b01110110;
         }
@@ -202,13 +129,7 @@ private:
         if (state.PC() == 0x0005) {
             u8 c = state.C();
 
-            #ifdef ENABLE_TRACE
-            puts("\x1B[47;01mBDOS 0x0005: Wants to print:     \x1B[0m");
-            #endif
 
-            #ifdef ENABLE_TRACE_ESSENTIAL
-            puts("\x1B[33;01m");
-            #endif
 
             if (c == 0x02)
                 printer << state.E();
@@ -222,14 +143,7 @@ private:
 
             fetch();
 
-            #ifdef ENABLE_TRACE
-            putchar('\n');
-            _trace<1>(0b11001001); 
-            #endif
 
-            #ifdef ENABLE_TRACE_ESSENTIAL
-            puts("\x1B[0m");
-            #endif
             
             RETURN();
         }
@@ -390,7 +304,6 @@ private:
 
     inline void POP(cpu_registers16 pair) {
         if (pair == cpu_registers16::SP) pair = cpu_registers16::AF;
-        //_trace_stackptr16_deref();
         u16 lo = cardbus[state.SP()];
         u16 hi = cardbus[state.SP() + 1];
         state.set_register16(pair, (hi << 8) | lo);
@@ -408,7 +321,6 @@ private:
         state.SP(state.SP() - 2);
         cardbus[state.SP()] = state.get_register16(pair) & 0xFF;
         cardbus[state.SP() + 1] = state.get_register16(pair) >> 8;
-        //_trace_stackptr16_deref();
     }
 
     inline void RST(u8 n) { PUSH(cpu_registers16::PC); state.PC(n * 8); }
@@ -461,6 +373,8 @@ public:
     /**
      * @brief Steps the CPU by one instruction (and its operands).
      * @param steps The number of steps to forward the CPU by.
+     * @tparam report_trace False selects an executor with all instruction trace
+     * calls compiled out, even when an observer remains attached.
      *
      * Calling the step method will fetch the next instruction opcode from cardbus and execute it. Internally, on every
      * fetch the PC is incremented, and each instruction is also responsible for fetching its operands, so a step is
@@ -473,13 +387,14 @@ public:
      * @par
      * @note Internally, this method is calling `execute(fetch())`.
      */
+    template <bool report_trace = true>
     void step(usize steps = 1) {
         for (usize i = 0; i < steps; ++i) {
             if (halted)
                 return;
             if (do_handle_bdos)
                 handle_bdos();
-            execute(fetch());
+            execute<report_trace>(fetch());
         }
     }
 
@@ -493,11 +408,12 @@ public:
      * the operands retrieved by this method (usually to be placed by a device on the bus that called an IRQ)
      * instead of fetching them from the bus cards. In fact, this is used by the interrupt method as well.
      */
+    template <bool report_trace = true>
     void execute(u8 opcode, u8 operand1, u8 operand2 = 0) {
         ext_op[0] = operand1;
         ext_op[1] = operand2;
         set_fetch_ext(true);
-        execute(opcode);
+        execute<report_trace>(opcode);
         set_fetch_ext(false);
     }
 
@@ -511,32 +427,33 @@ public:
      * @note To allow multiple operand instructions, there is an overload of this method that takes one or two extra
      * argument bytes and temporarily redirects `fetch()` and `fetch2()` to them during the instruction cycle!
      */
+    template <bool report_trace = true>
     void execute(u8 opcode) {
         cpu_registers16 pair_sel = static_cast<cpu_registers16>((((opcode & 0b00110000) >> 4) & 0b11) + 1);
         cpu_registers8 dst_sel = cpu_reg8_decode[(opcode >> 3) & 0b111];
         cpu_registers8 src_sel = cpu_reg8_decode[opcode & 0b111];
 
         switch (opcode) {
-            case 0b00000000: _trace<1>(opcode); NOP(); 
+            case 0b00000000: if constexpr (report_trace) _trace<1>(opcode); NOP(); 
             break;
             
             //     ..RP....
             case 0b00000001: 
             case 0b00010001:
             case 0b00100001:
-            case 0b00110001: _trace<3>(opcode); LXI(pair_sel); _trace_state(); 
+            case 0b00110001: if constexpr (report_trace) _trace<3>(opcode); LXI(pair_sel); 
             break;
 
             //     ..RP....
             case 0b00000010:
-            case 0b00010010: _trace<1>(opcode); STAX(pair_sel); _trace_reg16_deref(pair_sel); 
+            case 0b00010010: if constexpr (report_trace) _trace<1>(opcode); STAX(pair_sel); 
             break;
 
             //     ..RP....
             case 0b00000011:
             case 0b00010011:
             case 0b00100011:
-            case 0b00110011: _trace<1>(opcode); INX(pair_sel); _trace_state(); 
+            case 0b00110011: if constexpr (report_trace) _trace<1>(opcode); INX(pair_sel); 
             break;
 
             //     ..DDD...
@@ -547,8 +464,8 @@ public:
             case 0b00100100:
             case 0b00101100:
             case 0b00111100: 
-            case 0b00110100: _trace<1>(opcode); INR(dst_sel); _trace_state(); 
-                            if (is_memref(dst_sel)) _trace_reg16_deref(cpu_registers16::HL); 
+            case 0b00110100: if constexpr (report_trace) _trace<1>(opcode); INR(dst_sel); 
+                             
             break;
 
             //     ..DDD...
@@ -559,8 +476,8 @@ public:
             case 0b00100101:
             case 0b00101101:
             case 0b00111101: 
-            case 0b00110101: _trace<1>(opcode); DCR(dst_sel); _trace_state(); 
-                            if (is_memref(dst_sel)) _trace_reg16_deref(cpu_registers16::HL); 
+            case 0b00110101: if constexpr (report_trace) _trace<1>(opcode); DCR(dst_sel); 
+                             
             break;
 
             //     ..DDD...
@@ -571,63 +488,63 @@ public:
             case 0b00100110:
             case 0b00101110:
             case 0b00111110: 
-            case 0b00110110: _trace<2>(opcode); MVI(dst_sel); _trace_state(); 
-                            if (is_memref(dst_sel)) _trace_reg16_deref(cpu_registers16::HL);          
+            case 0b00110110: if constexpr (report_trace) _trace<2>(opcode); MVI(dst_sel); 
+                                      
             break;
             
             //     ..RP....
             case 0b00001001:
             case 0b00011001:
             case 0b00101001:
-            case 0b00111001: _trace<1>(opcode); DAD(pair_sel); _trace_state();
+            case 0b00111001: if constexpr (report_trace) _trace<1>(opcode); DAD(pair_sel); 
             break;
 
             //     ..RP....
             case 0b00001010:
-            case 0b00011010: _trace<1>(opcode); LDAX(pair_sel); _trace_state(); _trace_reg16_deref(pair_sel); 
+            case 0b00011010: if constexpr (report_trace) _trace<1>(opcode); LDAX(pair_sel); 
             break;
 
             //     ..RP....
             case 0b00001011:
             case 0b00011011:
             case 0b00101011:
-            case 0b00111011: _trace<1>(opcode); DCX(pair_sel); _trace_state(); 
+            case 0b00111011: if constexpr (report_trace) _trace<1>(opcode); DCX(pair_sel); 
             break;
 
-            case 0b00000111: _trace<1>(opcode); RLC(); _trace_state(); 
+            case 0b00000111: if constexpr (report_trace) _trace<1>(opcode); RLC(); 
             break;
 
-            case 0b00001111: _trace<1>(opcode); RRC(); _trace_state(); 
+            case 0b00001111: if constexpr (report_trace) _trace<1>(opcode); RRC(); 
             break;
 
-            case 0b00010111: _trace<1>(opcode); RAL(); _trace_state(); 
+            case 0b00010111: if constexpr (report_trace) _trace<1>(opcode); RAL(); 
             break;
 
-            case 0b00011111: _trace<1>(opcode); RAR(); _trace_state(); 
+            case 0b00011111: if constexpr (report_trace) _trace<1>(opcode); RAR(); 
             break;
 
-            case 0b00100010: _trace<3>(opcode); SHLD(); _trace_state(); //_trace_mem16_deref(); 
+            case 0b00100010: if constexpr (report_trace) _trace<3>(opcode); SHLD();  
             break;
 
-            case 0b00100111: _trace<1>(opcode); DAA(); _trace_state(); 
+            case 0b00100111: if constexpr (report_trace) _trace<1>(opcode); DAA(); 
             break;
 
-            case 0b00101010: _trace<3>(opcode); LHLD(); _trace_state(); //_trace_mem16_deref(); 
+            case 0b00101010: if constexpr (report_trace) _trace<3>(opcode); LHLD();  
             break;
 
-            case 0b00101111: _trace<1>(opcode); CMA(); _trace_state(); 
+            case 0b00101111: if constexpr (report_trace) _trace<1>(opcode); CMA(); 
             break;
 
-            case 0b00110010: _trace<3>(opcode); STA(); _trace_state(); //_trace_mem16_deref(); 
+            case 0b00110010: if constexpr (report_trace) _trace<3>(opcode); STA();  
             break;
 
-            case 0b00110111: _trace<1>(opcode); STC(); _trace_state(); 
+            case 0b00110111: if constexpr (report_trace) _trace<1>(opcode); STC(); 
             break;
 
-            case 0b00111010: _trace<3>(opcode); LDA(); _trace_state(); //_trace_mem16_deref(); 
+            case 0b00111010: if constexpr (report_trace) _trace<3>(opcode); LDA();  
             break;
 
-            case 0b00111111: _trace<1>(opcode); CMC(); _trace_state(); 
+            case 0b00111111: if constexpr (report_trace) _trace<1>(opcode); CMC(); 
             break;
 
             //     ..DDDSSS
@@ -693,11 +610,11 @@ public:
             case 0b01110011:
             case 0b01110100:
             case 0b01110101:
-            case 0b01110111: _trace<1>(opcode); MOV(dst_sel, src_sel); _trace_state();
-                            if (is_memref(dst_sel) or is_memref(src_sel)) _trace_reg16_deref(cpu_registers16::HL); 
+            case 0b01110111: if constexpr (report_trace) _trace<1>(opcode); MOV(dst_sel, src_sel); 
+                             
             break;
             
-            case 0b01110110: _trace<1>(opcode); HLT(); 
+            case 0b01110110: if constexpr (report_trace) _trace<1>(opcode); HLT(); 
             break;
 
             //     ..ALUSSS
@@ -764,7 +681,7 @@ public:
             case 0b10110100:
             case 0b10110101:
             case 0b10110111:
-            case 0b10110110: _trace<1>(opcode); ALU(src_sel, (opcode >> 3) & 0b111); _trace_state();
+            case 0b10110110: if constexpr (report_trace) _trace<1>(opcode); ALU(src_sel, (opcode >> 3) & 0b111); 
             break;
 
             //     ..CCC...
@@ -775,14 +692,14 @@ public:
             case 0b11100000:
             case 0b11101000:
             case 0b11110000:
-            case 0b11111000: _trace<1>(opcode); RETURN_ON((opcode >> 3) & 0b111); _trace_state();
+            case 0b11111000: if constexpr (report_trace) _trace<1>(opcode); RETURN_ON((opcode >> 3) & 0b111); 
             break;
 
             //     ..RP....
             case 0b11000001:
             case 0b11010001:
             case 0b11100001:
-            case 0b11110001: _trace<1>(opcode); POP(pair_sel); _trace_state();
+            case 0b11110001: if constexpr (report_trace) _trace<1>(opcode); POP(pair_sel); 
             break;
 
             //     ..CCC...
@@ -793,10 +710,10 @@ public:
             case 0b11100010:
             case 0b11101010:
             case 0b11110010:
-            case 0b11111010: _trace<3>(opcode); JUMP_ON((opcode >> 3) & 0b111); _trace_state();
+            case 0b11111010: if constexpr (report_trace) _trace<3>(opcode); JUMP_ON((opcode >> 3) & 0b111); 
             break;
 
-            case 0b11000011: _trace<3>(opcode); JMP(); _trace_state();
+            case 0b11000011: if constexpr (report_trace) _trace<3>(opcode); JMP(); 
             break;
 
             //     ..CCC...
@@ -807,14 +724,14 @@ public:
             case 0b11100100:
             case 0b11101100:
             case 0b11110100:
-            case 0b11111100: _trace<3>(opcode); CALL_ON((opcode & 0b00111000) >> 3); _trace_state();
+            case 0b11111100: if constexpr (report_trace) _trace<3>(opcode); CALL_ON((opcode & 0b00111000) >> 3); 
             break;
 
             //     ..RP....
             case 0b11000101:
             case 0b11010101:
             case 0b11100101:
-            case 0b11110101: _trace<1>(opcode); PUSH(pair_sel); _trace_state();
+            case 0b11110101: if constexpr (report_trace) _trace<1>(opcode); PUSH(pair_sel); 
             break;
 
             //     ..ALU...
@@ -825,7 +742,7 @@ public:
             case 0b11100110:
             case 0b11101110:
             case 0b11110110:
-            case 0b11111110: _trace<2>(opcode); ALU_IMM((opcode >> 3) & 0b111); _trace_state();
+            case 0b11111110: if constexpr (report_trace) _trace<2>(opcode); ALU_IMM((opcode >> 3) & 0b111); 
             break;
 
             //     ..NNN...
@@ -836,40 +753,40 @@ public:
             case 0b11100111:
             case 0b11101111:
             case 0b11110111:
-            case 0b11111111: _trace<1>(opcode); RST((opcode >> 3) & 0b111); _trace_state();
+            case 0b11111111: if constexpr (report_trace) _trace<1>(opcode); RST((opcode >> 3) & 0b111); 
             break;
 
-            case 0b11001001: _trace<1>(opcode); RETURN(); _trace_state();
+            case 0b11001001: if constexpr (report_trace) _trace<1>(opcode); RETURN(); 
             break;
 
-            case 0b11001101: _trace<3>(opcode); CALL(); _trace_state();
+            case 0b11001101: if constexpr (report_trace) _trace<3>(opcode); CALL(); 
             break;
 
-            case 0b11010011: _trace<2>(opcode); OUT();
+            case 0b11010011: if constexpr (report_trace) _trace<2>(opcode); OUT();
             break;
 
-            case 0b11011011: _trace<2>(opcode); IN();
+            case 0b11011011: if constexpr (report_trace) _trace<2>(opcode); IN();
             break;
 
-            case 0b11100011: _trace<1>(opcode); XTHL(); _trace_state(); _trace_stackptr16_deref();
+            case 0b11100011: if constexpr (report_trace) _trace<1>(opcode); XTHL(); 
             break;
 
-            case 0b11101001: _trace<1>(opcode); PCHL(); _trace_state();
+            case 0b11101001: if constexpr (report_trace) _trace<1>(opcode); PCHL(); 
             break;
 
-            case 0b11101011: _trace<1>(opcode); XCHG(); _trace_state();
+            case 0b11101011: if constexpr (report_trace) _trace<1>(opcode); XCHG(); 
             break;
 
-            case 0b11110011: _trace<1>(opcode); DI();
+            case 0b11110011: if constexpr (report_trace) _trace<1>(opcode); DI();
             break;
 
-            case 0b11111001: _trace<1>(opcode); SPHL(); _trace_state();
+            case 0b11111001: if constexpr (report_trace) _trace<1>(opcode); SPHL(); 
             break;
 
-            case 0b11111011: _trace<1>(opcode); EI();
+            case 0b11111011: if constexpr (report_trace) _trace<1>(opcode); EI();
             break;
 
-            default:         _trace_error(opcode); 
+            default:         if constexpr (report_trace) _trace<1>(opcode); 
             break;
         }
     }
@@ -930,6 +847,11 @@ public:
      */
     cpu_state save_state() const { return state; }
 
+    void set_trace_observer(std::function<void(u16, const std::array<u8, 3>&, usize)> observer) {
+        trace_observer = std::move(observer);
+    }
+
+
     /// @brief Set the PC of the CPU.
     /// @param pc The new PC value.
     void set_pc(u16 pc) { state.PC(pc); }
@@ -972,13 +894,14 @@ public:
     /// @brief Call an interrupt and push PC, then disable interrupts.
     /// @param inst The interrupt instruction (with optional operands) to execute out of place.
     /// @todo This allows any instruction and any retrieval of arguments, but I'm not sure if that happens other than on `CALL`.
+    template <bool report_trace = true>
     void interrupt(std::array<u8, 3> inst) {
         if (!interrupts_enabled)
             return;
 
         interrupts_enabled = false;
         PUSH(cpu_registers16::PC);
-        execute(inst[0], inst[1], inst[2]);
+        execute<report_trace>(inst[0], inst[1], inst[2]);
     }
 
     /// \}

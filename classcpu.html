@@ -109,15 +109,18 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>cpu</b> (bus_iface init_adr_space, bool allow_reset_twice=true)</td></tr>
 <tr class="separator:a4e36f074244b069de9f0e9a9d1c9cc9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">CPU API methods.</div></td></tr>
-<tr class="memitem:a7a01c8c57ae52af3126b88042cd1aa63" id="r_a7a01c8c57ae52af3126b88042cd1aa63"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a7a01c8c57ae52af3126b88042cd1aa63">step</a> (usize steps=1)</td></tr>
-<tr class="memdesc:a7a01c8c57ae52af3126b88042cd1aa63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Steps the CPU by one instruction (and its operands).  <br /></td></tr>
-<tr class="separator:a7a01c8c57ae52af3126b88042cd1aa63"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3e1736be271fe78087dee008490199b" id="r_ab3e1736be271fe78087dee008490199b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#ab3e1736be271fe78087dee008490199b">execute</a> (u8 opcode, u8 operand1, u8 operand2=0)</td></tr>
-<tr class="memdesc:ab3e1736be271fe78087dee008490199b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a single opcode with one or two operands.  <br /></td></tr>
-<tr class="separator:ab3e1736be271fe78087dee008490199b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d70c847732b6891a759352d27e896ee" id="r_a9d70c847732b6891a759352d27e896ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a9d70c847732b6891a759352d27e896ee">execute</a> (u8 opcode)</td></tr>
-<tr class="memdesc:a9d70c847732b6891a759352d27e896ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a single opcode.  <br /></td></tr>
-<tr class="separator:a9d70c847732b6891a759352d27e896ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a962cab85ff1cce074256d303dcaf53cf" id="r_a962cab85ff1cce074256d303dcaf53cf"><td class="memTemplParams" colspan="2">template&lt;bool report_trace = true&gt; </td></tr>
+<tr class="memitem:a962cab85ff1cce074256d303dcaf53cf"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcpu.html#a962cab85ff1cce074256d303dcaf53cf">step</a> (usize steps=1)</td></tr>
+<tr class="memdesc:a962cab85ff1cce074256d303dcaf53cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Steps the CPU by one instruction (and its operands).  <br /></td></tr>
+<tr class="separator:a962cab85ff1cce074256d303dcaf53cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a310bf9a672be578a1e7484d12fee6d00" id="r_a310bf9a672be578a1e7484d12fee6d00"><td class="memTemplParams" colspan="2">template&lt;bool report_trace = true&gt; </td></tr>
+<tr class="memitem:a310bf9a672be578a1e7484d12fee6d00"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcpu.html#a310bf9a672be578a1e7484d12fee6d00">execute</a> (u8 opcode, u8 operand1, u8 operand2=0)</td></tr>
+<tr class="memdesc:a310bf9a672be578a1e7484d12fee6d00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a single opcode with one or two operands.  <br /></td></tr>
+<tr class="separator:a310bf9a672be578a1e7484d12fee6d00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf57ba53d7481afb8c3e7747db7d2c7a" id="r_acf57ba53d7481afb8c3e7747db7d2c7a"><td class="memTemplParams" colspan="2">template&lt;bool report_trace = true&gt; </td></tr>
+<tr class="memitem:acf57ba53d7481afb8c3e7747db7d2c7a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcpu.html#acf57ba53d7481afb8c3e7747db7d2c7a">execute</a> (u8 opcode)</td></tr>
+<tr class="memdesc:acf57ba53d7481afb8c3e7747db7d2c7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a single opcode.  <br /></td></tr>
+<tr class="separator:acf57ba53d7481afb8c3e7747db7d2c7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d839c16cc808245a4f0c38a430a342a" id="r_a0d839c16cc808245a4f0c38a430a342a"><td class="memTemplParams" colspan="2">template&lt;typename T , T_ITERATOR_SFINAE &gt; </td></tr>
 <tr class="memitem:a0d839c16cc808245a4f0c38a430a342a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcpu.html#a0d839c16cc808245a4f0c38a430a342a">load</a> (T begin, T end, usize offset=0, bool auto_reset_vector=false)</td></tr>
 <tr class="memdesc:a0d839c16cc808245a4f0c38a430a342a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads data into cardbus.  <br /></td></tr>
@@ -128,6 +131,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae6100df727ce03c23512fee8d2698fc5" id="r_ae6100df727ce03c23512fee8d2698fc5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcpu__state.html">cpu_state</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#ae6100df727ce03c23512fee8d2698fc5">save_state</a> () const</td></tr>
 <tr class="memdesc:ae6100df727ce03c23512fee8d2698fc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save CPU state.  <br /></td></tr>
 <tr class="separator:ae6100df727ce03c23512fee8d2698fc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d9a455331bb9572b839735ae73ccc88" id="r_a8d9a455331bb9572b839735ae73ccc88"><td class="memItemLeft" align="right" valign="top"><a id="a8d9a455331bb9572b839735ae73ccc88" name="a8d9a455331bb9572b839735ae73ccc88"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_trace_observer</b> (std::function&lt; void(u16, const std::array&lt; u8, 3 &gt; &amp;, usize)&gt; observer)</td></tr>
+<tr class="separator:a8d9a455331bb9572b839735ae73ccc88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0dd1651ec43836cea38fa1a8af972b55" id="r_a0dd1651ec43836cea38fa1a8af972b55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a0dd1651ec43836cea38fa1a8af972b55">set_pc</a> (u16 pc)</td></tr>
 <tr class="memdesc:a0dd1651ec43836cea38fa1a8af972b55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the PC of the CPU.  <br /></td></tr>
 <tr class="separator:a0dd1651ec43836cea38fa1a8af972b55"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,14 +156,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reset_pseudo_bdos_red
 <tr class="memdesc:a850125d4d67383c10cbb1ba594d1db18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Redirect pseudo BDOS print routines back to stdout. <br /></td></tr>
 <tr class="separator:a850125d4d67383c10cbb1ba594d1db18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Interrupt related methods.</div></td></tr>
-<tr class="memitem:a4228c63bc0f368cf39bfe37909f73f45" id="r_a4228c63bc0f368cf39bfe37909f73f45"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a4228c63bc0f368cf39bfe37909f73f45">interrupt</a> (std::array&lt; u8, 3 &gt; inst)</td></tr>
-<tr class="memdesc:a4228c63bc0f368cf39bfe37909f73f45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call an interrupt and push PC, then disable interrupts.  <br /></td></tr>
-<tr class="separator:a4228c63bc0f368cf39bfe37909f73f45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0486313a1a4f72cb6c0e3231b2927d94" id="r_a0486313a1a4f72cb6c0e3231b2927d94"><td class="memTemplParams" colspan="2">template&lt;bool report_trace = true&gt; </td></tr>
+<tr class="memitem:a0486313a1a4f72cb6c0e3231b2927d94"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcpu.html#a0486313a1a4f72cb6c0e3231b2927d94">interrupt</a> (std::array&lt; u8, 3 &gt; inst)</td></tr>
+<tr class="memdesc:a0486313a1a4f72cb6c0e3231b2927d94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call an interrupt and push PC, then disable interrupts.  <br /></td></tr>
+<tr class="separator:a0486313a1a4f72cb6c0e3231b2927d94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class bus_iface = bus&amp;&gt;<br />
 class cpu&lt; bus_iface &gt;</div><p>Represents the CPU of the emulator. </p>
-<p>This is the 8080 CPU emulator and interpreter. It abstracts the CPU functionality into straightforward methods and presents a way to step and interact with state. Being an interpreter, each opcode starting from the program counter address in cardbus is fetched and executed according to what it represents and including further fetches to opcode operands. The API also provides public access to <a class="el" href="classcpu.html#ab3e1736be271fe78087dee008490199b" title="Executes a single opcode with one or two operands.">execute()</a>, should the user want to manually ask for instructions.</p>
+<p>This is the 8080 CPU emulator and interpreter. It abstracts the CPU functionality into straightforward methods and presents a way to step and interact with state. Being an interpreter, each opcode starting from the program counter address in cardbus is fetched and executed according to what it represents and including further fetches to opcode operands. The API also provides public access to <a class="el" href="classcpu.html#a310bf9a672be578a1e7484d12fee6d00" title="Executes a single opcode with one or two operands.">execute()</a>, should the user want to manually ask for instructions.</p>
 <dl class="section note"><dt>Note</dt><dd>The class is completely defined in this header to allow templating the class to determine what bus interface <code>bus_iface</code> to use. For example, you can:<ul>
 <li><code>cpu&lt;bus&amp;&gt; <a class="el" href="classcpu.html" title="Represents the CPU of the emulator.">cpu(cardbus)</a>;</code> or <code>cpu&lt;&gt; <a class="el" href="classcpu.html" title="Represents the CPU of the emulator.">cpu(cardbus)</a>;</code> to create a standard CPU that interacts with a bus, or</li>
 <li><code>cpu&lt;std::array&lt;u8, 65536&gt;&gt; cpu;</code> to instead have an empty array as a bus, for max performance! </li>
@@ -201,13 +208,15 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
 
 </div>
 </div>
-<a id="a9d70c847732b6891a759352d27e896ee" name="a9d70c847732b6891a759352d27e896ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d70c847732b6891a759352d27e896ee">&#9670;&#160;</a></span>execute() <span class="overload">[1/2]</span></h2>
+<a id="acf57ba53d7481afb8c3e7747db7d2c7a" name="acf57ba53d7481afb8c3e7747db7d2c7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf57ba53d7481afb8c3e7747db7d2c7a">&#9670;&#160;</a></span>execute() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class bus_iface  = bus&amp;&gt; </div>
+<div class="memtemplate">
+template&lt;bool report_trace = true&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -239,13 +248,15 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
 
 </div>
 </div>
-<a id="ab3e1736be271fe78087dee008490199b" name="ab3e1736be271fe78087dee008490199b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab3e1736be271fe78087dee008490199b">&#9670;&#160;</a></span>execute() <span class="overload">[2/2]</span></h2>
+<a id="a310bf9a672be578a1e7484d12fee6d00" name="a310bf9a672be578a1e7484d12fee6d00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a310bf9a672be578a1e7484d12fee6d00">&#9670;&#160;</a></span>execute() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class bus_iface  = bus&amp;&gt; </div>
+<div class="memtemplate">
+template&lt;bool report_trace = true&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -292,45 +303,17 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
 </dl>
 <p>This is an overload that manipulates the way the fetch cycles interact in the CPU logic: it will use the operands retrieved by this method (usually to be placed by a device on the bus that called an IRQ) instead of fetching them from the bus cards. In fact, this is used by the interrupt method as well. </p>
 
-<p class="reference">References <a class="el" href="classcpu.html#ab3e1736be271fe78087dee008490199b">cpu&lt; bus_iface &gt;::execute()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="classcpu.html#ab3e1736be271fe78087dee008490199b">cpu&lt; bus_iface &gt;::execute()</a>, <a class="el" href="classcpu.html#a4228c63bc0f368cf39bfe37909f73f45">cpu&lt; bus_iface &gt;::interrupt()</a>, and <a class="el" href="classcpu.html#a7a01c8c57ae52af3126b88042cd1aa63">cpu&lt; bus_iface &gt;::step()</a>.</p>
-<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classcpu_ab3e1736be271fe78087dee008490199b_cgraph.png" border="0" usemap="#aclasscpu_ab3e1736be271fe78087dee008490199b_cgraph" alt=""/></div>
-<map name="aclasscpu_ab3e1736be271fe78087dee008490199b_cgraph" id="aclasscpu_ab3e1736be271fe78087dee008490199b_cgraph">
-<area shape="rect" title="Executes a single opcode with one or two operands." alt="" coords="5,29,109,55"/>
-<area shape="poly" title=" " alt="" coords="39,30,35,21,37,12,45,5,57,3,72,6,79,14,74,18,69,11,57,8,47,10,42,14,41,20,44,28"/>
-</map>
-</div>
-<div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classcpu_ab3e1736be271fe78087dee008490199b_icgraph.png" border="0" usemap="#aclasscpu_ab3e1736be271fe78087dee008490199b_icgraph" alt=""/></div>
-<map name="aclasscpu_ab3e1736be271fe78087dee008490199b_icgraph" id="aclasscpu_ab3e1736be271fe78087dee008490199b_icgraph">
-<area shape="rect" title="Executes a single opcode with one or two operands." alt="" coords="163,31,267,56"/>
-<area shape="poly" title=" " alt="" coords="241,20,234,12,215,9,199,11,190,16,188,22,193,29,189,32,183,22,186,13,197,6,215,4,236,7,245,16"/>
-<area shape="rect" href="classcpu.html#a4228c63bc0f368cf39bfe37909f73f45" title="Call an interrupt and push PC, then disable interrupts." alt="" coords="5,5,115,31"/>
-<area shape="poly" title=" " alt="" coords="148,35,115,30,116,24,149,30"/>
-<area shape="rect" href="classcpu.html#a7a01c8c57ae52af3126b88042cd1aa63" title="Steps the CPU by one instruction (and its operands)." alt="" coords="19,55,101,80"/>
-<area shape="poly" title=" " alt="" coords="149,56,101,64,101,58,148,51"/>
-</map>
-</div>
-
 </div>
 </div>
-<a id="a4228c63bc0f368cf39bfe37909f73f45" name="a4228c63bc0f368cf39bfe37909f73f45"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4228c63bc0f368cf39bfe37909f73f45">&#9670;&#160;</a></span>interrupt()</h2>
+<a id="a0486313a1a4f72cb6c0e3231b2927d94" name="a0486313a1a4f72cb6c0e3231b2927d94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0486313a1a4f72cb6c0e3231b2927d94">&#9670;&#160;</a></span>interrupt()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class bus_iface  = bus&amp;&gt; </div>
+<div class="memtemplate">
+template&lt;bool report_trace = true&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -358,21 +341,6 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
   </dd>
 </dl>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>This allows any instruction and any retrieval of arguments, but I'm not sure if that happens other than on <code>CALL</code>. </dd></dl>
-
-<p class="reference">References <a class="el" href="classcpu.html#ab3e1736be271fe78087dee008490199b">cpu&lt; bus_iface &gt;::execute()</a>.</p>
-<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classcpu_a4228c63bc0f368cf39bfe37909f73f45_cgraph.png" border="0" usemap="#aclasscpu_a4228c63bc0f368cf39bfe37909f73f45_cgraph" alt=""/></div>
-<map name="aclasscpu_a4228c63bc0f368cf39bfe37909f73f45_cgraph" id="aclasscpu_a4228c63bc0f368cf39bfe37909f73f45_cgraph">
-<area shape="rect" title="Call an interrupt and push PC, then disable interrupts." alt="" coords="5,29,115,55"/>
-<area shape="rect" href="classcpu.html#ab3e1736be271fe78087dee008490199b" title="Executes a single opcode with one or two operands." alt="" coords="163,29,267,55"/>
-<area shape="poly" title=" " alt="" coords="115,39,149,39,149,45,115,45"/>
-<area shape="poly" title=" " alt="" coords="189,31,183,21,186,11,197,5,215,3,236,6,245,15,241,19,234,11,215,8,199,10,190,15,188,20,193,28"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -617,11 +585,11 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
 </dl>
 
 <p class="reference">References <a class="el" href="classutil_1_1print__helper.html#a08912c4069c431b6080355b8a7c18c15">util::print_helper::set()</a>.</p>
-<div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classcpu_abbf017b99cf39776da5a4bf517fb9226_cgraph.png" border="0" usemap="#aclasscpu_abbf017b99cf39776da5a4bf517fb9226_cgraph" alt=""/></div>
 <map name="aclasscpu_abbf017b99cf39776da5a4bf517fb9226_cgraph" id="aclasscpu_abbf017b99cf39776da5a4bf517fb9226_cgraph">
 <area shape="rect" title="Redirect pseudo BDOS print routines to a file." alt="" coords="5,5,171,45"/>
@@ -632,13 +600,15 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
 
 </div>
 </div>
-<a id="a7a01c8c57ae52af3126b88042cd1aa63" name="a7a01c8c57ae52af3126b88042cd1aa63"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a01c8c57ae52af3126b88042cd1aa63">&#9670;&#160;</a></span>step()</h2>
+<a id="a962cab85ff1cce074256d303dcaf53cf" name="a962cab85ff1cce074256d303dcaf53cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a962cab85ff1cce074256d303dcaf53cf">&#9670;&#160;</a></span>step()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class bus_iface  = bus&amp;&gt; </div>
+<div class="memtemplate">
+template&lt;bool report_trace = true&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -661,7 +631,13 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
 <p>Steps the CPU by one instruction (and its operands). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">steps</td><td>The number of steps to forward the CPU by.</td></tr>
+    <tr><td class="paramname">steps</td><td>The number of steps to forward the CPU by. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">report_trace</td><td>False selects an executor with all instruction trace calls compiled out, even when an observer remains attached.</td></tr>
   </table>
   </dd>
 </dl>
@@ -670,21 +646,6 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>If the CPU is halted, this method will return immediately. </dd></dl>
 <dl class="section user"><dt></dt><dd></dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Internally, this method is calling <code>execute(fetch())</code>. </dd></dl>
-
-<p class="reference">References <a class="el" href="classcpu.html#ab3e1736be271fe78087dee008490199b">cpu&lt; bus_iface &gt;::execute()</a>.</p>
-<div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-4-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classcpu_a7a01c8c57ae52af3126b88042cd1aa63_cgraph.png" border="0" usemap="#aclasscpu_a7a01c8c57ae52af3126b88042cd1aa63_cgraph" alt=""/></div>
-<map name="aclasscpu_a7a01c8c57ae52af3126b88042cd1aa63_cgraph" id="aclasscpu_a7a01c8c57ae52af3126b88042cd1aa63_cgraph">
-<area shape="rect" title="Steps the CPU by one instruction (and its operands)." alt="" coords="5,29,87,55"/>
-<area shape="rect" href="classcpu.html#ab3e1736be271fe78087dee008490199b" title="Executes a single opcode with one or two operands." alt="" coords="135,29,239,55"/>
-<area shape="poly" title=" " alt="" coords="87,39,121,39,121,45,87,45"/>
-<area shape="poly" title=" " alt="" coords="163,30,158,21,161,11,171,5,187,3,206,6,214,15,210,18,203,11,187,8,172,10,165,15,163,20,168,28"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -697,7 +658,7 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classcpu.html">cpu</a></li>
-    <li class="footer">Generated on Sun Sep 6 2026 for buddy8800 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Tue Sep 8 2026 for buddy8800 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
