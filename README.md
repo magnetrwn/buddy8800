@@ -2,7 +2,7 @@
 
 **An Intel 8080 emulated on an S-100 bus with a Motorola 6850 ACIA serial expansion card. Designed for running BASIC and CP/M over a PTY.**
 
-![Running `cpudiag.bin`](media/cpudiag-in-a-loop.gif)
+![Main emulator window while running ALTMON 1.3](media/ncurses-main-window.png)
 
 ### Getting Started
 
@@ -12,6 +12,7 @@
 + [Configuration File](#configuration-file)
 + [Resources and Documentation](#resources-and-documentation)
 + [Additional Information](#additional-information)
++ [License](#license)
 
 ### Doxygen Documentation
 
@@ -165,12 +166,9 @@ Here are some of the resources I used to figure out various aspects of this proj
 + [beriddle/i8080](https://github.com/beriddle/i8080), some demos for the Orion-128 Russian 8080 clone machine, but includes an interesting [16 bit floating point library](https://github.com/beriddle/i8080/tree/master/FP16).
 + [skx/cpmulator](https://github.com/skx/cpmulator/tree/master/ccp), useful CCP sources and binaries.
 
-And thank you to the **Emulator Development** and **Lazy Developers** Discord servers for general help and support!
-
 ### Additional Information
 
-I decided to dig back this project from being abandoned to get GPT-6 Astra to fix a bug with the PTY I couldn't spend time to look for. The following are updates from the agent with my guidance.
-
+I decided to recover this project from being abandoned to try getting an AI agent to fix a bug with the PTY I couldn't spend time to look for. The following are updates from the agent with my guidance, and can be useful to rebuild context later.
 ```
 The build requires a C++17 compiler, CMake, and the ncurses development library; tests additionally require Python 3
 (standard library only). It uses `build-linux/` (`BUDDY8800_BUILD_DIR` can override
@@ -245,3 +243,7 @@ modem signals and UART interrupts are not emulated. Add another serial card at
 0x12 for a separate PTY if needed. This setup does not include the disk hardware
 or software needed to boot CP/M.
 ```
+
+# License
+
+The project is licensed under GPL-3.0-or-later, see LICENSE.

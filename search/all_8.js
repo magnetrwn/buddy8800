@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['list_0',['Todo List',['../todo.html',1,'']]],
-  ['load_1',['load',['../classcpu.html#a0d839c16cc808245a4f0c38a430a342a',1,'cpu']]],
-  ['load_5fstate_2',['load_state',['../classcpu.html#a6c72852ac69a7814d8e0faa836d3abf3',1,'cpu']]]
+  ['license_0',['License',['..//home/runner/work/buddy8800/buddy8800/README.md#autotoc_md9',1,'']]],
+  ['list_1',['Todo List',['../todo.html',1,'']]],
+  ['load_2',['load',['../classcpu.html#a0d839c16cc808245a4f0c38a430a342a',1,'cpu']]],
+  ['load_5fstate_3',['load_state',['../classcpu.html#a6c72852ac69a7814d8e0faa836d3abf3',1,'cpu']]]
 ];
