@@ -103,8 +103,14 @@ TEST_CASE("Serial registers consume input once and handle control reset", "[seri
     REQUIRE_FALSE(serial.in_range(0x12));
     REQUIRE(serial.read(0x10) == 2);
     // ALTMON's master reset followed by 8N2 must not fail Linux termios.
+    termios before{}, after{};
+    REQUIRE(tcgetattr(client.descriptor, &before) == 0);
     serial.write(0x10, 3);
     serial.write(0x10, 0x11);
+    REQUIRE(tcgetattr(client.descriptor, &after) == 0);
+    // Guest clock division does not change the host PTY's nominal speed.
+    REQUIRE(cfgetispeed(&after) == cfgetispeed(&before));
+    REQUIRE(cfgetospeed(&after) == cfgetospeed(&before));
     client.send("AB");
     eventually([&] { return serial.read(0x10) & 1; });
     REQUIRE((serial.read(0x10) & 1) == 1);

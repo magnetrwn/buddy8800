@@ -5,13 +5,7 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif()
 
-if(ENABLE_TRACE)
-    add_compile_definitions(ENABLE_TRACE)
-endif()
-
-if(ENABLE_TRACE_ESSENTIAL)
-    add_compile_definitions(ENABLE_TRACE_ESSENTIAL)
-endif()
+option(DISABLE_TRACE "Build the plain frontend without ncurses tracing" OFF)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)

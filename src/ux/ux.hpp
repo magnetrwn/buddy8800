@@ -51,10 +51,20 @@ public:
 
     void run(const volatile std::sig_atomic_t& stop) {
         while (!stop && !processor.is_halted()) {
-            processor.step();
-            if (cardbus.is_irq())
-                processor.interrupt(cardbus.get_irq());
+            step<false>();
         }
+    }
+
+    template <bool report_trace = true>
+    void step() {
+        if (processor.is_halted()) return;
+        processor.step<report_trace>();
+        if (cardbus.is_irq()) processor.interrupt<report_trace>(cardbus.get_irq());
+    }
+    bool halted() const { return processor.is_halted(); }
+    cpu_state state() const { return processor.save_state(); }
+    void trace(std::function<void(u16, const std::array<u8, 3>&, usize)> observer) {
+        processor.set_trace_observer(std::move(observer));
     }
 
     std::string info() const { return cardbus.bus_map_s(); }
@@ -65,14 +75,22 @@ public:
           processor(cardbus, conf.get_start_pc() == 0x0000) {}
 };
 
+#ifndef DISABLE_TRACE
+int run_tui(emulator& emu, const volatile std::sig_atomic_t& stop);
+#endif
+
 struct terminal_ux {
     emulator emu;
 
     int main(int argc, char** argv, const volatile std::sig_atomic_t& stop) {
+        emu.setup(argc, argv);
+#ifndef DISABLE_TRACE
+        if (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO))
+            return run_tui(emu, stop);
+#endif
         std::cout << "\x1B[33;01m-:-:-:-:- emulator setup -:-:-:-:-\x1B[0m\n" << std::endl;
 
         std::cout << emu.info();
-        emu.setup(argc, argv);
 
         std::cout << "\x1B[33;01m-:-:-:-:- emulator run -:-:-:-:-\x1B[0m" << std::endl;
 

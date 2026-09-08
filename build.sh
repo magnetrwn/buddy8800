@@ -5,8 +5,7 @@
 BUILD_TYPE="Release"
 BUILD_DOCS="OFF"
 ENABLE_TESTING="OFF"
-ENABLE_TRACE="OFF"
-ENABLE_TRACE_ESSENTIAL="OFF"
+DISABLE_TRACE="OFF"
 RUN_PERF_STAT="OFF"
 RUN_PERF_RECORD="OFF"
 RUN_MEMCHECK="OFF"
@@ -21,8 +20,7 @@ do
     -d|--debug)           BUILD_TYPE="Debug";;
     -r|--release)         BUILD_TYPE="Release";;
     -T|--tests)           ENABLE_TESTING="ON";;
-       --trace)           ENABLE_TRACE="ON";;
-       --trace-essential) ENABLE_TRACE_ESSENTIAL="ON";;
+       --disable-trace)   DISABLE_TRACE="ON";;
        --docs)            BUILD_DOCS="ON";;
     -P|--perf-stat)       RUN_PERF_STAT="ON";;
        --perf-record)     RUN_PERF_RECORD="ON";;
@@ -39,8 +37,7 @@ build_dir="${BUDDY8800_BUILD_DIR:-build-linux}"
 cmake -S . -B "$build_dir" \
   -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
   -DENABLE_TESTING=$ENABLE_TESTING \
-  -DENABLE_TRACE=$ENABLE_TRACE \
-  -DENABLE_TRACE_ESSENTIAL=$ENABLE_TRACE_ESSENTIAL
+  -DDISABLE_TRACE=$DISABLE_TRACE
 
 cmake --build "$build_dir" -j8
 cp "$build_dir/compile_commands.json" compile_commands.json
