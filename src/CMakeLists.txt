@@ -21,5 +21,7 @@ else()
     target_include_directories(buddy8800 PRIVATE ${CURSES_INCLUDE_DIRS})
     target_link_libraries(buddy8800 PRIVATE ${CURSES_LIBRARIES})
 endif()
+# TODO: use rsync in build.sh?
 configure_file(${PROJECT_SOURCE_DIR}/static/config.toml ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/config.toml COPYONLY)
-configure_file(${PROJECT_SOURCE_DIR}/static/f800mon.bin ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/f800mon.bin COPYONLY)
+configure_file(${PROJECT_SOURCE_DIR}/static/altmon.bin ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/altmon.bin COPYONLY)
+configure_file(${PROJECT_SOURCE_DIR}/static/8kbas.bin ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/8kbas.bin COPYONLY)
