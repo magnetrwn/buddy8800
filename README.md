@@ -98,7 +98,7 @@ Please check the highly descriptive [config.toml](static/config.toml) file for a
 For reference, here is a simple test machine setup (only the cards portion of the config file):
 
 ```toml
-[[card]] # 88-SIO serial interface
+[[card]] # 88-2SIO serial interface
 slot        = 10
 type        = "serial"
 at          = 0x10
@@ -165,6 +165,10 @@ Here are some of the resources I used to figure out various aspects of this proj
 + [jefftranter/8080](https://github.com/jefftranter/8080), more software, multiple monitor programs.
 + [beriddle/i8080](https://github.com/beriddle/i8080), some demos for the Orion-128 Russian 8080 clone machine, but includes an interesting [16 bit floating point library](https://github.com/beriddle/i8080/tree/master/FP16).
 + [skx/cpmulator](https://github.com/skx/cpmulator/tree/master/ccp), useful CCP sources and binaries.
++ [emustudio.net](https://www.emustudio.net/documentation/user/altair8800/software), referenced software binaries.
++ [trailing-edge.com](http://simh.trailing-edge.com/kits/psaltair.zip), additional roms.
++ [tommojphillips/Altair8800](https://github.com/tommojphillips/Altair8800/tree/master/roms), additional roms.
++ [jim11662418/Intel_8080_Single_Board_Computer](https://github.com/jim11662418/Intel_8080_Single_Board_Computer/blob/main/Altair_BASIC.bin), useful merge of bins in a 32k rom package.
 
 ### Additional Information
 

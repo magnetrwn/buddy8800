@@ -1,73 +1,26 @@
-############################################################################################################
-# Configuration file for the emulator.                                                                     #
-# This file is loaded by the emulator to understand how to configure the system.                           #
-############################################################################################################
-
-# -------------------------------------------- GENERAL SETUP --------------------------------------------- # 
-
 [emulator]
-pseudo_bdos_enabled = false     # Redirect and handle calls that match addresses of BDOS calls.
-start_with_pc_at    = 0xF800    # Start the program counter at this address. Note that this bypasses the reset vector. 0 or comment to disable.
+pseudo_bdos_enabled = false
+start_with_pc_at    = 0xf800
 
-############################################################################################################
-# List of cards here, make sure to append cards you wish to add. Available parameters are:                 #
-# - slot: Slot number of the card [0, 17], which also determines IRQ priority (lower is higher priority).  #
-# - type: Type of the card. Available types are: "ram", "rom", "serial".                                   #
-# - load: Path to the file to load into the card. Only for "ram" or "rom" type.                            #
-#    (relative to this configuration file; the card uses the exact file size unless range is given)       #
-# - at: Address of the card in the memory space.                                                           #
-# - range: Size or address range (like I/O register count) of the card in bytes.                           #
-#    (you can omit this if using load)                                                                     #
-# - let_collide: Allow the card to have overlapping address range with other cards.                        #
-#                                                                                                          #
-# IMPORTANT: cards can be de/activated by the IOR/IOW signal according to them being memory or I/O, so     #
-#            you might not need to enable overlapping, as overlap of I/O and memory is expected.           #
-#            Only use this in case of overlap of the same type of card (e.g. two RAM cards).               #
-#                                                                                                          #
-# Note: there is (usually) a limit of 18 cards in the system. Lower slot number means higher IRQ priority. #
-#                                                                                                          #
-# Note: you can use load, range or both to load a rom and fill unused extra with zeros, at least one of    #
-#       them must be present.                                                                              #
-############################################################################################################
-
-# -------------------------------------------- CP/M ROM CARDS -------------------------------------------- #
-
-[[card]] # ALTMON: all 1031 bytes are needed (F800..FC06).
+[[card]] # Load 8K BASIC in RAM (0x0000-0x1fff)
 slot        = 0
-type        = "rom"
-at          = 0xF800
-load        = "f800mon.bin"
-
-# [[card]] # CP/M 2.2 BIOS
-# slot        = 0
-# type        = "rom"
-# at          = 0x0000
-# load        = "static/bios22.bin"
-
-# [[card]] # CP/M 2.2 BDOS
-# slot        = 1
-# type        = "rom"
-# at          = 0x8000
-# load        = "static/bdos22.bin"
-
-# [[card]] # CP/M 2.2 CCP
-# slot        = 2
-# type        = "rom"
-# at          = 0xC000
-# load        = "static/ccp22.bin"
-
-# ------------------------------------------ I/O HARDWARE CARDS ------------------------------------------ #
-
-[[card]] # 88-SIO serial interface
-slot        = 10
-type        = "serial"
-at          = 0x10
-
-# -------------------------------------------- SOFTWARE CARDS -------------------------------------------- #
-
-[[card]] # Cover all memory space with RAM just in case
-slot        = 17
 type        = "ram"
 at          = 0x0000
-range       = 65536
-let_collide = true
+load        = "8kbas.bin"
+
+[[card]] # Add 16K empty RAM (0x8000-0xbfff)
+slot        = 1
+type        = "ram"
+at          = 0x8000
+range       = 16384
+
+[[card]] # Put Altair Monitor in ROM (0xf800-0xfc00)
+slot        = 2
+type        = "rom"
+at          = 0xf800
+load        = "altmon.bin"
+
+[[card]] # 88-2SIO serial interface
+slot        = 3
+type        = "serial"
+at          = 0x10
