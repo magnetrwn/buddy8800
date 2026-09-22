@@ -16,6 +16,7 @@ struct card_config {
     usize range;
     std::filesystem::path load;
     bool allow_collision;
+    u8 switches = 0;
 };
 
 /// @brief Machine settings without live devices or host resources.

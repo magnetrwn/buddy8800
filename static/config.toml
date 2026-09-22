@@ -8,19 +8,30 @@ type        = "ram"
 at          = 0x0000
 load        = "8kbas.bin"
 
-[[card]] # Add 16K empty RAM (0x8000-0xbfff)
+[[card]] # Add 16K contiguous workspace for BASIC (0x2000-0x5fff)
 slot        = 1
 type        = "ram"
-at          = 0x8000
+at          = 0x2000
 range       = 16384
 
-[[card]] # Put Altair Monitor in ROM (0xf800-0xfc00)
+[[card]] # Add 512B RAM for ALTMON's stack (0xbe00-0xbfff)
 slot        = 2
+type        = "ram"
+at          = 0xbe00
+range       = 512
+
+[[card]] # Put Altair Monitor in ROM (0xf800-0xfc00)
+slot        = 3
 type        = "rom"
 at          = 0xf800
 load        = "altmon.bin"
 
 [[card]] # 88-2SIO serial interface
-slot        = 3
+slot        = 4
 type        = "serial"
 at          = 0x10
+
+[[card]] # Fixed front-panel sense switches (A8..A15)
+slot        = 5
+type        = "front_panel"
+switches    = 0x10  # A12 up: BASIC 4.x terminal on 88-2SIO port 1, one stop bit

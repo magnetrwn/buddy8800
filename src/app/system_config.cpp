@@ -1,5 +1,6 @@
 #include "app/system_config.hpp"
 #include "app/binary_file.hpp"
+#include "core/cards/front_panel.hpp"
 #include "core/cards/ram_card.hpp"
 #include "core/cards/rom_card.hpp"
 #include "core/cards/serial_card.hpp"
@@ -20,6 +21,11 @@ std::unique_ptr<card> make_card(const buddy8800::app::card_config& config) {
         return make_memory<ram_card>(config);
     if (config.type == "rom")
         return make_memory<rom_card>(config);
+    if (config.type == "front_panel") {
+        if (!config.load.empty() || config.range != 0)
+            throw std::invalid_argument("Front panel cards do not accept load or range");
+        return std::make_unique<front_panel>(config.at, config.switches);
+    }
     if (config.type == "serial") {
         if (!config.load.empty() || config.range != 0)
             throw std::invalid_argument("Serial cards do not accept load or range");
