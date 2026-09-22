@@ -1,0 +1,5 @@
+<map id="cpu::set_pc" name="cpu::set_pc">
+<area shape="rect" id="Node000001" title="Set the PC of the CPU." alt="" coords="172,5,267,31"/>
+<area shape="rect" id="Node000002" href="$classemulator.html#ad8c5a8afd978c31126befeea506156b6" title="Set the configured initial program counter." alt="" coords="5,5,124,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="159,21,124,21,124,15,159,15"/>
+</map>

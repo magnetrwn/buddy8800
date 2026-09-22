@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['load_0',['load',['../classcpu.html#a0d839c16cc808245a4f0c38a430a342a',1,'cpu']]],
-  ['load_5fstate_1',['load_state',['../classcpu.html#a6c72852ac69a7814d8e0faa836d3abf3',1,'cpu']]]
+  ['halted_0',['halted',['../classemulator.html#a3f7b452aa417b6474d814e6d77c022b5',1,'emulator']]]
 ];

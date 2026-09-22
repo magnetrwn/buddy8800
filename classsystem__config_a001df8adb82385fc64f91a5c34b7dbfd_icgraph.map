@@ -1,0 +1,5 @@
+<map id="system_config::get_do_pseudo_bdos" name="system_config::get_do_pseudo_bdos">
+<area shape="rect" id="Node000001" title="Report whether legacy diagnostic interception is enabled." alt="" coords="201,5,347,45"/>
+<area shape="rect" id="Node000002" href="$classemulator.html#a25086f33052c106dbc9aaa5337d12740" title="Construct the machine from a configuration file." alt="" coords="5,13,153,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="187,28,154,28,154,23,187,23"/>
+</map>

@@ -1,4 +1,25 @@
 var searchData=
 [
-  ['unset_5fflag_0',['unset_flag',['../structcpu__state.html#ad2172487d40c164820b74a21b267af84',1,'cpu_state']]]
+  ['save_5fstate_0',['save_state',['../classcpu.html#ae6100df727ce03c23512fee8d2698fc5',1,'cpu']]],
+  ['send_1',['send',['../classpty.html#a42411f2b12218401f748cbc94fe12062',1,'pty::send(const char *data) const'],['../classpty.html#afde0990ca2d8300af613c1bf15836ac6',1,'pty::send(const char *data, usize size) const']]],
+  ['send_5fbreak_2',['send_break',['../classpty.html#ae60caccd262899cddaa62ebeda9ca14d',1,'pty']]],
+  ['serial_5fcard_3',['serial_card',['../classserial__card.html#ab31c2ab7a8e57caa47c1559262a6aeb8',1,'serial_card']]],
+  ['set_4',['set',['../classbuddy8800_1_1legacy_1_1print__helper.html#ac1bdc5d43bafce18dee0b958541edcd9',1,'buddy8800::legacy::print_helper']]],
+  ['set_5fbaud_5frate_5',['set_baud_rate',['../classpty.html#a757f8fc7156ea5215922e9646b65daaa',1,'pty']]],
+  ['set_5fecho_5freceived_5fback_6',['set_echo_received_back',['../classpty.html#a361a2ef0fc27c6c1f2aac8e05aa0f89c',1,'pty']]],
+  ['set_5fflag_7',['set_flag',['../structcpu__state.html#a88086422013ebb4ddb691a5d4ec090aa',1,'cpu_state']]],
+  ['set_5fif_5fflag_8',['set_if_flag',['../structcpu__state.html#aedbda43148055f040a9b18c5fc16bfd1',1,'cpu_state']]],
+  ['set_5fpc_9',['set_pc',['../classcpu.html#a0dd1651ec43836cea38fa1a8af972b55',1,'cpu']]],
+  ['set_5fpseudo_5fbdos_5fredirect_10',['set_pseudo_bdos_redirect',['../classcpu.html#abbf017b99cf39776da5a4bf517fb9226',1,'cpu']]],
+  ['set_5fpseudo_5fbdos_5fstream_11',['set_pseudo_bdos_stream',['../classcpu.html#a307fd899ceee77e498f60a6c57783084',1,'cpu']]],
+  ['set_5fregister16_12',['set_register16',['../structcpu__state.html#ac9b4c2b78269d7e1f39a02d9b7a27007',1,'cpu_state']]],
+  ['set_5fregister8_13',['set_register8',['../structcpu__state.html#a02e774e783ac8deb8e0580ff63855871',1,'cpu_state']]],
+  ['set_5fz_5fs_5fp_5fflags_14',['set_Z_S_P_flags',['../structcpu__state.html#ac065e7b10c522bb1a3fcd4b6fc9ee428',1,'cpu_state']]],
+  ['setup_15',['setup',['../classpty.html#acacb920c29edf75bc85388b4e347aa4e',1,'pty']]],
+  ['size_16',['size',['../classbus.html#a40eeeeb2ba939e469bdff3d35c3f5f67',1,'bus::size()'],['../classtrace__history.html#a51a55c2ae8cec0f9b7afea43eb59c7aa',1,'trace_history::size()']]],
+  ['start_17',['start',['../classemulator.html#ad8c5a8afd978c31126befeea506156b6',1,'emulator']]],
+  ['state_18',['state',['../classemulator.html#a5a9731c316c66c09b5a9bd764e5af2ea',1,'emulator']]],
+  ['step_19',['step',['../classemulator.html#a0c5f9de9ac11c30ee26c04cb20a7fc57',1,'emulator::step()'],['../classcpu.html#a962cab85ff1cce074256d303dcaf53cf',1,'cpu::step()']]],
+  ['stream_20',['stream',['../classbuddy8800_1_1ux_1_1tui_1_1diagnostic__console.html#aa3fd9c64fe268969e54d24ec25efc6f1',1,'buddy8800::ux::tui::diagnostic_console']]],
+  ['system_5fconfig_21',['system_config',['../classsystem__config.html#af9ac9e84a5453d2487f17b9953866c83',1,'system_config::system_config(const char *filename)'],['../classsystem__config.html#a8424741aadf4922c9931bb24c46d4241',1,'system_config::system_config(const buddy8800::app::machine_config &amp;config)']]]
 ];

@@ -1,6 +1,8 @@
 <map id="pty::set_baud_rate" name="pty::set_baud_rate">
-<area shape="rect" id="Node000001" title="Set the baud rate of the PTY interface." alt="" coords="136,29,279,55"/>
-<area shape="rect" id="Node000002" href="$classpty.html#a50aec75ef08fc8368e6a3668821309cb" title="Open the PTY interface." alt="" coords="5,29,88,55"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,45,88,45,88,39,122,39"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="75,19,66,11,47,8,30,10,21,15,19,20,24,28,20,31,14,21,17,11,28,5,47,3,69,6,78,15"/>
+<area shape="rect" id="Node000001" title="Set the baud rate of the PTY interface." alt="" coords="356,29,499,55"/>
+<area shape="rect" id="Node000002" href="$classpty.html#a50aec75ef08fc8368e6a3668821309cb" title="Open the PTY interface." alt="" coords="225,29,308,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="342,45,308,45,308,39,342,39"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="295,19,286,11,267,8,250,10,241,15,239,20,244,28,240,31,234,21,237,11,248,5,267,3,289,6,298,15"/>
+<area shape="rect" id="Node000003" href="$classserial__card.html#ab31c2ab7a8e57caa47c1559262a6aeb8" title="Open a PTY&#45;backed serial device at the specified base address." alt="" coords="5,29,177,55"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="212,45,177,45,177,39,212,39"/>
 </map>

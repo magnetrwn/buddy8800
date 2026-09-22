@@ -1,7 +1,9 @@
 #include <catch2/catch_test_macros.hpp>
 
-#include "typedef.hpp"
-#include "bus.hpp"
+#include "util/typedef.hpp"
+#include "core/bus/bus.hpp"
+#include "core/cards/ram_card.hpp"
+#include "core/cards/rom_card.hpp"
 
 TEST_CASE("Check bus with RAM and ROM cards", "[bus]") {    
     std::array<u8, 1024> pattern_1k;

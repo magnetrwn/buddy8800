@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['test_5fmonitor_0',['test_monitor',['../namespacetest__monitor.html',1,'']]],
-  ['type_5fdefinitions_1',['type_definitions',['../namespacetype__definitions.html',1,'']]]
+  ['buddy8800_3a_3atypes_0',['types',['../namespacebuddy8800_1_1types.html',1,'buddy8800']]]
 ];

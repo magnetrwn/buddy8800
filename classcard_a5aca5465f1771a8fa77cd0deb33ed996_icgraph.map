@@ -1,7 +1,10 @@
 <map id="card::is_irq" name="card::is_irq">
-<area shape="rect" id="Node000001" title="Check if the card has an IRQ raised." alt="" coords="152,31,245,56"/>
-<area shape="rect" id="Node000002" href="$classbus.html#a6c144df7773fb32aad6371cd1dcf0498" title="Gets the IRQ instruction (and possible operands)." alt="" coords="5,5,104,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,35,104,29,105,24,139,30"/>
-<area shape="rect" id="Node000003" href="$classbus.html#ae35dadd5a5ae3a060bd18facb8bb4f31" title="A shortcut to read the bus using an index directly without a proxy object." alt="" coords="11,55,99,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="139,56,99,63,99,57,138,51"/>
+<area shape="rect" id="Node000001" title="Check if the card has an IRQ raised." alt="" coords="317,31,411,56"/>
+<area shape="rect" id="Node000002" href="$classbus.html#a6c144df7773fb32aad6371cd1dcf0498" title="Gets the IRQ instruction (and possible operands)." alt="" coords="171,5,269,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="304,35,269,29,270,24,304,30"/>
+<area shape="rect" id="Node000004" href="$classbus.html#ae35dadd5a5ae3a060bd18facb8bb4f31" title="A shortcut to read the bus using an index directly without a proxy object." alt="" coords="176,55,264,80"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="304,56,265,63,264,57,303,51"/>
+<area shape="rect" id="Node000003" href="$classemulator.html#a0c5f9de9ac11c30ee26c04cb20a7fc57" title="Execute one instruction and service a pending bus interrupt." alt="" coords="5,31,123,56"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="158,31,123,36,123,31,157,26"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="162,61,122,55,123,50,163,56"/>
 </map>

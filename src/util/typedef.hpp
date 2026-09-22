@@ -1,35 +1,30 @@
-#ifndef TYPEDEF_HPP_
-#define TYPEDEF_HPP_
+#ifndef BUDDY8800_SRC_UTIL_TYPEDEF_HPP_
+#define BUDDY8800_SRC_UTIL_TYPEDEF_HPP_
 
 #include <cstdint>
-#include <unistd.h>
+#include <cstddef>
 
 /**
  * @brief Common type definitions for easier use of types.
- * @warning By including this file, you are injecting the definition namespace in the global one.
+ * Global aliases below preserve the existing public API; new facilities can use
+ * buddy8800::types without importing a namespace or Unix headers.
  */
-namespace type_definitions {
+namespace buddy8800::types {
 
-typedef std::uint8_t u8;
-typedef std::uint16_t u16;
-typedef std::uint32_t u32;
-typedef std::uint64_t u64;
-typedef std::size_t usize;
+using u8 = std::uint8_t;
+using u16 = std::uint16_t;
+using u32 = std::uint32_t;
+using usize = std::size_t;
 
-typedef std::int8_t i8;
-typedef std::int16_t i16;
-typedef std::int32_t i32;
-typedef std::int64_t i64;
-
-typedef float f32;
-typedef double f64;
-
-typedef int fd;
-typedef ssize_t isize;
+using fd = int;
 
 }
 
-using namespace type_definitions;
+using buddy8800::types::fd;
+using buddy8800::types::u16;
+using buddy8800::types::u32;
+using buddy8800::types::u8;
+using buddy8800::types::usize;
 
 static constexpr u8 BAD_U8 = 0xFF;
 

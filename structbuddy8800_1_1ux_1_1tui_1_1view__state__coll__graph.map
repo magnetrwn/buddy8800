@@ -1,0 +1,7 @@
+<map id="buddy8800::ux::tui::view_state" name="buddy8800::ux::tui::view_state">
+<area shape="rect" id="Node000001" title="Retain viewport positions and execution controls between frames." alt="" coords="15,108,158,148"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,61,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="32,45,32,64,37,83,57,106,53,109,32,85,27,65,26,45"/>
+<area shape="rect" id="Node000003" href="$structcpu__state.html" title="Represents the state of the CPU." alt="" coords="99,5,184,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="134,45,114,85,101,109,96,106,110,83,129,42"/>
+</map>

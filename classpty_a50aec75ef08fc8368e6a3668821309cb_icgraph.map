@@ -1,4 +1,6 @@
 <map id="pty::open" name="pty::open">
-<area shape="rect" id="Node000001" title="Open the PTY interface." alt="" coords="5,29,88,55"/>
-<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="59,17,55,10,47,8,39,10,35,14,37,29,32,29,30,12,37,5,47,3,58,6,64,14"/>
+<area shape="rect" id="Node000001" title="Open the PTY interface." alt="" coords="225,29,308,55"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="297,19,288,11,267,8,248,10,239,15,237,20,242,28,238,31,232,21,235,11,247,5,267,3,291,6,301,15"/>
+<area shape="rect" id="Node000002" href="$classserial__card.html#ab31c2ab7a8e57caa47c1559262a6aeb8" title="Open a PTY&#45;backed serial device at the specified base address." alt="" coords="5,29,177,55"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="212,45,177,45,177,39,212,39"/>
 </map>

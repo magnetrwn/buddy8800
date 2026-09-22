@@ -1,12 +1,9 @@
 var searchData=
 [
-  ['raise_5firq_0',['raise_irq',['../classcard.html#ab4841b21668816977ff2266d6667593e',1,'card']]],
-  ['read_1',['read',['../classbus.html#a593732187325b7ae685b075eadf9fc6a',1,'bus::read()'],['../classcard.html#a5ed2b72cca9db35d23873352a4af90a5',1,'card::read()'],['../classdata__card.html#ac97a9451734b90e6fd01248bbdc15135',1,'data_card::read()'],['../classserial__card.html#a449b4374d2b57d9328f91c48ea56e451',1,'serial_card::read()']]],
-  ['recv_2',['recv',['../classpty.html#a22e150200a8581e9da66e309f9ee2ec6',1,'pty']]],
-  ['regression_20fixtures_3',['Pinned ALTMON regression fixtures',['../index.html',1,'']]],
-  ['remove_4',['remove',['../classbus.html#ac452a5305b4fcb30b6e40172d63fba4a',1,'bus']]],
-  ['reset_5',['reset',['../classutil_1_1print__helper.html#a7bbd968d8ae6ccec11b3bf507fc7bf6f',1,'util::print_helper']]],
-  ['reset_5fpseudo_5fbdos_5fredirect_6',['reset_pseudo_bdos_redirect',['../classcpu.html#a850125d4d67383c10cbb1ba594d1db18',1,'cpu']]],
-  ['resources_20and_20documentation_7',['Resources and Documentation',['..//home/runner/work/buddy8800/buddy8800/README.md#autotoc_md7',1,'']]],
-  ['running_20from_20cli_8',['Running from CLI',['..//home/runner/work/buddy8800/buddy8800/README.md#autotoc_md5',1,'']]]
+  ['observers_0',['observers',['../classbuddy8800_1_1ux_1_1tui_1_1observers.html',1,'buddy8800::ux::tui']]],
+  ['open_1',['open',['../classpty.html#a50aec75ef08fc8368e6a3668821309cb',1,'pty']]],
+  ['operator_3c_3c_2',['operator&lt;&lt;',['../classbuddy8800_1_1legacy_1_1print__helper.html#aec3bdd8f870ec4fc01dcc3389f8a5a09',1,'buddy8800::legacy::print_helper']]],
+  ['operator_3d_3d_3',['operator==',['../structcpu__state.html#a0935e77f575269fcd23121830df94026',1,'cpu_state']]],
+  ['operator_5b_5d_4',['operator[]',['../classbus.html#a823fe0fdf5aad85763fdeb840a3c4df2',1,'bus::operator[]()'],['../classtrace__history.html#a3b0dec14fda1d4a7139d014ceca8072a',1,'trace_history::operator[]()']]],
+  ['options_5',['options',['../structbuddy8800_1_1app_1_1options.html',1,'buddy8800::app']]]
 ];

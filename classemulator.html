@@ -97,37 +97,107 @@ $(document).ready(function(){initNavTree('classemulator.html',''); initResizable
   <div class="headertitle"><div class="title">emulator Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Owns and executes a configured machine.  
+ <a href="classemulator.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="emulator_8hpp_source.html">emulator.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a912310082c687d7a473d1b1e7590d388" id="r_a912310082c687d7a473d1b1e7590d388"><td class="memItemLeft" align="right" valign="top"><a id="a912310082c687d7a473d1b1e7590d388" name="a912310082c687d7a473d1b1e7590d388"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setup</b> (int argc, char **argv)</td></tr>
-<tr class="separator:a912310082c687d7a473d1b1e7590d388"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68c291f78142aee0c96562e972b367ed" id="r_a68c291f78142aee0c96562e972b367ed"><td class="memItemLeft" align="right" valign="top"><a id="a68c291f78142aee0c96562e972b367ed" name="a68c291f78142aee0c96562e972b367ed"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>run</b> (const volatile std::sig_atomic_t &amp;stop)</td></tr>
-<tr class="separator:a68c291f78142aee0c96562e972b367ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25086f33052c106dbc9aaa5337d12740" id="r_a25086f33052c106dbc9aaa5337d12740"><td class="memItemLeft" align="right" valign="top"><a id="a25086f33052c106dbc9aaa5337d12740" name="a25086f33052c106dbc9aaa5337d12740"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>emulator</b> (const char *config_filename)</td></tr>
+<tr class="memdesc:a25086f33052c106dbc9aaa5337d12740"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct the machine from a configuration file. <br /></td></tr>
+<tr class="separator:a25086f33052c106dbc9aaa5337d12740"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Loading and execution</div></td></tr>
+<tr class="memitem:a2bece48284f6736c9d7cde1b6198378a" id="r_a2bece48284f6736c9d7cde1b6198378a"><td class="memItemLeft" align="right" valign="top"><a id="a2bece48284f6736c9d7cde1b6198378a" name="a2bece48284f6736c9d7cde1b6198378a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>load_program</b> (const std::vector&lt; u8 &gt; &amp;bytes, u16 address, bool reset_vector)</td></tr>
+<tr class="memdesc:a2bece48284f6736c9d7cde1b6198378a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load bytes and optionally install a reset jump to their address. <br /></td></tr>
+<tr class="separator:a2bece48284f6736c9d7cde1b6198378a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8c5a8afd978c31126befeea506156b6" id="r_ad8c5a8afd978c31126befeea506156b6"><td class="memItemLeft" align="right" valign="top"><a id="ad8c5a8afd978c31126befeea506156b6" name="ad8c5a8afd978c31126befeea506156b6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>start</b> ()</td></tr>
+<tr class="memdesc:ad8c5a8afd978c31126befeea506156b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the configured initial program counter. <br /></td></tr>
+<tr class="separator:ad8c5a8afd978c31126befeea506156b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c5f9de9ac11c30ee26c04cb20a7fc57" id="r_a0c5f9de9ac11c30ee26c04cb20a7fc57"><td class="memTemplParams" colspan="2"><a id="a0c5f9de9ac11c30ee26c04cb20a7fc57" name="a0c5f9de9ac11c30ee26c04cb20a7fc57"></a>
 template&lt;bool report_trace = true&gt; </td></tr>
 <tr class="memitem:a0c5f9de9ac11c30ee26c04cb20a7fc57"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>step</b> ()</td></tr>
+<tr class="memdesc:a0c5f9de9ac11c30ee26c04cb20a7fc57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute one instruction and service a pending bus interrupt. <br /></td></tr>
 <tr class="separator:a0c5f9de9ac11c30ee26c04cb20a7fc57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68c291f78142aee0c96562e972b367ed" id="r_a68c291f78142aee0c96562e972b367ed"><td class="memItemLeft" align="right" valign="top"><a id="a68c291f78142aee0c96562e972b367ed" name="a68c291f78142aee0c96562e972b367ed"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>run</b> (const volatile std::sig_atomic_t &amp;stop)</td></tr>
+<tr class="memdesc:a68c291f78142aee0c96562e972b367ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute until halted or a stop is requested. <br /></td></tr>
+<tr class="separator:a68c291f78142aee0c96562e972b367ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Observation</div></td></tr>
 <tr class="memitem:a3f7b452aa417b6474d814e6d77c022b5" id="r_a3f7b452aa417b6474d814e6d77c022b5"><td class="memItemLeft" align="right" valign="top"><a id="a3f7b452aa417b6474d814e6d77c022b5" name="a3f7b452aa417b6474d814e6d77c022b5"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>halted</b> () const</td></tr>
+<tr class="memdesc:a3f7b452aa417b6474d814e6d77c022b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Report whether the processor is halted. <br /></td></tr>
 <tr class="separator:a3f7b452aa417b6474d814e6d77c022b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a9731c316c66c09b5a9bd764e5af2ea" id="r_a5a9731c316c66c09b5a9bd764e5af2ea"><td class="memItemLeft" align="right" valign="top"><a id="a5a9731c316c66c09b5a9bd764e5af2ea" name="a5a9731c316c66c09b5a9bd764e5af2ea"></a>
 <a class="el" href="structcpu__state.html">cpu_state</a>&#160;</td><td class="memItemRight" valign="bottom"><b>state</b> () const</td></tr>
+<tr class="memdesc:a5a9731c316c66c09b5a9bd764e5af2ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy the current processor registers and flags. <br /></td></tr>
 <tr class="separator:a5a9731c316c66c09b5a9bd764e5af2ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62b25471c354b84154a144ecd24823de" id="r_a62b25471c354b84154a144ecd24823de"><td class="memItemLeft" align="right" valign="top"><a id="a62b25471c354b84154a144ecd24823de" name="a62b25471c354b84154a144ecd24823de"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>trace</b> (std::function&lt; void(u16, const std::array&lt; u8, 3 &gt; &amp;, usize)&gt; observer)</td></tr>
+<tr class="memdesc:a62b25471c354b84154a144ecd24823de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace the instruction trace observer. <br /></td></tr>
 <tr class="separator:a62b25471c354b84154a144ecd24823de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59f9daa9bdfca04ebee3473a9d2c64f5" id="r_a59f9daa9bdfca04ebee3473a9d2c64f5"><td class="memItemLeft" align="right" valign="top"><a id="a59f9daa9bdfca04ebee3473a9d2c64f5" name="a59f9daa9bdfca04ebee3473a9d2c64f5"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>info</b> () const</td></tr>
-<tr class="separator:a59f9daa9bdfca04ebee3473a9d2c64f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25086f33052c106dbc9aaa5337d12740" id="r_a25086f33052c106dbc9aaa5337d12740"><td class="memItemLeft" align="right" valign="top"><a id="a25086f33052c106dbc9aaa5337d12740" name="a25086f33052c106dbc9aaa5337d12740"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>emulator</b> (const char *config_filename)</td></tr>
-<tr class="separator:a25086f33052c106dbc9aaa5337d12740"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80a243ec917043d8828bab2b6150a0b1" id="r_a80a243ec917043d8828bab2b6150a0b1"><td class="memItemLeft" align="right" valign="top"><a id="a80a243ec917043d8828bab2b6150a0b1" name="a80a243ec917043d8828bab2b6150a0b1"></a>
+auto&#160;</td><td class="memItemRight" valign="bottom"><b>devices</b> () const</td></tr>
+<tr class="memdesc:a80a243ec917043d8828bab2b6150a0b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describe installed devices without servicing their I/O. <br /></td></tr>
+<tr class="separator:a80a243ec917043d8828bab2b6150a0b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ff29c6c63bb1ef3373857d0ed4994df" id="r_a7ff29c6c63bb1ef3373857d0ed4994df"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classemulator.html#a7ff29c6c63bb1ef3373857d0ed4994df">diagnostic_stream</a> (std::ostream &amp;stream)</td></tr>
+<tr class="memdesc:a7ff29c6c63bb1ef3373857d0ed4994df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bind diagnostic output and return the previous stream.  <br /></td></tr>
+<tr class="separator:a7ff29c6c63bb1ef3373857d0ed4994df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/ux/<a class="el" href="ux_8hpp_source.html">ux.hpp</a></li>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Owns and executes a configured machine. </p>
+<p>Terminal selection, paths and command lines belong to the application/frontend. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7ff29c6c63bb1ef3373857d0ed4994df" name="a7ff29c6c63bb1ef3373857d0ed4994df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ff29c6c63bb1ef3373857d0ed4994df">&#9670;&#160;</a></span>diagnostic_stream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream &amp; emulator::diagnostic_stream </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Bind diagnostic output and return the previous stream. </p>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000001">Deprecated:</a></b></dt><dd>The frontend retains ownership of this diagnostic-only stream. </dd></dl>
+
+<p class="reference">References <a class="el" href="classcpu.html#a307fd899ceee77e498f60a6c57783084">cpu&lt; bus_iface &gt;::set_pseudo_bdos_stream()</a>.</p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classemulator_a7ff29c6c63bb1ef3373857d0ed4994df_cgraph.png" border="0" usemap="#aclassemulator_a7ff29c6c63bb1ef3373857d0ed4994df_cgraph" alt=""/></div>
+<map name="aclassemulator_a7ff29c6c63bb1ef3373857d0ed4994df_cgraph" id="aclassemulator_a7ff29c6c63bb1ef3373857d0ed4994df_cgraph">
+<area shape="rect" title="Bind diagnostic output and return the previous stream." alt="" coords="5,5,161,45"/>
+<area shape="rect" href="classcpu.html#a307fd899ceee77e498f60a6c57783084" title="Legacy frontend adapter. The caller owns the stream and restores it." alt="" coords="209,5,375,45"/>
+<area shape="poly" title=" " alt="" coords="161,23,196,23,196,28,161,28"/>
+</map>
+</div>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>src/app/<a class="el" href="emulator_8hpp_source.html">emulator.hpp</a></li>
+<li>src/app/<b>emulator.cpp</b></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -135,7 +205,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>info</b> () co
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classemulator.html">emulator</a></li>
-    <li class="footer">Generated on Sun Sep 20 2026 for buddy8800 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Tue Sep 22 2026 for buddy8800 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

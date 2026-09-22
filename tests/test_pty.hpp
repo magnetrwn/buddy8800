@@ -2,8 +2,8 @@
 #include <chrono>
 #include <thread>
 #include <poll.h>
-#include "pty.hpp"
-#include "card.hpp"
+#include "core/iface/unix_pty.hpp"
+#include "core/cards/serial_card.hpp"
 
 struct slave_connection {
     int descriptor;

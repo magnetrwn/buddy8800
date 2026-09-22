@@ -97,33 +97,94 @@ $(document).ready(function(){initNavTree('classsystem__config.html',''); initRes
   <div class="headertitle"><div class="title">system_config Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Owns configured cards and their bus.  
+ <a href="classsystem__config.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="system__config_8hpp_source.html">system_config.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:af9ac9e84a5453d2487f17b9953866c83" id="r_af9ac9e84a5453d2487f17b9953866c83"><td class="memItemLeft" align="right" valign="top"><a id="af9ac9e84a5453d2487f17b9953866c83" name="af9ac9e84a5453d2487f17b9953866c83"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>system_config</b> (const char *filename)</td></tr>
+<tr class="memdesc:af9ac9e84a5453d2487f17b9953866c83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse a configuration file and construct its devices. <br /></td></tr>
 <tr class="separator:af9ac9e84a5453d2487f17b9953866c83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8424741aadf4922c9931bb24c46d4241" id="r_a8424741aadf4922c9931bb24c46d4241"><td class="memItemLeft" align="right" valign="top"><a id="a8424741aadf4922c9931bb24c46d4241" name="a8424741aadf4922c9931bb24c46d4241"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>system_config</b> (const <a class="el" href="structbuddy8800_1_1app_1_1machine__config.html">buddy8800::app::machine_config</a> &amp;config)</td></tr>
+<tr class="memdesc:a8424741aadf4922c9931bb24c46d4241"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct devices from parsed settings. <br /></td></tr>
+<tr class="separator:a8424741aadf4922c9931bb24c46d4241"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb94ba4dba713227d0bb0189d76e23aa" id="r_aeb94ba4dba713227d0bb0189d76e23aa"><td class="memItemLeft" align="right" valign="top"><a id="aeb94ba4dba713227d0bb0189d76e23aa" name="aeb94ba4dba713227d0bb0189d76e23aa"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>system_config</b> (const <a class="el" href="classsystem__config.html">system_config</a> &amp;)=delete</td></tr>
 <tr class="separator:aeb94ba4dba713227d0bb0189d76e23aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea5794bdbfbc14c2da739cb866ea6648" id="r_aea5794bdbfbc14c2da739cb866ea6648"><td class="memItemLeft" align="right" valign="top"><a id="aea5794bdbfbc14c2da739cb866ea6648" name="aea5794bdbfbc14c2da739cb866ea6648"></a>
 <a class="el" href="classsystem__config.html">system_config</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classsystem__config.html">system_config</a> &amp;)=delete</td></tr>
 <tr class="separator:aea5794bdbfbc14c2da739cb866ea6648"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Configured resources and startup settings</div></td></tr>
 <tr class="memitem:a903a9d3bd13ceaaf1647c456dfc9de53" id="r_a903a9d3bd13ceaaf1647c456dfc9de53"><td class="memItemLeft" align="right" valign="top"><a id="a903a9d3bd13ceaaf1647c456dfc9de53" name="a903a9d3bd13ceaaf1647c456dfc9de53"></a>
 const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_cards_vec</b> () const</td></tr>
+<tr class="memdesc:a903a9d3bd13ceaaf1647c456dfc9de53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inspect the owned cards. <br /></td></tr>
 <tr class="separator:a903a9d3bd13ceaaf1647c456dfc9de53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97418d2fdf1642ddb5a575edee1b6869" id="r_a97418d2fdf1642ddb5a575edee1b6869"><td class="memItemLeft" align="right" valign="top"><a id="a97418d2fdf1642ddb5a575edee1b6869" name="a97418d2fdf1642ddb5a575edee1b6869"></a>
 <a class="el" href="classbus.html">bus</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_bus</b> ()</td></tr>
+<tr class="memdesc:a97418d2fdf1642ddb5a575edee1b6869"><td class="mdescLeft">&#160;</td><td class="mdescRight">Borrow the configured bus. <br /></td></tr>
 <tr class="separator:a97418d2fdf1642ddb5a575edee1b6869"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a001df8adb82385fc64f91a5c34b7dbfd" id="r_a001df8adb82385fc64f91a5c34b7dbfd"><td class="memItemLeft" align="right" valign="top"><a id="a001df8adb82385fc64f91a5c34b7dbfd" name="a001df8adb82385fc64f91a5c34b7dbfd"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>get_do_pseudo_bdos</b> () const</td></tr>
+<tr class="memitem:a001df8adb82385fc64f91a5c34b7dbfd" id="r_a001df8adb82385fc64f91a5c34b7dbfd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsystem__config.html#a001df8adb82385fc64f91a5c34b7dbfd">get_do_pseudo_bdos</a> () const</td></tr>
+<tr class="memdesc:a001df8adb82385fc64f91a5c34b7dbfd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Report whether legacy diagnostic interception is enabled.  <br /></td></tr>
 <tr class="separator:a001df8adb82385fc64f91a5c34b7dbfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a511abf1d3971427529203a0d9377bc81" id="r_a511abf1d3971427529203a0d9377bc81"><td class="memItemLeft" align="right" valign="top"><a id="a511abf1d3971427529203a0d9377bc81" name="a511abf1d3971427529203a0d9377bc81"></a>
 u16&#160;</td><td class="memItemRight" valign="bottom"><b>get_start_pc</b> () const</td></tr>
+<tr class="memdesc:a511abf1d3971427529203a0d9377bc81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the configured initial program counter. <br /></td></tr>
 <tr class="separator:a511abf1d3971427529203a0d9377bc81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/util/<a class="el" href="sysconf_8hpp_source.html">sysconf.hpp</a></li>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Owns configured cards and their bus. </p>
+<p>Parsing lives outside this interface; the CPU and frontends borrow the bus. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a001df8adb82385fc64f91a5c34b7dbfd" name="a001df8adb82385fc64f91a5c34b7dbfd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a001df8adb82385fc64f91a5c34b7dbfd">&#9670;&#160;</a></span>get_do_pseudo_bdos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool system_config::get_do_pseudo_bdos </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Report whether legacy diagnostic interception is enabled. </p>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000002">Deprecated:</a></b></dt><dd>Diagnostic compatibility only. </dd></dl>
+
+<p class="reference">Referenced by <a class="el" href="classemulator.html#a25086f33052c106dbc9aaa5337d12740">emulator::emulator()</a>.</p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classsystem__config_a001df8adb82385fc64f91a5c34b7dbfd_icgraph.png" border="0" usemap="#aclasssystem__config_a001df8adb82385fc64f91a5c34b7dbfd_icgraph" alt=""/></div>
+<map name="aclasssystem__config_a001df8adb82385fc64f91a5c34b7dbfd_icgraph" id="aclasssystem__config_a001df8adb82385fc64f91a5c34b7dbfd_icgraph">
+<area shape="rect" title="Report whether legacy diagnostic interception is enabled." alt="" coords="201,5,347,45"/>
+<area shape="rect" href="classemulator.html#a25086f33052c106dbc9aaa5337d12740" title="Construct the machine from a configuration file." alt="" coords="5,13,153,38"/>
+<area shape="poly" title=" " alt="" coords="187,28,154,28,154,23,187,23"/>
+</map>
+</div>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>src/app/<a class="el" href="system__config_8hpp_source.html">system_config.hpp</a></li>
+<li>src/app/<b>system_config.cpp</b></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -131,7 +192,7 @@ u16&#160;</td><td class="memItemRight" valign="bottom"><b>get_start_pc</b> () co
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classsystem__config.html">system_config</a></li>
-    <li class="footer">Generated on Sun Sep 20 2026 for buddy8800 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Tue Sep 22 2026 for buddy8800 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

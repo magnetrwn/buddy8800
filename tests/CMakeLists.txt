@@ -1,6 +1,6 @@
 file(GLOB_RECURSE TEST_SOURCES *.cpp)
 add_executable(tests ${TEST_SOURCES})
-target_link_libraries(tests PRIVATE Catch2::Catch2WithMain buddylib toml11)
+target_link_libraries(tests PRIVATE Catch2::Catch2WithMain buddy8800_application)
 set(BUDDY8800_MONITOR_FIXTURE_DIR ${CMAKE_CURRENT_BINARY_DIR}/fixtures/altmon)
 foreach(BUDDY8800_MONITOR_FIXTURE config.toml f800mon.bin)
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/fixtures/altmon/${BUDDY8800_MONITOR_FIXTURE}

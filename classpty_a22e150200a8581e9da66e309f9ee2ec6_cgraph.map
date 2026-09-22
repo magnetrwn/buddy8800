@@ -1,7 +1,11 @@
 <map id="pty::recv" name="pty::recv">
-<area shape="rect" id="Node000001" title="Receive data from the PTY interface master side." alt="" coords="5,5,84,31"/>
-<area shape="rect" id="Node000002" href="$classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0" title="Get a single byte from the PTY interface master side." alt="" coords="132,5,219,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,15,118,15,118,21,84,21"/>
-<area shape="rect" id="Node000003" href="$classpty.html#ac9e7847a4ade52e8bea78e13f49c4c76" title="Send a single byte to the PTY interface master side." alt="" coords="267,5,353,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="219,15,253,15,253,21,219,21"/>
+<area shape="rect" id="Node000001" title="Receive data from the PTY interface master side." alt="" coords="5,31,84,56"/>
+<area shape="rect" id="Node000002" href="$classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0" title="Get a single byte from the PTY interface master side." alt="" coords="132,31,219,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,41,118,41,118,46,84,46"/>
+<area shape="rect" id="Node000003" href="$classpty.html#ac9e7847a4ade52e8bea78e13f49c4c76" title="Send a single byte to the PTY interface master side." alt="" coords="279,5,365,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="218,33,265,25,266,30,219,39"/>
+<area shape="rect" id="Node000005" href="$classpty.html#a254a5f61957aa45fcc1ba8d964dd40f2" title="Read one available byte; return false if none is ready." alt="" coords="267,55,377,80"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="219,48,254,53,253,59,218,53"/>
+<area shape="rect" id="Node000004" href="$classpty.html#a69985a1ff0555f4c01b0ee1b972b78e6" title="Write one byte; return false if the transport would block." alt="" coords="425,5,536,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="366,15,412,15,412,21,366,21"/>
 </map>

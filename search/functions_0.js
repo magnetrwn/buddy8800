@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['bus_5fmap_5fs_0',['bus_map_s',['../classbus.html#a616875dde214c117fcc36c0bbcc80f9e',1,'bus']]]
+  ['append_0',['append',['../classtrace__history.html#a1e9c06a6a0b6a0c97fe8f23ed5886c95',1,'trace_history']]]
 ];

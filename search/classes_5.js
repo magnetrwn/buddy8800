@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['serial_5fcard_0',['serial_card',['../classserial__card.html',1,'']]],
-  ['slave_5fconnection_1',['slave_connection',['../structslave__connection.html',1,'']]],
-  ['system_5fconfig_2',['system_config',['../classsystem__config.html',1,'']]]
+  ['observers_0',['observers',['../classbuddy8800_1_1ux_1_1tui_1_1observers.html',1,'buddy8800::ux::tui']]],
+  ['options_1',['options',['../structbuddy8800_1_1app_1_1options.html',1,'buddy8800::app']]]
 ];

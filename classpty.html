@@ -111,12 +111,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a502b1048f1d72b0fd2d3a2c981e53274" id="r_a502b1048f1d72b0fd2d3a2c981e53274"><td class="memItemLeft" align="right" valign="top"><a id="a502b1048f1d72b0fd2d3a2c981e53274" name="a502b1048f1d72b0fd2d3a2c981e53274"></a>
 <a class="el" href="classpty.html">pty</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classpty.html">pty</a> &amp;)=delete</td></tr>
 <tr class="separator:a502b1048f1d72b0fd2d3a2c981e53274"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a254a5f61957aa45fcc1ba8d964dd40f2" id="r_a254a5f61957aa45fcc1ba8d964dd40f2"><td class="memItemLeft" align="right" valign="top"><a id="a254a5f61957aa45fcc1ba8d964dd40f2" name="a254a5f61957aa45fcc1ba8d964dd40f2"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>try_getch</b> (u8 &amp;byte) const</td></tr>
-<tr class="separator:a254a5f61957aa45fcc1ba8d964dd40f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69985a1ff0555f4c01b0ee1b972b78e6" id="r_a69985a1ff0555f4c01b0ee1b972b78e6"><td class="memItemLeft" align="right" valign="top"><a id="a69985a1ff0555f4c01b0ee1b972b78e6" name="a69985a1ff0555f4c01b0ee1b972b78e6"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>try_putch</b> (u8 byte) const</td></tr>
-<tr class="separator:a69985a1ff0555f4c01b0ee1b972b78e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50aec75ef08fc8368e6a3668821309cb" id="r_a50aec75ef08fc8368e6a3668821309cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpty.html#a50aec75ef08fc8368e6a3668821309cb">open</a> ()</td></tr>
 <tr class="memdesc:a50aec75ef08fc8368e6a3668821309cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open the PTY interface.  <br /></td></tr>
 <tr class="separator:a50aec75ef08fc8368e6a3668821309cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -157,6 +151,15 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>try_putch</b> (u8 byt
 void&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr>
 <tr class="memdesc:a0d795020dcb52657c7828f952306e687"><td class="mdescLeft">&#160;</td><td class="mdescRight">Close the PTY interface and free the PTY master file descriptor. <br /></td></tr>
 <tr class="separator:a0d795020dcb52657c7828f952306e687"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Nonblocking transport</div></td></tr>
+<tr class="memitem:a254a5f61957aa45fcc1ba8d964dd40f2" id="r_a254a5f61957aa45fcc1ba8d964dd40f2"><td class="memItemLeft" align="right" valign="top"><a id="a254a5f61957aa45fcc1ba8d964dd40f2" name="a254a5f61957aa45fcc1ba8d964dd40f2"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>try_getch</b> (u8 &amp;byte) const</td></tr>
+<tr class="memdesc:a254a5f61957aa45fcc1ba8d964dd40f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read one available byte; return false if none is ready. <br /></td></tr>
+<tr class="separator:a254a5f61957aa45fcc1ba8d964dd40f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69985a1ff0555f4c01b0ee1b972b78e6" id="r_a69985a1ff0555f4c01b0ee1b972b78e6"><td class="memItemLeft" align="right" valign="top"><a id="a69985a1ff0555f4c01b0ee1b972b78e6" name="a69985a1ff0555f4c01b0ee1b972b78e6"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>try_putch</b> (u8 byte) const</td></tr>
+<tr class="memdesc:a69985a1ff0555f4c01b0ee1b972b78e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write one byte; return false if the transport would block. <br /></td></tr>
+<tr class="separator:a69985a1ff0555f4c01b0ee1b972b78e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a pseudo-terminal interface. </p>
@@ -188,7 +191,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr
 <p>This method reads a single byte/char from the PTY interface master side. It uses the <code>read()</code> system call to read the byte from the master file descriptor, sent by the slave side.</p>
 <dl class="section warning"><dt>Warning</dt><dd>This method will block until a byte is read. </dd></dl>
 
-<p class="reference">References <a class="el" href="classpty.html#ac9e7847a4ade52e8bea78e13f49c4c76">putch()</a>.</p>
+<p class="reference">References <a class="el" href="classpty.html#ac9e7847a4ade52e8bea78e13f49c4c76">putch()</a>, and <a class="el" href="classpty.html#a254a5f61957aa45fcc1ba8d964dd40f2">try_getch()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="classpty.html#a22e150200a8581e9da66e309f9ee2ec6">recv()</a>.</p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -198,9 +201,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpty_af46ce3f92e8dc2077afec7a54c6b85b0_cgraph.png" border="0" usemap="#aclasspty_af46ce3f92e8dc2077afec7a54c6b85b0_cgraph" alt=""/></div>
 <map name="aclasspty_af46ce3f92e8dc2077afec7a54c6b85b0_cgraph" id="aclasspty_af46ce3f92e8dc2077afec7a54c6b85b0_cgraph">
-<area shape="rect" title="Get a single byte from the PTY interface master side." alt="" coords="5,5,92,31"/>
-<area shape="rect" href="classpty.html#ac9e7847a4ade52e8bea78e13f49c4c76" title="Send a single byte to the PTY interface master side." alt="" coords="140,5,227,31"/>
-<area shape="poly" title=" " alt="" coords="92,15,126,15,126,21,92,21"/>
+<area shape="rect" title="Get a single byte from the PTY interface master side." alt="" coords="5,31,92,56"/>
+<area shape="rect" href="classpty.html#ac9e7847a4ade52e8bea78e13f49c4c76" title="Send a single byte to the PTY interface master side." alt="" coords="152,5,239,31"/>
+<area shape="poly" title=" " alt="" coords="92,33,138,25,139,30,92,39"/>
+<area shape="rect" href="classpty.html#a254a5f61957aa45fcc1ba8d964dd40f2" title="Read one available byte; return false if none is ready." alt="" coords="140,55,251,80"/>
+<area shape="poly" title=" " alt="" coords="92,48,127,53,126,59,92,53"/>
+<area shape="rect" href="classpty.html#a69985a1ff0555f4c01b0ee1b972b78e6" title="Write one byte; return false if the transport would block." alt="" coords="299,5,409,31"/>
+<area shape="poly" title=" " alt="" coords="239,15,285,15,285,21,239,21"/>
 </map>
 </div>
 <div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -237,7 +244,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr
 <dl class="section return"><dt>Returns</dt><dd>A C-like string containing the name of the slave device.</dd></dl>
 <p>This method returns the name of the slave device, such as <code>/dev/pts/3</code>. This name identifies the slave side PTY interface, to which a user or process can interface with. For example, you could run <code>screen /dev/pts/3</code> on your terminal to connect to the PTY slave side. </p>
 
-<p class="reference">Referenced by <a class="el" href="classserial__card.html#a1f29b0bb8ad083bf74af151628b7acf3">serial_card::identify()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="classserial__card.html#a8a08c936960bae66ed479f5f840ca37e">serial_card::identify()</a>, and <a class="el" href="classserial__card.html#af821b987a5dcdae65cbcc5b88cadb90a">serial_card::pty_name()</a>.</p>
 <div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
@@ -245,9 +252,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr
 <div id="dynsection-2-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpty_aaee682964bcc6906eab0cadbde4bc6fe_icgraph.png" border="0" usemap="#aclasspty_aaee682964bcc6906eab0cadbde4bc6fe_icgraph" alt=""/></div>
 <map name="aclasspty_aaee682964bcc6906eab0cadbde4bc6fe_icgraph" id="aclasspty_aaee682964bcc6906eab0cadbde4bc6fe_icgraph">
-<area shape="rect" title="Retrieve the name of the slave device." alt="" coords="204,5,291,31"/>
-<area shape="rect" href="classserial__card.html#a1f29b0bb8ad083bf74af151628b7acf3" title="Get information about the card." alt="" coords="5,5,156,31"/>
-<area shape="poly" title=" " alt="" coords="190,21,157,21,157,15,190,15"/>
+<area shape="rect" title="Retrieve the name of the slave device." alt="" coords="220,31,307,56"/>
+<area shape="rect" href="classserial__card.html#a8a08c936960bae66ed479f5f840ca37e" title="Describe this device without servicing serial traffic." alt="" coords="13,5,164,31"/>
+<area shape="poly" title=" " alt="" coords="206,38,164,32,165,26,207,33"/>
+<area shape="rect" href="classserial__card.html#af821b987a5dcdae65cbcc5b88cadb90a" title="Return the host PTY slave device name." alt="" coords="5,55,172,80"/>
+<area shape="poly" title=" " alt="" coords="207,54,173,58,172,53,206,48"/>
 </map>
 </div>
 
@@ -280,7 +289,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr
 
 <p class="reference">References <a class="el" href="classpty.html#a0d795020dcb52657c7828f952306e687">close()</a>, <a class="el" href="classpty.html#a50aec75ef08fc8368e6a3668821309cb">open()</a>, <a class="el" href="classpty.html#a757f8fc7156ea5215922e9646b65daaa">set_baud_rate()</a>, and <a class="el" href="classpty.html#acacb920c29edf75bc85388b4e347aa4e">setup()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="classpty.html#a50aec75ef08fc8368e6a3668821309cb">open()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="classpty.html#a50aec75ef08fc8368e6a3668821309cb">open()</a>, and <a class="el" href="classserial__card.html#ab31c2ab7a8e57caa47c1559262a6aeb8">serial_card::serial_card()</a>.</p>
 <div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
@@ -306,8 +315,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr
 <div id="dynsection-4-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpty_a50aec75ef08fc8368e6a3668821309cb_icgraph.png" border="0" usemap="#aclasspty_a50aec75ef08fc8368e6a3668821309cb_icgraph" alt=""/></div>
 <map name="aclasspty_a50aec75ef08fc8368e6a3668821309cb_icgraph" id="aclasspty_a50aec75ef08fc8368e6a3668821309cb_icgraph">
-<area shape="rect" title="Open the PTY interface." alt="" coords="5,29,88,55"/>
-<area shape="poly" title=" " alt="" coords="59,17,55,10,47,8,39,10,35,14,37,29,32,29,30,12,37,5,47,3,58,6,64,14"/>
+<area shape="rect" title="Open the PTY interface." alt="" coords="225,29,308,55"/>
+<area shape="poly" title=" " alt="" coords="297,19,288,11,267,8,248,10,239,15,237,20,242,28,238,31,232,21,235,11,247,5,267,3,291,6,301,15"/>
+<area shape="rect" href="classserial__card.html#ab31c2ab7a8e57caa47c1559262a6aeb8" title="Open a PTY&#45;backed serial device at the specified base address." alt="" coords="5,29,177,55"/>
+<area shape="poly" title=" " alt="" coords="212,45,177,45,177,39,212,39"/>
 </map>
 </div>
 
@@ -398,12 +409,26 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr
 <p>This method sends a single byte/char to the PTY interface master side. It uses the <code>write()</code> system call.</p>
 <dl class="section warning"><dt>Warning</dt><dd>This method will block until the byte is sent. </dd></dl>
 
+<p class="reference">References <a class="el" href="classpty.html#a69985a1ff0555f4c01b0ee1b972b78e6">try_putch()</a>.</p>
+
 <p class="reference">Referenced by <a class="el" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0">getch()</a>, and <a class="el" href="classpty.html#afde0990ca2d8300af613c1bf15836ac6">send()</a>.</p>
 <div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-7-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpty_ac9e7847a4ade52e8bea78e13f49c4c76_cgraph.png" border="0" usemap="#aclasspty_ac9e7847a4ade52e8bea78e13f49c4c76_cgraph" alt=""/></div>
+<map name="aclasspty_ac9e7847a4ade52e8bea78e13f49c4c76_cgraph" id="aclasspty_ac9e7847a4ade52e8bea78e13f49c4c76_cgraph">
+<area shape="rect" title="Send a single byte to the PTY interface master side." alt="" coords="5,5,92,31"/>
+<area shape="rect" href="classpty.html#a69985a1ff0555f4c01b0ee1b972b78e6" title="Write one byte; return false if the transport would block." alt="" coords="140,5,251,31"/>
+<area shape="poly" title=" " alt="" coords="92,15,126,15,126,21,92,21"/>
+</map>
+</div>
+<div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-8-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpty_ac9e7847a4ade52e8bea78e13f49c4c76_icgraph.png" border="0" usemap="#aclasspty_ac9e7847a4ade52e8bea78e13f49c4c76_icgraph" alt=""/></div>
 <map name="aclasspty_ac9e7847a4ade52e8bea78e13f49c4c76_icgraph" id="aclasspty_ac9e7847a4ade52e8bea78e13f49c4c76_icgraph">
 <area shape="rect" title="Send a single byte to the PTY interface master side." alt="" coords="267,31,353,56"/>
@@ -471,18 +496,22 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr
 <dl class="section warning"><dt>Warning</dt><dd>This method will block until <code>max - 1</code> bytes are read or the terminator character is found. </dd></dl>
 
 <p class="reference">References <a class="el" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0">getch()</a>.</p>
-<div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-8-content" class="dyncontent" style="display:none;">
+<div id="dynsection-9-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpty_a22e150200a8581e9da66e309f9ee2ec6_cgraph.png" border="0" usemap="#aclasspty_a22e150200a8581e9da66e309f9ee2ec6_cgraph" alt=""/></div>
 <map name="aclasspty_a22e150200a8581e9da66e309f9ee2ec6_cgraph" id="aclasspty_a22e150200a8581e9da66e309f9ee2ec6_cgraph">
-<area shape="rect" title="Receive data from the PTY interface master side." alt="" coords="5,5,84,31"/>
-<area shape="rect" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0" title="Get a single byte from the PTY interface master side." alt="" coords="132,5,219,31"/>
-<area shape="poly" title=" " alt="" coords="84,15,118,15,118,21,84,21"/>
-<area shape="rect" href="classpty.html#ac9e7847a4ade52e8bea78e13f49c4c76" title="Send a single byte to the PTY interface master side." alt="" coords="267,5,353,31"/>
-<area shape="poly" title=" " alt="" coords="219,15,253,15,253,21,219,21"/>
+<area shape="rect" title="Receive data from the PTY interface master side." alt="" coords="5,31,84,56"/>
+<area shape="rect" href="classpty.html#af46ce3f92e8dc2077afec7a54c6b85b0" title="Get a single byte from the PTY interface master side." alt="" coords="132,31,219,56"/>
+<area shape="poly" title=" " alt="" coords="84,41,118,41,118,46,84,46"/>
+<area shape="rect" href="classpty.html#ac9e7847a4ade52e8bea78e13f49c4c76" title="Send a single byte to the PTY interface master side." alt="" coords="279,5,365,31"/>
+<area shape="poly" title=" " alt="" coords="218,33,265,25,266,30,219,39"/>
+<area shape="rect" href="classpty.html#a254a5f61957aa45fcc1ba8d964dd40f2" title="Read one available byte; return false if none is ready." alt="" coords="267,55,377,80"/>
+<area shape="poly" title=" " alt="" coords="219,48,254,53,253,59,218,53"/>
+<area shape="rect" href="classpty.html#a69985a1ff0555f4c01b0ee1b972b78e6" title="Write one byte; return false if the transport would block." alt="" coords="425,5,536,31"/>
+<area shape="poly" title=" " alt="" coords="366,15,412,15,412,21,366,21"/>
 </map>
 </div>
 
@@ -523,22 +552,22 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr
 <p class="reference">References <a class="el" href="classpty.html#a42411f2b12218401f748cbc94fe12062">send()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="classpty.html#a42411f2b12218401f748cbc94fe12062">send()</a>.</p>
-<div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-10-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-9-content" class="dyncontent" style="display:none;">
+<div id="dynsection-10-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpty_a42411f2b12218401f748cbc94fe12062_cgraph.png" border="0" usemap="#aclasspty_a42411f2b12218401f748cbc94fe12062_cgraph" alt=""/></div>
 <map name="aclasspty_a42411f2b12218401f748cbc94fe12062_cgraph" id="aclasspty_a42411f2b12218401f748cbc94fe12062_cgraph">
 <area shape="rect" title="Send data to the PTY interface master side." alt="" coords="5,29,87,55"/>
 <area shape="poly" title=" " alt="" coords="31,29,30,12,36,5,46,3,58,6,63,14,58,17,54,10,46,8,39,10,35,14,36,29"/>
 </map>
 </div>
-<div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-10-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-11" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-11-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-10-content" class="dyncontent" style="display:none;">
+<div id="dynsection-11-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpty_a42411f2b12218401f748cbc94fe12062_icgraph.png" border="0" usemap="#aclasspty_a42411f2b12218401f748cbc94fe12062_icgraph" alt=""/></div>
 <map name="aclasspty_a42411f2b12218401f748cbc94fe12062_icgraph" id="aclasspty_a42411f2b12218401f748cbc94fe12062_icgraph">
 <area shape="rect" title="Send data to the PTY interface master side." alt="" coords="5,29,87,55"/>
@@ -592,16 +621,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr
 <dl class="section warning"><dt>Warning</dt><dd>This method will block until <code>size</code> bytes are sent. </dd></dl>
 
 <p class="reference">References <a class="el" href="classpty.html#ac9e7847a4ade52e8bea78e13f49c4c76">putch()</a>.</p>
-<div id="dynsection-11" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-11-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-12" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-12-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-11-content" class="dyncontent" style="display:none;">
+<div id="dynsection-12-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpty_afde0990ca2d8300af613c1bf15836ac6_cgraph.png" border="0" usemap="#aclasspty_afde0990ca2d8300af613c1bf15836ac6_cgraph" alt=""/></div>
 <map name="aclasspty_afde0990ca2d8300af613c1bf15836ac6_cgraph" id="aclasspty_afde0990ca2d8300af613c1bf15836ac6_cgraph">
 <area shape="rect" title="Send data to the PTY interface master side." alt="" coords="5,5,87,31"/>
 <area shape="rect" href="classpty.html#ac9e7847a4ade52e8bea78e13f49c4c76" title="Send a single byte to the PTY interface master side." alt="" coords="135,5,221,31"/>
 <area shape="poly" title=" " alt="" coords="87,15,121,15,121,21,87,21"/>
+<area shape="rect" href="classpty.html#a69985a1ff0555f4c01b0ee1b972b78e6" title="Write one byte; return false if the transport would block." alt="" coords="269,5,380,31"/>
+<area shape="poly" title=" " alt="" coords="221,15,256,15,256,21,221,21"/>
 </map>
 </div>
 
@@ -666,17 +697,19 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr
 <p>This method sets the baud rate of the PTY interface. It uses the <code>cfsetospeed()</code> and <code>cfsetispeed()</code> functions from <code>termios.h</code> to set the baud rate of the PTY interface. </p>
 
 <p class="reference">Referenced by <a class="el" href="classpty.html#a50aec75ef08fc8368e6a3668821309cb">open()</a>.</p>
-<div id="dynsection-12" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-12-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-13" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-13-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-12-content" class="dyncontent" style="display:none;">
+<div id="dynsection-13-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpty_a757f8fc7156ea5215922e9646b65daaa_icgraph.png" border="0" usemap="#aclasspty_a757f8fc7156ea5215922e9646b65daaa_icgraph" alt=""/></div>
 <map name="aclasspty_a757f8fc7156ea5215922e9646b65daaa_icgraph" id="aclasspty_a757f8fc7156ea5215922e9646b65daaa_icgraph">
-<area shape="rect" title="Set the baud rate of the PTY interface." alt="" coords="136,29,279,55"/>
-<area shape="rect" href="classpty.html#a50aec75ef08fc8368e6a3668821309cb" title="Open the PTY interface." alt="" coords="5,29,88,55"/>
-<area shape="poly" title=" " alt="" coords="122,45,88,45,88,39,122,39"/>
-<area shape="poly" title=" " alt="" coords="75,19,66,11,47,8,30,10,21,15,19,20,24,28,20,31,14,21,17,11,28,5,47,3,69,6,78,15"/>
+<area shape="rect" title="Set the baud rate of the PTY interface." alt="" coords="356,29,499,55"/>
+<area shape="rect" href="classpty.html#a50aec75ef08fc8368e6a3668821309cb" title="Open the PTY interface." alt="" coords="225,29,308,55"/>
+<area shape="poly" title=" " alt="" coords="342,45,308,45,308,39,342,39"/>
+<area shape="poly" title=" " alt="" coords="295,19,286,11,267,8,250,10,241,15,239,20,244,28,240,31,234,21,237,11,248,5,267,3,289,6,298,15"/>
+<area shape="rect" href="classserial__card.html#ab31c2ab7a8e57caa47c1559262a6aeb8" title="Open a PTY&#45;backed serial device at the specified base address." alt="" coords="5,29,177,55"/>
+<area shape="poly" title=" " alt="" coords="212,45,177,45,177,39,212,39"/>
 </map>
 </div>
 
@@ -759,17 +792,19 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr
 <p>Validates framing values and configures raw eight-bit host transport. Physical parity and stop bits are not represented by a PTY. </p>
 
 <p class="reference">Referenced by <a class="el" href="classpty.html#a50aec75ef08fc8368e6a3668821309cb">open()</a>.</p>
-<div id="dynsection-13" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-13-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-14" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-14-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-14-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-13-content" class="dyncontent" style="display:none;">
+<div id="dynsection-14-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpty_acacb920c29edf75bc85388b4e347aa4e_icgraph.png" border="0" usemap="#aclasspty_acacb920c29edf75bc85388b4e347aa4e_icgraph" alt=""/></div>
 <map name="aclasspty_acacb920c29edf75bc85388b4e347aa4e_icgraph" id="aclasspty_acacb920c29edf75bc85388b4e347aa4e_icgraph">
-<area shape="rect" title="Setup the PTY interface with custom configuration." alt="" coords="136,29,223,55"/>
-<area shape="rect" href="classpty.html#a50aec75ef08fc8368e6a3668821309cb" title="Open the PTY interface." alt="" coords="5,29,88,55"/>
-<area shape="poly" title=" " alt="" coords="122,45,88,45,88,39,122,39"/>
-<area shape="poly" title=" " alt="" coords="69,18,62,11,47,8,33,10,26,14,25,20,29,28,24,30,20,21,22,11,31,5,47,3,65,6,73,14"/>
+<area shape="rect" title="Setup the PTY interface with custom configuration." alt="" coords="356,29,443,55"/>
+<area shape="rect" href="classpty.html#a50aec75ef08fc8368e6a3668821309cb" title="Open the PTY interface." alt="" coords="225,29,308,55"/>
+<area shape="poly" title=" " alt="" coords="342,45,308,45,308,39,342,39"/>
+<area shape="poly" title=" " alt="" coords="289,18,282,11,267,8,253,10,246,14,245,20,249,28,244,30,240,21,242,11,251,5,267,3,285,6,293,14"/>
+<area shape="rect" href="classserial__card.html#ab31c2ab7a8e57caa47c1559262a6aeb8" title="Open a PTY&#45;backed serial device at the specified base address." alt="" coords="5,29,177,55"/>
+<area shape="poly" title=" " alt="" coords="212,45,177,45,177,39,212,39"/>
 </map>
 </div>
 
@@ -785,7 +820,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classpty.html">pty</a></li>
-    <li class="footer">Generated on Sun Sep 20 2026 for buddy8800 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Tue Sep 22 2026 for buddy8800 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

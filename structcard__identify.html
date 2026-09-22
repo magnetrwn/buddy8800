@@ -102,16 +102,34 @@ $(document).ready(function(){initNavTree('structcard__identify.html',''); initRe
 <p>Holds information that can be used to identify a card.  
  <a href="structcard__identify.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="card_8hpp_source.html">card.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="card__base_8hpp_source.html">card_base.hpp</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Collaboration diagram for card_identify:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="structcard__identify__coll__graph.png" border="0" usemap="#acard__identify_coll__map" alt="Collaboration graph"/></div>
+<map name="acard__identify_coll__map" id="acard__identify_coll__map">
+<area shape="rect" title="Holds information that can be used to identify a card." alt="" coords="69,197,175,223"/>
+<area shape="rect" title=" " alt="" coords="5,95,52,120"/>
+<area shape="poly" title=" " alt="" coords="36,132,44,153,56,172,72,185,90,195,88,200,69,189,52,175,39,155,31,134"/>
+<area shape="rect" title=" " alt="" coords="94,95,150,120"/>
+<area shape="poly" title=" " alt="" coords="125,134,125,197,119,197,119,134"/>
+<area shape="rect" title=" " alt="" coords="179,95,265,120"/>
+<area shape="poly" title=" " alt="" coords="218,134,209,155,195,175,177,189,157,200,155,195,174,185,191,172,204,153,213,132"/>
+<area shape="rect" title=" " alt="" coords="153,5,291,45"/>
+<area shape="poly" title=" " alt="" coords="225,59,225,94,219,94,219,59"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4ac19bb148afece855b9a4654e163755" id="r_a4ac19bb148afece855b9a4654e163755"><td class="memItemLeft" align="right" valign="top"><a id="a4ac19bb148afece855b9a4654e163755" name="a4ac19bb148afece855b9a4654e163755"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>card_identify</b> (u16 start_adr, usize adr_range, const char *name)</td></tr>
-<tr class="separator:a4ac19bb148afece855b9a4654e163755"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3dc5365abd132b718f3566024466800" id="r_ab3dc5365abd132b718f3566024466800"><td class="memItemLeft" align="right" valign="top"><a id="ab3dc5365abd132b718f3566024466800" name="ab3dc5365abd132b718f3566024466800"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>card_identify</b> (u16 start_adr, usize adr_range, const char *name, const char *detail)</td></tr>
-<tr class="separator:ab3dc5365abd132b718f3566024466800"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f79865ea7f6147253ee78330845aea7" id="r_a9f79865ea7f6147253ee78330845aea7"><td class="memItemLeft" align="right" valign="top"><a id="a9f79865ea7f6147253ee78330845aea7" name="a9f79865ea7f6147253ee78330845aea7"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>card_identify</b> (u16 start_adr, usize adr_range, std::string name)</td></tr>
+<tr class="separator:a9f79865ea7f6147253ee78330845aea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1769dce023f84898e70d40dee2fdaeb" id="r_ac1769dce023f84898e70d40dee2fdaeb"><td class="memItemLeft" align="right" valign="top"><a id="ac1769dce023f84898e70d40dee2fdaeb" name="ac1769dce023f84898e70d40dee2fdaeb"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>card_identify</b> (u16 start_adr, usize adr_range, std::string name, std::string detail)</td></tr>
+<tr class="separator:ac1769dce023f84898e70d40dee2fdaeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -121,18 +139,18 @@ u16&#160;</td><td class="memItemRight" valign="bottom"><b>start_adr</b></td></tr
 <tr class="memitem:a872827c4ff414f4f09982a824c84a2d0" id="r_a872827c4ff414f4f09982a824c84a2d0"><td class="memItemLeft" align="right" valign="top"><a id="a872827c4ff414f4f09982a824c84a2d0" name="a872827c4ff414f4f09982a824c84a2d0"></a>
 usize&#160;</td><td class="memItemRight" valign="bottom"><b>adr_range</b></td></tr>
 <tr class="separator:a872827c4ff414f4f09982a824c84a2d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abbd8279ecd838d4afbf758d3fa068285" id="r_abbd8279ecd838d4afbf758d3fa068285"><td class="memItemLeft" align="right" valign="top"><a id="abbd8279ecd838d4afbf758d3fa068285" name="abbd8279ecd838d4afbf758d3fa068285"></a>
-const char *&#160;</td><td class="memItemRight" valign="bottom"><b>name</b></td></tr>
-<tr class="separator:abbd8279ecd838d4afbf758d3fa068285"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10722e44ab5c4aaf1ebac4f1f43dc9b4" id="r_a10722e44ab5c4aaf1ebac4f1f43dc9b4"><td class="memItemLeft" align="right" valign="top"><a id="a10722e44ab5c4aaf1ebac4f1f43dc9b4" name="a10722e44ab5c4aaf1ebac4f1f43dc9b4"></a>
-const char *&#160;</td><td class="memItemRight" valign="bottom"><b>detail</b></td></tr>
-<tr class="separator:a10722e44ab5c4aaf1ebac4f1f43dc9b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ded0fe77476e7018910f88cda6481ed" id="r_a4ded0fe77476e7018910f88cda6481ed"><td class="memItemLeft" align="right" valign="top"><a id="a4ded0fe77476e7018910f88cda6481ed" name="a4ded0fe77476e7018910f88cda6481ed"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>name</b></td></tr>
+<tr class="separator:a4ded0fe77476e7018910f88cda6481ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a018c8f30b39d44dc4f4bbc22e2719af4" id="r_a018c8f30b39d44dc4f4bbc22e2719af4"><td class="memItemLeft" align="right" valign="top"><a id="a018c8f30b39d44dc4f4bbc22e2719af4" name="a018c8f30b39d44dc4f4bbc22e2719af4"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>detail</b></td></tr>
+<tr class="separator:a018c8f30b39d44dc4f4bbc22e2719af4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Holds information that can be used to identify a card. </p>
-<p>This struct groups the start address, address range, a name C-string and details C-string of a card. Its main application is to have an instance of it returned by the <code>identify()</code> method of a card. </p>
+<p>This struct groups the start address, address range, a name string and details string of a card. Its main application is to have an instance of it returned by the <code>identify()</code> method of a card. </p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/core/bus/<a class="el" href="card_8hpp_source.html">card.hpp</a></li>
+<li>src/core/bus/<a class="el" href="card__base_8hpp_source.html">card_base.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -140,7 +158,7 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>detail</b></t
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structcard__identify.html">card_identify</a></li>
-    <li class="footer">Generated on Sun Sep 20 2026 for buddy8800 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Tue Sep 22 2026 for buddy8800 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

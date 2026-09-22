@@ -97,20 +97,22 @@ $(document).ready(function(){initNavTree('classemulator.html',''); initResizable
 
 <p>This is the complete list of members for <a class="el" href="classemulator.html">emulator</a>, including all inherited members.</p>
 <table class="directory">
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>emulator</b>(const char *config_filename) (defined in <a class="el" href="classemulator.html">emulator</a>)</td><td class="entry"><a class="el" href="classemulator.html">emulator</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>halted</b>() const (defined in <a class="el" href="classemulator.html">emulator</a>)</td><td class="entry"><a class="el" href="classemulator.html">emulator</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>info</b>() const (defined in <a class="el" href="classemulator.html">emulator</a>)</td><td class="entry"><a class="el" href="classemulator.html">emulator</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>run</b>(const volatile std::sig_atomic_t &amp;stop) (defined in <a class="el" href="classemulator.html">emulator</a>)</td><td class="entry"><a class="el" href="classemulator.html">emulator</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>setup</b>(int argc, char **argv) (defined in <a class="el" href="classemulator.html">emulator</a>)</td><td class="entry"><a class="el" href="classemulator.html">emulator</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>state</b>() const (defined in <a class="el" href="classemulator.html">emulator</a>)</td><td class="entry"><a class="el" href="classemulator.html">emulator</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>step</b>() (defined in <a class="el" href="classemulator.html">emulator</a>)</td><td class="entry"><a class="el" href="classemulator.html">emulator</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>trace</b>(std::function&lt; void(u16, const std::array&lt; u8, 3 &gt; &amp;, usize)&gt; observer) (defined in <a class="el" href="classemulator.html">emulator</a>)</td><td class="entry"><a class="el" href="classemulator.html">emulator</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classemulator.html#a80a243ec917043d8828bab2b6150a0b1">devices</a>() const</td><td class="entry"><a class="el" href="classemulator.html">emulator</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classemulator.html#a7ff29c6c63bb1ef3373857d0ed4994df">diagnostic_stream</a>(std::ostream &amp;stream)</td><td class="entry"><a class="el" href="classemulator.html">emulator</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classemulator.html#a25086f33052c106dbc9aaa5337d12740">emulator</a>(const char *config_filename)</td><td class="entry"><a class="el" href="classemulator.html">emulator</a></td><td class="entry"><span class="mlabel">explicit</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classemulator.html#a3f7b452aa417b6474d814e6d77c022b5">halted</a>() const</td><td class="entry"><a class="el" href="classemulator.html">emulator</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classemulator.html#a2bece48284f6736c9d7cde1b6198378a">load_program</a>(const std::vector&lt; u8 &gt; &amp;bytes, u16 address, bool reset_vector)</td><td class="entry"><a class="el" href="classemulator.html">emulator</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classemulator.html#a68c291f78142aee0c96562e972b367ed">run</a>(const volatile std::sig_atomic_t &amp;stop)</td><td class="entry"><a class="el" href="classemulator.html">emulator</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classemulator.html#ad8c5a8afd978c31126befeea506156b6">start</a>()</td><td class="entry"><a class="el" href="classemulator.html">emulator</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classemulator.html#a5a9731c316c66c09b5a9bd764e5af2ea">state</a>() const</td><td class="entry"><a class="el" href="classemulator.html">emulator</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classemulator.html#a0c5f9de9ac11c30ee26c04cb20a7fc57">step</a>()</td><td class="entry"><a class="el" href="classemulator.html">emulator</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classemulator.html#a62b25471c354b84154a144ecd24823de">trace</a>(std::function&lt; void(u16, const std::array&lt; u8, 3 &gt; &amp;, usize)&gt; observer)</td><td class="entry"><a class="el" href="classemulator.html">emulator</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Sep 20 2026 for buddy8800 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Tue Sep 22 2026 for buddy8800 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

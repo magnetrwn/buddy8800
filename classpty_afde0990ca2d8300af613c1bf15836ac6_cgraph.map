@@ -2,4 +2,6 @@
 <area shape="rect" id="Node000001" title="Send data to the PTY interface master side." alt="" coords="5,5,87,31"/>
 <area shape="rect" id="Node000002" href="$classpty.html#ac9e7847a4ade52e8bea78e13f49c4c76" title="Send a single byte to the PTY interface master side." alt="" coords="135,5,221,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,15,121,15,121,21,87,21"/>
+<area shape="rect" id="Node000003" href="$classpty.html#a69985a1ff0555f4c01b0ee1b972b78e6" title="Write one byte; return false if the transport would block." alt="" coords="269,5,380,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="221,15,256,15,256,21,221,21"/>
 </map>

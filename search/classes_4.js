@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['print_5fhelper_0',['print_helper',['../classutil_1_1print__helper.html',1,'util']]],
-  ['pty_1',['pty',['../classpty.html',1,'']]]
+  ['machine_5fconfig_0',['machine_config',['../structbuddy8800_1_1app_1_1machine__config.html',1,'buddy8800::app']]]
 ];

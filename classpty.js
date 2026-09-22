@@ -12,5 +12,7 @@ var classpty =
     [ "send_break", "classpty.html#ae60caccd262899cddaa62ebeda9ca14d", null ],
     [ "set_baud_rate", "classpty.html#a757f8fc7156ea5215922e9646b65daaa", null ],
     [ "set_echo_received_back", "classpty.html#a361a2ef0fc27c6c1f2aac8e05aa0f89c", null ],
-    [ "setup", "classpty.html#acacb920c29edf75bc85388b4e347aa4e", null ]
+    [ "setup", "classpty.html#acacb920c29edf75bc85388b4e347aa4e", null ],
+    [ "try_getch", "classpty.html#a254a5f61957aa45fcc1ba8d964dd40f2", null ],
+    [ "try_putch", "classpty.html#a69985a1ff0555f4c01b0ee1b972b78e6", null ]
 ];

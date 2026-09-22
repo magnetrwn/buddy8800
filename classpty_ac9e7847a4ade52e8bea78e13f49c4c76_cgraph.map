@@ -1,0 +1,5 @@
+<map id="pty::putch" name="pty::putch">
+<area shape="rect" id="Node000001" title="Send a single byte to the PTY interface master side." alt="" coords="5,5,92,31"/>
+<area shape="rect" id="Node000002" href="$classpty.html#a69985a1ff0555f4c01b0ee1b972b78e6" title="Write one byte; return false if the transport would block." alt="" coords="140,5,251,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="92,15,126,15,126,21,92,21"/>
+</map>

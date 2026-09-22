@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['open_0',['open',['../classpty.html#a50aec75ef08fc8368e6a3668821309cb',1,'pty']]],
-  ['operator_3c_3c_1',['operator&lt;&lt;',['../classutil_1_1print__helper.html#afea61ba0b18b05a65dabfe5af657cf95',1,'util::print_helper']]],
-  ['operator_5b_5d_2',['operator[]',['../classbus.html#a823fe0fdf5aad85763fdeb840a3c4df2',1,'bus']]]
+  ['load_0',['load',['../classcpu.html#a816a112adb7790d3e82a46776f4fafbf',1,'cpu']]],
+  ['load_5fprogram_1',['load_program',['../classemulator.html#a2bece48284f6736c9d7cde1b6198378a',1,'emulator']]],
+  ['load_5fstate_2',['load_state',['../classcpu.html#a6c72852ac69a7814d8e0faa836d3abf3',1,'cpu']]]
 ];

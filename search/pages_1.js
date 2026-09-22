@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['fixtures_0',['Pinned ALTMON regression fixtures',['../index.html',1,'']]]
+  ['deprecated_20list_0',['Deprecated List',['../deprecated.html',1,'']]]
 ];

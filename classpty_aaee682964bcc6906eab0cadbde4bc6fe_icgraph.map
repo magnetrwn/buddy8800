@@ -1,5 +1,7 @@
 <map id="pty::name" name="pty::name">
-<area shape="rect" id="Node000001" title="Retrieve the name of the slave device." alt="" coords="204,5,291,31"/>
-<area shape="rect" id="Node000002" href="$classserial__card.html#a1f29b0bb8ad083bf74af151628b7acf3" title="Get information about the card." alt="" coords="5,5,156,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,21,157,21,157,15,190,15"/>
+<area shape="rect" id="Node000001" title="Retrieve the name of the slave device." alt="" coords="220,31,307,56"/>
+<area shape="rect" id="Node000002" href="$classserial__card.html#a8a08c936960bae66ed479f5f840ca37e" title="Describe this device without servicing serial traffic." alt="" coords="13,5,164,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="206,38,164,32,165,26,207,33"/>
+<area shape="rect" id="Node000003" href="$classserial__card.html#af821b987a5dcdae65cbcc5b88cadb90a" title="Return the host PTY slave device name." alt="" coords="5,55,172,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="207,54,173,58,172,53,206,48"/>
 </map>

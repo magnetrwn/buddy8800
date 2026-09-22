@@ -1,0 +1,11 @@
+<map id="card_identify" name="card_identify">
+<area shape="rect" id="Node000001" title="Holds information that can be used to identify a card." alt="" coords="69,197,175,223"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,95,52,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="36,132,44,153,56,172,72,185,90,195,88,200,69,189,52,175,39,155,31,134"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="94,95,150,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="125,134,125,197,119,197,119,134"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="179,95,265,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="218,134,209,155,195,175,177,189,157,200,155,195,174,185,191,172,204,153,213,132"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="153,5,291,45"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="225,59,225,94,219,94,219,59"/>
+</map>

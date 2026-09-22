@@ -1,4 +1,13 @@
 var searchData=
 [
-  ['name_0',['name',['../classpty.html#aaee682964bcc6906eab0cadbde4bc6fe',1,'pty']]]
+  ['identify_0',['identify',['../classdata__card.html#aae444733e56815a3422222646f60efe1',1,'data_card::identify()'],['../classserial__card.html#a8a08c936960bae66ed479f5f840ca37e',1,'serial_card::identify()'],['../classcard.html#aaf025b6d566884d0b82c07ac8a94666e',1,'card::identify() const =0']]],
+  ['in_5frange_1',['in_range',['../classcard.html#ab32f79943888d74e0a506e78b2d7406c',1,'card::in_range()'],['../classdata__card.html#af921f54ef18d2f7c799e7335fd82e68e',1,'data_card::in_range()'],['../classserial__card.html#afec24d99079048e6555c21b3eaf3be66',1,'serial_card::in_range()']]],
+  ['inc_5fregister16_2',['inc_register16',['../structcpu__state.html#a96f5e9dead7b9d7f9622818d13aff5db',1,'cpu_state']]],
+  ['inc_5fregister8_3',['inc_register8',['../structcpu__state.html#a996a8f507607206d89e3149679332352',1,'cpu_state']]],
+  ['insert_4',['insert',['../classbus.html#aef6e4de3df548561b9545f0cb341e143',1,'bus']]],
+  ['interrupt_5',['interrupt',['../classcpu.html#a0486313a1a4f72cb6c0e3231b2927d94',1,'cpu']]],
+  ['is_5fhalted_6',['is_halted',['../classcpu.html#a010e335fc9f1797e72bfc5585e9238f6',1,'cpu']]],
+  ['is_5fio_7',['is_io',['../classcard.html#af41da29e90a5b92e6df323da37822060',1,'card::is_io()'],['../classdata__card.html#a1d5e0fc519f03e8ab010cbca151654ef',1,'data_card::is_io()'],['../classserial__card.html#a63b70caf2fd303c6d8246a28bd50dc68',1,'serial_card::is_io()']]],
+  ['is_5firq_8',['is_irq',['../classbus.html#ae35dadd5a5ae3a060bd18facb8bb4f31',1,'bus::is_irq()'],['../classcard.html#a5aca5465f1771a8fa77cd0deb33ed996',1,'card::is_irq() const']]],
+  ['is_5fw_5flocked_9',['is_w_locked',['../classcard.html#acda2f3ac26f4d8e8f2e583799458e366',1,'card']]]
 ];

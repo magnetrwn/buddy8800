@@ -1,0 +1,5 @@
+<map id="bus::get_irq" name="bus::get_irq">
+<area shape="rect" id="Node000001" title="Gets the IRQ instruction (and possible operands)." alt="" coords="171,5,269,31"/>
+<area shape="rect" id="Node000002" href="$classemulator.html#a0c5f9de9ac11c30ee26c04cb20a7fc57" title="Execute one instruction and service a pending bus interrupt." alt="" coords="5,5,123,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="157,21,123,21,123,15,157,15"/>
+</map>

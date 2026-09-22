@@ -1,0 +1,16 @@
+<map id="buddy8800::app::machine_config" name="buddy8800::app::machine_config">
+<area shape="rect" id="Node000001" title="Machine settings without live devices or host resources." alt="" coords="5,403,196,443"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="69,95,116,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,134,103,402,98,402,91,134"/>
+<area shape="rect" id="Node000004" href="$structbuddy8800_1_1app_1_1card__config.html" title="Parsed placement and initialization settings for one card." alt="" coords="121,197,283,237"/>
+<area shape="poly" id="edge6_Node000004_Node000002" title=" " alt="" coords="116,128,185,195,181,199,112,132"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="117,300,295,340"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="178,352,122,405,119,401,174,348"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="206,251,208,300,203,300,201,251"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="147,95,233,120"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="195,134,203,197,197,197,190,134"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="121,5,259,45"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="193,59,193,94,187,94,187,59"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="258,95,314,120"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="271,133,239,175,220,199,216,195,235,172,267,129"/>
+</map>

@@ -26,6 +26,7 @@ var NAVTREE =
 [
   [ "buddy8800", "index.html", [
     [ "Pinned ALTMON regression fixtures", "index.html", null ],
+    [ "Deprecated List", "deprecated.html", null ],
     [ "Todo List", "todo.html", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ]

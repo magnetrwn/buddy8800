@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('classdata__card.html',''); initResizab
 <p>A card that holds a fixed amount of data.  
  <a href="classdata__card.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="card_8hpp_source.html">card.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="data__card_8hpp_source.html">data_card.hpp</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for data_card&lt; construct_then_write_lock &gt;:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -132,16 +132,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1f4339ce0ffbeafe215f45d0f6b3e65d" id="r_a1f4339ce0ffbeafe215f45d0f6b3e65d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#a1f4339ce0ffbeafe215f45d0f6b3e65d">data_card</a> (u16 start_adr, usize capacity, u8 fill=BAD_U8, bool lock=construct_then_write_lock)</td></tr>
 <tr class="memdesc:a1f4339ce0ffbeafe215f45d0f6b3e65d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a card with a fixed capacity and simple one byte fill.  <br /></td></tr>
 <tr class="separator:a1f4339ce0ffbeafe215f45d0f6b3e65d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa37ae16414bdfd89a16e2283bce6c043" id="r_aa37ae16414bdfd89a16e2283bce6c043"><td class="memTemplParams" colspan="2">template&lt;typename T , T_ITERATOR_SFINAE &gt; </td></tr>
-<tr class="memitem:aa37ae16414bdfd89a16e2283bce6c043"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classdata__card.html#aa37ae16414bdfd89a16e2283bce6c043">data_card</a> (u16 start_adr, T begin, T end, usize capacity=0, bool lock=construct_then_write_lock)</td></tr>
-<tr class="memdesc:aa37ae16414bdfd89a16e2283bce6c043"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a card and copy data from an iterator pair immediately.  <br /></td></tr>
-<tr class="separator:aa37ae16414bdfd89a16e2283bce6c043"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21be3253a8a25577b188d17899399de7" id="r_a21be3253a8a25577b188d17899399de7"><td class="memTemplParams" colspan="2">template&lt;typename value_type , typename  = buddy8800::enable_input_iterator&lt;value_type&gt;&gt; </td></tr>
+<tr class="memitem:a21be3253a8a25577b188d17899399de7"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classdata__card.html#a21be3253a8a25577b188d17899399de7">data_card</a> (u16 start_adr, value_type begin, value_type end, usize capacity=0, bool lock=construct_then_write_lock)</td></tr>
+<tr class="memdesc:a21be3253a8a25577b188d17899399de7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a card and copy data from an iterator pair immediately.  <br /></td></tr>
+<tr class="separator:a21be3253a8a25577b188d17899399de7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af921f54ef18d2f7c799e7335fd82e68e" id="r_af921f54ef18d2f7c799e7335fd82e68e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#af921f54ef18d2f7c799e7335fd82e68e">in_range</a> (u16 adr) const override</td></tr>
 <tr class="memdesc:af921f54ef18d2f7c799e7335fd82e68e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if an address on the bus is in the card's range.  <br /></td></tr>
 <tr class="separator:af921f54ef18d2f7c799e7335fd82e68e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c21b71079491b84c9d50cdba8f5db5a" id="r_a3c21b71079491b84c9d50cdba8f5db5a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcard__identify.html">card_identify</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#a3c21b71079491b84c9d50cdba8f5db5a">identify</a> () override</td></tr>
-<tr class="memdesc:a3c21b71079491b84c9d50cdba8f5db5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get information about the data card.  <br /></td></tr>
-<tr class="separator:a3c21b71079491b84c9d50cdba8f5db5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae444733e56815a3422222646f60efe1" id="r_aae444733e56815a3422222646f60efe1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcard__identify.html">card_identify</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#aae444733e56815a3422222646f60efe1">identify</a> () const override</td></tr>
+<tr class="memdesc:aae444733e56815a3422222646f60efe1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get information about the data card.  <br /></td></tr>
+<tr class="separator:aae444733e56815a3422222646f60efe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac97a9451734b90e6fd01248bbdc15135" id="r_ac97a9451734b90e6fd01248bbdc15135"><td class="memItemLeft" align="right" valign="top">u8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdata__card.html#ac97a9451734b90e6fd01248bbdc15135">read</a> (u16 adr) override</td></tr>
 <tr class="memdesc:ac97a9451734b90e6fd01248bbdc15135"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a byte from the data card.  <br /></td></tr>
 <tr class="separator:ac97a9451734b90e6fd01248bbdc15135"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -270,15 +270,15 @@ template&lt;bool construct_then_write_lock&gt; </div>
 
 </div>
 </div>
-<a id="aa37ae16414bdfd89a16e2283bce6c043" name="aa37ae16414bdfd89a16e2283bce6c043"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa37ae16414bdfd89a16e2283bce6c043">&#9670;&#160;</a></span>data_card() <span class="overload">[2/2]</span></h2>
+<a id="a21be3253a8a25577b188d17899399de7" name="a21be3253a8a25577b188d17899399de7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21be3253a8a25577b188d17899399de7">&#9670;&#160;</a></span>data_card() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;bool construct_then_write_lock&gt; </div>
 <div class="memtemplate">
-template&lt;typename T , T_ITERATOR_SFINAE &gt; </div>
+template&lt;typename value_type , typename  = buddy8800::enable_input_iterator&lt;value_type&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -292,13 +292,13 @@ template&lt;typename T , T_ITERATOR_SFINAE &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">T&#160;</td>
+          <td class="paramtype">value_type&#160;</td>
           <td class="paramname"><em>begin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">T&#160;</td>
+          <td class="paramtype">value_type&#160;</td>
           <td class="paramname"><em>end</em>, </td>
         </tr>
         <tr>
@@ -404,8 +404,8 @@ template&lt;bool construct_then_write_lock&gt; </div>
 
 </div>
 </div>
-<a id="a3c21b71079491b84c9d50cdba8f5db5a" name="a3c21b71079491b84c9d50cdba8f5db5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c21b71079491b84c9d50cdba8f5db5a">&#9670;&#160;</a></span>identify()</h2>
+<a id="aae444733e56815a3422222646f60efe1" name="aae444733e56815a3422222646f60efe1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae444733e56815a3422222646f60efe1">&#9670;&#160;</a></span>identify()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -419,7 +419,7 @@ template&lt;bool construct_then_write_lock&gt; </div>
           <td class="memname"><a class="el" href="structcard__identify.html">card_identify</a> <a class="el" href="classdata__card.html">data_card</a>&lt; construct_then_write_lock &gt;::identify </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -431,7 +431,7 @@ template&lt;bool construct_then_write_lock&gt; </div>
 
 <p>Get information about the data card. </p>
 
-<p>Implements <a class="el" href="classcard.html#aa242bc5baf3e6276c4c3ba5ddf7610a4">card</a>.</p>
+<p>Implements <a class="el" href="classcard.html#aaf025b6d566884d0b82c07ac8a94666e">card</a>.</p>
 
 </div>
 </div>
@@ -615,7 +615,7 @@ template&lt;bool construct_then_write_lock&gt; </div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/core/bus/<a class="el" href="card_8hpp_source.html">card.hpp</a></li>
+<li>src/core/cards/<a class="el" href="data__card_8hpp_source.html">data_card.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -623,7 +623,7 @@ template&lt;bool construct_then_write_lock&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classdata__card.html">data_card</a></li>
-    <li class="footer">Generated on Sun Sep 20 2026 for buddy8800 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Tue Sep 22 2026 for buddy8800 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

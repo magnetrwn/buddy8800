@@ -7,6 +7,7 @@ var structcpu__state =
     [ "get_then_inc_register8", "structcpu__state.html#a3a35aaf04e1c04644a5a30ae34def37e", null ],
     [ "inc_register16", "structcpu__state.html#a96f5e9dead7b9d7f9622818d13aff5db", null ],
     [ "inc_register8", "structcpu__state.html#a996a8f507607206d89e3149679332352", null ],
+    [ "operator==", "structcpu__state.html#a0935e77f575269fcd23121830df94026", null ],
     [ "set_flag", "structcpu__state.html#a88086422013ebb4ddb691a5d4ec090aa", null ],
     [ "set_if_flag", "structcpu__state.html#aedbda43148055f040a9b18c5fc16bfd1", null ],
     [ "set_register16", "structcpu__state.html#ac9b4c2b78269d7e1f39a02d9b7a27007", null ],

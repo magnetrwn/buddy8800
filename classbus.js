@@ -1,6 +1,5 @@
 var classbus =
 [
-    [ "bus_map_s", "classbus.html#a616875dde214c117fcc36c0bbcc80f9e", null ],
     [ "clear", "classbus.html#a653c79df108c47ff654d18cc601d4d67", null ],
     [ "get_irq", "classbus.html#a6c144df7773fb32aad6371cd1dcf0498", null ],
     [ "get_slot_by_adr", "classbus.html#a1600c50ee9b9e2aeb648a6529b234cf8", null ],

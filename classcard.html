@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('classcard.html',''); initResizable(); 
 <p>Base class for all cards.  
  <a href="classcard.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="card_8hpp_source.html">card.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="card__base_8hpp_source.html">card_base.hpp</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for card:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('classcard.html',''); initResizable(); 
 <area shape="rect" title="Base class for all cards." alt="" coords="137,5,187,31"/>
 <area shape="rect" href="classdata__card.html" title="A card that holds a fixed amount of data." alt="" coords="5,79,167,119"/>
 <area shape="poly" title=" " alt="" coords="143,42,106,80,102,77,140,39"/>
-<area shape="rect" href="classserial__card.html" title="A card that emulates a 6850 ACIA." alt="" coords="191,86,285,111"/>
+<area shape="rect" href="classserial__card.html" title="Polled 88&#45;2SIO subset using the 6850 ACIA register layout." alt="" coords="191,86,285,111"/>
 <area shape="poly" title=" " alt="" coords="185,39,229,84,225,88,181,42"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
@@ -143,9 +143,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>raise_irq</b> (bool v
 <tr class="memitem:ab32f79943888d74e0a506e78b2d7406c" id="r_ab32f79943888d74e0a506e78b2d7406c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#ab32f79943888d74e0a506e78b2d7406c">in_range</a> (u16 adr) const =0</td></tr>
 <tr class="memdesc:ab32f79943888d74e0a506e78b2d7406c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if an address on the bus is in the card's range.  <br /></td></tr>
 <tr class="separator:ab32f79943888d74e0a506e78b2d7406c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa242bc5baf3e6276c4c3ba5ddf7610a4" id="r_aa242bc5baf3e6276c4c3ba5ddf7610a4"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structcard__identify.html">card_identify</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#aa242bc5baf3e6276c4c3ba5ddf7610a4">identify</a> ()=0</td></tr>
-<tr class="memdesc:aa242bc5baf3e6276c4c3ba5ddf7610a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get information about the card.  <br /></td></tr>
-<tr class="separator:aa242bc5baf3e6276c4c3ba5ddf7610a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf025b6d566884d0b82c07ac8a94666e" id="r_aaf025b6d566884d0b82c07ac8a94666e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structcard__identify.html">card_identify</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#aaf025b6d566884d0b82c07ac8a94666e">identify</a> () const =0</td></tr>
+<tr class="memdesc:aaf025b6d566884d0b82c07ac8a94666e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get information about the card.  <br /></td></tr>
+<tr class="separator:aaf025b6d566884d0b82c07ac8a94666e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ed2b72cca9db35d23873352a4af90a5" id="r_a5ed2b72cca9db35d23873352a4af90a5"><td class="memItemLeft" align="right" valign="top">virtual u8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcard.html#a5ed2b72cca9db35d23873352a4af90a5">read</a> (u16 adr)=0</td></tr>
 <tr class="memdesc:a5ed2b72cca9db35d23873352a4af90a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a byte from the card.  <br /></td></tr>
 <tr class="separator:a5ed2b72cca9db35d23873352a4af90a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -257,16 +257,18 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 <div id="dynsection-2-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classcard_aa2b195bb9c23eb11051577629cb1986e_icgraph.png" border="0" usemap="#aclasscard_aa2b195bb9c23eb11051577629cb1986e_icgraph" alt=""/></div>
 <map name="aclasscard_aa2b195bb9c23eb11051577629cb1986e_icgraph" id="aclasscard_aa2b195bb9c23eb11051577629cb1986e_icgraph">
-<area shape="rect" title="Get the IRQ instruction (and possible operands)." alt="" coords="152,5,255,31"/>
-<area shape="rect" href="classbus.html#a6c144df7773fb32aad6371cd1dcf0498" title="Gets the IRQ instruction (and possible operands)." alt="" coords="5,5,104,31"/>
-<area shape="poly" title=" " alt="" coords="138,21,104,21,104,15,138,15"/>
+<area shape="rect" title="Get the IRQ instruction (and possible operands)." alt="" coords="317,5,420,31"/>
+<area shape="rect" href="classbus.html#a6c144df7773fb32aad6371cd1dcf0498" title="Gets the IRQ instruction (and possible operands)." alt="" coords="171,5,269,31"/>
+<area shape="poly" title=" " alt="" coords="303,21,270,21,270,15,303,15"/>
+<area shape="rect" href="classemulator.html#a0c5f9de9ac11c30ee26c04cb20a7fc57" title="Execute one instruction and service a pending bus interrupt." alt="" coords="5,5,123,31"/>
+<area shape="poly" title=" " alt="" coords="157,21,123,21,123,15,157,15"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="aa242bc5baf3e6276c4c3ba5ddf7610a4" name="aa242bc5baf3e6276c4c3ba5ddf7610a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa242bc5baf3e6276c4c3ba5ddf7610a4">&#9670;&#160;</a></span>identify()</h2>
+<a id="aaf025b6d566884d0b82c07ac8a94666e" name="aaf025b6d566884d0b82c07ac8a94666e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf025b6d566884d0b82c07ac8a94666e">&#9670;&#160;</a></span>identify()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -278,7 +280,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
           <td class="memname">virtual <a class="el" href="structcard__identify.html">card_identify</a> card::identify </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -291,7 +293,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 <p>Get information about the card. </p>
 <dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structcard__identify.html" title="Holds information that can be used to identify a card.">card_identify</a> struct with lengthy details about the card. </dd></dl>
 
-<p>Implemented in <a class="el" href="classdata__card.html#a3c21b71079491b84c9d50cdba8f5db5a">data_card&lt; construct_then_write_lock &gt;</a>, and <a class="el" href="classserial__card.html#a1f29b0bb8ad083bf74af151628b7acf3">serial_card</a>.</p>
+<p>Implemented in <a class="el" href="classdata__card.html#aae444733e56815a3422222646f60efe1">data_card&lt; construct_then_write_lock &gt;</a>, and <a class="el" href="classserial__card.html#a8a08c936960bae66ed479f5f840ca37e">serial_card</a>.</p>
 
 </div>
 </div>
@@ -433,11 +435,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 <div id="dynsection-5-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classcard_a5aca5465f1771a8fa77cd0deb33ed996_icgraph.png" border="0" usemap="#aclasscard_a5aca5465f1771a8fa77cd0deb33ed996_icgraph" alt=""/></div>
 <map name="aclasscard_a5aca5465f1771a8fa77cd0deb33ed996_icgraph" id="aclasscard_a5aca5465f1771a8fa77cd0deb33ed996_icgraph">
-<area shape="rect" title="Check if the card has an IRQ raised." alt="" coords="152,31,245,56"/>
-<area shape="rect" href="classbus.html#a6c144df7773fb32aad6371cd1dcf0498" title="Gets the IRQ instruction (and possible operands)." alt="" coords="5,5,104,31"/>
-<area shape="poly" title=" " alt="" coords="138,35,104,29,105,24,139,30"/>
-<area shape="rect" href="classbus.html#ae35dadd5a5ae3a060bd18facb8bb4f31" title="A shortcut to read the bus using an index directly without a proxy object." alt="" coords="11,55,99,80"/>
-<area shape="poly" title=" " alt="" coords="139,56,99,63,99,57,138,51"/>
+<area shape="rect" title="Check if the card has an IRQ raised." alt="" coords="317,31,411,56"/>
+<area shape="rect" href="classbus.html#a6c144df7773fb32aad6371cd1dcf0498" title="Gets the IRQ instruction (and possible operands)." alt="" coords="171,5,269,31"/>
+<area shape="poly" title=" " alt="" coords="304,35,269,29,270,24,304,30"/>
+<area shape="rect" href="classbus.html#ae35dadd5a5ae3a060bd18facb8bb4f31" title="A shortcut to read the bus using an index directly without a proxy object." alt="" coords="176,55,264,80"/>
+<area shape="poly" title=" " alt="" coords="304,56,265,63,264,57,303,51"/>
+<area shape="rect" href="classemulator.html#a0c5f9de9ac11c30ee26c04cb20a7fc57" title="Execute one instruction and service a pending bus interrupt." alt="" coords="5,31,123,56"/>
+<area shape="poly" title=" " alt="" coords="158,31,123,36,123,31,157,26"/>
+<area shape="poly" title=" " alt="" coords="162,61,122,55,123,50,163,56"/>
 </map>
 </div>
 
@@ -617,7 +622,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/core/bus/<a class="el" href="card_8hpp_source.html">card.hpp</a></li>
+<li>src/core/bus/<a class="el" href="card__base_8hpp_source.html">card_base.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -625,7 +630,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>irq_raised</b> = fals
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classcard.html">card</a></li>
-    <li class="footer">Generated on Sun Sep 20 2026 for buddy8800 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Tue Sep 22 2026 for buddy8800 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

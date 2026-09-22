@@ -92,7 +92,7 @@ $(document).ready(function(){initNavTree('structcpu__state.html',''); initResiza
 
 <div class="header">
   <div class="summary">
-<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="structcpu__state-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">cpu_state Struct Reference</div></div>
 </div><!--header-->
@@ -102,21 +102,13 @@ $(document).ready(function(){initNavTree('structcpu__state.html',''); initResiza
  <a href="structcpu__state.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="cpu__state_8hpp_source.html">cpu_state.hpp</a>&gt;</code></p>
-<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Collaboration diagram for cpu_state:</div>
-<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="structcpu__state__coll__graph.png" border="0" usemap="#acpu__state_coll__map" alt="Collaboration graph"/></div>
-<map name="acpu__state_coll__map" id="acpu__state_coll__map">
-<area shape="rect" title="Represents the state of the CPU." alt="" coords="40,93,125,119"/>
-<area shape="rect" title=" " alt="" coords="5,5,160,31"/>
-<area shape="poly" title=" " alt="" coords="85,45,85,93,80,93,80,45"/>
-</map>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a0935e77f575269fcd23121830df94026" id="r_a0935e77f575269fcd23121830df94026"><td class="memItemLeft" align="right" valign="top"><a id="a0935e77f575269fcd23121830df94026" name="a0935e77f575269fcd23121830df94026"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (const <a class="el" href="structcpu__state.html">cpu_state</a> &amp;other) const</td></tr>
+<tr class="memdesc:a0935e77f575269fcd23121830df94026"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare complete register and flag state. <br /></td></tr>
+<tr class="separator:a0935e77f575269fcd23121830df94026"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Register state get/setters.</div></td></tr>
 <tr class="memitem:aa5c19ebd81fbc6a35100fefb3dce00a3" id="r_aa5c19ebd81fbc6a35100fefb3dce00a3"><td class="memItemLeft" align="right" valign="top"><a id="aa5c19ebd81fbc6a35100fefb3dce00a3" name="aa5c19ebd81fbc6a35100fefb3dce00a3"></a>
 constexpr u8&#160;</td><td class="memItemRight" valign="bottom"><b>get_register8</b> (cpu_registers8 reg) const</td></tr>
@@ -287,12 +279,6 @@ constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>flgZ</b> (b
 <tr class="memitem:a39abc0f26ca28e2b163e05bca57a0ac8" id="r_a39abc0f26ca28e2b163e05bca57a0ac8"><td class="memItemLeft" align="right" valign="top"><a id="a39abc0f26ca28e2b163e05bca57a0ac8" name="a39abc0f26ca28e2b163e05bca57a0ac8"></a>
 constexpr void&#160;</td><td class="memItemRight" valign="bottom"><b>flgS</b> (bool value)</td></tr>
 <tr class="separator:a39abc0f26ca28e2b163e05bca57a0ac8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:aa27c0b706f22f62eedc2af5ef597017b" id="r_aa27c0b706f22f62eedc2af5ef597017b"><td class="memItemLeft" align="right" valign="top"><a id="aa27c0b706f22f62eedc2af5ef597017b" name="aa27c0b706f22f62eedc2af5ef597017b"></a>
-std::array&lt; u16, 6 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>registers</b></td></tr>
-<tr class="separator:aa27c0b706f22f62eedc2af5ef597017b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents the state of the CPU. </p>
@@ -306,7 +292,7 @@ std::array&lt; u16, 6 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structcpu__state.html">cpu_state</a></li>
-    <li class="footer">Generated on Sun Sep 20 2026 for buddy8800 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Tue Sep 22 2026 for buddy8800 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

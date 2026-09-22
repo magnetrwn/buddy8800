@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['w_5flock_0',['w_lock',['../classcard.html#a08987729c7f53ba0fd3462e2d5ca8eae',1,'card']]],
-  ['w_5funlock_1',['w_unlock',['../classcard.html#aeb5526b21831ac5fe40ade8de19c9ed3',1,'card']]],
-  ['write_2',['write',['../classbus.html#aea7690c041bc175652f213f9a8860c73',1,'bus::write()'],['../classcard.html#ae4b1863113c0e72b7de13f3774776fdb',1,'card::write()'],['../classdata__card.html#a838d64e1c4e8ba9450812e406ac2ba3c',1,'data_card::write()'],['../classserial__card.html#a87b17dad886b8847836ebd214c3c14ad',1,'serial_card::write()']]],
-  ['write_5fforce_3',['write_force',['../classbus.html#addf9c4c65e0374e6016e1a278f51a0ed',1,'bus::write_force()'],['../classcard.html#a4db633403be8c709db66fafa54c43989',1,'card::write_force()'],['../classdata__card.html#af5458172552b57ac4a7e5de2a31aa0c9',1,'data_card::write_force()'],['../classserial__card.html#a692446f7540c8ae4601737bdf2833ebf',1,'serial_card::write_force()']]]
+  ['trace_0',['trace',['../classemulator.html#a62b25471c354b84154a144ecd24823de',1,'emulator']]],
+  ['trace_5fpage_5fsize_1',['trace_page_size',['../classbuddy8800_1_1ux_1_1tui_1_1screen.html#ae0ef26178a6a3059f650c7f6f53091cc',1,'buddy8800::ux::tui::screen']]],
+  ['try_5fgetch_2',['try_getch',['../classpty.html#a254a5f61957aa45fcc1ba8d964dd40f2',1,'pty']]],
+  ['try_5fputch_3',['try_putch',['../classpty.html#a69985a1ff0555f4c01b0ee1b972b78e6',1,'pty']]]
 ];

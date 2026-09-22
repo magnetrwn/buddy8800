@@ -1,0 +1,9 @@
+<map id="buddy8800::app::options" name="buddy8800::app::options">
+<area shape="rect" id="Node000001" title="Parsed command&#45;line settings." alt="" coords="26,284,209,309"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="28,181,207,221"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="120,235,120,284,115,284,115,235"/>
+<area shape="rect" id="Node000003" href="$structbuddy8800_1_1app_1_1program__load.html" title="A binary filename and its guest load address." alt="" coords="5,93,229,119"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="120,132,120,181,115,181,115,132"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="94,5,141,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="120,45,120,93,115,93,115,45"/>
+</map>

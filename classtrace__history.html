@@ -92,35 +92,59 @@ $(document).ready(function(){initNavTree('classtrace__history.html',''); initRes
 
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="classtrace__history-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">trace_history Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Keep a bounded history of formatted trace lines.  
+ <a href="classtrace__history.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="trace__view_8hpp_source.html">trace_view.hpp</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Collaboration diagram for trace_history:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classtrace__history__coll__graph.png" border="0" usemap="#atrace__history_coll__map" alt="Collaboration graph"/></div>
+<map name="atrace__history_coll__map" id="atrace__history_coll__map">
+<area shape="rect" title="Keep a bounded history of formatted trace lines." alt="" coords="5,93,112,119"/>
+<area shape="rect" title=" " alt="" coords="31,5,87,31"/>
+<area shape="poly" title=" " alt="" coords="61,45,61,93,56,93,56,45"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader">History access</div></td></tr>
 <tr class="memitem:a1e9c06a6a0b6a0c97fe8f23ed5886c95" id="r_a1e9c06a6a0b6a0c97fe8f23ed5886c95"><td class="memItemLeft" align="right" valign="top"><a id="a1e9c06a6a0b6a0c97fe8f23ed5886c95" name="a1e9c06a6a0b6a0c97fe8f23ed5886c95"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>append</b> (std::string line)</td></tr>
+<tr class="memdesc:a1e9c06a6a0b6a0c97fe8f23ed5886c95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append a line, discarding the oldest when full. <br /></td></tr>
 <tr class="separator:a1e9c06a6a0b6a0c97fe8f23ed5886c95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51a55c2ae8cec0f9b7afea43eb59c7aa" id="r_a51a55c2ae8cec0f9b7afea43eb59c7aa"><td class="memItemLeft" align="right" valign="top"><a id="a51a55c2ae8cec0f9b7afea43eb59c7aa" name="a51a55c2ae8cec0f9b7afea43eb59c7aa"></a>
 usize&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> () const</td></tr>
+<tr class="memdesc:a51a55c2ae8cec0f9b7afea43eb59c7aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of retained lines. <br /></td></tr>
 <tr class="separator:a51a55c2ae8cec0f9b7afea43eb59c7aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9323ff901e951a71234f959ff1a2f975" id="r_a9323ff901e951a71234f959ff1a2f975"><td class="memItemLeft" align="right" valign="top"><a id="a9323ff901e951a71234f959ff1a2f975" name="a9323ff901e951a71234f959ff1a2f975"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
+<tr class="memdesc:a9323ff901e951a71234f959ff1a2f975"><td class="mdescLeft">&#160;</td><td class="mdescRight">Discard all retained lines. <br /></td></tr>
 <tr class="separator:a9323ff901e951a71234f959ff1a2f975"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b0dec14fda1d4a7139d014ceca8072a" id="r_a3b0dec14fda1d4a7139d014ceca8072a"><td class="memItemLeft" align="right" valign="top"><a id="a3b0dec14fda1d4a7139d014ceca8072a" name="a3b0dec14fda1d4a7139d014ceca8072a"></a>
 const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator[]</b> (usize index) const</td></tr>
+<tr class="memdesc:a3b0dec14fda1d4a7139d014ceca8072a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a retained line with bounds checking. <br /></td></tr>
 <tr class="separator:a3b0dec14fda1d4a7139d014ceca8072a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:ad8acac11cd07a0ec0d6b95c8ee0a3f67" id="r_ad8acac11cd07a0ec0d6b95c8ee0a3f67"><td class="memItemLeft" align="right" valign="top"><a id="ad8acac11cd07a0ec0d6b95c8ee0a3f67" name="ad8acac11cd07a0ec0d6b95c8ee0a3f67"></a>
-static constexpr usize&#160;</td><td class="memItemRight" valign="bottom"><b>capacity</b> = 2048</td></tr>
-<tr class="separator:ad8acac11cd07a0ec0d6b95c8ee0a3f67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a587b612ee750912e28c22698a8872a37" id="r_a587b612ee750912e28c22698a8872a37"><td class="memItemLeft" align="right" valign="top"><a id="a587b612ee750912e28c22698a8872a37" name="a587b612ee750912e28c22698a8872a37"></a>
+static constexpr usize&#160;</td><td class="memItemRight" valign="bottom"><b>CAPACITY</b> = 2048</td></tr>
+<tr class="separator:a587b612ee750912e28c22698a8872a37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Keep a bounded history of formatted trace lines. </p>
+<p>Rendering is independent of execution; slow refreshes cannot grow the queue. </p>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/ux/<a class="el" href="trace__view_8hpp_source.html">trace_view.hpp</a></li>
 </ul>
 </div><!-- contents -->
@@ -129,7 +153,7 @@ static constexpr usize&#160;</td><td class="memItemRight" valign="bottom"><b>cap
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classtrace__history.html">trace_history</a></li>
-    <li class="footer">Generated on Sun Sep 20 2026 for buddy8800 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Tue Sep 22 2026 for buddy8800 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

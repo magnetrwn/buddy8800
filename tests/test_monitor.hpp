@@ -1,4 +1,7 @@
-#include "sysconf.hpp"
+#include "app/system_config.hpp"
+#include "core/cards/serial_card.hpp"
+#include "core/cpu/cpu.hpp"
+#include "util/format.hpp"
 
 TEST_CASE("ALTMON executes commands on the card bus", "[monitor]") {
     system_config config(BUDDY8800_MONITOR_CONFIG);
@@ -12,7 +15,8 @@ TEST_CASE("ALTMON executes commands on the card bus", "[monitor]") {
     client.send("K200020035A");
     processor.step(100000);
     const auto state = processor.save_state();
-    INFO("PC=" << util::to_hex_s(state.PC()) << " A=" << util::to_hex_s(state.A()));
+    INFO("PC=" << buddy8800::format::to_hex_s(state.PC())
+               << " A=" << buddy8800::format::to_hex_s(state.A()));
     REQUIRE_FALSE(processor.is_halted());
     REQUIRE(cardbus.read(0x2000) == 0x5A);
     REQUIRE(cardbus.read(0x2003) == 0x5A);

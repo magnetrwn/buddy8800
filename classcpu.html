@@ -121,10 +121,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acf57ba53d7481afb8c3e7747db7d2c7a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcpu.html#acf57ba53d7481afb8c3e7747db7d2c7a">execute</a> (u8 opcode)</td></tr>
 <tr class="memdesc:acf57ba53d7481afb8c3e7747db7d2c7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a single opcode.  <br /></td></tr>
 <tr class="separator:acf57ba53d7481afb8c3e7747db7d2c7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d839c16cc808245a4f0c38a430a342a" id="r_a0d839c16cc808245a4f0c38a430a342a"><td class="memTemplParams" colspan="2">template&lt;typename T , T_ITERATOR_SFINAE &gt; </td></tr>
-<tr class="memitem:a0d839c16cc808245a4f0c38a430a342a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcpu.html#a0d839c16cc808245a4f0c38a430a342a">load</a> (T begin, T end, usize offset=0, bool auto_reset_vector=false)</td></tr>
-<tr class="memdesc:a0d839c16cc808245a4f0c38a430a342a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads data into cardbus.  <br /></td></tr>
-<tr class="separator:a0d839c16cc808245a4f0c38a430a342a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a816a112adb7790d3e82a46776f4fafbf" id="r_a816a112adb7790d3e82a46776f4fafbf"><td class="memTemplParams" colspan="2">template&lt;typename value_type , typename  = buddy8800::enable_input_iterator&lt;value_type&gt;&gt; </td></tr>
+<tr class="memitem:a816a112adb7790d3e82a46776f4fafbf"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcpu.html#a816a112adb7790d3e82a46776f4fafbf">load</a> (value_type begin, value_type end, usize offset=0, bool auto_reset_vector=false)</td></tr>
+<tr class="memdesc:a816a112adb7790d3e82a46776f4fafbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads data into cardbus.  <br /></td></tr>
+<tr class="separator:a816a112adb7790d3e82a46776f4fafbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c72852ac69a7814d8e0faa836d3abf3" id="r_a6c72852ac69a7814d8e0faa836d3abf3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a6c72852ac69a7814d8e0faa836d3abf3">load_state</a> (const <a class="el" href="structcpu__state.html">cpu_state</a> &amp;new_state)</td></tr>
 <tr class="memdesc:a6c72852ac69a7814d8e0faa836d3abf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load CPU state.  <br /></td></tr>
 <tr class="separator:a6c72852ac69a7814d8e0faa836d3abf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -151,10 +151,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr
 <tr class="memitem:abbf017b99cf39776da5a4bf517fb9226" id="r_abbf017b99cf39776da5a4bf517fb9226"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#abbf017b99cf39776da5a4bf517fb9226">set_pseudo_bdos_redirect</a> (const char *filename)</td></tr>
 <tr class="memdesc:abbf017b99cf39776da5a4bf517fb9226"><td class="mdescLeft">&#160;</td><td class="mdescRight">Redirect pseudo BDOS print routines to a file.  <br /></td></tr>
 <tr class="separator:abbf017b99cf39776da5a4bf517fb9226"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a850125d4d67383c10cbb1ba594d1db18" id="r_a850125d4d67383c10cbb1ba594d1db18"><td class="memItemLeft" align="right" valign="top"><a id="a850125d4d67383c10cbb1ba594d1db18" name="a850125d4d67383c10cbb1ba594d1db18"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>reset_pseudo_bdos_redirect</b> ()</td></tr>
-<tr class="memdesc:a850125d4d67383c10cbb1ba594d1db18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Redirect pseudo BDOS print routines back to stdout. <br /></td></tr>
+<tr class="memitem:a850125d4d67383c10cbb1ba594d1db18" id="r_a850125d4d67383c10cbb1ba594d1db18"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpu.html#a850125d4d67383c10cbb1ba594d1db18">reset_pseudo_bdos_redirect</a> ()</td></tr>
+<tr class="memdesc:a850125d4d67383c10cbb1ba594d1db18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Redirect pseudo BDOS print routines back to stdout.  <br /></td></tr>
 <tr class="separator:a850125d4d67383c10cbb1ba594d1db18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a307fd899ceee77e498f60a6c57783084" id="r_a307fd899ceee77e498f60a6c57783084"><td class="memItemLeft" align="right" valign="top"><a id="a307fd899ceee77e498f60a6c57783084" name="a307fd899ceee77e498f60a6c57783084"></a>
+std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>set_pseudo_bdos_stream</b> (std::ostream &amp;stream)</td></tr>
+<tr class="memdesc:a307fd899ceee77e498f60a6c57783084"><td class="mdescLeft">&#160;</td><td class="mdescRight">Legacy frontend adapter. The caller owns the stream and restores it. <br /></td></tr>
+<tr class="separator:a307fd899ceee77e498f60a6c57783084"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Interrupt related methods.</div></td></tr>
 <tr class="memitem:a0486313a1a4f72cb6c0e3231b2927d94" id="r_a0486313a1a4f72cb6c0e3231b2927d94"><td class="memTemplParams" colspan="2">template&lt;bool report_trace = true&gt; </td></tr>
 <tr class="memitem:a0486313a1a4f72cb6c0e3231b2927d94"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcpu.html#a0486313a1a4f72cb6c0e3231b2927d94">interrupt</a> (std::array&lt; u8, 3 &gt; inst)</td></tr>
@@ -166,10 +169,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reset_pseudo_bdos_red
 class cpu&lt; bus_iface &gt;</div><p>Represents the CPU of the emulator. </p>
 <p>This is the 8080 CPU emulator and interpreter. It abstracts the CPU functionality into straightforward methods and presents a way to step and interact with state. Being an interpreter, each opcode starting from the program counter address in cardbus is fetched and executed according to what it represents and including further fetches to opcode operands. The API also provides public access to <a class="el" href="classcpu.html#a310bf9a672be578a1e7484d12fee6d00" title="Executes a single opcode with one or two operands.">execute()</a>, should the user want to manually ask for instructions.</p>
 <dl class="section note"><dt>Note</dt><dd>The class is completely defined in this header to allow templating the class to determine what bus interface <code>bus_iface</code> to use. For example, you can:<ul>
-<li><code>cpu&lt;bus&amp;&gt; <a class="el" href="classcpu.html" title="Represents the CPU of the emulator.">cpu(cardbus)</a>;</code> or <code>cpu&lt;&gt; <a class="el" href="classcpu.html" title="Represents the CPU of the emulator.">cpu(cardbus)</a>;</code> to create a standard CPU that interacts with a bus, or</li>
-<li><code>cpu&lt;std::array&lt;u8, 65536&gt;&gt; cpu;</code> to instead have an empty array as a bus, for max performance! </li>
+<li><code>cpu&lt;bus&amp;&gt; <a class="el" href="classcpu.html" title="Represents the CPU of the emulator.">cpu(cardbus)</a>;</code> or <code>cpu&lt;&gt; <a class="el" href="classcpu.html" title="Represents the CPU of the emulator.">cpu(cardbus)</a>;</code> to create a standard CPU that interacts with a bus. </li>
 </ul>
 </dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000003">Deprecated:</a></b></dt><dd>Non-bus specializations are retained only for legacy diagnostic and trace tests. Production uses <a class="el" href="classcpu.html">cpu&lt;bus&amp;&gt;</a>; do not add new address-space types. </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ad684d25913e8aaf0139fa3dc47ce9e40" name="ad684d25913e8aaf0139fa3dc47ce9e40"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad684d25913e8aaf0139fa3dc47ce9e40">&#9670;&#160;</a></span>do_pseudo_bdos()</h2>
@@ -204,7 +207,21 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
   </table>
   </dd>
 </dl>
-<p>This method enables pseudo BDOS functionality by the CPU itself. This can be essential for testing the CPU, as most diagnostic programs expect the system to be able to print messages. </p>
+<p>This method enables pseudo BDOS functionality by the CPU itself. This can be essential for testing the CPU, as most diagnostic programs expect the system to be able to print messages. </p><dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000004">Deprecated:</a></b></dt><dd>Diagnostic compatibility only; remove with its legacy tests. </dd></dl>
+
+<p class="reference">Referenced by <a class="el" href="classemulator.html#a25086f33052c106dbc9aaa5337d12740">emulator::emulator()</a>.</p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classcpu_ad684d25913e8aaf0139fa3dc47ce9e40_icgraph.png" border="0" usemap="#aclasscpu_ad684d25913e8aaf0139fa3dc47ce9e40_icgraph" alt=""/></div>
+<map name="aclasscpu_ad684d25913e8aaf0139fa3dc47ce9e40_icgraph" id="aclasscpu_ad684d25913e8aaf0139fa3dc47ce9e40_icgraph">
+<area shape="rect" title="Set the CPU to resolve calls to BDOS internally." alt="" coords="201,5,363,31"/>
+<area shape="rect" href="classemulator.html#a25086f33052c106dbc9aaa5337d12740" title="Construct the machine from a configuration file." alt="" coords="5,5,153,31"/>
+<area shape="poly" title=" " alt="" coords="188,21,154,21,154,15,188,15"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -342,6 +359,20 @@ template&lt;bool report_trace = true&gt; </div>
 </dl>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>This allows any instruction and any retrieval of arguments, but I'm not sure if that happens other than on <code>CALL</code>. </dd></dl>
 
+<p class="reference">Referenced by <a class="el" href="classemulator.html#a0c5f9de9ac11c30ee26c04cb20a7fc57">emulator::step()</a>.</p>
+<div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classcpu_a0486313a1a4f72cb6c0e3231b2927d94_icgraph.png" border="0" usemap="#aclasscpu_a0486313a1a4f72cb6c0e3231b2927d94_icgraph" alt=""/></div>
+<map name="aclasscpu_a0486313a1a4f72cb6c0e3231b2927d94_icgraph" id="aclasscpu_a0486313a1a4f72cb6c0e3231b2927d94_icgraph">
+<area shape="rect" title="Call an interrupt and push PC, then disable interrupts." alt="" coords="171,5,280,31"/>
+<area shape="rect" href="classemulator.html#a0c5f9de9ac11c30ee26c04cb20a7fc57" title="Execute one instruction and service a pending bus interrupt." alt="" coords="5,5,123,31"/>
+<area shape="poly" title=" " alt="" coords="157,21,123,21,123,15,157,15"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="a010e335fc9f1797e72bfc5585e9238f6" name="a010e335fc9f1797e72bfc5585e9238f6"></a>
@@ -372,17 +403,35 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
 <p>Check if the CPU is halted. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if the CPU is halted, false otherwise. </dd></dl>
 
+<p class="reference">Referenced by <a class="el" href="classemulator.html#a3f7b452aa417b6474d814e6d77c022b5">emulator::halted()</a>, <a class="el" href="classemulator.html#a68c291f78142aee0c96562e972b367ed">emulator::run()</a>, and <a class="el" href="classemulator.html#a0c5f9de9ac11c30ee26c04cb20a7fc57">emulator::step()</a>.</p>
+<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classcpu_a010e335fc9f1797e72bfc5585e9238f6_icgraph.png" border="0" usemap="#aclasscpu_a010e335fc9f1797e72bfc5585e9238f6_icgraph" alt=""/></div>
+<map name="aclasscpu_a010e335fc9f1797e72bfc5585e9238f6_icgraph" id="aclasscpu_a010e335fc9f1797e72bfc5585e9238f6_icgraph">
+<area shape="rect" title="Check if the CPU is halted." alt="" coords="184,55,296,80"/>
+<area shape="rect" href="classemulator.html#a3f7b452aa417b6474d814e6d77c022b5" title="Report whether the processor is halted." alt="" coords="5,5,136,31"/>
+<area shape="poly" title=" " alt="" coords="182,53,115,33,116,28,183,48"/>
+<area shape="rect" href="classemulator.html#a68c291f78142aee0c96562e972b367ed" title="Execute until halted or a stop is requested." alt="" coords="15,55,126,80"/>
+<area shape="poly" title=" " alt="" coords="170,70,126,70,126,65,170,65"/>
+<area shape="rect" href="classemulator.html#a0c5f9de9ac11c30ee26c04cb20a7fc57" title="Execute one instruction and service a pending bus interrupt." alt="" coords="12,104,129,129"/>
+<area shape="poly" title=" " alt="" coords="183,87,116,106,115,101,182,81"/>
+</map>
+</div>
+
 </div>
 </div>
-<a id="a0d839c16cc808245a4f0c38a430a342a" name="a0d839c16cc808245a4f0c38a430a342a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d839c16cc808245a4f0c38a430a342a">&#9670;&#160;</a></span>load()</h2>
+<a id="a816a112adb7790d3e82a46776f4fafbf" name="a816a112adb7790d3e82a46776f4fafbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a816a112adb7790d3e82a46776f4fafbf">&#9670;&#160;</a></span>load()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class bus_iface  = bus&amp;&gt; </div>
 <div class="memtemplate">
-template&lt;typename T , T_ITERATOR_SFINAE &gt; </div>
+template&lt;typename value_type , typename  = buddy8800::enable_input_iterator&lt;value_type&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -390,13 +439,13 @@ template&lt;typename T , T_ITERATOR_SFINAE &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classcpu.html">cpu</a>&lt; bus_iface &gt;::load </td>
           <td>(</td>
-          <td class="paramtype">T&#160;</td>
+          <td class="paramtype">value_type&#160;</td>
           <td class="paramname"><em>begin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">T&#160;</td>
+          <td class="paramtype">value_type&#160;</td>
           <td class="paramname"><em>end</em>, </td>
         </tr>
         <tr>
@@ -444,6 +493,20 @@ template&lt;typename T , T_ITERATOR_SFINAE &gt; </div>
 <p>This method can be useful to load programs, libraries, or data into the emulator's cardbus. It will copy the data at the specified offset, check if it will fit, and if auto_reset_vector is true, it will set the zero page (the first 3 bytes of cardbus, specifically a jump instruction and a 2 byte argument) to point to the start of the loaded data.</p>
 <dl class="section note"><dt>Note</dt><dd>This method calls <code>write_force()</code> on the cards when using a bus, so it can also write to locked ROM to setup the system roms. </dd></dl>
 
+<p class="reference">Referenced by <a class="el" href="classemulator.html#a2bece48284f6736c9d7cde1b6198378a">emulator::load_program()</a>.</p>
+<div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classcpu_a816a112adb7790d3e82a46776f4fafbf_icgraph.png" border="0" usemap="#aclasscpu_a816a112adb7790d3e82a46776f4fafbf_icgraph" alt=""/></div>
+<map name="aclasscpu_a816a112adb7790d3e82a46776f4fafbf_icgraph" id="aclasscpu_a816a112adb7790d3e82a46776f4fafbf_icgraph">
+<area shape="rect" title="Loads data into cardbus." alt="" coords="232,5,313,31"/>
+<area shape="rect" href="classemulator.html#a2bece48284f6736c9d7cde1b6198378a" title="Load bytes and optionally install a reset jump to their address." alt="" coords="5,5,184,31"/>
+<area shape="poly" title=" " alt="" coords="218,21,184,21,184,15,218,15"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="a6c72852ac69a7814d8e0faa836d3abf3" name="a6c72852ac69a7814d8e0faa836d3abf3"></a>
@@ -483,6 +546,50 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
 
 </div>
 </div>
+<a id="a850125d4d67383c10cbb1ba594d1db18" name="a850125d4d67383c10cbb1ba594d1db18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a850125d4d67383c10cbb1ba594d1db18">&#9670;&#160;</a></span>reset_pseudo_bdos_redirect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class bus_iface  = bus&amp;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classcpu.html">cpu</a>&lt; bus_iface &gt;::reset_pseudo_bdos_redirect </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Redirect pseudo BDOS print routines back to stdout. </p>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000006">Deprecated:</a></b></dt><dd>Diagnostic compatibility only. </dd></dl>
+
+<p class="reference">References <a class="el" href="classbuddy8800_1_1legacy_1_1print__helper.html#a96c83a2a83dd8fed3da011134fc1bd4b">buddy8800::legacy::print_helper::reset()</a>.</p>
+<div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classcpu_a850125d4d67383c10cbb1ba594d1db18_cgraph.png" border="0" usemap="#aclasscpu_a850125d4d67383c10cbb1ba594d1db18_cgraph" alt=""/></div>
+<map name="aclasscpu_a850125d4d67383c10cbb1ba594d1db18_cgraph" id="aclasscpu_a850125d4d67383c10cbb1ba594d1db18_cgraph">
+<area shape="rect" title="Redirect pseudo BDOS print routines back to stdout." alt="" coords="5,5,184,45"/>
+<area shape="rect" href="classbuddy8800_1_1legacy_1_1print__helper.html#a96c83a2a83dd8fed3da011134fc1bd4b" title="Reset and fallback to default destination." alt="" coords="232,5,384,45"/>
+<area shape="poly" title=" " alt="" coords="184,23,218,23,218,28,184,28"/>
+</map>
+</div>
+
+</div>
+</div>
 <a id="ae6100df727ce03c23512fee8d2698fc5" name="ae6100df727ce03c23512fee8d2698fc5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae6100df727ce03c23512fee8d2698fc5">&#9670;&#160;</a></span>save_state()</h2>
 
@@ -511,6 +618,20 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
 <p>Save CPU state. </p>
 <dl class="section return"><dt>Returns</dt><dd>The current state of the CPU.</dd></dl>
 <p>This method will return the current state of the CPU, including all registers and flags of it. </p>
+
+<p class="reference">Referenced by <a class="el" href="classemulator.html#a5a9731c316c66c09b5a9bd764e5af2ea">emulator::state()</a>.</p>
+<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classcpu_ae6100df727ce03c23512fee8d2698fc5_icgraph.png" border="0" usemap="#aclasscpu_ae6100df727ce03c23512fee8d2698fc5_icgraph" alt=""/></div>
+<map name="aclasscpu_ae6100df727ce03c23512fee8d2698fc5_icgraph" id="aclasscpu_ae6100df727ce03c23512fee8d2698fc5_icgraph">
+<area shape="rect" title="Save CPU state." alt="" coords="176,5,300,31"/>
+<area shape="rect" href="classemulator.html#a5a9731c316c66c09b5a9bd764e5af2ea" title="Copy the current processor registers and flags." alt="" coords="5,5,128,31"/>
+<area shape="poly" title=" " alt="" coords="162,21,128,21,128,15,162,15"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -548,6 +669,20 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
   </dd>
 </dl>
 
+<p class="reference">Referenced by <a class="el" href="classemulator.html#ad8c5a8afd978c31126befeea506156b6">emulator::start()</a>.</p>
+<div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-6-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classcpu_a0dd1651ec43836cea38fa1a8af972b55_icgraph.png" border="0" usemap="#aclasscpu_a0dd1651ec43836cea38fa1a8af972b55_icgraph" alt=""/></div>
+<map name="aclasscpu_a0dd1651ec43836cea38fa1a8af972b55_icgraph" id="aclasscpu_a0dd1651ec43836cea38fa1a8af972b55_icgraph">
+<area shape="rect" title="Set the PC of the CPU." alt="" coords="172,5,267,31"/>
+<area shape="rect" href="classemulator.html#ad8c5a8afd978c31126befeea506156b6" title="Set the configured initial program counter." alt="" coords="5,5,124,31"/>
+<area shape="poly" title=" " alt="" coords="159,21,124,21,124,15,159,15"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="abbf017b99cf39776da5a4bf517fb9226" name="abbf017b99cf39776da5a4bf517fb9226"></a>
@@ -583,17 +718,18 @@ template&lt;class bus_iface  = bus&amp;&gt; </div>
   </table>
   </dd>
 </dl>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000005">Deprecated:</a></b></dt><dd>Diagnostic compatibility only. </dd></dl>
 
-<p class="reference">References <a class="el" href="classutil_1_1print__helper.html#a08912c4069c431b6080355b8a7c18c15">util::print_helper::set()</a>.</p>
-<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="classbuddy8800_1_1legacy_1_1print__helper.html#ac1bdc5d43bafce18dee0b958541edcd9">buddy8800::legacy::print_helper::set()</a>.</p>
+<div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div id="dynsection-7-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classcpu_abbf017b99cf39776da5a4bf517fb9226_cgraph.png" border="0" usemap="#aclasscpu_abbf017b99cf39776da5a4bf517fb9226_cgraph" alt=""/></div>
 <map name="aclasscpu_abbf017b99cf39776da5a4bf517fb9226_cgraph" id="aclasscpu_abbf017b99cf39776da5a4bf517fb9226_cgraph">
 <area shape="rect" title="Redirect pseudo BDOS print routines to a file." alt="" coords="5,5,171,45"/>
-<area shape="rect" href="classutil_1_1print__helper.html#a08912c4069c431b6080355b8a7c18c15" title="Set a redirection to file." alt="" coords="219,13,376,38"/>
+<area shape="rect" href="classbuddy8800_1_1legacy_1_1print__helper.html#ac1bdc5d43bafce18dee0b958541edcd9" title="Set a redirection to file." alt="" coords="219,5,371,45"/>
 <area shape="poly" title=" " alt="" coords="171,23,205,23,205,28,171,28"/>
 </map>
 </div>
@@ -647,6 +783,20 @@ template&lt;bool report_trace = true&gt; </div>
 <dl class="section user"><dt></dt><dd></dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Internally, this method is calling <code>execute(fetch())</code>. </dd></dl>
 
+<p class="reference">Referenced by <a class="el" href="classemulator.html#a0c5f9de9ac11c30ee26c04cb20a7fc57">emulator::step()</a>.</p>
+<div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-8-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classcpu_a962cab85ff1cce074256d303dcaf53cf_icgraph.png" border="0" usemap="#aclasscpu_a962cab85ff1cce074256d303dcaf53cf_icgraph" alt=""/></div>
+<map name="aclasscpu_a962cab85ff1cce074256d303dcaf53cf_icgraph" id="aclasscpu_a962cab85ff1cce074256d303dcaf53cf_icgraph">
+<area shape="rect" title="Steps the CPU by one instruction (and its operands)." alt="" coords="171,5,252,31"/>
+<area shape="rect" href="classemulator.html#a0c5f9de9ac11c30ee26c04cb20a7fc57" title="Execute one instruction and service a pending bus interrupt." alt="" coords="5,5,123,31"/>
+<area shape="poly" title=" " alt="" coords="157,21,123,21,123,15,157,15"/>
+</map>
+</div>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
@@ -658,7 +808,7 @@ template&lt;bool report_trace = true&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classcpu.html">cpu</a></li>
-    <li class="footer">Generated on Sun Sep 20 2026 for buddy8800 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Tue Sep 22 2026 for buddy8800 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
