@@ -1,6 +1,6 @@
 #include <catch2/catch_test_macros.hpp>
 
-#include "cpu_state.hpp"
+#include "core/cpu/cpu_state.hpp"
 
 TEST_CASE("CPU state checks", "[cpu_state]") {
     cpu_state state;

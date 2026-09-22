@@ -1,4 +1,4 @@
-#include "trace_view.hpp"
+#include "ux/trace_view.hpp"
 
 TEST_CASE("Instruction observer captures operands and wrapping addresses without changing execution", "[trace]") {
     std::array<u8, 65536> memory{};
@@ -18,7 +18,7 @@ TEST_CASE("Instruction observer captures operands and wrapping addresses without
     });
     traced.step(4);
     plain.step(4);
-    REQUIRE(traced.save_state().registers == plain.save_state().registers);
+    REQUIRE(traced.save_state() == plain.save_state());
     REQUIRE(traced.is_halted());
     REQUIRE(traced.save_state().HL() == 0x1234);
     REQUIRE(traced.save_state().A() == 0x5B);
@@ -30,10 +30,10 @@ TEST_CASE("Instruction observer captures operands and wrapping addresses without
 
 TEST_CASE("Trace history has a fixed memory bound and keeps the latest instructions", "[trace]") {
     trace_history history;
-    for (usize i = 0; i < trace_history::capacity + 10; ++i) history.append(std::to_string(i));
-    REQUIRE(history.size() == trace_history::capacity);
+    for (usize i = 0; i < trace_history::CAPACITY + 10; ++i) history.append(std::to_string(i));
+    REQUIRE(history.size() == trace_history::CAPACITY);
     REQUIRE(history[0] == "10");
-    REQUIRE(history[history.size() - 1] == std::to_string(trace_history::capacity + 9));
+    REQUIRE(history[history.size() - 1] == std::to_string(trace_history::CAPACITY + 9));
 }
 
 TEST_CASE("Untraced execution skips operand inspection and resumes the same CPU", "[trace]") {

@@ -1,5 +1,5 @@
-#ifndef UNIX_PTY_HPP_
-#define UNIX_PTY_HPP_
+#ifndef BUDDY8800_SRC_CORE_IFACE_UNIX_PTY_HPP_
+#define BUDDY8800_SRC_CORE_IFACE_UNIX_PTY_HPP_
 
 #include <stdexcept>
 #include <fcntl.h>
@@ -7,12 +7,10 @@
 #include <termios.h>
 #include <cstring>
 
-#include "typedef.hpp"
+#include "util/typedef.hpp"
 
 /// @brief Enumerates all possible parity modes of the serial device.
-enum class pty_parity : u32 {
-    NONE, EVEN, ODD
-};
+enum class pty_parity : u32 { NONE, EVEN, ODD };
 
 /**
  * @brief Represents a pseudo-terminal interface.
@@ -28,12 +26,12 @@ class pty {
 private:
     static constexpr usize MAX_SLAVE_DEVICE_NAME = 64;
 
-    static constexpr u32 DEFAULT_BAUD_RATE       = 19200;
-    static constexpr u32 DEFAULT_DATA_BITS       = 8;
-    static constexpr pty_parity DEFAULT_PARITY   = pty_parity::NONE;
-    static constexpr u32 DEFAULT_STOP_BITS       = 1;
+    static constexpr u32 DEFAULT_BAUD_RATE = 19200;
+    static constexpr u32 DEFAULT_DATA_BITS = 8;
+    static constexpr pty_parity DEFAULT_PARITY = pty_parity::NONE;
+    static constexpr u32 DEFAULT_STOP_BITS = 1;
 
-    static constexpr u32 DEFAULT_BREAK_DURATION  = 0; /// Will default to the termios.h default value
+    static constexpr u32 DEFAULT_BREAK_DURATION = 0; /// Will default to the termios.h default value
 
     fd master_fd;
     fd slave_fd;
@@ -43,13 +41,23 @@ private:
 
 public:
     pty(const pty&) = delete;
+
     pty& operator=(const pty&) = delete;
+
+    /// @name Nonblocking transport
+    /// \{
+
+    /// @brief Read one available byte; return false if none is ready.
     bool try_getch(u8& byte) const;
+
+    /// @brief Write one byte; return false if the transport would block.
     bool try_putch(u8 byte) const;
+
+    /// \}
     /**
      * @brief Open the PTY interface.
      * @throw `std::runtime_error` if the PTY interface could not be opened.
-     * 
+     *
      * Use this method when first starting the PTY interface. It will open the master file descriptor
      * and setup various configuration flags for a bit more realism in emulating an Altair 8800 serial
      * interface.
@@ -61,7 +69,7 @@ public:
     /**
      * @brief Retrieve the name of the slave device.
      * @return A C-like string containing the name of the slave device.
-     * 
+     *
      * This method returns the name of the slave device, such as `/dev/pts/3`. This name identifies
      * the slave side PTY interface, to which a user or process can interface with. For example, you
      * could run `screen /dev/pts/3` on your terminal to connect to the PTY slave side.
@@ -96,12 +104,13 @@ public:
     /**
      * @brief Send a break signal to the PTY interface master side.
      * @throw `std::runtime_error` if the PTY interface had an error.
-     * 
+     *
      * This method sends a break signal to the PTY interface master side. It uses the `tcsendbreak()` system
      * call to make the pseudo-terminal interface run a break signal.
      *
      * Sending a break signal effectively holds the transmission line low for a considerable amount of time,
-     * with no concern for framing or data bits, which is a step further than simply sending 0x00 over and over.
+     * with no concern for framing or data bits, which is a step further than simply sending 0x00 over and
+     * over.
      */
     void send_break() const;
 
@@ -109,7 +118,7 @@ public:
      * @brief Get a single byte from the PTY interface master side.
      * @return The byte read from the PTY interface.
      * @throw `std::runtime_error` if the PTY interface had an error.
-     * 
+     *
      * This method reads a single byte/char from the PTY interface master side. It uses the `read()` system
      * call to read the byte from the master file descriptor, sent by the slave side.
      *
@@ -122,7 +131,8 @@ public:
      * @param c The byte to be sent.
      * @throw `std::runtime_error` if the PTY interface had an error.
      *
-     * This method sends a single byte/char to the PTY interface master side. It uses the `write()` system call.
+     * This method sends a single byte/char to the PTY interface master side. It uses the `write()` system
+     * call.
      *
      * @warning This method will block until the byte is sent.
      */
@@ -145,9 +155,9 @@ public:
      * @param terminator The character that will stop the reading.
      * @throw `std::runtime_error` if the PTY interface had an error.
      * @throw `std::invalid_argument` if `max` is 0.
-     * 
-     * This method reads data from the PTY interface master side. It will read up to `max - 1` bytes, until 
-     * the terminator character is found. The received data is always null-terminated by this method, thus 
+     *
+     * This method reads data from the PTY interface master side. It will read up to `max - 1` bytes, until
+     * the terminator character is found. The received data is always null-terminated by this method, thus
      * `max` is actually considered as `max - 1` for the amount of bytes to be read, with the last byte being
      * reserved for the null-terminator, should data fit the entire buffer.
      *
@@ -163,7 +173,7 @@ public:
      * @param stop_bits The amount of stop bits to be used.
      * @throw `std::runtime_error` if the PTY interface could not be configured.
      * @throw `std::invalid_argument` if an invalid setup was being configured.
-     * 
+     *
      * Validates framing values and configures raw eight-bit host transport. Physical
      * parity and stop bits are not represented by a PTY.
      */
@@ -173,7 +183,7 @@ public:
      * @brief Set the baud rate of the PTY interface.
      * @param baud_rate The baud rate to be set.
      * @throw `std::runtime_error` if the PTY interface could not be configured.
-     * 
+     *
      * This method sets the baud rate of the PTY interface. It uses the `cfsetospeed()` and `cfsetispeed()`
      * functions from `termios.h` to set the baud rate of the PTY interface.
      */
@@ -185,11 +195,11 @@ public:
      */
     void set_echo_received_back(bool should);
 
-    
     /// @brief Close the PTY interface and free the PTY master file descriptor.
     void close();
 
     pty() : master_fd(-1), slave_fd(-1), echo_received_back(false) {};
+
     ~pty() { close(); }
 };
 
