@@ -1,0 +1,5 @@
+<map id="front_panel::clear" name="front_panel::clear">
+<area shape="rect" id="Node000001" title="Preserve the switch positions when the machine is cleared." alt="" coords="5,5,141,31"/>
+<area shape="rect" id="Node000002" href="$classcard.html#ab4841b21668816977ff2266d6667593e" title="Raise or clear the IRQ trigger." alt="" coords="189,5,304,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="142,15,176,15,176,21,142,21"/>
+</map>

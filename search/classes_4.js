@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['machine_5fconfig_0',['machine_config',['../structbuddy8800_1_1app_1_1machine__config.html',1,'buddy8800::app']]]
+  ['front_5fpanel_0',['front_panel',['../classfront__panel.html',1,'']]],
+  ['front_5fpanel_5fconfig_5ffile_1',['front_panel_config_file',['../structfront__panel__config__file.html',1,'']]]
 ];

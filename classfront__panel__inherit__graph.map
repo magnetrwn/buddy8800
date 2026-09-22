@@ -1,0 +1,5 @@
+<map id="front_panel" name="front_panel">
+<area shape="rect" id="Node000001" title="Fixed Altair front&#45;panel sense switches, read through one I/O port." alt="" coords="5,79,101,104"/>
+<area shape="rect" id="Node000002" href="$classcard.html" title="Base class for all cards." alt="" coords="28,5,79,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="56,44,56,79,51,79,51,44"/>
+</map>

@@ -7,7 +7,7 @@ the emulator. Python uses only its standard library.
 
 - `config.toml`: PC at F800, 1,031-byte ROM at F800–FC06, serial ports 10/11,
   and 64 KiB of underlying RAM. Pseudo-BDOS is disabled.
-- `f800mon.bin`: ALTMON 1.3, copied from the repaired distributable image when
+- `altmon-1.3.bin`: ALTMON 1.3, copied from the repaired distributable image when
   this fixture was pinned. Offset 003B is C1 rather than 81; see
   [the repair explanation](../../../static/f800mon.md).
 

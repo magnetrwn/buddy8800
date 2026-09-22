@@ -4,4 +4,5 @@
 #include "test_pty.hpp"
 #include "test_data_cards.hpp"
 #include "test_monitor.hpp"
+#include "test_front_panel.hpp"
 #include "test_trace.hpp"

@@ -7,7 +7,7 @@ var searchData=
   ['diagnostic_5fconsole_4',['diagnostic_console',['../classbuddy8800_1_1ux_1_1tui_1_1diagnostic__console.html',1,'buddy8800::ux::tui']]],
   ['diagnostic_5fstream_5',['diagnostic_stream',['../classemulator.html#a7ff29c6c63bb1ef3373857d0ed4994df',1,'emulator']]],
   ['do_5fpseudo_5fbdos_6',['do_pseudo_bdos',['../classcpu.html#ad684d25913e8aaf0139fa3dc47ce9e40',1,'cpu']]],
-  ['documentation_7',['documentation',['..//home/runner/work/buddy8800/buddy8800/README.md#autotoc_md3',1,'Doxygen Documentation'],['..//home/runner/work/buddy8800/buddy8800/README.md#autotoc_md7',1,'Resources and Documentation']]],
-  ['doxygen_20documentation_8',['Doxygen Documentation',['..//home/runner/work/buddy8800/buddy8800/README.md#autotoc_md3',1,'']]],
+  ['documentation_7',['documentation',['..//home/runner/work/buddy8800/buddy8800/README.md#autotoc_md4',1,'Doxygen Documentation'],['..//home/runner/work/buddy8800/buddy8800/README.md#autotoc_md8',1,'Resources and Documentation']]],
+  ['doxygen_20documentation_8',['Doxygen Documentation',['..//home/runner/work/buddy8800/buddy8800/README.md#autotoc_md4',1,'']]],
   ['draw_9',['draw',['../classbuddy8800_1_1ux_1_1tui_1_1screen.html#a42f0e44fdbe53d299eb4561ecc8cb04c',1,'buddy8800::ux::tui::screen']]]
 ];

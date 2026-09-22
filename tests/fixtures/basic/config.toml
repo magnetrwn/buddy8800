@@ -1,0 +1,38 @@
+# Pinned ALTMON-to-BASIC regression machine; independent of static/ and bin/.
+[emulator]
+pseudo_bdos_enabled = false
+start_with_pc_at = 0xF800
+
+[[card]]
+slot = 0
+type = "ram"
+at = 0x0000
+load = "mits-8k-basic-4.0.bin"
+
+[[card]]
+slot = 1
+type = "ram"
+at = 0x2000
+range = 16384
+
+[[card]]
+slot = 2
+type = "ram"
+at = 0x8000
+range = 16384
+
+[[card]]
+slot = 3
+type = "rom"
+at = 0xF800
+load = "altmon-1.1.bin"
+
+[[card]]
+slot = 4
+type = "serial"
+at = 0x10
+
+[[card]]
+slot = 5
+type = "front_panel"
+switches = 0x10

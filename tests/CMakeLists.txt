@@ -2,12 +2,18 @@ file(GLOB_RECURSE TEST_SOURCES *.cpp)
 add_executable(tests ${TEST_SOURCES})
 target_link_libraries(tests PRIVATE Catch2::Catch2WithMain buddy8800_application)
 set(BUDDY8800_MONITOR_FIXTURE_DIR ${CMAKE_CURRENT_BINARY_DIR}/fixtures/altmon)
-foreach(BUDDY8800_MONITOR_FIXTURE config.toml f800mon.bin)
+foreach(BUDDY8800_MONITOR_FIXTURE config.toml altmon-1.3.bin)
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/fixtures/altmon/${BUDDY8800_MONITOR_FIXTURE}
         ${BUDDY8800_MONITOR_FIXTURE_DIR}/${BUDDY8800_MONITOR_FIXTURE} COPYONLY)
 endforeach()
+set(BUDDY8800_BASIC_FIXTURE_DIR ${CMAKE_CURRENT_BINARY_DIR}/fixtures/basic)
+foreach(BUDDY8800_BASIC_FIXTURE config.toml altmon-1.1.bin mits-8k-basic-4.0.bin)
+    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/fixtures/basic/${BUDDY8800_BASIC_FIXTURE}
+        ${BUDDY8800_BASIC_FIXTURE_DIR}/${BUDDY8800_BASIC_FIXTURE} COPYONLY)
+endforeach()
 target_compile_definitions(tests PRIVATE
-    BUDDY8800_MONITOR_CONFIG="${BUDDY8800_MONITOR_FIXTURE_DIR}/config.toml")
+    BUDDY8800_MONITOR_CONFIG="${BUDDY8800_MONITOR_FIXTURE_DIR}/config.toml"
+    BUDDY8800_BASIC_CONFIG="${BUDDY8800_BASIC_FIXTURE_DIR}/config.toml")
 target_include_directories(tests PRIVATE 
     ${PROJECT_SOURCE_DIR}/src
     ${PROJECT_SOURCE_DIR}/extern/toml11/include

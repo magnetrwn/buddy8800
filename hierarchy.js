@@ -3,6 +3,7 @@ var hierarchy =
     [ "bus", "classbus.html", null ],
     [ "card", "classcard.html", [
       [ "data_card< construct_then_write_lock >", "classdata__card.html", null ],
+      [ "front_panel", "classfront__panel.html", null ],
       [ "serial_card", "classserial__card.html", null ]
     ] ],
     [ "buddy8800::app::card_config", "structbuddy8800_1_1app_1_1card__config.html", null ],
@@ -12,6 +13,7 @@ var hierarchy =
     [ "cpu_state", "structcpu__state.html", null ],
     [ "buddy8800::device_description", "structbuddy8800_1_1device__description.html", null ],
     [ "emulator", "classemulator.html", null ],
+    [ "front_panel_config_file", "structfront__panel__config__file.html", null ],
     [ "buddy8800::app::machine_config", "structbuddy8800_1_1app_1_1machine__config.html", null ],
     [ "buddy8800::ux::tui::observers", "classbuddy8800_1_1ux_1_1tui_1_1observers.html", null ],
     [ "buddy8800::app::options", "structbuddy8800_1_1app_1_1options.html", null ],

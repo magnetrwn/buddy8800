@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['screen_0',['screen',['../classbuddy8800_1_1ux_1_1tui_1_1screen.html',1,'buddy8800::ux::tui']]],
-  ['serial_5fcard_1',['serial_card',['../classserial__card.html',1,'']]],
-  ['slave_5fconnection_2',['slave_connection',['../structslave__connection.html',1,'']]],
-  ['system_5fconfig_3',['system_config',['../classsystem__config.html',1,'']]]
+  ['print_5fhelper_0',['print_helper',['../classbuddy8800_1_1legacy_1_1print__helper.html',1,'buddy8800::legacy']]],
+  ['program_5fload_1',['program_load',['../structbuddy8800_1_1app_1_1program__load.html',1,'buddy8800::app']]],
+  ['pty_2',['pty',['../classpty.html',1,'']]]
 ];

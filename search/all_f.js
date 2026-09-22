@@ -20,7 +20,7 @@ var searchData=
   ['size_17',['size',['../classtrace__history.html#a51a55c2ae8cec0f9b7afea43eb59c7aa',1,'trace_history::size()'],['../classbus.html#a40eeeeb2ba939e469bdff3d35c3f5f67',1,'bus::size()']]],
   ['slave_5fconnection_18',['slave_connection',['../structslave__connection.html',1,'']]],
   ['start_19',['start',['../classemulator.html#ad8c5a8afd978c31126befeea506156b6',1,'emulator']]],
-  ['started_20',['Getting Started',['..//home/runner/work/buddy8800/buddy8800/README.md#autotoc_md2',1,'']]],
+  ['started_20',['Getting Started',['..//home/runner/work/buddy8800/buddy8800/README.md#autotoc_md3',1,'']]],
   ['state_21',['state',['../classemulator.html#a5a9731c316c66c09b5a9bd764e5af2ea',1,'emulator']]],
   ['step_22',['step',['../classemulator.html#a0c5f9de9ac11c30ee26c04cb20a7fc57',1,'emulator::step()'],['../classcpu.html#a962cab85ff1cce074256d303dcaf53cf',1,'cpu::step()']]],
   ['stream_23',['stream',['../classbuddy8800_1_1ux_1_1tui_1_1diagnostic__console.html#aa3fd9c64fe268969e54d24ec25efc6f1',1,'buddy8800::ux::tui::diagnostic_console']]],

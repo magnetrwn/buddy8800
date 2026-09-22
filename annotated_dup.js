@@ -28,6 +28,8 @@ var annotated_dup =
     [ "cpu_state", "structcpu__state.html", "structcpu__state" ],
     [ "data_card", "classdata__card.html", "classdata__card" ],
     [ "emulator", "classemulator.html", "classemulator" ],
+    [ "front_panel", "classfront__panel.html", "classfront__panel" ],
+    [ "front_panel_config_file", "structfront__panel__config__file.html", null ],
     [ "pty", "classpty.html", "classpty" ],
     [ "serial_card", "classserial__card.html", "classserial__card" ],
     [ "slave_connection", "structslave__connection.html", null ],

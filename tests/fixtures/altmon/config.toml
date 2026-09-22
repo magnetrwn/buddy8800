@@ -8,7 +8,7 @@ slot = 0
 type = "rom"
 at = 0xF800
 range = 1031
-load = "f800mon.bin"
+load = "altmon-1.3.bin"
 
 [[card]]
 slot = 10
